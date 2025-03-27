@@ -79,7 +79,7 @@ const Footer = () => {
           <h5 className="text-lg font-medium">Explore</h5>
           <ul className="space-y-3 mt-4">
             {exploreData?.map((item) => (
-              <li key={item?.path}>
+              <li key={item?.title}>
                 <Link>{item?.title}</Link>
               </li>
             ))}
@@ -90,7 +90,7 @@ const Footer = () => {
           <h5 className="text-lg font-medium">Recipe library</h5>
           <ul className="space-y-3 mt-4">
             {recipeLibraryData?.map((item) => (
-              <li key={item?.path}>
+              <li key={item?.title}>
                 <Link>{item?.title}</Link>
               </li>
             ))}
@@ -102,8 +102,8 @@ const Footer = () => {
 
           {/* links */}
           <ul className="mt-4 flex items-center gap-4">
-            {socialLinks?.map((item) => (
-              <li key={item?.svg}>
+            {socialLinks?.map((item,idx) => (
+              <li key={idx}>
                 <Link>{item?.svg}</Link>
               </li>
             ))}

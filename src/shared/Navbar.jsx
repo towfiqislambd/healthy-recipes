@@ -1,4 +1,5 @@
 import ButtonTransparent from '@/components/buttons/ButtonTransparent';
+import logo from '../assets/images/logo.png';
 import {
   LogoSvg,
   LoveSvg,
@@ -41,7 +42,7 @@ const Navbar = () => {
         <div className="flex items-center gap-14">
           {/* logo */}
           <Link to="/">
-            <LogoSvg />
+            <img src={logo} alt="" />
           </Link>
 
           {/* search bar */}

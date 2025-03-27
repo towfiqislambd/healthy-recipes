@@ -1,5 +1,6 @@
 import MainLayout from '@/layouts/MainLayout';
 import Homepage from '@/pages/homepage/Homepage';
+import RecipeLibrary from '@/pages/recipe-library/RecipeLibrary';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const router = createBrowserRouter([
@@ -10,6 +11,10 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Homepage />,
+      },
+      {
+        path: '/recipe-library',
+        element: <RecipeLibrary />,
       },
     ],
   },
