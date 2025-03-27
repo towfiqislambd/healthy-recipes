@@ -1152,3 +1152,22 @@ export function AppleBgSvg() {
     </svg>
   );
 }
+export function ArrowTopRightSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <path
+        d="M6.72078 16.7075L17.2729 7.29192M17.2729 7.29192L7.28906 6.72363M17.2729 7.29192L16.7046 17.2758"
+        stroke="#5A5C5F"
+        strokewidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
