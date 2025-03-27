@@ -99,9 +99,9 @@ const TrendingDiet = () => {
               className="mySwiper"
               onSwiper={setSwiperRef}
             >
-              {trendingRecipesData?.map((item, index) => (
-                <SwiperSlide key={item?.image}>
-                  <RecipeCard item={item} down={index % 2 !== 0} />
+              {trendingRecipesData?.map((item, idx) => (
+                <SwiperSlide key={idx}>
+                  <RecipeCard item={item} down={idx % 2 !== 0} />
                 </SwiperSlide>
               ))}
             </Swiper>

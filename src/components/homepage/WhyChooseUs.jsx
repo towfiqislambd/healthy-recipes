@@ -35,14 +35,14 @@ const WhyChooseUs = () => {
   ];
   return (
     <section className="py-20 bg-[#FCFCFC]">
-      <div className='container'>
+      <div className="container">
         {/* section title */}
         <SectionTitle title="Why Choose Us" />
 
         {/* contents */}
         <div className="mt-10 grid grid-cols-4 gap-12">
-          {chooseUsData?.map((item) => (
-            <div className="w-full space-y-4">
+          {chooseUsData?.map((item, idx) => (
+            <div key={idx} className="w-full space-y-4">
               <div className="flex items-center gap-2 justify-center w-full">
                 {item?.svg}{' '}
                 <h5 className="text-3xl leading-[140%] text-primary font-merriweather">
