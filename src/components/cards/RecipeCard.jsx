@@ -7,12 +7,12 @@ import {
 } from '../svg-container/SvgContainer';
 import { useState } from 'react';
 
-const RecipeCard = ({ item, index }) => {
+const RecipeCard = ({ item, down }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   return (
     <Link
       className={`bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl ${
-        index % 2 !== 0 ? 'my-5' : 'my-0'
+        down ? 'my-5' : 'my-0'
       }`}
     >
       {/* image */}
@@ -57,7 +57,7 @@ const RecipeCard = ({ item, index }) => {
       </div>
 
       {/* stats */}
-      <div className="px-7 pt-4 pb-16 w-full flex items-center justify-between">
+      <div className="px-7 py-5 w-full flex items-center justify-between">
         {/* views */}
         <div className="flex items-center gap-1">
           <FireSvg />

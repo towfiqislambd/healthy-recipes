@@ -14,7 +14,7 @@ import banner7 from '../../assets/images/banner-4.jpg';
 import RecipeCard from '../cards/RecipeCard';
 import { useState } from 'react';
 
-const TrendingDiet = () => {
+const FavoriteRecipes = () => {
   const [swiperRef, setSwiperRef] = useState(null);
   const trendingRecipesData = [
     {
@@ -60,14 +60,13 @@ const TrendingDiet = () => {
       rating: 4.8,
     },
   ];
-
   return (
     <section className="py-24  bg-[#F8FCF9]">
       <div className="container">
         {/* title */}
         <div>
           <h2 className="font-merriweather text-[40px] leading-[140%] font-bold  ">
-            Trending Diet Food Recipes
+            Your Favorite Recipes
           </h2>
         </div>
 
@@ -112,4 +111,4 @@ const TrendingDiet = () => {
   );
 };
 
-export default TrendingDiet;
+export default FavoriteRecipes;
