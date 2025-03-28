@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { RiResetLeftFill } from 'react-icons/ri';
 import {
   Select,
   SelectContent,
@@ -37,21 +38,37 @@ const AllRecipesTabs = () => {
     },
   ];
   const [activeTab, setActiveTab] = useState(allTabs[0]);
+  const [selectedAllergen, setSelectedAllergen] = useState('');
+  const [updatedRecipes, setUpdatedRecipes] = useState(allRecipes);
   const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
   //functions:
   const getCountByType = (type) => {
     if (type === 'All recipes') {
-      return allRecipes?.length;
+      return updatedRecipes?.length;
     } else {
-      return allRecipes?.filter((recipe) => recipe.type === type)?.length;
+      return updatedRecipes?.filter((recipe) => recipe.type === type)?.length;
     }
+  };
+  const handleFilterChange = (allergen) => {
+    // Update updatedRecipes based on the selected allergen
+    const filteredRecipes = allRecipes.filter(
+      (item) => item?.allergens === allergen
+    );
+    setSelectedAllergen(allergen);
+    setUpdatedRecipes(filteredRecipes);
+  };
+
+  const handleReset = () => {
+    setSelectedAllergen('');
+    setActiveTab(allTabs[0]);
+    setUpdatedRecipes(allRecipes);
   };
 
   const filteredRecipes =
     activeTab?.title == 'All recipes'
-      ? allRecipes
-      : allRecipes?.filter((recipe) => recipe.type === activeTab?.title);
+      ? updatedRecipes
+      : updatedRecipes?.filter((recipe) => recipe.type === activeTab?.title);
 
   return (
     <div className="container pb-20">
@@ -75,8 +92,8 @@ const AllRecipesTabs = () => {
       </div>
 
       {/* filter */}
-      <div className="w-full flex items-center justify-end">
-        <Select>
+      <div className="w-full flex items-center justify-end gap-5">
+        <Select value={selectedAllergen} onValueChange={handleFilterChange}>
           <SelectTrigger className="w-[460px] h-14 rounded-full px-6 text-base focus:ring-primary">
             <SelectValue placeholder="Select for recipes by allergens..." />
           </SelectTrigger>
@@ -107,6 +124,14 @@ const AllRecipesTabs = () => {
             </SelectItem>
           </SelectContent>
         </Select>
+
+        <button
+          onClick={handleReset}
+          className="h-14 px-6 border border-primary rounded-full flex items-center gap-2 bg-primary text-white transition-all duration-300 hover:bg-transparent hover:text-primary"
+        >
+          <RiResetLeftFill />
+          Reset
+        </button>
       </div>
 
       {/* cards */}
