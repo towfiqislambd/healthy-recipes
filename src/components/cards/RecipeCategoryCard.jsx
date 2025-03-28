@@ -4,7 +4,7 @@ import { FireSvg, RecipeBookSvg, StarSvg } from '../svg-container/SvgContainer';
 const RecipeCategoryCard = ({ item }) => {
   return (
     <Link
-      className={`bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl `}
+      className={`max-w-[370px] bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl `}
     >
       {/* image */}
       <div className="h-[370px] w-full relative rounded-sm overflow-hidden">

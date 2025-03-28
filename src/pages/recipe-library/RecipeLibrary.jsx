@@ -2,8 +2,32 @@ import RecipeBlogs from '@/components/homepage/RecipeBlogs';
 import ShareYourRecipeSection from '@/components/homepage/ShareYourRecipeSection';
 import AllRecipeCardsSection from '@/components/recipe-library/AllRecipeCardsSection';
 import { Link } from 'react-router-dom';
+import banner from '@/assets/images/banner-8.jpg';
 
 const RecipeLibrary = () => {
+    const items = [
+      {
+        image: banner,
+      },
+      {
+        image: banner,
+      },
+      {
+        image: banner,
+      },
+      {
+        image: banner,
+      },
+      {
+        image: banner,
+      },
+      {
+        image: banner,
+      },
+      {
+        image: banner,
+      },
+    ];
   return (
     <div className="mt-[104px]">
       {/* breadcrumbs */}
@@ -26,13 +50,13 @@ const RecipeLibrary = () => {
       </div>
 
       {/* contents */}
-      <div className="mt-10 container ">
+      <div className="mt-10 container pb-10">
         {/* section title */}
         <h2 className="text-black text-5xl font-bold leading-[130%]">
           All Recipe Library
         </h2>
 
-        <AllRecipeCardsSection />
+        <AllRecipeCardsSection items={items} />
       </div>
 
       <ShareYourRecipeSection />
