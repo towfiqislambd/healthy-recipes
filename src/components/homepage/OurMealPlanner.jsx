@@ -42,7 +42,7 @@ const OurMealPlanner = () => {
         <div className="bg-[#FDE0B8] px-12 py-14 rounded-lg flex-shrink-0 group overflow-hidden">
           <div>
             <img
-              className="group-hover:scale-105 transition-all duration-300"
+              className="group-hover:scale-105 transition-all duration-500 rounded-md"
               src={mealPlannerImage}
               alt=""
             />

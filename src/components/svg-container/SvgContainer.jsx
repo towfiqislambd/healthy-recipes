@@ -1239,3 +1239,31 @@ export function DownArrowSvg() {
     </svg>
   );
 }
+export function BackArrowSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="17"
+      viewBox="0 0 16 17"
+      fill="none"
+    >
+      <path
+        d="M6.3826 4.45312L2.33594 8.49979L6.3826 12.5465"
+        stroke="#373E85"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M13.6653 8.5H2.44531"
+        stroke="#373E85"
+        strokeWidth="1.4"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

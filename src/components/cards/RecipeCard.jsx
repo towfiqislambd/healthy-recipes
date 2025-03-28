@@ -10,7 +10,8 @@ import { useState } from 'react';
 const RecipeCard = ({ item, down }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   return (
-    <Link to={`/recipe-details/${item.id}`}
+    <Link
+      to={`/recipe-details/${item.id}`}
       className={`bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl ${
         down ? 'my-5' : 'my-0'
       }`}
@@ -28,7 +29,7 @@ const RecipeCard = ({ item, down }) => {
         {/* wish icon */}
         <div
           onClick={() => setIsFavorite((prev) => !prev)}
-          className={`absolute size-10 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${
+          className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${
             isFavorite ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
           }`}
         >
