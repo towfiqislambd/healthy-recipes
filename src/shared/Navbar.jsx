@@ -36,7 +36,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <header className="py-6 bg-[#F6F5F2] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] fixed w-full left-0 top-0 z-50">
+    <header className="py-6 bg-[#F6F5F2] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] fixed w-full left-0 top-0 z-50 topbar">
       <nav className="container w-full flex justify-between items-center">
         {/* left side contents */}
         <div className="flex items-center gap-14">

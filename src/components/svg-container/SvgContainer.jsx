@@ -1219,3 +1219,23 @@ export function TwitterSvg() {
     </svg>
   );
 }
+export function DownArrowSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="21"
+      viewBox="0 0 20 21"
+      fill="none"
+    >
+      <path
+        d="M16.5984 8.38867L11.1651 13.822C10.5234 14.4637 9.47344 14.4637 8.83177 13.822L3.39844 8.38867"
+        stroke="#292D32"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
