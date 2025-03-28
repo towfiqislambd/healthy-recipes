@@ -10,7 +10,7 @@ import { useState } from 'react';
 const RecipeCard = ({ item, down }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   return (
-    <div
+    <Link to={`/recipe-details/${item.id}`}
       className={`bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl ${
         down ? 'my-5' : 'my-0'
       }`}
@@ -80,7 +80,7 @@ const RecipeCard = ({ item, down }) => {
           <span className="text-textColor text-sm font-medium">4.8/5</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

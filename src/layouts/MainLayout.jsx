@@ -5,7 +5,7 @@ import { Outlet, ScrollRestoration } from 'react-router-dom';
 const MainLayout = () => {
   return (
     <>
-      <ScrollRestoration /> 
+      <ScrollRestoration />
       <Navbar />
       <Outlet />
       <Footer />

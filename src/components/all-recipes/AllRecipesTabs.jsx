@@ -137,7 +137,7 @@ const AllRecipesTabs = () => {
       {/* cards */}
       <div className="mt-10 grid grid-cols-4 gap-6">
         {filteredRecipes?.map((item, idx) => (
-          <RecipeCard key={idx} item={item} />
+          <RecipeCard key={idx} item={item} down={idx % 2 !== 0} />
         ))}
       </div>
     </div>
