@@ -9,26 +9,36 @@ import { useState } from 'react';
 
 const RecipeCard = ({ item, down }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+
+  // Function to handle wishlist button click
+  const handleWishlistClick = (e) => {
+    e.stopPropagation(); // Prevents the Link from being activated
+    setIsFavorite((prev) => !prev); // Toggle favorite state
+  };
+
   return (
-    <Link
-      to={`/recipe-details/${item.id}`}
+    <div
       className={`bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl ${
         down ? 'my-5' : 'my-0'
       }`}
     >
-      {/* image */}
-      <div className="h-[370px] w-full relative rounded-sm overflow-hidden">
-        <img
-          className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
-          src={item?.image}
-          alt=""
-        />
-        {/* Overlay with Linear Gradient */}
-        <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30"></div>
+      <div className="relative">
+        {/* image and overlay */}
+        <Link to={`/recipe-details/${item.id}`} className="block">
+          <div className="h-[370px] w-full relative rounded-sm overflow-hidden">
+            <img
+              className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
+              src={item?.image}
+              alt=""
+            />
+            {/* Overlay with Linear Gradient */}
+            <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30"></div>
+          </div>
+        </Link>
 
         {/* wish icon */}
         <div
-          onClick={() => setIsFavorite((prev) => !prev)}
+          onClick={handleWishlistClick} // Use the new function here
           className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${
             isFavorite ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
           }`}
@@ -50,7 +60,7 @@ const RecipeCard = ({ item, down }) => {
           {item?.title}
         </h5>
         <div className="mt-4 space-y-2">
-          <div className="flex gap-2   ">
+          <div className="flex gap-2">
             <div className="flex-shrink-0">
               <RecipeBookSvg />
             </div>
@@ -81,7 +91,7 @@ const RecipeCard = ({ item, down }) => {
           <span className="text-textColor text-sm font-medium">4.8/5</span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
