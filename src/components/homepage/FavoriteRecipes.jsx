@@ -1,19 +1,18 @@
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
-import { SliderNextSvg, SliderPrevSvg } from '../svg-container/SvgContainer';
-import RecipeCard from '../cards/RecipeCard';
-import { useState } from 'react';
-import { allRecipes } from '@/data/data';
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { SliderNextSvg, SliderPrevSvg } from "../svg-container/SvgContainer";
+import RecipeCard from "../cards/RecipeCard";
+import { useState } from "react";
+import { allRecipes } from "@/data/data";
+import { Navigation } from "swiper/modules";
 const FavoriteRecipes = () => {
   const [swiperRef, setSwiperRef] = useState(null);
 
   return (
     <section className="py-24  bg-[#F8FCF9]">
-      <div className="container">
+      <div className="container mx-auto px-4">
         {/* title */}
         <div>
           <h2 className="font-merriweather text-[40px] leading-[140%] font-bold  ">
@@ -42,12 +41,20 @@ const FavoriteRecipes = () => {
           {/* sliders */}
           <div className="  mt-5">
             <Swiper
-              loop={true}
-              slidesPerView={4}
-              spaceBetween={20}
-              modules={[Pagination]}
-              className="mySwiper"
               onSwiper={setSwiperRef}
+              spaceBetween={20}
+              slidesPerView={1}
+              loop={true}
+              modules={[Navigation]}
+              pagination={{ clickable: true }}
+              navigation={false}
+              className="mySwiper"
+              breakpoints={{
+                640: { slidesPerView: 2, spaceBetween: 20 },
+                768: { slidesPerView: 2.5, spaceBetween: 25 },
+                1024: { slidesPerView: 3, spaceBetween: 30 },
+                1280: { slidesPerView: 4, spaceBetween: 35 },
+              }}
             >
               {allRecipes?.map((item, index) => (
                 <SwiperSlide key={index}>
