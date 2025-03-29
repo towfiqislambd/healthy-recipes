@@ -6,6 +6,7 @@ import { Pagination } from 'swiper/modules';
 import { SliderNextSvg, SliderPrevSvg } from '../svg-container/SvgContainer';
 import { useState } from 'react';
 import BlogCard from '../cards/BlogCard';
+import { allBlogs } from '@/data/data';
 
 const RecipeBlogs = () => {
   const [swiperRef, setSwiperRef] = useState(null);
@@ -48,21 +49,11 @@ const RecipeBlogs = () => {
               className="mySwiper"
               onSwiper={setSwiperRef}
             >
-              <SwiperSlide>
-                <BlogCard />
-              </SwiperSlide>
-              <SwiperSlide>
-                <BlogCard />
-              </SwiperSlide>
-              <SwiperSlide>
-                <BlogCard />
-              </SwiperSlide>
-              <SwiperSlide>
-                <BlogCard />
-              </SwiperSlide>
-              <SwiperSlide>
-                <BlogCard />
-              </SwiperSlide>
+              {allBlogs?.map((item) => (
+                <SwiperSlide key={item?.id}>
+                  <BlogCard data={item} />
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
         </div>

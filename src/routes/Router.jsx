@@ -1,5 +1,6 @@
 import MainLayout from '@/layouts/MainLayout';
 import AllRecipes from '@/pages/all-recipes/AllRecipes';
+import BlogDetails from '@/pages/blog-details/BlogDetails';
 import Blog from '@/pages/blog/Blog';
 import ErrorPage from '@/pages/error/ErrorPage';
 import Homepage from '@/pages/homepage/Homepage';
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: '/blog',
         element: <Blog />,
+      },
+      {
+        path: '/blog/:id',
+        element: <BlogDetails />,
       },
     ],
   },

@@ -676,3 +676,433 @@ export const allReviews = [
     image: 'https://iili.io/3umtXdG.md.jpg',
   },
 ];
+export const allBlogs = [
+  {
+    id: 1,
+    image: 'https://i.postimg.cc/3RG12F2R/blog-1.jpg',
+    title: 'Language everyone shoulder inside',
+    category: 'Box',
+    time: '6 min',
+    date: 'Jan 01 2025',
+    subtitle:
+      'Decide natural itself positive four red bad actually herself describe institution store.',
+  },
+  {
+    id: 2,
+    image: 'https://i.postimg.cc/d3m9xQHc/blog-2.jpg',
+    title: 'Head sing far smile on there determine outside run',
+    category: 'Whether',
+    time: '7 min',
+    date: 'Jan 02 2025',
+    subtitle:
+      'Personal outside item amount personal positive southern give serve church party fast smile.',
+  },
+  {
+    id: 3,
+    image: 'https://i.postimg.cc/qB8QRQkD/blog-3.jpg',
+    title: 'Manager yard including value whose wind live you',
+    category: 'Young',
+    time: '4 min',
+    date: 'Jan 03 2025',
+    subtitle:
+      'International style your clear expert become nice strong occur attorney recently available shoulder leg car only easy hot heart.',
+  },
+  {
+    id: 4,
+    image: 'https://i.postimg.cc/5NbgFvy4/blog-4.jpg',
+    title: 'Local claim half social seat even behind million rate',
+    category: 'Nothing',
+    time: '4 min',
+    date: 'Jan 04 2025',
+    subtitle: 'Teach seat mean cost program standard yet staff indicate tree.',
+  },
+  {
+    id: 5,
+    image: 'https://i.postimg.cc/T1X905cc/blog-5.jpg',
+    title: 'Nation including service huge international plan after',
+    category: 'Age',
+    time: '7 min',
+    date: 'Jan 05 2025',
+    subtitle:
+      'Analysis mention safe six expect while particular score while personal international record include answer however take pressure why area.',
+  },
+  {
+    id: 6,
+    image: 'https://i.postimg.cc/15BH0tVp/blog-6.jpg',
+    title: 'Agency method send hand different of far',
+    category: 'Wife',
+    time: '4 min',
+    date: 'Jan 06 2025',
+    subtitle:
+      'Finish if around guess thousand product will society save woman glass political film of popular.',
+  },
+  {
+    id: 7,
+    image: 'https://i.postimg.cc/qv7G1T2W/blog-7.jpg',
+    title: 'According evening image another',
+    category: 'Late',
+    time: '3 min',
+    date: 'Jan 07 2025',
+    subtitle:
+      'Room down house skin coach within truth generation structure direction down.',
+  },
+  {
+    id: 8,
+    image: 'https://i.postimg.cc/3RG12F2R/blog-1.jpg',
+    title: 'Treat response wait number run',
+    category: 'Senior',
+    time: '6 min',
+    date: 'Jan 08 2025',
+    subtitle:
+      'Degree collection hotel three bring about like central spend Congress.',
+  },
+  {
+    id: 9,
+    image: 'https://i.postimg.cc/d3m9xQHc/blog-2.jpg',
+    title: 'Sport believe garden teach',
+    category: 'Behavior',
+    time: '5 min',
+    date: 'Jan 09 2025',
+    subtitle:
+      'Road night goal vote near want clear mission instead would late network themselves team upon sing as.',
+  },
+  {
+    id: 10,
+    image: 'https://i.postimg.cc/qB8QRQkD/blog-3.jpg',
+    title: 'Research someone performance marriage member blue machine away',
+    category: 'Tax',
+    time: '6 min',
+    date: 'Jan 10 2025',
+    subtitle:
+      'Week else happy keep group leave interesting bit design avoid whole around language rock test need color president.',
+  },
+  {
+    id: 11,
+    image: 'https://i.postimg.cc/5NbgFvy4/blog-4.jpg',
+    title: 'Figure if over statement wrong onto he fire',
+    category: 'Sea',
+    time: '3 min',
+    date: 'Jan 11 2025',
+    subtitle:
+      'Chance family project just political radio like answer draw live.',
+  },
+  {
+    id: 12,
+    image: 'https://i.postimg.cc/T1X905cc/blog-5.jpg',
+    title: 'Fish option space score again ground baby',
+    category: 'End',
+    time: '4 min',
+    date: 'Jan 12 2025',
+    subtitle:
+      'Western best would onto investment challenge too discussion fine night four answer summer science.',
+  },
+  {
+    id: 13,
+    image: 'https://i.postimg.cc/15BH0tVp/blog-6.jpg',
+    title: 'Discuss apply on would senior population successful rate me',
+    category: 'He',
+    time: '6 min',
+    date: 'Jan 13 2025',
+    subtitle: 'Move big political public eight eat task prove wind art.',
+  },
+  {
+    id: 14,
+    image: 'https://i.postimg.cc/qv7G1T2W/blog-7.jpg',
+    title: 'Store customer manager grow whole young relationship car',
+    category: 'Debate',
+    time: '3 min',
+    date: 'Jan 14 2025',
+    subtitle: 'Treatment key off outside few when science just mean.',
+  },
+  {
+    id: 15,
+    image: 'https://i.postimg.cc/3RG12F2R/blog-1.jpg',
+    title: 'Give appear go recent tough',
+    category: 'Spend',
+    time: '4 min',
+    date: 'Jan 15 2025',
+    subtitle:
+      'Skill necessary challenge prevent discover carry news why occur impact must traditional relationship democratic follow fall.',
+  },
+  {
+    id: 16,
+    image: 'https://i.postimg.cc/d3m9xQHc/blog-2.jpg',
+    title: 'Ability soldier affect kind term bag light',
+    category: 'Help',
+    time: '8 min',
+    date: 'Jan 16 2025',
+    subtitle:
+      'Look newspaper mother sound table through tonight machine man listen drive participant million blue minute cut hot rule performance base.',
+  },
+  {
+    id: 17,
+    image: 'https://i.postimg.cc/qB8QRQkD/blog-3.jpg',
+    title: 'Cover community professor whatever wide another little town',
+    category: 'Administration',
+    time: '3 min',
+    date: 'Jan 17 2025',
+    subtitle:
+      'Late chair real time over option measure plant experience just reason edge scene issue hit company.',
+  },
+  {
+    id: 18,
+    image: 'https://i.postimg.cc/5NbgFvy4/blog-4.jpg',
+    title: 'Conference learn which make toward human thing in',
+    category: 'Professor',
+    time: '9 min',
+    date: 'Jan 18 2025',
+    subtitle:
+      'Well by identify cup forget between success high yes however rest hour test brother bit find model language read.',
+  },
+  {
+    id: 19,
+    image: 'https://i.postimg.cc/T1X905cc/blog-5.jpg',
+    title: 'Office security cultural wear',
+    category: 'Wide',
+    time: '9 min',
+    date: 'Jan 19 2025',
+    subtitle: 'House red person until local him he father blood learn.',
+  },
+  {
+    id: 20,
+    image: 'https://i.postimg.cc/15BH0tVp/blog-6.jpg',
+    title: 'Image culture their growth professional weight staff sit mouth',
+    category: 'Wonder',
+    time: '4 min',
+    date: 'Jan 20 2025',
+    subtitle:
+      'Wait even author care shoulder cup beat glass rest agreement something.',
+  },
+  {
+    id: 21,
+    image: 'https://i.postimg.cc/qv7G1T2W/blog-7.jpg',
+    title: 'Wrong young life near whether charge quite',
+    category: 'Front',
+    time: '7 min',
+    date: 'Jan 21 2025',
+    subtitle:
+      'On consumer offer far health true hospital rock difficult company day provide.',
+  },
+  {
+    id: 22,
+    image: 'https://i.postimg.cc/3RG12F2R/blog-1.jpg',
+    title: 'Series language place agree maybe success campaign several team',
+    category: 'Even',
+    time: '3 min',
+    date: 'Jan 22 2025',
+    subtitle:
+      'How mind describe ground get town teach cover able street add national usually better others.',
+  },
+  {
+    id: 23,
+    image: 'https://i.postimg.cc/d3m9xQHc/blog-2.jpg',
+    title: 'Majority strategy care think simply blood',
+    category: 'Everything',
+    time: '8 min',
+    date: 'Jan 23 2025',
+    subtitle:
+      'Move measure white realize both himself special production chair thank of heavy herself control return.',
+  },
+  {
+    id: 24,
+    image: 'https://i.postimg.cc/qB8QRQkD/blog-3.jpg',
+    title: 'Soon evidence talk animal use trouble town side',
+    category: 'Life',
+    time: '8 min',
+    date: 'Jan 24 2025',
+    subtitle:
+      'Enter crime tough north should table thank contain today drop strong different our.',
+  },
+  {
+    id: 25,
+    image: 'https://i.postimg.cc/5NbgFvy4/blog-4.jpg',
+    title: 'Republican job even accept military process either',
+    category: 'Start',
+    time: '8 min',
+    date: 'Jan 25 2025',
+    subtitle:
+      'Cover simple concern old half food fact sure high hot big ready agency project relate.',
+  },
+  {
+    id: 26,
+    image: 'https://i.postimg.cc/T1X905cc/blog-5.jpg',
+    title: 'Wind rich democratic address show serious',
+    category: 'Task',
+    time: '7 min',
+    date: 'Jan 26 2025',
+    subtitle:
+      'Paper find number television experience political final western military order watch true short.',
+  },
+  {
+    id: 27,
+    image: 'https://i.postimg.cc/15BH0tVp/blog-6.jpg',
+    title: 'Environment involve plant run public seem',
+    category: 'High',
+    time: '3 min',
+    date: 'Jan 27 2025',
+    subtitle:
+      'Condition entire consumer around third rather majority hair training majority doctor option simple eight heart partner.',
+  },
+  {
+    id: 28,
+    image: 'https://i.postimg.cc/qv7G1T2W/blog-7.jpg',
+    title: 'Firm special available probably weight instead',
+    category: 'Everybody',
+    time: '9 min',
+    date: 'Jan 28 2025',
+    subtitle:
+      'Present fall than very sort media example themselves family test describe after future evening order wall down.',
+  },
+  {
+    id: 29,
+    image: 'https://i.postimg.cc/3RG12F2R/blog-1.jpg',
+    title: 'Realize factor not win author outside',
+    category: 'Brother',
+    time: '6 min',
+    date: 'Jan 29 2025',
+    subtitle:
+      'Nice there money agreement support like rest stay it member certain lead risk voice listen like do candidate common.',
+  },
+  {
+    id: 30,
+    image: 'https://i.postimg.cc/d3m9xQHc/blog-2.jpg',
+    title: 'Common become end scene apply thank hand',
+    category: 'Tv',
+    time: '6 min',
+    date: 'Jan 30 2025',
+    subtitle:
+      'Western above example their market yard media bit activity executive attorney center room project what.',
+  },
+  {
+    id: 31,
+    image: 'https://i.postimg.cc/qB8QRQkD/blog-3.jpg',
+    title: 'Still someone there step',
+    category: 'Carry',
+    time: '6 min',
+    date: 'Jan 31 2025',
+    subtitle:
+      'Change thousand trouble industry chair between mother student thing left rule dinner rather instead try deep.',
+  },
+  {
+    id: 32,
+    image: 'https://i.postimg.cc/5NbgFvy4/blog-4.jpg',
+    title: 'Range type figure guy',
+    category: 'Federal',
+    time: '4 min',
+    date: 'Feb 01 2025',
+    subtitle:
+      'Manager federal woman seat scientist director measure discuss look economic attorney realize identify great cultural baby professor quality but base.',
+  },
+  {
+    id: 33,
+    image: 'https://i.postimg.cc/T1X905cc/blog-5.jpg',
+    title: 'Modern occur friend rate growth after day local',
+    category: 'Specific',
+    time: '8 min',
+    date: 'Feb 02 2025',
+    subtitle:
+      'Commercial while them usually message notice water manage second decision.',
+  },
+  {
+    id: 34,
+    image: 'https://i.postimg.cc/15BH0tVp/blog-6.jpg',
+    title: 'Heart well no increase church forward budget',
+    category: 'Since',
+    time: '5 min',
+    date: 'Feb 03 2025',
+    subtitle:
+      'Dog Mrs activity first into charge build significant do whether blue hundred until her glass Congress.',
+  },
+  {
+    id: 35,
+    image: 'https://i.postimg.cc/qv7G1T2W/blog-7.jpg',
+    title: 'Miss that nearly high service throw',
+    category: 'Bring',
+    time: '9 min',
+    date: 'Feb 04 2025',
+    subtitle:
+      'Bit ago especially couple street success believe nature situation lay.',
+  },
+  {
+    id: 36,
+    image: 'https://i.postimg.cc/3RG12F2R/blog-1.jpg',
+    title: 'Anyone glass but majority participant project continue article',
+    category: 'Happen',
+    time: '7 min',
+    date: 'Feb 05 2025',
+    subtitle:
+      'Research despite ground whom discover resource despite radio plan want.',
+  },
+  {
+    id: 37,
+    image: 'https://i.postimg.cc/d3m9xQHc/blog-2.jpg',
+    title: 'Begin similar table research safe avoid',
+    category: 'Better',
+    time: '6 min',
+    date: 'Feb 06 2025',
+    subtitle:
+      'Congress article become already charge lose computer week situation spring should go campaign reality every those away space price.',
+  },
+  {
+    id: 38,
+    image: 'https://i.postimg.cc/qB8QRQkD/blog-3.jpg',
+    title: 'Add least month issue Democrat happen newspaper size',
+    category: 'Method',
+    time: '6 min',
+    date: 'Feb 07 2025',
+    subtitle:
+      'Director late statement last stage blue region eat worry if just have stop born business dog question man.',
+  },
+  {
+    id: 39,
+    image: 'https://i.postimg.cc/5NbgFvy4/blog-4.jpg',
+    title: 'Choice success room huge talk economy cell',
+    category: 'Work',
+    time: '3 min',
+    date: 'Feb 08 2025',
+    subtitle:
+      'Truth democratic read involve ability describe their a foot manager deal play language hit walk western national finally oil.',
+  },
+  {
+    id: 40,
+    image: 'https://i.postimg.cc/T1X905cc/blog-5.jpg',
+    title: 'Close next sense television feel who suddenly',
+    category: 'View',
+    time: '3 min',
+    date: 'Feb 09 2025',
+    subtitle:
+      'Produce foot most trouble data fund blue per though again plant front camera prevent start fine notice argue form.',
+  },
+];
+export const blogDetails = [
+  {
+    id: 1,
+    title: 'Focus on Whole Foods',
+    description:
+      'Prioritize fresh fruits, vegetables, whole grains, lean proteins, and healthy fats over processed and refined foods. Whole foods provide essential nutrients that keep your body functioning optimally.',
+  },
+  {
+    id: 2,
+    title: 'Stay Hydrated',
+    description:
+      'Drinking enough water is crucial for digestion, metabolism, and overall health. Aim for at least 8 glasses per day, and include herbal teas or infused water for variety.',
+  },
+  {
+    id: 3,
+    title: 'Practice Portion Control',
+    description:
+      'Even healthy foods can lead to weight gain if consumed in excess. Use smaller plates, measure portions, and eat mindfully to avoid overeating.',
+  },
+  {
+    id: 4,
+    title: 'Balance Your Macros',
+    description:
+      'A well-balanced diet should include carbohydrates, proteins, and fats. Opt for complex carbs like quinoa and sweet potatoes, lean proteins such as chicken and beans, and healthy fats from sources like avocados and nuts.',
+  },
+  {
+    id: 5,
+    title: 'Plan Your Meals',
+    description:
+      'Meal prepping can help you make healthier choices and save time during busy weekdays. Plan ahead to ensure you have nutritious meals readily available.',
+  },
+];

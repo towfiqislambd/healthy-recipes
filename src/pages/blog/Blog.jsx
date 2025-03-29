@@ -1,3 +1,6 @@
+import BlogCard from '@/components/cards/BlogCard';
+import { allBlogs } from '@/data/data';
+
 const Blog = () => {
   return (
     <div className="mt-[104px]">
@@ -14,8 +17,10 @@ const Blog = () => {
       </div>
 
       {/* all blogs */}
-      <div className="grid grid-cols-4 gap-5">
-
+      <div className="grid grid-cols-4 gap-5 container pb-20">
+        {allBlogs?.map((item) => (
+          <BlogCard key={item?.id} data={item} />
+        ))}
       </div>
     </div>
   );

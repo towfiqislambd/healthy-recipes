@@ -5,7 +5,6 @@ import recipe from '../../assets/videos/recipe.mp4';
 import RightSideContentsDetailsPage from '@/components/recipe-details/RightSideContentsDetailsPage';
 import ShareRecipeSection from '@/components/recipe-details/ShareRecipeSection';
 import ShareYourRecipeSection from '@/components/homepage/ShareYourRecipeSection';
-import { EmptyStarSvg } from '@/components/svg-container/SvgContainer';
 import ReviewSection from '@/components/recipe-details/ReviewSection';
 
 const RecipeDetails = () => {
