@@ -650,3 +650,29 @@ export const allRecipes = [
     rating: 5,
   },
 ];
+export const allReviews = [
+  {
+    name: 'John Doe',
+    date: 'October 5 2024',
+    review:
+      "I've been on a keto diet for a year now, and this site has been a lifesaver! The recipes are delicious, and I appreciate the detailed nutritional breakdown. The meal-planning tool makes it so much easier to stick to my diet. Highly recommended!",
+    reviewCount: 5,
+    image: 'https://iili.io/3umtXdG.md.jpg',
+  },
+  {
+    name: 'Sarah Jenny',
+    date: 'January 5 2025',
+    review:
+      'I’ve been on a keto diet for a year now, and this site has been a lifesaver! The recipes are delicious, and I appreciate the detailed nutritional breakdown. The meal-planning tool makes it so much easier to stick to my diet. Highly recommended!',
+    reviewCount: 5,
+    image: 'https://iili.io/3umtVgs.jpg',
+  },
+  {
+    name: 'John Doe',
+    date: 'October 5 2024',
+    review:
+      "I've been on a keto diet for a year now, and this site has been a lifesaver! The recipes are delicious, and I appreciate the detailed nutritional breakdown. The meal-planning tool makes it so much easier to stick to my diet. Highly recommended!",
+    reviewCount: 4,
+    image: 'https://iili.io/3umtXdG.md.jpg',
+  },
+];
