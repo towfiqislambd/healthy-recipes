@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import {
   FireSvg,
   LoveSvg,
   RecipeBookSvg,
   StarSvg,
-} from '../svg-container/SvgContainer';
-import { useState } from 'react';
+} from "../svg-container/SvgContainer";
+import { useState } from "react";
 
 const RecipeCard = ({ item, down }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -21,13 +21,13 @@ const RecipeCard = ({ item, down }) => {
     <Link
       to={`/recipe-details/${item.id}`}
       className={`bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl ${
-        down ? 'my-5' : 'my-0'
+        down ? "my-5" : "my-0"
       }`}
     >
       <div className="relative">
         {/* image and overlay */}
         <div className="block">
-          <div className="h-[370px] w-full relative rounded-sm overflow-hidden">
+          <div className="sm:h-[370px] h-[250px] w-full relative rounded-sm overflow-hidden">
             <img
               className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
               src={item?.image}
@@ -42,7 +42,7 @@ const RecipeCard = ({ item, down }) => {
         <button
           onClick={handleWishlistClick}
           className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${
-            isFavorite ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
+            isFavorite ? "bg-[#CB4242]" : "bg-[#FFE3E3]"
           }`}
         >
           <LoveSvg isFavorite={isFavorite} />

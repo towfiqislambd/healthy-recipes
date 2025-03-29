@@ -1,13 +1,14 @@
-import { Link } from 'react-router-dom';
-import { FireSvg, RecipeBookSvg, StarSvg } from '../svg-container/SvgContainer';
+import { Link } from "react-router-dom";
+import { FireSvg, RecipeBookSvg, StarSvg } from "../svg-container/SvgContainer";
 
 const RecipeCategoryCard = ({ item }) => {
   return (
-    <Link to='/all-recipes'
-      className={`max-w-[370px] bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl `}
+    <Link
+      to="/all-recipes"
+      className={`sm:max-w-[370px] bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl `}
     >
       {/* image */}
-      <div className="h-[370px] w-full relative rounded-sm overflow-hidden">
+      <div className="sm:h-[370px] w-full relative rounded-sm overflow-hidden">
         <img
           className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
           src={item?.image}

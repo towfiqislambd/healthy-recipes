@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
-import SectionTitle from '../common/SectionTitle';
-import banner from '../../assets/images/banner-8.jpg';
-import RecipeCard from '../cards/RecipeCard';
-import RecipeCategoryCard from '../cards/RecipeCategoryCard';
+import { Link } from "react-router-dom";
+import SectionTitle from "../common/SectionTitle";
+import banner from "../../assets/images/banner-8.jpg";
+import RecipeCard from "../cards/RecipeCard";
+import RecipeCategoryCard from "../cards/RecipeCategoryCard";
 
 const RecipeLibrarySection = () => {
   const items = [
@@ -27,16 +27,19 @@ const RecipeLibrarySection = () => {
         {/* cards  section*/}
         <div className="-mt-8">
           {/* see all button */}
-          <div className="w-full flex items-center justify-end">
-            <Link to='/recipe-library' className="text-textColor font-merriweather px-6 py-3 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white">
+          <div className="w-full flex items-center justify-end mt-5 sm:mt-0">
+            <Link
+              to="/recipe-library"
+              className="text-textColor font-merriweather px-6 py-3 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white"
+            >
               See all
             </Link>
           </div>
 
           {/* all cards */}
-          <div className="grid grid-cols-4 gap-5 pt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-5 pt-8 px-6 sm:px-0">
             {items?.map((item, idx) => (
-              <RecipeCategoryCard  key={idx} item={item} />
+              <RecipeCategoryCard key={idx} item={item} />
             ))}
           </div>
         </div>
