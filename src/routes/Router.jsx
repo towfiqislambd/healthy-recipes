@@ -1,5 +1,7 @@
 import MainLayout from '@/layouts/MainLayout';
 import AllRecipes from '@/pages/all-recipes/AllRecipes';
+import BlogDetails from '@/pages/blog-details/BlogDetails';
+import Blog from '@/pages/blog/Blog';
 import ErrorPage from '@/pages/error/ErrorPage';
 import Homepage from '@/pages/homepage/Homepage';
 import RecipeDetails from '@/pages/recipe-details/RecipeDetails';
@@ -21,12 +23,20 @@ export const router = createBrowserRouter([
         element: <RecipeLibrary />,
       },
       {
-        path: '/all-recipes',
+        path: '/recipe-library/:all-recipes',
         element: <AllRecipes />,
       },
       {
         path: '/recipe-details/:id',
         element: <RecipeDetails />,
+      },
+      {
+        path: '/blog',
+        element: <Blog />,
+      },
+      {
+        path: '/blog/:id',
+        element: <BlogDetails />,
       },
     ],
   },
