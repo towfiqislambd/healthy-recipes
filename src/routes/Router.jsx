@@ -23,7 +23,7 @@ export const router = createBrowserRouter([
         element: <RecipeLibrary />,
       },
       {
-        path: '/all-recipes',
+        path: '/recipe-library/:all-recipes',
         element: <AllRecipes />,
       },
       {
