@@ -4,6 +4,7 @@ import { EmptyStarSvg, FullStarSvg } from '../svg-container/SvgContainer';
 const ReviewCard = ({ data }) => {
   const fullStars = Array(data?.reviewCount).fill(<FullStarSvg />);
   const emptyStars = Array(5 - data?.reviewCount).fill(<EmptyStarSvg />);
+
   return (
     <div className="border border-[#8993A4] rounded-2xl px-12 py-5 w-full">
       {/* top contents */}

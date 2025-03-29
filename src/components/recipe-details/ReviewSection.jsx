@@ -1,6 +1,4 @@
 import ReviewLeftSection from './ReviewLeftSection';
-import avatar from '../../assets/images/avatar-1.jpg';
-import { FullStarSvg } from '../svg-container/SvgContainer';
 import { allReviews } from '@/data/data';
 import ReviewCard from '../cards/ReviewCard';
 
