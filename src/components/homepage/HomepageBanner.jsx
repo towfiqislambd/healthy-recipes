@@ -7,12 +7,12 @@ import banner4 from "../../assets/images/banner-4.jpg";
 const HomepageBanner = () => {
   return (
     <section className="py-[68px] bg-[#F6F5F2]">
-      <div className="container flex items-center gap-16">
+      <div className="container flex flex-col md:flex-row items-center md:gap-16 gap-10">
         {/* left side */}
-        <div className="space-y-10 w-full">
+        <div className="md:space-y-10 space-y-5 w-full px-6 md:px-0">
           {/* Details */}
           <div className="space-y-5">
-            <h1 className="max-w-[740px] font-merriweather text-[56px] font-bold leading-[135%] text-black">
+            <h1 className="md:max-w-[740px] w-full font-merriweather text-3xl md:text-[56px] font-bold leading-[135%] text-black">
               Baby Bites to Golden Delights - Healthy
               <span className="text-primary ml-4">Recipes & Tips</span> for All
               thys
@@ -31,8 +31,8 @@ const HomepageBanner = () => {
         {/* right side */}
         <div className="w-fit space-y-5">
           {/* top images */}
-          <div className="w-full flex items-end gap-5 px-10">
-            <div className="h-[320px] w-[300px] relative overflow-hidden rounded-lg">
+          <div className="w-full flex flex-col md:flex-row items-end gap-5 md:px-10">
+            <div className="md:h-[320px] h-[230px] md:w-[300px] w-full relative overflow-hidden rounded-lg">
               <img
                 className="rounded-lg h-full w-full object-cover"
                 src={banner1}
@@ -42,7 +42,7 @@ const HomepageBanner = () => {
               <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30"></div>
             </div>
 
-            <div className="h-[340px] w-[320px] overflow-hidden rounded-lg relative">
+            <div className="md:h-[340px] h-[230px] md:w-[320px] w-full overflow-hidden rounded-lg relative">
               <img
                 className="rounded-lg h-full w-full object-cover"
                 src={banner2}
@@ -54,8 +54,8 @@ const HomepageBanner = () => {
           </div>
 
           {/* bottom images */}
-          <div className="w-full flex gap-5">
-            <div className="h-[390px] w-[365px] relative overflow-hidden rounded-lg">
+          <div className="w-full flex flex-col md:flex-row gap-5">
+            <div className="md:h-[390px] h-[230px] md:w-[365px] w-full relative overflow-hidden rounded-lg">
               <img
                 className="rounded-lg h-full w-full object-cover"
                 src={banner3}
@@ -64,7 +64,7 @@ const HomepageBanner = () => {
               {/* Overlay with Linear Gradient */}
               <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30"></div>
             </div>
-            <div className="h-[360px] w-[340px] relative rounded-lg overflow-hidden">
+            <div className="md:h-[360px] h-[230px] md:w-[340px] w-full relative rounded-lg overflow-hidden">
               <img
                 className="rounded-lg h-full w-full object-cover"
                 src={banner4}
