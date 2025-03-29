@@ -65,7 +65,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background font-poppins;
+    @apply bg-background font-poppins bg-[#FCFCFC];
   }
   body[data-scroll-locked] .topbar {
     padding-right: var(--removed-body-scroll-bar-size) !important;

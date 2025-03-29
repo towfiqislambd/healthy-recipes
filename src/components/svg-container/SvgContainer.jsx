@@ -1267,3 +1267,32 @@ export function BackArrowSvg() {
     </svg>
   );
 }
+export function PlayButtonSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="28"
+      viewBox="0 0 32 28"
+      fill="none"
+    >
+      <path
+        d="M28.4663 12.2149C29.9306 12.9546 29.9306 15.0454 28.4663 15.7851L10.9018 24.6584C9.57155 25.3304 8 24.3637 8 22.8733V5.12673C8 3.63635 9.57155 2.66956 10.9018 3.34159L28.4663 12.2149Z"
+        fill="white"
+      />
+    </svg>
+  );
+}
+export function PauseButtonSvg() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <path d="M14 19V5H18V19H14ZM6 19V5H10V19H6Z" fill="white" />
+    </svg>
+  );
+}

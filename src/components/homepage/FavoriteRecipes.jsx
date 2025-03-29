@@ -50,7 +50,7 @@ const FavoriteRecipes = () => {
               onSwiper={setSwiperRef}
             >
               {allRecipes?.map((item, index) => (
-                <SwiperSlide key={item?.image}>
+                <SwiperSlide key={index}>
                   <RecipeCard item={item} down={index % 2 !== 0} />
                 </SwiperSlide>
               ))}
