@@ -1,6 +1,6 @@
-import avatar from '../../assets/images/avatar-1.jpg';
-import { Link } from 'react-router-dom';
-import { ArrowTopRightSvg } from '../svg-container/SvgContainer';
+import avatar from "../../assets/images/avatar-1.jpg";
+import { Link } from "react-router-dom";
+import { ArrowTopRightSvg } from "../svg-container/SvgContainer";
 
 const BlogCard = ({ data }) => {
   return (
@@ -37,7 +37,7 @@ const BlogCard = ({ data }) => {
         </div>
 
         {/* user info */}
-        <div className="mt-12 w-full flex items-center justify-between">
+        <div className="sm:mt-12 mt-6 w-full flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="size-10">
               <img
