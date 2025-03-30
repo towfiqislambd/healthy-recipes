@@ -1,5 +1,7 @@
+import AuthLayout from '@/layouts/AuthLayout';
 import MainLayout from '@/layouts/MainLayout';
 import AllRecipes from '@/pages/all-recipes/AllRecipes';
+import Login from '@/pages/auth/login/Login';
 import BlogDetails from '@/pages/blog-details/BlogDetails';
 import Blog from '@/pages/blog/Blog';
 import ErrorPage from '@/pages/error/ErrorPage';
@@ -23,7 +25,7 @@ export const router = createBrowserRouter([
         element: <RecipeLibrary />,
       },
       {
-        path: '/recipe-library/:all-recipes',
+        path: '/recipe-library/:slug',
         element: <AllRecipes />,
       },
       {
@@ -37,6 +39,17 @@ export const router = createBrowserRouter([
       {
         path: '/blog/:id',
         element: <BlogDetails />,
+      },
+    ],
+  },
+  {
+    path: '/auth',
+    element: <AuthLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: 'login',
+        element: <Login />,
       },
     ],
   },

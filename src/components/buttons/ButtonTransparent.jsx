@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 
-const ButtonTransparent = ({ title }) => {
+const ButtonTransparent = ({ title, path }) => {
   return (
-    <Link className="text-textColor font-merriweather px-8 py-3 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white">
+    <Link
+      to={path}
+      className="text-textColor font-merriweather px-8 py-3 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white"
+    >
       {title}
     </Link>
   );
