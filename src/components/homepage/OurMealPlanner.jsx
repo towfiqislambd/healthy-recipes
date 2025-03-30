@@ -1,17 +1,17 @@
-import mealPlannerImage from '../../assets/images/meal-planner.png';
-import ButtonPrimary from '../buttons/ButtonPrimary';
+import mealPlannerImage from "../../assets/images/meal-planner.png";
+import ButtonPrimary from "../buttons/ButtonPrimary";
 const OurMealPlanner = () => {
   return (
     <section className="py-24 bg-[#FCFCFC]">
-      <div className="container flex items-center gap-32">
+      <div className="container flex flex-col sm:flex-row items-center sm:gap-32 gap-10 px-6 sm:px-0">
         {/* left contents */}
         <div>
-          <h4 className="font-merriweather text-[40px] leading-[140%] font-bold ">
+          <h4 className="font-merriweather text-3xl sm:text-[40px] leading-[140%] font-bold">
             Our Meal Planner
           </h4>
 
           {/* description */}
-          <div className="space-y-6 mt-8">
+          <div className="sm:space-y-6 space-y-3 sm:mt-8 mt-4">
             <p className="text-textColor leading-[150%]">
               Our Meal Planner tool is designed to make healthy eating
               effortless and personalized for every age group. Whether you're
@@ -33,13 +33,12 @@ const OurMealPlanner = () => {
           </div>
 
           {/* explore more */}
-          <div className='mt-10'>
+          <div className="sm:mt-10 mt-5">
             <ButtonPrimary title="Explore more" />
           </div>
         </div>
         {/* right contents */}
-
-        <div className="bg-[#FDE0B8] px-12 py-14 rounded-lg flex-shrink-0 group overflow-hidden">
+        <div className="bg-[#FDE0B8] sm:px-12 px-6 sm:py-14 py-7 rounded-lg flex-shrink-0 group overflow-hidden">
           <div>
             <img
               className="group-hover:scale-105 transition-all duration-500 rounded-md"
