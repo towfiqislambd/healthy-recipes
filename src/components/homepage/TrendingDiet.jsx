@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation"; // Ensure this is imported
-import { Pagination, Navigation } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import { SliderNextSvg, SliderPrevSvg } from "../svg-container/SvgContainer";
 import RecipeCard from "../cards/RecipeCard";
 import { useState } from "react";
@@ -13,7 +13,7 @@ const TrendingDiet = () => {
   const [swiperRef, setSwiperRef] = useState(null);
 
   return (
-    <section className="py-24 bg-[#F8FCF9]">
+    <section className="sm:py-24  bg-[#F8FCF9]">
       <div className="container mx-auto px-4">
         {/* Title */}
         <div className="text-center">
