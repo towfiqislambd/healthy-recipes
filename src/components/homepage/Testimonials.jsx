@@ -73,7 +73,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#FCFCFC] px-6 sm:px-0">
+    <section className="sm:py-24 bg-[#FCFCFC] px-6 sm:px-0">
       <div className="container">
         <SectionTitle title="Testimonials about us" />
 

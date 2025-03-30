@@ -5,7 +5,7 @@ import { AddSvgLight, RecipeLogoSvg } from "../svg-container/SvgContainer";
 const ShareYourRecipeSection = () => {
   return (
     <section
-      className="sm:py-20 py-10"
+      className="sm:py-20 py-10 my-10 sm:my-0"
       style={{
         backgroundImage: `url(${banner})`,
         backgroundSize: "cover",

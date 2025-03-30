@@ -12,7 +12,7 @@ const RecipeBlogs = () => {
   const [swiperRef, setSwiperRef] = useState(null);
 
   return (
-    <section className="py-24 bg-[#F8FCF9] px-3 sm:px-0">
+    <section className="sm:py-24 pt-10 bg-[#F8FCF9] px-3 sm:px-0">
       <div className="container">
         {/* title */}
         <div>

@@ -2,7 +2,7 @@ import mealPlannerImage from "../../assets/images/meal-planner.png";
 import ButtonPrimary from "../buttons/ButtonPrimary";
 const OurMealPlanner = () => {
   return (
-    <section className="py-24 bg-[#FCFCFC]">
+    <section className="sm:py-24 bg-[#FCFCFC]">
       <div className="container flex flex-col sm:flex-row items-center sm:gap-32 gap-10 px-6 sm:px-0">
         {/* left contents */}
         <div>

@@ -6,7 +6,7 @@ import banner4 from "../../assets/images/banner-4.jpg";
 
 const HomepageBanner = () => {
   return (
-    <section className="py-[68px] bg-[#F6F5F2]">
+    <section className="sm:py-[68px] pt-16 bg-[#F6F5F2]">
       <div className="container flex flex-col md:flex-row items-center md:gap-16 gap-10">
         {/* left side */}
         <div className="md:space-y-10 space-y-5 w-full px-6 md:px-0">
