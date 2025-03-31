@@ -3,6 +3,7 @@ import MainLayout from '@/layouts/MainLayout';
 import AllRecipes from '@/pages/all-recipes/AllRecipes';
 import Login from '@/pages/auth/login/Login';
 import Register from '@/pages/auth/register/Register';
+import ResetPassword from '@/pages/auth/reset-password/ResetPassword';
 import VerifyEmail from '@/pages/auth/verify-email/VerifyEmail';
 import VerifyOtp from '@/pages/auth/verify-otp/VerifyOtp';
 import BlogDetails from '@/pages/blog-details/BlogDetails';
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
       {
         path: 'verify-otp',
         element: <VerifyOtp />,
+      },
+      {
+        path: 'reset-password',
+        element: <ResetPassword />,
       },
     ],
   },

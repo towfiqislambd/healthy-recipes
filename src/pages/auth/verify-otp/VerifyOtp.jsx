@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CgSpinnerTwo } from 'react-icons/cg';
 import toast from 'react-hot-toast';
 import OTPInput from 'react-otp-input';
@@ -11,6 +11,7 @@ const VerifyOtp = () => {
   const [timer, setTimer] = useState(60);
   const [isReset, setIsReset] = useState(false);
 
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
@@ -27,6 +28,7 @@ const VerifyOtp = () => {
         setLoading(false);
         reset();
         toast.success('OTP verification successful!');
+        navigate('/auth/reset-password');
       }, 1500);
     }
   };

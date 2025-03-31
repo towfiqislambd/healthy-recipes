@@ -30,7 +30,7 @@ const Register = () => {
       setTimeout(() => {
         setLoading(false);
         reset();
-        toast.success('Login successful!');
+        toast.success('Registration successful!');
       }, 1500);
     }
   };
