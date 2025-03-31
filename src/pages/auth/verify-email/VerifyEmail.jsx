@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CgSpinnerTwo } from 'react-icons/cg';
 import toast from 'react-hot-toast';
 
 const VerifyEmail = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   // css:
   const inputClass =
@@ -25,7 +26,8 @@ const VerifyEmail = () => {
       setTimeout(() => {
         setLoading(false);
         reset();
-        toast.success('Login successful!');
+        toast.success('Email Verification successful!');
+        navigate('/auth/verify-otp');
       }, 1500);
     }
   };
@@ -82,7 +84,7 @@ const VerifyEmail = () => {
               {loading ? (
                 <CgSpinnerTwo className="animate-spin size-6" />
               ) : (
-                'Login'
+                'Verify'
               )}
             </span>
           </button>

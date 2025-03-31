@@ -4,6 +4,7 @@ import AllRecipes from '@/pages/all-recipes/AllRecipes';
 import Login from '@/pages/auth/login/Login';
 import Register from '@/pages/auth/register/Register';
 import VerifyEmail from '@/pages/auth/verify-email/VerifyEmail';
+import VerifyOtp from '@/pages/auth/verify-otp/VerifyOtp';
 import BlogDetails from '@/pages/blog-details/BlogDetails';
 import Blog from '@/pages/blog/Blog';
 import ErrorPage from '@/pages/error/ErrorPage';
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
       {
         path: 'verify-email',
         element: <VerifyEmail />,
+      },
+      {
+        path: 'verify-otp',
+        element: <VerifyOtp />,
       },
     ],
   },
