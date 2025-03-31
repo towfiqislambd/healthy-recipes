@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { CgSpinnerTwo } from 'react-icons/cg';
 import toast from 'react-hot-toast';
 
-const Login = () => {
+const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -34,16 +34,38 @@ const Login = () => {
       }, 1500);
     }
   };
-
   return (
     <section>
       {/* title */}
-      <h4 className="text-black font-merriweather text-center text-4xl tracking-[-0.36px] leading-[83.146px]">
-        Login
+      <h4 className="text-black text-center font-merriweather text-4xl tracking-[-0.36px] leading-[83.146px]">
+        New account
       </h4>
 
       {/* form */}
       <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+        {/* email */}
+        <div className="flex flex-col gap-1">
+          <div className="w-full flex justify-between">
+            <label
+              htmlFor="nickname"
+              className="text-black leading-[175%] tracking-[-0.064px]"
+            >
+              Nickname*
+            </label>
+            {errors.nickname && <span className="text-red-500">Required</span>}
+          </div>
+          <input
+            {...register('nickname', { required: true })}
+            placeholder="Enter your Nickname"
+            className={`${inputClass} ${
+              errors.nickname ? 'border-red-500' : 'border-[#9D9D9D]'
+            }`}
+            type="text"
+            name="nickname"
+            id="nickname"
+          />
+        </div>
+
         {/* email */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
@@ -100,16 +122,6 @@ const Login = () => {
           </div>
         </div>
 
-        {/* forgot password */}
-        <div className="w-full flex items-center justify-end">
-          <Link
-            to="/auth/verify-email"
-            className="text-textColor underline font-semibold hover:no-underline transition-all duration-300"
-          >
-            Forgot password?
-          </Link>
-        </div>
-
         {/* submit button */}
         <div className="w-full pt-2">
           <button
@@ -123,7 +135,7 @@ const Login = () => {
               {loading ? (
                 <CgSpinnerTwo className="animate-spin size-6" />
               ) : (
-                'Login'
+                'Create account'
               )}
             </span>
           </button>
@@ -133,12 +145,12 @@ const Login = () => {
       {/* toggle link */}
       <div className="mt-12 text-center">
         <h6 className="leading-[38.375px] text-[#333]">
-          Don’t have an account?
+          Already have an account?
           <Link
-            to="/auth/register"
+            to={'/auth/login'}
             className="font-semibold pl-1 underline hover:no-underline transition-all duration-300"
           >
-            Create an account
+            Log in
           </Link>
         </h6>
       </div>
@@ -153,4 +165,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

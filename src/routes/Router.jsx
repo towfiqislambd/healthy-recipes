@@ -2,6 +2,8 @@ import AuthLayout from '@/layouts/AuthLayout';
 import MainLayout from '@/layouts/MainLayout';
 import AllRecipes from '@/pages/all-recipes/AllRecipes';
 import Login from '@/pages/auth/login/Login';
+import Register from '@/pages/auth/register/Register';
+import VerifyEmail from '@/pages/auth/verify-email/VerifyEmail';
 import BlogDetails from '@/pages/blog-details/BlogDetails';
 import Blog from '@/pages/blog/Blog';
 import ErrorPage from '@/pages/error/ErrorPage';
@@ -50,6 +52,14 @@ export const router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />,
+      },
+      {
+        path: 'register',
+        element: <Register />,
+      },
+      {
+        path: 'verify-email',
+        element: <VerifyEmail />,
       },
     ],
   },

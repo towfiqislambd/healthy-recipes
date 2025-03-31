@@ -1,15 +1,10 @@
-import {
-  HidePassSvg,
-  ShowPassSvg,
-} from '@/components/svg-container/SvgContainer';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { CgSpinnerTwo } from 'react-icons/cg';
 import toast from 'react-hot-toast';
 
-const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
+const VerifyEmail = () => {
   const [loading, setLoading] = useState(false);
 
   // css:
@@ -37,10 +32,17 @@ const Login = () => {
 
   return (
     <section>
-      {/* title */}
-      <h4 className="text-black font-merriweather text-center text-4xl tracking-[-0.36px] leading-[83.146px]">
-        Login
-      </h4>
+      {/* top section */}
+      <div>
+        {/* title */}
+        <h4 className="text-black font-merriweather text-center text-4xl tracking-[-0.36px] leading-[83.146px]">
+          Verify account
+        </h4>
+        <p className="text-center mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto">
+          Lost your password? Please enter your email address. You will receive
+          mail with link to set new password.
+        </p>
+      </div>
 
       {/* form */}
       <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
@@ -67,49 +69,6 @@ const Login = () => {
           />
         </div>
 
-        {/* password */}
-        <div className="flex flex-col gap-1">
-          <div className="w-full flex justify-between">
-            <label
-              htmlFor="password"
-              className="text-black leading-[175%] tracking-[-0.064px]"
-            >
-              Password
-            </label>
-            {errors.password && <span className="text-red-500">Required</span>}
-          </div>
-          <div
-            className={`w-full ${inputClass} relative ${
-              errors.password ? 'border-red-500' : 'border-[#9D9D9D]'
-            }`}
-          >
-            <input
-              {...register('password', { required: true })}
-              placeholder="Enter password"
-              className="focus:outline-none w-full"
-              type={!showPassword ? 'password' : 'text'}
-              name="password"
-              id="password"
-            />
-            <div
-              onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
-            >
-              {showPassword ? <ShowPassSvg /> : <HidePassSvg />}
-            </div>
-          </div>
-        </div>
-
-        {/* forgot password */}
-        <div className="w-full flex items-center justify-end">
-          <Link
-            to="/auth/verify-email"
-            className="text-textColor underline font-semibold hover:no-underline transition-all duration-300"
-          >
-            Forgot password?
-          </Link>
-        </div>
-
         {/* submit button */}
         <div className="w-full pt-2">
           <button
@@ -132,25 +91,15 @@ const Login = () => {
 
       {/* toggle link */}
       <div className="mt-12 text-center">
-        <h6 className="leading-[38.375px] text-[#333]">
-          Don’t have an account?
-          <Link
-            to="/auth/register"
-            className="font-semibold pl-1 underline hover:no-underline transition-all duration-300"
-          >
-            Create an account
-          </Link>
-        </h6>
-      </div>
-
-      {/* go to home button */}
-      <div className="pt-12 text-center">
-        <Link to="/" className="text-primary underline">
-          Go to home
+        <Link
+          to="/auth/login"
+          className="font-semibold leading-[38.375px] text-[#333] pl-1 underline hover:no-underline transition-all duration-300"
+        >
+          Back to login
         </Link>
       </div>
     </section>
   );
 };
 
-export default Login;
+export default VerifyEmail;
