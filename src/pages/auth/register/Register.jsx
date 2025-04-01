@@ -47,22 +47,20 @@ const Register = () => {
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
             <label
-              htmlFor="nickname"
+              htmlFor="full_name"
               className="text-black leading-[175%] tracking-[-0.064px]"
             >
-              Nickname*
+              Full Name
             </label>
-            {errors.nickname && <span className="text-red-500">Required</span>}
+            {errors.full_name && <span className="text-red-500">Required</span>}
           </div>
           <input
-            {...register('nickname', { required: true })}
-            placeholder="Enter your Nickname"
+            {...register('full_name', { required: true })}
+            placeholder="Enter your Full Name"
             className={`${inputClass} ${
-              errors.nickname ? 'border-red-500' : 'border-[#9D9D9D]'
+              errors.full_name ? 'border-red-500' : 'border-[#9D9D9D]'
             }`}
             type="text"
-            name="nickname"
-            id="nickname"
           />
         </div>
 
