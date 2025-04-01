@@ -12,7 +12,7 @@ const RecipeBlogs = () => {
   const [swiperRef, setSwiperRef] = useState(null);
 
   return (
-    <section className="sm:py-24 pt-10 bg-[#F8FCF9] px-3 sm:px-0">
+    <section className="md:py-24 py-10 md:pt-10 bg-[#F8FCF9]">
       <div className="container">
         {/* title */}
         <div>
@@ -52,7 +52,8 @@ const RecipeBlogs = () => {
                 640: { slidesPerView: 1, spaceBetween: 20 },
                 768: { slidesPerView: 2, spaceBetween: 25 },
                 1024: { slidesPerView: 3, spaceBetween: 30 },
-                1280: { slidesPerView: 4, spaceBetween: 35 },
+                1280: { slidesPerView: 3, spaceBetween: 35 },
+                1536: { slidesPerView: 4, spaceBetween: 35 },
               }}
             >
               {allBlogs?.map((item) => (
