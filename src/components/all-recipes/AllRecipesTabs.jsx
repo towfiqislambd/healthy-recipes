@@ -1,50 +1,50 @@
-import { useState } from 'react';
-import { RiResetLeftFill } from 'react-icons/ri';
+import { useState } from "react";
+import { RiResetLeftFill } from "react-icons/ri";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select';
-import RecipeCard from '../cards/RecipeCard';
-import { allRecipes } from '@/data/data';
+} from "../ui/select";
+import RecipeCard from "../cards/RecipeCard";
+import { allRecipes } from "@/data/data";
 
 const AllRecipesTabs = () => {
   const allTabs = [
     {
-      title: 'All recipes',
+      title: "All recipes",
     },
     {
-      title: 'Breakfast',
+      title: "Breakfast",
     },
     {
-      title: 'Dinner',
+      title: "Dinner",
     },
     {
-      title: 'Appetizer',
+      title: "Appetizer",
     },
     {
-      title: 'Beverages',
+      title: "Beverages",
     },
     {
-      title: 'Salad',
+      title: "Salad",
     },
     {
-      title: 'Desserts',
+      title: "Desserts",
     },
     {
-      title: 'Snacks',
+      title: "Snacks",
     },
   ];
   const [activeTab, setActiveTab] = useState(allTabs[0]);
-  const [selectedAllergen, setSelectedAllergen] = useState('');
+  const [selectedAllergen, setSelectedAllergen] = useState("");
   const [updatedRecipes, setUpdatedRecipes] = useState(allRecipes);
   const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
   //functions:
   const getCountByType = (type) => {
-    if (type === 'All recipes') {
+    if (type === "All recipes") {
       return updatedRecipes?.length;
     } else {
       return updatedRecipes?.filter((recipe) => recipe.type === type)?.length;
@@ -60,29 +60,29 @@ const AllRecipesTabs = () => {
   };
 
   const handleReset = () => {
-    setSelectedAllergen('');
+    setSelectedAllergen("");
     setActiveTab(allTabs[0]);
     setUpdatedRecipes(allRecipes);
   };
 
   const filteredRecipes =
-    activeTab?.title == 'All recipes'
+    activeTab?.title == "All recipes"
       ? updatedRecipes
       : updatedRecipes?.filter((recipe) => recipe.type === activeTab?.title);
 
   return (
-    <div className="container pb-20">
+    <div className="container xl:pb-20 lg:pb-10">
       {/* tabs */}
-      <div className="py-8 w-full flex items-center justify-between">
+      <div className="lg:py-8 py-6 w-full flex flex-wrap items-center xl:justify-between px-5 2xl:px-0 gap-1 md:gap-1">
         {allTabs?.map((tab) => (
           <button
             key={tab.title}
             onClick={() => setActiveTab(tab)}
-            className={`px-6 py-3 rounded-full  font-medium
+            className={`lg:px-6 px-3 lg:py-3 py-2 rounded-full  font-medium
           ${
             tab?.title === activeTab?.title
-              ? 'bg-[#3A3A3A] text-white'
-              : 'bg-transparent text-textColor'
+              ? "bg-[#3A3A3A] text-white"
+              : "bg-transparent text-textColor"
           }
           `}
           >
@@ -93,9 +93,9 @@ const AllRecipesTabs = () => {
       </div>
 
       {/* filter */}
-      <div className="w-full flex items-center justify-end gap-5">
+      <div className="w-full flex flex-col md:flex-row items-center justify-start lg:justify-end gap-3 xl:gap-3 2xl:gap-5 px-5 2xl:px-0">
         <Select value={selectedAllergen} onValueChange={handleFilterChange}>
-          <SelectTrigger className="w-[460px] h-14 rounded-full px-6 text-base focus:ring-primary">
+          <SelectTrigger className="lg:w-[460px] w-[300px] lg:h-14 h-12 rounded-full px-6 text-base focus:ring-primary">
             <SelectValue placeholder="Select for recipes by allergens..." />
           </SelectTrigger>
           <SelectContent className="px-0 py-0">
@@ -128,7 +128,7 @@ const AllRecipesTabs = () => {
 
         <button
           onClick={handleReset}
-          className="h-14 px-6 border border-primary rounded-full flex items-center gap-2 bg-primary text-white transition-all duration-300 hover:bg-transparent hover:text-primary"
+          className="lg:h-14 h-12 px-6 border border-primary rounded-full flex items-center gap-2 bg-primary text-white transition-all duration-300 hover:bg-transparent hover:text-primary"
         >
           <RiResetLeftFill />
           Reset
@@ -136,7 +136,7 @@ const AllRecipesTabs = () => {
       </div>
 
       {/* cards */}
-      <div className="mt-10 grid grid-cols-4 gap-6">
+      <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5 2xl:px-0">
         {filteredRecipes?.map((item, idx) => (
           <RecipeCard key={idx} item={item} down={idx % 2 !== 0} />
         ))}
