@@ -1,8 +1,8 @@
-import CommonHeroBanner from '@/components/common/CommonHeroBanner';
-import banner from '../../assets/images/blog-details.jpg';
-import { blogDetails } from '@/data/data';
-import ShareYourRecipeSection from '@/components/homepage/ShareYourRecipeSection';
-import RecipeBlogs from '@/components/homepage/RecipeBlogs';
+import CommonHeroBanner from "@/components/common/CommonHeroBanner";
+import banner from "../../assets/images/blog-details.jpg";
+import { blogDetails } from "@/data/data";
+import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection";
+import RecipeBlogs from "@/components/homepage/RecipeBlogs";
 
 const BlogDetails = () => {
   return (
@@ -13,7 +13,7 @@ const BlogDetails = () => {
       />
 
       {/* contents */}
-      <section className="max-w-[1010px] mx-auto mb-20 p-8">
+      <section className="2xl:max-w-[1010px] md:max-w-[800px] mx-auto 2xl:mb-20 md:p-8 p-5">
         {/* details */}
         <div>
           <p className="text-textColor leading-[160%]">

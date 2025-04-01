@@ -12,11 +12,11 @@ const RecipeBlogs = () => {
   const [swiperRef, setSwiperRef] = useState(null);
 
   return (
-    <section className="sm:py-24 pt-10 bg-[#F8FCF9] px-3 sm:px-0">
+    <section className="xl:py-24 py-10 md:pt-10 bg-[#F8FCF9] px-5 2xl:px-0">
       <div className="container">
         {/* title */}
         <div>
-          <h2 className="font-merriweather text-3xl sm:text-[40px] leading-[140%] font-bold  ">
+          <h2 className="font-merriweather text-3xl lg:text-[40px] leading-[140%] font-bold ">
             Recipe Blogs & Tips
           </h2>
         </div>
@@ -52,7 +52,8 @@ const RecipeBlogs = () => {
                 640: { slidesPerView: 1, spaceBetween: 20 },
                 768: { slidesPerView: 2, spaceBetween: 25 },
                 1024: { slidesPerView: 3, spaceBetween: 30 },
-                1280: { slidesPerView: 4, spaceBetween: 35 },
+                1280: { slidesPerView: 3, spaceBetween: 35 },
+                1536: { slidesPerView: 4, spaceBetween: 35 },
               }}
             >
               {allBlogs?.map((item) => (
