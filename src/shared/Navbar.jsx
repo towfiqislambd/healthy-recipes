@@ -1,52 +1,52 @@
-import ButtonTransparent from '@/components/buttons/ButtonTransparent';
-import logo from '../assets/images/logo.png';
-import { LoveSvg, SearchSvg } from '@/components/svg-container/SvgContainer';
-import React, { useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
-import { RxCross2 } from 'react-icons/rx';
-import { FaBars } from 'react-icons/fa';
+import ButtonTransparent from "@/components/buttons/ButtonTransparent";
+import logo from "../assets/images/logo.png";
+import { LoveSvg, SearchSvg } from "@/components/svg-container/SvgContainer";
+import React, { useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { RxCross2 } from "react-icons/rx";
+import { FaBars } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
   const location = useLocation()?.pathname;
-  console.log(location?.startsWith('/recipe-details'));
+  console.log(location?.startsWith("/recipe-details"));
   const navLinks = [
     {
-      path: '/',
-      title: 'Home',
+      path: "/",
+      title: "Home",
     },
     {
-      path: '/recipe-library',
-      title: 'Recipe library',
+      path: "/recipe-library",
+      title: "Recipe library",
     },
     {
-      path: '/dashboard/home',
-      title: 'Dashboard',
+      path: "/dashboard/home",
+      title: "Dashboard",
     },
     {
-      path: '/share-recipe',
-      title: 'Share recipe',
+      path: "/share-recipe",
+      title: "Share recipe",
     },
     {
-      path: '/meal-planner',
-      title: 'Meal planner',
+      path: "/meal-planner",
+      title: "Meal planner",
     },
     {
-      path: '/blog',
-      title: 'Blog',
+      path: "/blog",
+      title: "Blog",
     },
   ];
   return (
-    <header className="py-6 bg-[#F6F5F2] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] fixed w-full left-0 top-0 z-50 topbar">
-      <nav className="container w-full flex justify-between items-center px-5 md:px-0">
+    <header className="py-6 bg-[#F6F5F2] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] fixed w-full left-0 top-0 z-50 topbar px-5">
+      <nav className="container w-full flex justify-between items-center md:px-0 lg:px-0">
         {/* left side contents */}
-        <div className="flex items-center gap-14">
+        <div className="flex items-center xl:gap-5 2xl:gap-14">
           {/* logo */}
           <Link to="/">
             <img src={logo} alt="" />
           </Link>
           {/* search bar */}
-          <div className="hidden xl:flex items-center gap-2 px-5 py-4 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white min-w-[420px]">
+          <div className="hidden xl:flex items-center gap-2 px-5 py-4 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white 2xl:min-w-[420px]">
             <SearchSvg />
             <input
               className="focus:outline-none w-full"
@@ -59,19 +59,19 @@ const Navbar = () => {
         </div>
 
         {/* right side contents */}
-        <div className="flex items-center gap-20">
+        <div className="flex items-center xl:gap-10 2xl:gap-20">
           {/* nav links */}
-          <div className="hidden xl:flex gap-5">
+          <div className="hidden xl:flex xl:gap-5 2xl:gap-5">
             {navLinks?.map((item) => (
               <NavLink
                 to={item?.path}
                 className={({ isActive }) =>
                   `${
                     isActive ||
-                    (location?.startsWith('/recipe-details') &&
-                      item.path === '/recipe-library')
-                      ? 'text-primary '
-                      : 'text-textColor'
+                    (location?.startsWith("/recipe-details") &&
+                      item.path === "/recipe-library")
+                      ? "text-primary "
+                      : "text-textColor"
                   }
       hover:text-primary duration-300 transition-all`
                 }
@@ -82,13 +82,13 @@ const Navbar = () => {
             ))}
           </div>
           {/* cta section */}
-          <div className="hidden xl:flex gap-5 items-center">
+          <div className="hidden xl:flex xl:gap-2 2xl:gap-5 items-center">
             <Link className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center  ">
               <LoveSvg />
             </Link>
 
             {/* button */}
-            <ButtonTransparent path='/auth/login' title="Sign Up" />
+            <ButtonTransparent path="/auth/login" title="Sign Up" />
           </div>
         </div>
         {/*  */}
@@ -103,13 +103,13 @@ const Navbar = () => {
         <div
           onClick={() => setOpen(false)}
           className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 xl:hidden z-[999] ${
-            isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
         ></div>
         {/* Sidebar */}
         <div
           className={`${
-            isOpen ? 'translate-x-0' : '-translate-x-full'
+            isOpen ? "translate-x-0" : "-translate-x-full"
           } duration-500 transition-transform fixed top-0 z-[999] left-0 bg-white py-10 shadow-lg overflow-y-auto  border-r max-h-screen min-h-screen w-[270px] xl:hidden`}
         >
           {/* logo */}
@@ -134,7 +134,7 @@ const Navbar = () => {
                   to={item?.path}
                   className={({ isActive }) =>
                     `${
-                      isActive ? 'text-primary' : 'text-textColor'
+                      isActive ? "text-primary" : "text-textColor"
                     } hover:text-primary duration-300 transition-all`
                   }
                   key={item?.title}
