@@ -62,11 +62,11 @@ const RecipeCard = ({ item, down }) => {
           {item?.title}
         </h5>
         <div className="mt-4 space-y-2">
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <div className="flex-shrink-0">
               <RecipeBookSvg />
             </div>
-            <p className="text-textColor font-medium text-nowrap">
+            <p className="text-textColor text-sm 2xl:text-base font-medium text-nowrap">
               {item?.servings} servings | {item?.duration} needed |
               {item?.allergens}
             </p>
