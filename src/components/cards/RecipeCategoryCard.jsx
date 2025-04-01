@@ -1,13 +1,16 @@
-import { Link } from 'react-router-dom';
-import { FireSvg, RecipeBookSvg, StarSvg } from '../svg-container/SvgContainer';
+import { Link } from "react-router-dom";
+import { FireSvg, RecipeBookSvg, StarSvg } from "../svg-container/SvgContainer";
 
 const RecipeCategoryCard = ({ item }) => {
+  const slug = item?.title?.toLowerCase()?.split(" ").join("-");
+
   return (
-    <Link to='/all-recipes'
-      className={`max-w-[370px] bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl `}
+    <Link
+      to={`/recipe-library/${slug}`}
+      className={`lg:max-w-[370px] md:w-full bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl `}
     >
       {/* image */}
-      <div className="h-[370px] w-full relative rounded-sm overflow-hidden">
+      <div className="md:h-[370px] h-[250px] w-full relative rounded-sm overflow-hidden">
         <img
           className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
           src={item?.image}
@@ -20,7 +23,7 @@ const RecipeCategoryCard = ({ item }) => {
       {/* description */}
       <div className="py-4 px-4 border-b border-dashed border-black">
         <h5 className="text-xl font-bold font-merriweather text-black">
-          Fish and Vegetable Fry
+          {item?.title}
         </h5>
         <div className="mt-4 space-y-2">
           <div className="flex items-center gap-3">

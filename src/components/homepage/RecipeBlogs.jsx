@@ -1,21 +1,22 @@
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
-import { SliderNextSvg, SliderPrevSvg } from '../svg-container/SvgContainer';
-import { useState } from 'react';
-import BlogCard from '../cards/BlogCard';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { SliderNextSvg, SliderPrevSvg } from "../svg-container/SvgContainer";
+import { useState } from "react";
+import BlogCard from "../cards/BlogCard";
+import { allBlogs } from "@/data/data";
+import { Navigation } from "swiper/modules";
 
 const RecipeBlogs = () => {
   const [swiperRef, setSwiperRef] = useState(null);
 
   return (
-    <section className="py-24 bg-[#F8FCF9]">
+    <section className="xl:py-24 py-10 md:pt-10 bg-[#F8FCF9] px-5 2xl:px-0">
       <div className="container">
         {/* title */}
         <div>
-          <h2 className="font-merriweather text-[40px] leading-[140%] font-bold  ">
+          <h2 className="font-merriweather text-3xl lg:text-[40px] leading-[140%] font-bold ">
             Recipe Blogs & Tips
           </h2>
         </div>
@@ -26,43 +27,40 @@ const RecipeBlogs = () => {
           <div className="w-full flex items-center justify-end gap-3">
             <button
               onClick={() => swiperRef.slidePrev()}
-              className="size-12 flex items-center justify-center border border-primary rounded-full hover:bg-primary transition-all duration-300 group"
+              className="sm:size-12 size-8 flex items-center justify-center border border-primary rounded-full hover:bg-primary transition-all duration-300 group"
             >
               <SliderPrevSvg />
             </button>
             <button
               onClick={() => swiperRef.slideNext()}
-              className="size-12 flex items-center justify-center border border-primary rounded-full hover:bg-primary transition-all duration-300 group"
+              className="sm:size-12 size-8 flex items-center justify-center border border-primary rounded-full hover:bg-primary transition-all duration-300 group"
             >
               <SliderNextSvg />
             </button>
           </div>
 
           {/* sliders */}
-          <div className="  mt-5">
+          <div className="mt-5">
             <Swiper
-              loop={true}
-              slidesPerView={4}
-              spaceBetween={20}
-              modules={[Pagination]}
-              className="mySwiper"
               onSwiper={setSwiperRef}
+              spaceBetween={20}
+              slidesPerView={1}
+              loop={true}
+              modules={[Navigation]}
+              className="mySwiper"
+              breakpoints={{
+                640: { slidesPerView: 1, spaceBetween: 20 },
+                768: { slidesPerView: 2, spaceBetween: 25 },
+                1024: { slidesPerView: 3, spaceBetween: 30 },
+                1280: { slidesPerView: 3, spaceBetween: 35 },
+                1536: { slidesPerView: 4, spaceBetween: 35 },
+              }}
             >
-              <SwiperSlide>
-                <BlogCard />
-              </SwiperSlide>
-              <SwiperSlide>
-                <BlogCard />
-              </SwiperSlide>
-              <SwiperSlide>
-                <BlogCard />
-              </SwiperSlide>
-              <SwiperSlide>
-                <BlogCard />
-              </SwiperSlide>
-              <SwiperSlide>
-                <BlogCard />
-              </SwiperSlide>
+              {allBlogs?.map((item) => (
+                <SwiperSlide key={item?.id}>
+                  <BlogCard data={item} />
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
         </div>

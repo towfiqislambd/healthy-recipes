@@ -1,12 +1,10 @@
-
-
 const LeftSideContentsDetailsPage = () => {
   return (
-    <div className="p-12 bg-white rounded-lg h-full w-[30%] min-h-[50vh]">
+    <div className="p-12 bg-white rounded-lg h-full max-w-[420px]">
       {/* Ingredients */}
       <div>
         {/* title */}
-        <h5 className="text-black text-2xl font-bold leading-[130%]">
+        <h5 className="text-black text-2xl font-bold leading-[130%] font-merriweather">
           Ingredients:
         </h5>
 
@@ -53,8 +51,8 @@ const LeftSideContentsDetailsPage = () => {
       {/* Nutrition */}
       <div className="pt-8">
         {/* title */}
-        <h5 className="text-black text-2xl font-bold leading-[130%]">
-          Ingredients:
+        <h5 className="text-black text-2xl font-bold leading-[130%] font-merriweather">
+          Nutrition:
         </h5>
 
         {/* description */}
@@ -77,7 +75,9 @@ const LeftSideContentsDetailsPage = () => {
       {/* Tags */}
       <div className="pt-8">
         {/* title */}
-        <h5 className="text-black text-2xl font-bold leading-[130%]">Tags:</h5>
+        <h5 className="text-black text-2xl font-bold leading-[130%] font-merriweather">
+          Tags:
+        </h5>
 
         {/* description */}
         <div className="mt-8 flex items-center flex-wrap gap-3">

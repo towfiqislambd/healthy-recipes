@@ -1,9 +1,15 @@
 import AllRecipesTabs from '@/components/all-recipes/AllRecipesTabs';
 import RecipeBlogs from '@/components/homepage/RecipeBlogs';
 import ShareYourRecipeSection from '@/components/homepage/ShareYourRecipeSection';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const AllRecipes = () => {
+  const slug = useParams().slug;
+  const recipeTitle = slug
+    .split('-')
+    ?.map((item) => item.charAt(0).toUpperCase() + item?.slice(1))
+    ?.join(' ');
+
   return (
     <div className="mt-[104px]">
       {/* breadcrumbs */}
@@ -24,10 +30,10 @@ const AllRecipes = () => {
           </Link>
           <span className="text-gray-500"> {'>'} </span>
           <Link
-            to="/recipe-library"
+            to={`/recipe-library/${slug}`}
             className="text-textColor hover:text-primary leading-[130%] transition-all divide-blue-300"
           >
-            Keto Diet Recipe
+            {recipeTitle}
           </Link>
         </div>
       </div>
@@ -35,7 +41,7 @@ const AllRecipes = () => {
       {/* title */}
       <div className="mt-10 container">
         <h2 className="text-4xl font-merriweather font-bold leading-[130%] text-black">
-          Keto Diet Recipe
+         {recipeTitle}
         </h2>
       </div>
 

@@ -76,6 +76,7 @@ const AllRecipesTabs = () => {
       <div className="py-8 w-full flex items-center justify-between">
         {allTabs?.map((tab) => (
           <button
+            key={tab.title}
             onClick={() => setActiveTab(tab)}
             className={`px-6 py-3 rounded-full  font-medium
           ${

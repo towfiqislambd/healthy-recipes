@@ -70,4 +70,19 @@
   body[data-scroll-locked] .topbar {
     padding-right: var(--removed-body-scroll-bar-size) !important;
   }
+
+  /* otp:start */
+
+  #otp_container div {
+    @apply flex items-center justify-center gap-5;
+  }
+
+  #otp_container div input {
+    @apply !h-16 !w-24 bg-[#ECF1EE] rounded-2xl;
+  }
+
+  #otp_container div input:focus {
+    @apply outline-2 outline-secondary;
+  }
+  /* otp:end */
 }
