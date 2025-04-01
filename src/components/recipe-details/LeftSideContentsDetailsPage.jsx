@@ -1,6 +1,6 @@
 const LeftSideContentsDetailsPage = () => {
   return (
-    <div className="p-12 bg-white rounded-lg h-full max-w-[420px]">
+    <div className="2xl:p-12 mt-5 bg-white rounded-lg h-full xl:max-w-[420px]">
       {/* Ingredients */}
       <div>
         {/* title */}

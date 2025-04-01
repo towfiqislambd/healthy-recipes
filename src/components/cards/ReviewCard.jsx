@@ -1,12 +1,12 @@
-import React from 'react';
-import { EmptyStarSvg, FullStarSvg } from '../svg-container/SvgContainer';
+import React from "react";
+import { EmptyStarSvg, FullStarSvg } from "../svg-container/SvgContainer";
 
 const ReviewCard = ({ data }) => {
   const fullStars = Array(data?.reviewCount).fill(<FullStarSvg />);
   const emptyStars = Array(5 - data?.reviewCount).fill(<EmptyStarSvg />);
 
   return (
-    <div className="border border-[#8993A4] rounded-2xl px-12 py-5 w-full">
+    <div className="border border-[#8993A4] rounded-2xl md:px-12 px-6 md:py-5 py-2 w-full">
       {/* top contents */}
       <div className="w-full flex items-center justify-between ">
         {/* left side content */}
