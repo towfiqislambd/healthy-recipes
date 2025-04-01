@@ -1,3 +1,4 @@
+import { MealPannerSvg } from '@/components/svg-container/SvgContainer';
 import AuthLayout from '@/layouts/AuthLayout';
 import MainLayout from '@/layouts/MainLayout';
 import AllRecipes from '@/pages/all-recipes/AllRecipes';
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: '/recipe-details/:id',
         element: <RecipeDetails />,
+      },
+      {
+        path: '/meal-planner',
+        element: <MealPannerSvg />,
       },
       {
         path: '/blog',
