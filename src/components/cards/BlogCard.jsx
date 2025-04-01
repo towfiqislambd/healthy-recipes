@@ -1,6 +1,6 @@
-import avatar from "../../assets/images/avatar-1.jpg";
-import { Link } from "react-router-dom";
-import { ArrowTopRightSvg } from "../svg-container/SvgContainer";
+import avatar from '../../assets/images/avatar-1.jpg';
+import { Link } from 'react-router-dom';
+import { ArrowTopRightSvg } from '../svg-container/SvgContainer';
 
 const BlogCard = ({ data }) => {
   return (
@@ -56,9 +56,9 @@ const BlogCard = ({ data }) => {
             </div>
           </div>
 
-          <Link className="hover:scale-110 transition-all duration-300 block">
+          <div className="hover:scale-110 transition-all duration-300 block">
             <ArrowTopRightSvg />
-          </Link>
+          </div>
         </div>
       </div>
     </Link>

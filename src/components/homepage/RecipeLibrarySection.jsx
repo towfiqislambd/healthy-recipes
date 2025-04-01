@@ -5,19 +5,35 @@ import RecipeCategoryCard from "../cards/RecipeCategoryCard";
 
 const RecipeLibrarySection = () => {
   const items = [
-    {
-      image: banner,
-    },
-    {
-      image: banner,
-    },
-    {
-      image: banner,
-    },
-    {
-      image: banner,
-    },
-  ];
+      {
+        image: banner,
+        title: 'Keto Diet Recipe',
+      },
+      {
+        image: banner,
+        title: 'Mediterranean Diet Recipe',
+      },
+      {
+        image: banner,
+        title: 'Vegan Diet Recipe',
+      },
+      {
+        image: banner,
+        title: 'Paleo Diet Recipe',
+      },
+      {
+        image: banner,
+        title: 'Low-Carb Diet Recipe',
+      },
+      {
+        image: banner,
+        title: 'DASH Diet Recipe',
+      },
+      {
+        image: banner,
+        title: 'Carnivore Diet Recipe',
+      },
+    ];
   return (
     <section className="bg-[#FCFCFC] sm:py-24">
       <div className="container">
@@ -37,7 +53,7 @@ const RecipeLibrarySection = () => {
 
           {/* all cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-5 pt-8 px-6 sm:px-0">
-            {items?.map((item, idx) => (
+            {items?.slice(0,4)?.map((item, idx) => (
               <RecipeCategoryCard key={idx} item={item} />
             ))}
           </div>

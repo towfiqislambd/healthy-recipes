@@ -25,7 +25,7 @@ const HomepageBanner = () => {
           </div>
 
           {/* button */}
-          <ButtonPrimary title="Explore all recipes" svg={true} />
+          <ButtonPrimary path="/recipe-library" title="Explore all recipes" svg={true} />
         </div>
 
         {/* right side */}

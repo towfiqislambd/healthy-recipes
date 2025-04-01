@@ -5,29 +5,36 @@ import { Link } from 'react-router-dom';
 import banner from '@/assets/images/banner-8.jpg';
 
 const RecipeLibrary = () => {
-    const items = [
-      {
-        image: banner,
-      },
-      {
-        image: banner,
-      },
-      {
-        image: banner,
-      },
-      {
-        image: banner,
-      },
-      {
-        image: banner,
-      },
-      {
-        image: banner,
-      },
-      {
-        image: banner,
-      },
-    ];
+  const items = [
+    {
+      image: banner,
+      title: 'Keto Diet Recipe',
+    },
+    {
+      image: banner,
+      title: 'Mediterranean Diet Recipe',
+    },
+    {
+      image: banner,
+      title: 'Vegan Diet Recipe',
+    },
+    {
+      image: banner,
+      title: 'Paleo Diet Recipe',
+    },
+    {
+      image: banner,
+      title: 'Low-Carb Diet Recipe',
+    },
+    {
+      image: banner,
+      title: 'DASH Diet Recipe',
+    },
+    {
+      image: banner,
+      title: 'Carnivore Diet Recipe',
+    },
+  ];
   return (
     <div className="mt-[104px]">
       {/* breadcrumbs */}
