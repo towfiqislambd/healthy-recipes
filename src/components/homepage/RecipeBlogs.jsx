@@ -12,11 +12,11 @@ const RecipeBlogs = () => {
   const [swiperRef, setSwiperRef] = useState(null);
 
   return (
-    <section className="md:py-24 py-10 md:pt-10 bg-[#F8FCF9]">
+    <section className="xl:py-24 py-10 md:pt-10 bg-[#F8FCF9] px-5 2xl:px-0">
       <div className="container">
         {/* title */}
         <div>
-          <h2 className="font-merriweather text-3xl sm:text-[40px] leading-[140%] font-bold  ">
+          <h2 className="font-merriweather text-3xl lg:text-[40px] leading-[140%] font-bold ">
             Recipe Blogs & Tips
           </h2>
         </div>
