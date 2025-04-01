@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from "react";
 import {
   PauseButtonSvg,
   PlayButtonSvg,
-} from '@/components/svg-container/SvgContainer';
+} from "@/components/svg-container/SvgContainer";
 
 const RightSideContentsDetailsPage = ({ video }) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -11,9 +11,9 @@ const RightSideContentsDetailsPage = ({ video }) => {
   const handlePlay = () => {
     if (videoRef.current) {
       videoRef.current.play();
-      videoRef.current.setAttribute('loop', 'true'); // Set loop attribute
-      videoRef.current.setAttribute('muted', 'true'); // Set muted attribute
-      videoRef.current.setAttribute('autoplay', 'true'); // Set autoplay attribute
+      videoRef.current.setAttribute("loop", "true"); // Set loop attribute
+      videoRef.current.setAttribute("muted", "true"); // Set muted attribute
+      videoRef.current.setAttribute("autoplay", "true"); // Set autoplay attribute
     }
     setIsPlaying(true); // Set the state to 'playing'
   };
@@ -21,28 +21,28 @@ const RightSideContentsDetailsPage = ({ video }) => {
   const handlePause = () => {
     if (videoRef.current) {
       videoRef.current.pause();
-      videoRef.current.removeAttribute('loop'); // Remove loop attribute
-      videoRef.current.removeAttribute('muted'); // Remove muted attribute
-      videoRef.current.removeAttribute('autoplay'); // Remove autoplay attribute
+      videoRef.current.removeAttribute("loop"); // Remove loop attribute
+      videoRef.current.removeAttribute("muted"); // Remove muted attribute
+      videoRef.current.removeAttribute("autoplay"); // Remove autoplay attribute
     }
     setIsPlaying(false); // Set the state to 'paused'
   };
   return (
     <div className="h-full min-h-[50vh]">
       {/* edit button */}
-      <div className="pt-12 w-full flex items-center justify-end">
-        <button className="bg-primary font-medium text-white rounded-lg inline-flex items-center justify-center px-8 py-3 border border-primary hover:bg-transparent duration-300 transition-all group hover:text-primary">
+      <div className="lg:pt-12 xl:w-full w-[400px] flex items-center md:justify-end">
+        <button className="bg-primary font-medium text-white rounded-lg inline-flex items-center justify-center lg:px-8 px-4 lg:py-3 py-2 border border-primary hover:bg-transparent duration-300 transition-all group hover:text-primary">
           Edit Recipe
         </button>
       </div>
 
       {/* Details */}
-      <div className="mt-32">
+      <div className="xl:mt-32 mt-10">
         {/* video */}
-        <div className="w-full h-[480px] relative group">
+        <div className="xl:w-full lg:h-[480px] h-[300px] relative group">
           <video
             ref={videoRef}
-            className="w-full h-full object-cover rounded-2xl"
+            className="xl:w-full w-full xl:h-full h-[300px] object-cover rounded-2xl"
             src={video}
           ></video>
 
@@ -52,7 +52,7 @@ const RightSideContentsDetailsPage = ({ video }) => {
           <div
             onClick={handlePlay}
             className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700 items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer ${
-              !isPlaying ? 'flex' : 'hidden'
+              !isPlaying ? "flex" : "hidden"
             }`}
           >
             <PlayButtonSvg />
@@ -62,7 +62,7 @@ const RightSideContentsDetailsPage = ({ video }) => {
           <div
             onClick={handlePause}
             className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700  items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer   ${
-              isPlaying ? 'flex' : 'hidden'
+              isPlaying ? "flex" : "hidden"
             } `}
           >
             <PauseButtonSvg />
@@ -70,14 +70,14 @@ const RightSideContentsDetailsPage = ({ video }) => {
         </div>
 
         {/* instructions */}
-        <div className="p-12">
+        <div className="xl:p-12 pt-5">
           {/* title */}
           <h5 className="text-black text-2xl font-bold leading-[130%] font-merriweather">
             Instructions:
           </h5>
 
           {/* steps */}
-          <div className="mt-8 space-y-6">
+          <div className="lg:mt-8 mt-4 space-y-6">
             <p className="text-textColor text-xl font-medium leading-[150%]">
               Step 1.
               <span className="text-base">

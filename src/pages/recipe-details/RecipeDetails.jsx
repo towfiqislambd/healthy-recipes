@@ -1,11 +1,11 @@
-import LeftSideContentsDetailsPage from '@/components/recipe-details/LeftSideContentsDetailsPage';
-import banner from '../../assets/images/jjj.jpg';
-import CommonHeroBanner from '@/components/common/CommonHeroBanner';
-import recipe from '../../assets/videos/recipe.mp4';
-import RightSideContentsDetailsPage from '@/components/recipe-details/RightSideContentsDetailsPage';
-import ShareRecipeSection from '@/components/recipe-details/ShareRecipeSection';
-import ShareYourRecipeSection from '@/components/homepage/ShareYourRecipeSection';
-import ReviewSection from '@/components/recipe-details/ReviewSection';
+import LeftSideContentsDetailsPage from "@/components/recipe-details/LeftSideContentsDetailsPage";
+import banner from "../../assets/images/jjj.jpg";
+import CommonHeroBanner from "@/components/common/CommonHeroBanner";
+import recipe from "../../assets/videos/recipe.mp4";
+import RightSideContentsDetailsPage from "@/components/recipe-details/RightSideContentsDetailsPage";
+import ShareRecipeSection from "@/components/recipe-details/ShareRecipeSection";
+import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection";
+import ReviewSection from "@/components/recipe-details/ReviewSection";
 
 const RecipeDetails = () => {
   return (
@@ -17,9 +17,9 @@ const RecipeDetails = () => {
       />
 
       {/* Main Container */}
-      <section className="pb-20">
+      <section className="lg:pb-20 md:pb-10">
         {/* about recipe */}
-        <div className="container flex w-full gap-24">
+        <div className="container flex flex-col lg:flex-row w-full xl:gap-24 gap-10 px-5 2xl:px-0">
           {/* left side contents */}
           <LeftSideContentsDetailsPage />
 

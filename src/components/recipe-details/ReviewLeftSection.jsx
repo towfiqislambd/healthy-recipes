@@ -1,13 +1,13 @@
-import { EmptyStarSvg } from '../svg-container/SvgContainer';
+import { EmptyStarSvg } from "../svg-container/SvgContainer";
 
 const ReviewLeftSection = () => {
   return (
-    <div className="p-12">
+    <div className="2xl:p-12 w-full">
       {/* title */}
       <h5 className="text-2xl font-semibold text-black">Submit your review</h5>
 
       {/* form */}
-      <div className="py-8 w-full min-w-[560px]">
+      <div className="lg:py-8 w-full md:w-[720px] lg:min-w-[560px]">
         {/* rating */}
         <div className="w-full">
           <p className="text-textColor text-sm font-medium">
