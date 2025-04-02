@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import { CgSpinnerTwo } from 'react-icons/cg';
-import toast from 'react-hot-toast';
-import OTPInput from 'react-otp-input';
+import { useEffect, useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { CgSpinnerTwo } from "react-icons/cg";
+import toast from "react-hot-toast";
+import OTPInput from "react-otp-input";
 
 const VerifyOtp = () => {
   const [loading, setLoading] = useState(false);
@@ -27,8 +27,8 @@ const VerifyOtp = () => {
       setTimeout(() => {
         setLoading(false);
         reset();
-        toast.success('OTP verification successful!');
-        navigate('/auth/reset-password');
+        toast.success("OTP verification successful!");
+        navigate("/auth/reset-password");
       }, 1500);
     }
   };
@@ -72,13 +72,13 @@ const VerifyOtp = () => {
             name="otp"
             control={control}
             rules={{
-              required: 'OTP is required',
-              minLength: { value: 4, message: 'OTP must be 4 digits' },
+              required: "OTP is required",
+              minLength: { value: 4, message: "OTP must be 4 digits" },
             }}
             render={({ field }) => (
               <OTPInput
                 {...field}
-                value={field.value || ''}
+                value={field.value || ""}
                 onChange={field.onChange}
                 numInputs={4}
                 renderSeparator={false}
@@ -106,8 +106,8 @@ const VerifyOtp = () => {
                 type="button"
                 className={`font-semibold ${
                   activeResendButton
-                    ? 'text-secondary cursor-pointer'
-                    : 'text-textColor cursor-not-allowed'
+                    ? "text-secondary cursor-pointer"
+                    : "text-textColor cursor-not-allowed"
                 }`}
               >
                 Resend
@@ -125,14 +125,14 @@ const VerifyOtp = () => {
             disabled={loading}
             type="submit"
             className={`leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary w-full border bg-primary rounded-full text-center py-3 hover:bg-transparent hover:text-primary  transition-all duration-300 h-[50px] flex items-center justify-center
-                  ${loading ? 'cursor-not-allowed' : 'cursor-pointer'}
+                  ${loading ? "cursor-not-allowed" : "cursor-pointer"}
                   `}
           >
             <span>
               {loading ? (
                 <CgSpinnerTwo className="animate-spin size-6" />
               ) : (
-                'Verify'
+                "Verify"
               )}
             </span>
           </button>
@@ -140,7 +140,7 @@ const VerifyOtp = () => {
       </form>
 
       {/* toggle link */}
-      <div className="mt-12 text-center">
+      <div className="sm:mt-12 mt-3 text-center">
         <Link
           to="/auth/login"
           className="font-semibold leading-[38.375px] text-[#333] pl-1 underline hover:no-underline transition-all duration-300"
