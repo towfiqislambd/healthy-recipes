@@ -1,12 +1,12 @@
 import {
   HidePassSvg,
   ShowPassSvg,
-} from '@/components/svg-container/SvgContainer';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { CgSpinnerTwo } from 'react-icons/cg';
-import toast from 'react-hot-toast';
+} from "@/components/svg-container/SvgContainer";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { CgSpinnerTwo } from "react-icons/cg";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,7 +14,7 @@ const Login = () => {
 
   // css:
   const inputClass =
-    'rounded-lg border-[0.5px]  shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-5 py-3';
+    "rounded-lg border-[0.5px]  shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-5 py-3";
 
   const {
     register,
@@ -30,7 +30,7 @@ const Login = () => {
       setTimeout(() => {
         setLoading(false);
         reset();
-        toast.success('Login successful!');
+        toast.success("Login successful!");
       }, 1500);
     }
   };
@@ -56,10 +56,10 @@ const Login = () => {
             {errors.email && <span className="text-red-500">Required</span>}
           </div>
           <input
-            {...register('email', { required: true })}
+            {...register("email", { required: true })}
             placeholder="Enter your email"
             className={`${inputClass} ${
-              errors.email ? 'border-red-500' : 'border-[#9D9D9D]'
+              errors.email ? "border-red-500" : "border-[#9D9D9D]"
             }`}
             type="email"
             name="email"
@@ -80,14 +80,14 @@ const Login = () => {
           </div>
           <div
             className={`w-full ${inputClass} relative ${
-              errors.password ? 'border-red-500' : 'border-[#9D9D9D]'
+              errors.password ? "border-red-500" : "border-[#9D9D9D]"
             }`}
           >
             <input
-              {...register('password', { required: true })}
+              {...register("password", { required: true })}
               placeholder="Enter password"
               className="focus:outline-none w-full"
-              type={!showPassword ? 'password' : 'text'}
+              type={!showPassword ? "password" : "text"}
               name="password"
               id="password"
             />
@@ -116,14 +116,14 @@ const Login = () => {
             disabled={loading}
             type="submit"
             className={`leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary w-full border bg-primary rounded-full text-center py-3 hover:bg-transparent hover:text-primary  transition-all duration-300 h-[50px] flex items-center justify-center
-                ${loading ? 'cursor-not-allowed' : 'cursor-pointer'}
+                ${loading ? "cursor-not-allowed" : "cursor-pointer"}
                 `}
           >
             <span>
               {loading ? (
                 <CgSpinnerTwo className="animate-spin size-6" />
               ) : (
-                'Login'
+                "Login"
               )}
             </span>
           </button>
@@ -131,7 +131,7 @@ const Login = () => {
       </form>
 
       {/* toggle link */}
-      <div className="mt-12 text-center">
+      <div className="sm:mt-12 mt-6 text-center">
         <h6 className="leading-[38.375px] text-[#333]">
           Don’t have an account?
           <Link
@@ -144,7 +144,7 @@ const Login = () => {
       </div>
 
       {/* go to home button */}
-      <div className="pt-12 text-center">
+      <div className="sm:pt-12 text-center">
         <Link to="/" className="text-primary underline">
           Go to home
         </Link>
