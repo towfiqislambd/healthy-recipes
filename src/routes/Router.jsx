@@ -11,6 +11,7 @@ import BlogDetails from '@/pages/blog-details/BlogDetails';
 import Blog from '@/pages/blog/Blog';
 import ErrorPage from '@/pages/error/ErrorPage';
 import Homepage from '@/pages/homepage/Homepage';
+import MealPlanner from '@/pages/meal-planner/MealPlanner';
 import RecipeDetails from '@/pages/recipe-details/RecipeDetails';
 import RecipeLibrary from '@/pages/recipe-library/RecipeLibrary';
 import { createBrowserRouter } from 'react-router-dom';
@@ -39,7 +40,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/meal-planner',
-        element: <MealPannerSvg />,
+        element: <MealPlanner />,
       },
       {
         path: '/blog',
