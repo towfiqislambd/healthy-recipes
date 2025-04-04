@@ -2,7 +2,7 @@ import React from 'react';
 
 const MealPlannerStatsCard = ({ item }) => {
   return (
-    <div className="flex items-end gap-2">
+    <div className="flex items-end gap-2 justify-center">
       <div className="size-8 flex items-center justify-center bg-[#CFEDD9] rounded-full">
         {item?.id}
       </div>

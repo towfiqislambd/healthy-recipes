@@ -1,44 +1,44 @@
-import ButtonTransparent from "@/components/buttons/ButtonTransparent";
-import logo from "../assets/images/logo.png";
-import { LoveSvg, SearchSvg } from "@/components/svg-container/SvgContainer";
-import React, { useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { RxCross2 } from "react-icons/rx";
-import { FaBars } from "react-icons/fa";
+import ButtonTransparent from '@/components/buttons/ButtonTransparent';
+import logo from '../assets/images/logo.png';
+import { LoveSvg, SearchSvg } from '@/components/svg-container/SvgContainer';
+import React, { useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { RxCross2 } from 'react-icons/rx';
+import { FaBars } from 'react-icons/fa';
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
   const location = useLocation()?.pathname;
-  console.log(location?.startsWith("/recipe-details"));
+  console.log(location?.startsWith('/recipe-details'));
   const navLinks = [
     {
-      path: "/",
-      title: "Home",
+      path: '/',
+      title: 'Home',
     },
     {
-      path: "/recipe-library",
-      title: "Recipe library",
+      path: '/recipe-library',
+      title: 'Recipe library',
     },
     {
-      path: "/dashboard/home",
-      title: "Dashboard",
+      path: '/dashboard/home',
+      title: 'Dashboard',
     },
     {
-      path: "/share-recipe",
-      title: "Share recipe",
+      path: '/share-recipe',
+      title: 'Share recipe',
     },
     {
-      path: "/meal-planner",
-      title: "Meal planner",
+      path: '/meal-planner',
+      title: 'Meal planner',
     },
     {
-      path: "/blog",
-      title: "Blog",
+      path: '/blog',
+      title: 'Blog',
     },
   ];
   return (
-    <header className="py-6 bg-[#F6F5F2] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] fixed w-full left-0 top-0 z-50 topbar px-5">
-      <nav className="container w-full flex justify-between items-center md:px-0 lg:px-0">
+    <header className="py-6 bg-[#F6F5F2] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] fixed w-full left-0 top-0 z-50 navbar">
+      <nav className="container w-full flex justify-between items-center md:px-0 lg:px-0 px-5">
         {/* left side contents */}
         <div className="flex items-center xl:gap-5 2xl:gap-14">
           {/* logo */}
@@ -68,10 +68,10 @@ const Navbar = () => {
                 className={({ isActive }) =>
                   `${
                     isActive ||
-                    (location?.startsWith("/recipe-details") &&
-                      item.path === "/recipe-library")
-                      ? "text-primary "
-                      : "text-textColor"
+                    (location?.startsWith('/recipe-details') &&
+                      item.path === '/recipe-library')
+                      ? 'text-primary '
+                      : 'text-textColor'
                   }
       hover:text-primary duration-300 transition-all`
                 }
@@ -103,13 +103,13 @@ const Navbar = () => {
         <div
           onClick={() => setOpen(false)}
           className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 xl:hidden z-[999] ${
-            isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+            isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
         ></div>
         {/* Sidebar */}
         <div
           className={`${
-            isOpen ? "translate-x-0" : "-translate-x-full"
+            isOpen ? 'translate-x-0' : '-translate-x-full'
           } duration-500 transition-transform fixed top-0 z-[999] left-0 bg-white py-10 shadow-lg overflow-y-auto  border-r max-h-screen min-h-screen w-[270px] xl:hidden`}
         >
           {/* logo */}
@@ -134,7 +134,7 @@ const Navbar = () => {
                   to={item?.path}
                   className={({ isActive }) =>
                     `${
-                      isActive ? "text-primary" : "text-textColor"
+                      isActive ? 'text-primary' : 'text-textColor'
                     } hover:text-primary duration-300 transition-all`
                   }
                   key={item?.title}

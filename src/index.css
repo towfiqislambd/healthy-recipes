@@ -67,7 +67,7 @@
   body {
     @apply bg-background font-poppins bg-[#FCFCFC];
   }
-  body[data-scroll-locked] .topbar {
+  body[data-scroll-locked] .navbar {
     padding-right: var(--removed-body-scroll-bar-size) !important;
   }
 

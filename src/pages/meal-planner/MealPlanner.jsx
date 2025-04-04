@@ -1,6 +1,7 @@
 import MealPlannerStatsCard from '@/components/cards/MealPlannerStatsCard';
 import RecipeBlogs from '@/components/homepage/RecipeBlogs';
 import ShareYourRecipeSection from '@/components/homepage/ShareYourRecipeSection';
+import MealPlannerTabSection from '@/components/meal-planner/MealPlannerTabSection';
 import {
   ChooseMealPlanSvg,
   MealPlannerPlanSvg,
@@ -29,7 +30,7 @@ const MealPlanner = () => {
   return (
     <div className="mt-[104px]">
       {/* title */}
-      <section className="container pt-20 text-center">
+      <section className="container pt-20 pb-6 text-center">
         <h1 className="text-5xl font-merriweather font-bold text-black">
           Meal Planning by Age Group
         </h1>
@@ -50,6 +51,9 @@ const MealPlanner = () => {
           ))}
         </div>
       </section>
+
+      {/* tab section */}
+      <MealPlannerTabSection />
 
       <ShareYourRecipeSection />
 
