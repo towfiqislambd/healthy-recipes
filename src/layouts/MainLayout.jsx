@@ -1,14 +1,15 @@
 import Footer from "@/shared/Footer";
 import Navbar from "@/shared/Navbar";
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 
 const MainLayout = () => {
+  const location = useLocation()
   return (
     <>
       <ScrollRestoration />
       <Navbar />
       <Outlet />
-      <Footer />
+      {location.pathname !== '/dashboard' && <Footer />}
     </>
   );
 };
