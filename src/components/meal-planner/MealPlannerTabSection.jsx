@@ -88,11 +88,10 @@ const MealPlannerTabSection = () => {
             key={tab.title}
             onClick={() => setActiveTab(tab)}
             className={`lg:px-6 px-3 lg:py-3 py-2 rounded-full  font-medium
-          ${
-            tab?.title === activeTab?.title
-              ? 'bg-[#3A3A3A] text-white'
-              : 'bg-transparent text-textColor'
-          }
+          ${tab?.title === activeTab?.title
+                ? 'bg-[#3A3A3A] text-white'
+                : 'bg-transparent text-textColor'
+              }
           `}
           >
             {tab?.title}
@@ -168,7 +167,7 @@ const MealPlannerTabSection = () => {
       {/* cards */}
       <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5 2xl:px-0">
         {filteredRecipes?.map((item, idx) => (
-          <RecipeCard key={idx} item={item} down={idx % 2 !== 0} />
+          <RecipeCard isPlanner={true} key={idx} item={item} down={idx % 2 !== 0} />
         ))}
       </div>
     </section>
