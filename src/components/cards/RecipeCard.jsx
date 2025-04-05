@@ -8,6 +8,8 @@ import {
 import { useState } from "react";
 
 const RecipeCard = ({ item, down }) => {
+
+  console.log(item);
   const [isFavorite, setIsFavorite] = useState(false);
 
   // Function to handle wishlist button click
