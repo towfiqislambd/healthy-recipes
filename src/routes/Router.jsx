@@ -9,6 +9,7 @@ import VerifyEmail from '@/pages/auth/verify-email/VerifyEmail';
 import VerifyOtp from '@/pages/auth/verify-otp/VerifyOtp';
 import BlogDetails from '@/pages/blog-details/BlogDetails';
 import Blog from '@/pages/blog/Blog';
+import Dashboard from '@/pages/dashboard/Dashboard';
 import ErrorPage from '@/pages/error/ErrorPage';
 import Homepage from '@/pages/homepage/Homepage';
 import MealPlanner from '@/pages/meal-planner/MealPlanner';
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: '/blog/:id',
         element: <BlogDetails />,
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard />,
       },
     ],
   },

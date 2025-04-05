@@ -20,7 +20,7 @@ const Navbar = () => {
       title: 'Recipe library',
     },
     {
-      path: '/dashboard/home',
+      path: '/dashboard',
       title: 'Dashboard',
     },
     {
@@ -37,7 +37,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <header className="py-6 bg-[#F6F5F2] shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] fixed w-full left-0 top-0 z-50 navbar">
+    <header className={`${location !== '/dashboard' ? 'py-6 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)]' : 'py-1 border-b'} bg-[#F6F5F2]  fixed w-full left-0 top-0 z-50 navbar`}>
       <nav className="container w-full flex justify-between items-center md:px-0 lg:px-0 px-5">
         {/* left side contents */}
         <div className="flex items-center xl:gap-5 2xl:gap-14">
@@ -46,7 +46,7 @@ const Navbar = () => {
             <img src={logo} alt="" />
           </Link>
           {/* search bar */}
-          <div className="hidden xl:flex items-center gap-2 px-5 py-4 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white 2xl:min-w-[420px]">
+          <div className={`${location === '/dashboard' ? 'px-3 py-2' : 'px-5 py-4'} hidden xl:flex items-center gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white 2xl:min-w-[420px]`}>
             <SearchSvg />
             <input
               className="focus:outline-none w-full"
@@ -66,12 +66,11 @@ const Navbar = () => {
               <NavLink
                 to={item?.path}
                 className={({ isActive }) =>
-                  `${
-                    isActive ||
+                  `${isActive ||
                     (location?.startsWith('/recipe-details') &&
                       item.path === '/recipe-library')
-                      ? 'text-primary '
-                      : 'text-textColor'
+                    ? 'text-primary '
+                    : 'text-textColor'
                   }
       hover:text-primary duration-300 transition-all`
                 }
@@ -102,15 +101,13 @@ const Navbar = () => {
         {/* Blur Overlay */}
         <div
           onClick={() => setOpen(false)}
-          className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 xl:hidden z-[999] ${
-            isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
+          className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 xl:hidden z-[999] ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
         ></div>
         {/* Sidebar */}
         <div
-          className={`${
-            isOpen ? 'translate-x-0' : '-translate-x-full'
-          } duration-500 transition-transform fixed top-0 z-[999] left-0 bg-white py-10 shadow-lg overflow-y-auto  border-r max-h-screen min-h-screen w-[270px] xl:hidden`}
+          className={`${isOpen ? 'translate-x-0' : '-translate-x-full'
+            } duration-500 transition-transform fixed top-0 z-[999] left-0 bg-white py-10 shadow-lg overflow-y-auto  border-r max-h-screen min-h-screen w-[270px] xl:hidden`}
         >
           {/* logo */}
           <Link to="/" className="size-[80px]">
@@ -133,8 +130,7 @@ const Navbar = () => {
                 <NavLink
                   to={item?.path}
                   className={({ isActive }) =>
-                    `${
-                      isActive ? 'text-primary' : 'text-textColor'
+                    `${isActive ? 'text-primary' : 'text-textColor'
                     } hover:text-primary duration-300 transition-all`
                   }
                   key={item?.title}
