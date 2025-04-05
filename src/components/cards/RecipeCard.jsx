@@ -1,14 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import {
   FireSvg,
   LoveSvg,
   RecipeBookSvg,
   StarSvg,
-} from "../svg-container/SvgContainer";
-import { useState } from "react";
+} from '../svg-container/SvgContainer';
+import { useState } from 'react';
 
-const RecipeCard = ({ item, isPlanner }) => {
-
+const RecipeCard = ({ item, isPlanner, setOpen }) => {
   console.log(item);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -16,7 +15,8 @@ const RecipeCard = ({ item, isPlanner }) => {
   const handleAddToPlanner = (e) => {
     e.stopPropagation();
     e.preventDefault();
-  }
+    setOpen(true);
+  };
 
   // Function to handle wishlist button click
   const handleWishlistClick = (e) => {
@@ -47,8 +47,9 @@ const RecipeCard = ({ item, isPlanner }) => {
         {/* wish icon */}
         <button
           onClick={handleWishlistClick}
-          className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${isFavorite ? "bg-[#CB4242]" : "bg-[#FFE3E3]"
-            }`}
+          className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${
+            isFavorite ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
+          }`}
         >
           <LoveSvg isFavorite={isFavorite} />
         </button>
@@ -56,7 +57,9 @@ const RecipeCard = ({ item, isPlanner }) => {
         {/* type */}
         <div className="absolute top-3 left-3">
           <p className="px-3 py-1.5 rounded-sm bg-white/50 text-black text-sm">
-            <span>{item?.diet} | {item?.type}</span>
+            <span>
+              {item?.diet} | {item?.type}
+            </span>
           </p>
         </div>
       </div>
@@ -105,13 +108,16 @@ const RecipeCard = ({ item, isPlanner }) => {
       </div>
 
       {/* add meal button */}
-      {
-        isPlanner && <div className="px-5">
-          <button onClick={handleAddToPlanner} className="hover:bg-primary border border-primary px-5 py-3 rounded-lg hover:text-white text-[#5A5C5F] duration-300 transition-all">
+      {isPlanner && (
+        <div className="px-5">
+          <button
+            onClick={handleAddToPlanner}
+            className="hover:bg-primary border border-primary px-5 py-3 rounded-lg hover:text-white text-[#5A5C5F] duration-300 transition-all"
+          >
             + Add to planner
           </button>
         </div>
-      }
+      )}
     </Link>
   );
 };
