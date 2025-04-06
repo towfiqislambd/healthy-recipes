@@ -82,7 +82,7 @@ const Navbar = () => {
           </div>
           {/* cta section */}
           <div className="hidden xl:flex xl:gap-2 2xl:gap-5 items-center">
-            <Link className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center  ">
+            <Link to='/dashboard/dashboard-saved-recipes' className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center  ">
               <LoveSvg />
             </Link>
 
