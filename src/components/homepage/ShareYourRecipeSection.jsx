@@ -22,7 +22,7 @@ const ShareYourRecipeSection = () => {
         </div>
 
         {/* share recipe button */}
-        <Link className="px-6 py-3 rounded-full text-white border border-white relative mt-5 sm:mt-0">
+        <Link to='/dashboard/dashboard-share-recipes' className="px-6 py-3 rounded-full text-white border border-white relative mt-5 sm:mt-0">
           Share your recipe
           <div className="absolute -top-2.5 left-[6px]">
             <AddSvgLight />

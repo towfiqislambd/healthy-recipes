@@ -1,5 +1,5 @@
-import { MealPannerSvg } from '@/components/svg-container/SvgContainer';
 import AuthLayout from '@/layouts/AuthLayout';
+import DashboardLayout from '@/layouts/DashboardLayout';
 import MainLayout from '@/layouts/MainLayout';
 import AllRecipes from '@/pages/all-recipes/AllRecipes';
 import Login from '@/pages/auth/login/Login';
@@ -9,7 +9,11 @@ import VerifyEmail from '@/pages/auth/verify-email/VerifyEmail';
 import VerifyOtp from '@/pages/auth/verify-otp/VerifyOtp';
 import BlogDetails from '@/pages/blog-details/BlogDetails';
 import Blog from '@/pages/blog/Blog';
-import Dashboard from '@/pages/dashboard/Dashboard';
+import DashboardMealPlanner from '@/pages/dashboard/DashboardMealPlanner';
+import DashboardMyRecipes from '@/pages/dashboard/DashboardMyRecipes';
+import DashboardOverview from '@/pages/dashboard/DashboardOverview';
+import DashboardSavedRecipes from '@/pages/dashboard/DashboardSavedRecipes';
+import DashboardShareRecipe from '@/pages/dashboard/DashboardShareRecipe';
 import ErrorPage from '@/pages/error/ErrorPage';
 import Homepage from '@/pages/homepage/Homepage';
 import MealPlanner from '@/pages/meal-planner/MealPlanner';
@@ -18,6 +22,7 @@ import RecipeLibrary from '@/pages/recipe-library/RecipeLibrary';
 import { createBrowserRouter } from 'react-router-dom';
 
 export const router = createBrowserRouter([
+  // Main Layout
   {
     path: '/',
     element: <MainLayout />,
@@ -51,12 +56,9 @@ export const router = createBrowserRouter([
         path: '/blog/:id',
         element: <BlogDetails />,
       },
-      {
-        path: '/dashboard',
-        element: <Dashboard />,
-      },
     ],
   },
+  // Auth Layout
   {
     path: '/auth',
     element: <AuthLayout />,
@@ -84,4 +86,32 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  // Dashboard Layout
+  {
+    path: '/dashboard',
+    element: <DashboardLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "overview",
+        element: <DashboardOverview />,
+      },
+      {
+        path: 'dashboard-meal-planner',
+        element: <DashboardMealPlanner />,
+      },
+      {
+        path: 'dashboard-share-recipes',
+        element: <DashboardShareRecipe />,
+      },
+      {
+        path: 'dashboard-my-recipes',
+        element: <DashboardMyRecipes />,
+      },
+      {
+        path: 'dashboard-saved-recipes',
+        element: <DashboardSavedRecipes />,
+      },
+    ]
+  }
 ]);

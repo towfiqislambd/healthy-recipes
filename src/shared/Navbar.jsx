@@ -20,11 +20,11 @@ const Navbar = () => {
       title: 'Recipe library',
     },
     {
-      path: '/dashboard',
+      path: '/dashboard/overview',
       title: 'Dashboard',
     },
     {
-      path: '/share-recipe',
+      path: '/dashboard/dashboard-share-recipes',
       title: 'Share recipe',
     },
     {
@@ -37,7 +37,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <header className={`${location !== '/dashboard' ? 'py-6 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)]' : 'py-1 border-b'} bg-[#F6F5F2]  fixed w-full left-0 top-0 z-50 navbar`}>
+    <header className='py-6 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] bg-[#F6F5F2]  fixed w-full left-0 top-0 z-50 navbar'>
       <nav className="container w-full flex justify-between items-center md:px-0 lg:px-0 px-5">
         {/* left side contents */}
         <div className="flex items-center xl:gap-5 2xl:gap-14">
@@ -46,7 +46,7 @@ const Navbar = () => {
             <img src={logo} alt="" />
           </Link>
           {/* search bar */}
-          <div className={`${location === '/dashboard' ? 'px-3 py-2' : 'px-5 py-4'} hidden xl:flex items-center gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white 2xl:min-w-[420px]`}>
+          <div className='px-5 py-4 hidden xl:flex items-center gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white 2xl:min-w-[420px]'>
             <SearchSvg />
             <input
               className="focus:outline-none w-full"
@@ -82,7 +82,7 @@ const Navbar = () => {
           </div>
           {/* cta section */}
           <div className="hidden xl:flex xl:gap-2 2xl:gap-5 items-center">
-            <Link className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center  ">
+            <Link to='/dashboard/dashboard-saved-recipes' className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center  ">
               <LoveSvg />
             </Link>
 
