@@ -57,7 +57,6 @@ const tableData = [
     },
 ]
 
-
 const MealPlanner = () => {
     return (
         <div>
