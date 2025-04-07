@@ -39,10 +39,6 @@ const LeftSideContentsDetailsPage = () => {
           <p className="text-black font-medium">4</p>
         </div>
         <div className="w-full flex items-center justify-between">
-          <p className="text-textColor">Preparation time</p>
-          <p className="text-black font-medium">10 Min.</p>
-        </div>
-        <div className="w-full flex items-center justify-between">
           <p className="text-textColor">Cooking time</p>
           <p className="text-black font-medium">30 Min.</p>
         </div>
