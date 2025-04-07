@@ -1,5 +1,11 @@
 import { ThreeDotSvg } from '@/components/svg-container/SvgContainer';
 import { useState } from 'react';
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
+import { Link } from 'react-router-dom';
 
 const allTabs = [
     { title: 'Breakfast' },
@@ -101,11 +107,15 @@ const DashboardMealPlanner = () => {
                                     >
                                         <div className="flex items-center justify-between gap-2">
                                             <p>{item.item}</p>
-                                            {item.item !== 'No meal' && (
-                                                <button>
+                                            <Popover>
+                                                <PopoverTrigger>
                                                     <ThreeDotSvg />
-                                                </button>
-                                            )}
+                                                </PopoverTrigger>
+                                                <PopoverContent className='w-28 text-center space-y-2'>
+                                                    <button><Link to='/meal-planner'>Add meal</Link></button>
+                                                    <button>Delete</button>
+                                                </PopoverContent>
+                                            </Popover>
                                         </div>
                                     </td>
                                 ))}
