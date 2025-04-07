@@ -14,6 +14,7 @@ import DashboardMyRecipes from '@/pages/dashboard/DashboardMyRecipes';
 import DashboardOverview from '@/pages/dashboard/DashboardOverview';
 import DashboardSavedRecipes from '@/pages/dashboard/DashboardSavedRecipes';
 import DashboardShareRecipe from '@/pages/dashboard/DashboardShareRecipe';
+import EditRecipes from '@/pages/dashboard/EditRecipes';
 import ErrorPage from '@/pages/error/ErrorPage';
 import Homepage from '@/pages/homepage/Homepage';
 import MealPlanner from '@/pages/meal-planner/MealPlanner';
@@ -111,6 +112,10 @@ export const router = createBrowserRouter([
       {
         path: 'dashboard-saved-recipes',
         element: <DashboardSavedRecipes />,
+      },
+      {
+        path: 'edit-recipes',
+        element: <EditRecipes />,
       },
     ]
   }

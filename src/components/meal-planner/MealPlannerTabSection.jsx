@@ -44,7 +44,8 @@ const MealPlannerTabSection = () => {
   const [updatedRecipes, setUpdatedRecipes] = useState(allRecipes);
   const [selectedAge, setSelectedAge] = useState('');
   const [selectedDiet, setSelectedDiet] = useState('');
-
+  const [plannerItem, setPlannerItem] = useState();
+  const [tableData, setTableData] = useState([]);
   const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
   //functions:
@@ -82,6 +83,9 @@ const MealPlannerTabSection = () => {
       ? updatedRecipes
       : updatedRecipes?.filter((recipe) => recipe.type === activeTab?.title);
 
+  const handleAddMealFunc = (item) => {
+    setPlannerItem(item)
+  }
   return (
     <section className="py-12 container">
       {/* tabs */}
@@ -91,11 +95,10 @@ const MealPlannerTabSection = () => {
             key={tab.title}
             onClick={() => setActiveTab(tab)}
             className={`lg:px-6 px-3 lg:py-3 py-2 rounded-full  font-medium
-          ${
-            tab?.title === activeTab?.title
-              ? 'bg-[#3A3A3A] text-white'
-              : 'bg-transparent text-textColor'
-          }
+          ${tab?.title === activeTab?.title
+                ? 'bg-[#3A3A3A] text-white'
+                : 'bg-transparent text-textColor'
+              }
           `}
           >
             {tab?.title}
@@ -177,13 +180,14 @@ const MealPlannerTabSection = () => {
             key={idx}
             item={item}
             down={idx % 2 !== 0}
+            handleAddMealFunc={handleAddMealFunc}
           />
         ))}
       </div>
 
       {/* modal */}
       <Modal open={open} setOpen={setOpen}>
-        <AddMealModal open={open} setOpen={setOpen} />
+        <AddMealModal tableData={tableData} setTableData={setTableData} plannerItem={plannerItem} open={open} setOpen={setOpen} />
       </Modal>
     </section>
   );
