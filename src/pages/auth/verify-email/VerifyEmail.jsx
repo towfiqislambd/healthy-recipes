@@ -10,7 +10,7 @@ const VerifyEmail = () => {
 
   // css:
   const inputClass =
-    'rounded-lg border-[0.5px]  shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-5 py-3';
+    'rounded-lg border-[0.5px]  shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-3 lg:px-5 py-2 lg:py-3';
 
   const {
     register,
@@ -37,17 +37,17 @@ const VerifyEmail = () => {
       {/* top section */}
       <div>
         {/* title */}
-        <h4 className="text-black font-merriweather text-center text-4xl tracking-[-0.36px] leading-[83.146px]">
+        <h4 className="text-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
           Verify account
         </h4>
-        <p className="text-center mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto">
+        <p className="text-center lg:mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto">
           Lost your password? Please enter your email address. You will receive
           mail with link to set new password.
         </p>
       </div>
 
       {/* form */}
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-5 lg:mt-8 space-y-3 lg:space-y-6">
         {/* email */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
@@ -62,9 +62,8 @@ const VerifyEmail = () => {
           <input
             {...register('email', { required: true })}
             placeholder="Enter your email"
-            className={`${inputClass} ${
-              errors.email ? 'border-red-500' : 'border-[#9D9D9D]'
-            }`}
+            className={`${inputClass} ${errors.email ? 'border-red-500' : 'border-[#9D9D9D]'
+              }`}
             type="email"
             name="email"
             id="email"
@@ -92,7 +91,7 @@ const VerifyEmail = () => {
       </form>
 
       {/* toggle link */}
-      <div className="mt-12 text-center">
+      <div className="lg:mt-10 mt-5 text-center">
         <Link
           to="/auth/login"
           className="font-semibold leading-[38.375px] text-[#333] pl-1 underline hover:no-underline transition-all duration-300"

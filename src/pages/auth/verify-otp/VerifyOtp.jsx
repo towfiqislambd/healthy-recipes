@@ -56,16 +56,16 @@ const VerifyOtp = () => {
       {/* top section */}
       <div>
         {/* title */}
-        <h4 className="text-black font-merriweather text-center text-4xl tracking-[-0.36px] leading-[83.146px]">
+        <h4 className="text-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
           Verify account
         </h4>
-        <p className="text-center mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto">
+        <p className="text-center lg:mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto">
           Enter 4 digit code
         </p>
       </div>
 
       {/* form */}
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="lg:mt-8 space-y-6">
         {/* Otp */}
         <div id="otp_container" className="sm:mt-10 mt-6 mb-7">
           <Controller
@@ -104,11 +104,10 @@ const VerifyOtp = () => {
                 onClick={handleResendCode}
                 disabled={!activeResendButton}
                 type="button"
-                className={`font-semibold ${
-                  activeResendButton
-                    ? "text-secondary cursor-pointer"
-                    : "text-textColor cursor-not-allowed"
-                }`}
+                className={`font-semibold ${activeResendButton
+                  ? "text-secondary cursor-pointer"
+                  : "text-textColor cursor-not-allowed"
+                  }`}
               >
                 Resend
               </button>
