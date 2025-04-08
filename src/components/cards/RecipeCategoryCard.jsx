@@ -7,10 +7,10 @@ const RecipeCategoryCard = ({ item }) => {
   return (
     <Link
       to={`/recipe-library/${slug}`}
-      className={`lg:max-w-[370px] md:w-full bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl `}
+      className={`w-full bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl `}
     >
       {/* image */}
-      <div className="md:h-[370px] h-[250px] w-full relative rounded-sm overflow-hidden">
+      <div className="2xl:h-[370px] h-[300px] w-full relative rounded-sm overflow-hidden">
         <img
           className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
           src={item?.image}

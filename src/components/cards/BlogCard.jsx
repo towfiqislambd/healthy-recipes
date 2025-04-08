@@ -30,7 +30,7 @@ const BlogCard = ({ data }) => {
         </div>
         {/* title */}
         <div className="space-y-3">
-          <h4 className="text-xl font-bold leading-[160%] font-merriweather text-black">
+          <h4 className="text-lg 2xl:text-xl font-bold leading-[160%] font-merriweather text-black">
             {data?.title}
           </h4>
           <p className="text-textColor leading-[150%] h-14">{data?.subtitle}</p>

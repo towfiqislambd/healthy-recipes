@@ -4719,3 +4719,4 @@ export const sharedRecipes = [
   }
 ];
 
+export const tableData = [];

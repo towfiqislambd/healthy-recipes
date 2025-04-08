@@ -34,26 +34,28 @@ const WhyChooseUs = () => {
     },
   ];
   return (
-    <section className="sm:py-20 py-10 bg-[#FCFCFC]">
+    <section className="2xl:py-20 py-8 md:py-12 bg-[#FCFCFC]">
       <div className="container">
-        {/* section title */}
-        <SectionTitle title="Why Choose Us" />
+        <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
+          {/* section title */}
+          <SectionTitle title="Why Choose Us" />
 
-        {/* contents */}
-        <div className="sm:mt-10 mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-12 px-5 sm:px-0">
-          {chooseUsData?.map((item, idx) => (
-            <div key={idx} className="w-full sm:space-y-4 space-y-2">
-              <div className="flex items-center gap-2 justify-center w-full">
-                {item?.svg}{" "}
-                <h5 className="sm:text-3xl text-xl leading-[140%] text-primary font-merriweather">
-                  {item?.title}
-                </h5>
+          {/* contents */}
+          <div className="mt-5 lg:mt-7 3xl:mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-12 px-5 sm:px-0">
+            {chooseUsData?.map((item, idx) => (
+              <div key={idx} className="w-full sm:space-y-4 space-y-2">
+                <div className="flex items-center gap-2 justify-center w-full">
+                  {item?.svg}{" "}
+                  <h5 className="text-xl 3xl:text-3xl leading-[140%] text-primary font-merriweather">
+                    {item?.title}
+                  </h5>
+                </div>
+                <p className="leading-[150%] text-textColor text-center">
+                  {item?.description}
+                </p>
               </div>
-              <p className="leading-[150%] text-textColor text-center">
-                {item?.description}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

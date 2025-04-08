@@ -3,6 +3,7 @@ import {
   PauseButtonSvg,
   PlayButtonSvg,
 } from "@/components/svg-container/SvgContainer";
+import { Link } from "react-router-dom";
 
 const RightSideContentsDetailsPage = ({ video }) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -31,9 +32,11 @@ const RightSideContentsDetailsPage = ({ video }) => {
     <div className="h-full min-h-[50vh]">
       {/* edit button */}
       <div className="lg:pt-12 xl:w-full w-[400px] flex items-center md:justify-end">
-        <button className="bg-primary font-medium text-white rounded-lg inline-flex items-center justify-center lg:px-8 px-4 lg:py-3 py-2 border border-primary hover:bg-transparent duration-300 transition-all group hover:text-primary">
-          Edit Recipe
-        </button>
+        <Link to='/dashboard/edit-recipes'>
+          <button className="bg-primary font-medium text-white rounded-lg inline-flex items-center justify-center lg:px-8 px-4 lg:py-3 py-2 border border-primary hover:bg-transparent duration-300 transition-all group hover:text-primary">
+            Edit Recipe
+          </button>
+        </Link>
       </div>
 
       {/* Details */}
@@ -51,9 +54,8 @@ const RightSideContentsDetailsPage = ({ video }) => {
           {/* play button */}
           <div
             onClick={handlePlay}
-            className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700 items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer ${
-              !isPlaying ? "flex" : "hidden"
-            }`}
+            className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700 items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer ${!isPlaying ? "flex" : "hidden"
+              }`}
           >
             <PlayButtonSvg />
           </div>
@@ -61,9 +63,8 @@ const RightSideContentsDetailsPage = ({ video }) => {
           {/* pause button */}
           <div
             onClick={handlePause}
-            className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700  items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer   ${
-              isPlaying ? "flex" : "hidden"
-            } `}
+            className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700  items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer   ${isPlaying ? "flex" : "hidden"
+              } `}
           >
             <PauseButtonSvg />
           </div>
