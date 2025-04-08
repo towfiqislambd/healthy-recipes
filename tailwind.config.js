@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ['class'],
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -15,8 +14,21 @@ export default {
         merriweather: ['Merriweather Sans', 'sans-serif'],
       },
       container: {
-        center: true,
-      },
+  			center: true,
+  			screens: {
+  				'4xl': '1520px'
+  			},
+  			padding: '15px'
+  		},
+		  screens: {
+			 xs: "375px",
+			 sm: "480px",
+			 md: "576px",
+			 lg: "768px",
+			 xl: "1024px",
+			 "2xl": "1280px",
+			 "3xl": "1460px"
+		},
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
@@ -63,5 +75,6 @@ export default {
       },
     },
   },
+  // eslint-disable-next-line no-undef
   plugins: [require('tailwindcss-animate')],
 };

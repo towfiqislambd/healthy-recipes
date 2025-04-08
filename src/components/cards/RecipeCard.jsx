@@ -7,15 +7,15 @@ import {
 } from '../svg-container/SvgContainer';
 import { useState } from 'react';
 
-const RecipeCard = ({ item, isPlanner, setOpen }) => {
-  console.log(item);
+const RecipeCard = ({ item, isPlanner, setOpen, handleAddMealFunc }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   // Function to handle Add to planner button click
-  const handleAddToPlanner = (e) => {
+  const handleAddToPlanner = (e, item) => {
     e.stopPropagation();
     e.preventDefault();
     setOpen(true);
+    handleAddMealFunc(item)
   };
 
   // Function to handle wishlist button click
@@ -33,7 +33,7 @@ const RecipeCard = ({ item, isPlanner, setOpen }) => {
       <div className="relative">
         {/* image and overlay */}
         <div className="block">
-          <div className="sm:h-[370px] h-[250px] w-full relative rounded-sm overflow-hidden">
+          <div className="sm:h-[350px] h-[250px] w-full relative rounded-sm overflow-hidden">
             <img
               className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
               src={item?.image}
@@ -47,9 +47,8 @@ const RecipeCard = ({ item, isPlanner, setOpen }) => {
         {/* wish icon */}
         <button
           onClick={handleWishlistClick}
-          className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${
-            isFavorite ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
-          }`}
+          className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${isFavorite ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
+            }`}
         >
           <LoveSvg isFavorite={isFavorite} />
         </button>
@@ -111,7 +110,7 @@ const RecipeCard = ({ item, isPlanner, setOpen }) => {
       {isPlanner && (
         <div className="px-5">
           <button
-            onClick={handleAddToPlanner}
+            onClick={(e) => handleAddToPlanner(e, item)}
             className="hover:bg-primary border border-primary px-5 py-3 rounded-lg hover:text-white text-[#5A5C5F] duration-300 transition-all"
           >
             + Add to planner

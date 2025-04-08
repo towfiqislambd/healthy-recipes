@@ -12,56 +12,57 @@ const RecipeBlogs = () => {
   const [swiperRef, setSwiperRef] = useState(null);
 
   return (
-    <section className="xl:py-24 py-10 md:pt-10 bg-[#F8FCF9] px-5 2xl:px-0">
+    <section className="py-10 2xl:py-16 3xl:py-20  bg-[#F8FCF9]">
       <div className="container">
-        {/* title */}
-        <div>
-          <h2 className="font-merriweather text-3xl lg:text-[40px] leading-[140%] font-bold ">
-            Recipe Blogs & Tips
-          </h2>
-        </div>
-
-        {/* sliders */}
-        <div className="w-full">
-          {/* nav buttons */}
-          <div className="w-full flex items-center justify-end gap-3">
-            <button
-              onClick={() => swiperRef.slidePrev()}
-              className="sm:size-12 size-8 flex items-center justify-center border border-primary rounded-full hover:bg-primary transition-all duration-300 group"
-            >
-              <SliderPrevSvg />
-            </button>
-            <button
-              onClick={() => swiperRef.slideNext()}
-              className="sm:size-12 size-8 flex items-center justify-center border border-primary rounded-full hover:bg-primary transition-all duration-300 group"
-            >
-              <SliderNextSvg />
-            </button>
+        <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
+          {/* title */}
+          <div>
+            <h2 className="font-merriweather text-[22px] md:text-[24px] lg:text-[28px] 2xl:text-[32px] leading-[140%] font-bold">
+              Recipe Blogs & Tips
+            </h2>
           </div>
 
           {/* sliders */}
-          <div className="mt-5">
-            <Swiper
-              onSwiper={setSwiperRef}
-              spaceBetween={20}
-              slidesPerView={1}
-              loop={true}
-              modules={[Navigation]}
-              className="mySwiper"
-              breakpoints={{
-                640: { slidesPerView: 1, spaceBetween: 20 },
-                768: { slidesPerView: 2, spaceBetween: 25 },
-                1024: { slidesPerView: 3, spaceBetween: 30 },
-                1280: { slidesPerView: 3, spaceBetween: 35 },
-                1536: { slidesPerView: 4, spaceBetween: 35 },
-              }}
-            >
-              {allBlogs?.map((item) => (
-                <SwiperSlide key={item?.id}>
-                  <BlogCard data={item} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
+          <div className="w-full">
+            {/* nav buttons */}
+            <div className="w-full flex items-center justify-end gap-3">
+              <button
+                onClick={() => swiperRef.slidePrev()}
+                className="size-10 lg:size-12 flex items-center justify-center border border-primary rounded-full hover:bg-primary transition-all duration-300 group"
+              >
+                <SliderPrevSvg />
+              </button>
+              <button
+                onClick={() => swiperRef.slideNext()}
+                className="size-10 lg:size-12 flex items-center justify-center border border-primary rounded-full hover:bg-primary transition-all duration-300 group"
+              >
+                <SliderNextSvg />
+              </button>
+            </div>
+
+            {/* sliders */}
+            <div className="mt-5">
+              <Swiper
+                onSwiper={setSwiperRef}
+                spaceBetween={20}
+                slidesPerView={1}
+                loop={true}
+                modules={[Navigation]}
+                className="mySwiper"
+                breakpoints={{
+                  640: { slidesPerView: 2, spaceBetween: 25 },
+                  768: { slidesPerView: 2, spaceBetween: 25 },
+                  1024: { slidesPerView: 3, spaceBetween: 25 },
+                  1460: { slidesPerView: 4, spaceBetween: 25 },
+                }}
+              >
+                {allBlogs?.map((item) => (
+                  <SwiperSlide key={item?.id}>
+                    <BlogCard data={item} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </div>
         </div>
       </div>

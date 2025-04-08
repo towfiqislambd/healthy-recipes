@@ -5,7 +5,7 @@ const TestimonialCard = ({ item }) => {
   return (
     <div className="group">
       {/* Top section */}
-      <div className="sm:px-12 px-6 sm:py-16 py-12 bg-[#FF9F1C1F] rounded-[100px] relative group-hover:bg-[#FF9F1C7A] transition-all duration-300">
+      <div className="sm:px-12 px-6 md:py-16 py-10 bg-[#FF9F1C1F] rounded-[100px] relative group-hover:bg-[#FF9F1C7A] transition-all duration-300">
         <p className="text-black text-center">{item?.review}</p>
         <div className="absolute top-4 right-12 opacity-0 group-hover:opacity-100 transition-all duration-300">
           <AppleBgSvg />
@@ -19,8 +19,8 @@ const TestimonialCard = ({ item }) => {
       </div>
 
       {/* Bottom section */}
-      <div className="flex items-end gap-2 -mt-8">
-        <div className="size-20 z-10">
+      <div className="flex items-end gap-2 -mt-5 md:-mt-8">
+        <div className="size-16 md:size-20 z-10">
           <img
             className="h-full w-full object-cover rounded-full"
             src={item?.image}

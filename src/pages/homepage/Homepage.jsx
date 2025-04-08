@@ -10,7 +10,7 @@ import WhyChooseUs from "@/components/homepage/WhyChooseUs";
 
 const Homepage = () => {
   return (
-    <div className="mt-[104px]">
+    <div className="mt-[80px] lg:mt-[104px]">
       <HomepageBanner />
       <WhyChooseUs />
       <TrendingDiet />

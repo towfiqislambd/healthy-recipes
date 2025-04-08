@@ -2,7 +2,7 @@ import { AddMoreSvg, CameraSvg } from "@/components/svg-container/SvgContainer";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const DashboardShareRecipe = () => {
+const EditRecipes = () => {
     const [video, setVideo] = useState(null);
     const [thumbnail, setThumbnail] = useState(null);
     const [tags, setTags] = useState([]);
@@ -99,7 +99,7 @@ const DashboardShareRecipe = () => {
 
     return (
         <div className="max-w-[752px] mx-auto py-10">
-            <h3 className="mb-7 text-2xl text-[#E48E19] font-semibold font-merriweather">Share your recipe</h3>
+            <h3 className="mb-7 text-2xl text-[#E48E19] font-semibold font-merriweather">Edit recipe</h3>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
 
                 {/* Title */}
@@ -217,75 +217,6 @@ const DashboardShareRecipe = () => {
                     {customErrors.tags && <p className="text-red-500 mt-2">{customErrors.tags}</p>}
                 </div>
 
-                {/* Serving number */}
-                <div>
-                    <label htmlFor="servingNumber" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Serving number</label>
-                    <input
-                        {...register('servingNumber', { required: true })}
-                        placeholder="4"
-                        className="border rounded-[5px] px-4 py-3 outline-none block w-full"
-                    />
-                    <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Numeric values e.g. 2, 3, 4, 5</p>
-                    {errors.servingNumber && <span className="text-red-500 block mt-2 text-[15px]">Serving number is required</span>}
-                </div>
-
-                {/* Cooking time */}
-                <div>
-                    <label htmlFor="cookingTime" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Cooking time</label>
-                    <input
-                        {...register('cookingTime', { required: true })}
-                        placeholder="40 min"
-                        className="border rounded-[5px] px-4 py-3 outline-none block w-full"
-                    />
-                    <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Numeric values for time e.g. 20min, 30min, 40min</p>
-                    {errors.servingNumber && <span className="text-red-500 block mt-2 text-[15px]">Cooking time is required</span>}
-                </div>
-
-                {/* Diets */}
-                <div>
-                    <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Diets</label>
-                    <select
-                        {...register('diets', { required: true })}
-                        className="border rounded-[5px] px-3 py-3 outline-none block w-full"
-                    >
-                        <option value="Keto">Keto</option>
-                        <option value="Mediterranean">Mediterranean</option>
-                        <option value="Keto">Keto</option>
-                        <option value="Mediterranean">Mediterranean</option>
-                    </select>
-                    {errors.diets && <span className="text-red-500 block mt-2 text-[15px]">Select diet</span>}
-                </div>
-
-                {/* Allergens free */}
-                <div>
-                    <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Allergens free</label>
-                    <select
-                        {...register('allergensFree', { required: true })}
-                        className="border rounded-[5px] px-3 py-3 outline-none block w-full"
-                    >
-                        <option value="Dairy free">Dairy free</option>
-                        <option value="Gluten free">Gluten free</option>
-                        <option value="Dairy free">Dairy free</option>
-                        <option value="Gluten free">Gluten free</option>
-                    </select>
-                    {errors.allergensFree && <span className="text-red-500 block mt-2 text-[15px]">Select allergens free</span>}
-                </div>
-
-                {/* Recipe for age group */}
-                <div>
-                    <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Recipe for age group</label>
-                    <select
-                        {...register('ageGroup', { required: true })}
-                        className="border rounded-[5px] px-3 py-3 outline-none block w-full"
-                    >
-                        <option value="Teen (13-19 years)">Teen (13-19 years)</option>
-                        <option value="Adult (20-39 years)">Adult (20-39 years)</option>
-                        <option value="Middle adulthood (40-59 years)">Middle adulthood (40-59 years)</option>
-                        <option value="Senior Adult (60+)">Senior Adult (60+)</option>
-                    </select>
-                    {errors.ageGroup && <span className="text-red-500 block mt-2 text-[15px]">Select age group</span>}
-                </div>
-
                 {/* Ingredients */}
                 <div>
                     {ingredients.map((ingredient, index) => (
@@ -364,4 +295,4 @@ const DashboardShareRecipe = () => {
     );
 };
 
-export default DashboardShareRecipe;
+export default EditRecipes;
