@@ -16,8 +16,8 @@ const Homepage = () => {
       <TrendingDiet />
       <RecipeLibrarySection />
       <FavoriteRecipes />
-      <OurMealPlanner />{/*
-      <ShareYourRecipeSection />
+      <OurMealPlanner />
+      <ShareYourRecipeSection />{/*
       <Testimonials />
       <RecipeBlogs /> */}
     </div>
