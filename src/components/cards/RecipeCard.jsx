@@ -33,7 +33,7 @@ const RecipeCard = ({ item, isPlanner, setOpen, handleAddMealFunc }) => {
       <div className="relative">
         {/* image and overlay */}
         <div className="block">
-          <div className="sm:h-[370px] h-[250px] w-full relative rounded-sm overflow-hidden">
+          <div className="sm:h-[350px] h-[250px] w-full relative rounded-sm overflow-hidden">
             <img
               className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
               src={item?.image}
