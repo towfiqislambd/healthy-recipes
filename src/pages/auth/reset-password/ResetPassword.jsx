@@ -16,7 +16,7 @@ const ResetPassword = () => {
 
   // css:
   const inputClass =
-    "rounded-lg border-[0.5px]  shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-5 py-3";
+    "rounded-lg border-[0.5px]  shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-3 lg:px-5 py-2 lg:py-3";
 
   const {
     register,
@@ -47,10 +47,10 @@ const ResetPassword = () => {
       {/* top section */}
       <div>
         {/* title */}
-        <h4 className="text-black font-merriweather text-center text-3xl sm:text-4xl tracking-[-0.36px] leading-[83.146px]">
+        <h4 className="text-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
           Create new password
         </h4>
-        <p className="text-center sm:mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto text-textColor">
+        <p className="text-center lg:mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto text-textColor">
           Please enter and confirm your new password. You will need to login
           after you reset.
         </p>
@@ -59,7 +59,7 @@ const ResetPassword = () => {
       {/* form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="sm:mt-8 mt-3 sm:space-y-6 space-y-3"
+        className="lg:mt-8 mt-5 lg:space-y-6 space-y-3"
       >
         {/*new password */}
         <div>
@@ -76,9 +76,8 @@ const ResetPassword = () => {
               )}
             </div>
             <div
-              className={`w-full ${inputClass} relative ${
-                errors.new_password ? "border-red-500" : "border-[#9D9D9D]"
-              }`}
+              className={`w-full ${inputClass} relative ${errors.new_password ? "border-red-500" : "border-[#9D9D9D]"
+                }`}
             >
               <input
                 {...register("new_password", { required: true })}
@@ -94,7 +93,7 @@ const ResetPassword = () => {
               </div>
             </div>
           </div>
-          <p className="pt-2 text-xs text-textColor">
+          <p className="pt-2 text-sm text-textColor">
             Password must have 8 char, a number and a special char
           </p>
         </div>
@@ -113,11 +112,10 @@ const ResetPassword = () => {
             )}
           </div>
           <div
-            className={`w-full ${inputClass} relative ${
-              errors.confirm_new_password
-                ? "border-red-500"
-                : "border-[#9D9D9D]"
-            }`}
+            className={`w-full ${inputClass} relative ${errors.confirm_new_password
+              ? "border-red-500"
+              : "border-[#9D9D9D]"
+              }`}
           >
             <input
               {...register("confirm_new_password", { required: true })}
