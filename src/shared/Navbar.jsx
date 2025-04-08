@@ -6,6 +6,7 @@ import { FaBars } from 'react-icons/fa';
 import { useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 
+
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
   const location = useLocation()?.pathname;
