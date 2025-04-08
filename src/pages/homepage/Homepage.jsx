@@ -17,9 +17,9 @@ const Homepage = () => {
       <RecipeLibrarySection />
       <FavoriteRecipes />
       <OurMealPlanner />
-      <ShareYourRecipeSection />{/*
+      <ShareYourRecipeSection />
       <Testimonials />
-      <RecipeBlogs /> */}
+      <RecipeBlogs />
     </div>
   );
 };
