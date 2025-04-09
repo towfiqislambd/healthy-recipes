@@ -6,8 +6,14 @@ import RightSideContentsDetailsPage from "@/components/recipe-details/RightSideC
 import ShareRecipeSection from "@/components/recipe-details/ShareRecipeSection";
 import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection";
 import ReviewSection from "@/components/recipe-details/ReviewSection";
+import { useParams } from "react-router-dom";
 
 const RecipeDetails = () => {
+  const { id } = useParams();
+  const fullLocation = `${window.location.origin}/${id}`
+
+  console.log(fullLocation);
+
   return (
     <div className="mt-[104px]">
       {/* banner */}
@@ -30,7 +36,7 @@ const RecipeDetails = () => {
         </div>
 
         {/* share */}
-        <ShareRecipeSection />
+        <ShareRecipeSection fullLocation={fullLocation} />
       </section>
 
       <ShareYourRecipeSection />

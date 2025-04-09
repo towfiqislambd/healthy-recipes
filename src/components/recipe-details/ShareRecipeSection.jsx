@@ -7,7 +7,27 @@ import {
   TwitterShareSvg,
 } from "../svg-container/SvgContainer";
 
-const ShareRecipeSection = () => {
+const ShareRecipeSection = ({ fullLocation }) => {
+  const handleTwitterRedirect = () => {
+    const url = fullLocation; // Replace with your actual URL
+    const text = "Follow me on Gift a coffee!"; // Replace with your custom message
+    const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      url
+    )}&text=${encodeURIComponent(text)}`;
+
+    window.open(twitterShareUrl, "_blank");
+  };
+
+  const handleFacebookRedirect = () => {
+    const url = fullLocation; // Replace with your actual URL
+    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      url
+    )}`;
+
+    window.open(facebookShareUrl, "_blank");
+  };
+
+
   return (
     <section className="w-full container flex items-center lg:justify-center mt-8">
       <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
@@ -18,18 +38,18 @@ const ShareRecipeSection = () => {
 
         {/* social Links */}
         <div className="flex items-center gap-4 mt-3 xl:mt-4">
-          <Link>
+          <button onClick={handleFacebookRedirect}>
             <FacebookShareSvg />
-          </Link>
+          </button>
           <Link>
             <InstagramShareSvg />
           </Link>
           <Link>
             <PinterestShareSvg />
           </Link>
-          <Link>
+          <button onClick={handleTwitterRedirect}>
             <TwitterShareSvg />
-          </Link>
+          </button>
         </div>
 
         {/* share input */}
