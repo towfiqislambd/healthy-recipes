@@ -36,6 +36,7 @@ const BlogCard = ({ data }) => {
           <p className="text-textColor leading-[150%] ">{data?.subtitle}</p>
         </div>
 
+
         {/* user info */}
         <div className="mt-3 w-full flex items-center justify-between">
           <div className="flex items-center gap-2">
