@@ -3,7 +3,6 @@ import {
   PauseButtonSvg,
   PlayButtonSvg,
 } from "@/components/svg-container/SvgContainer";
-import { Link } from "react-router-dom";
 
 const RightSideContentsDetailsPage = ({ video }) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -30,17 +29,8 @@ const RightSideContentsDetailsPage = ({ video }) => {
   };
   return (
     <div className="h-full min-h-[50vh]">
-      {/* edit button */}
-      <div className="w-full flex items-center justify-start xl:justify-end">
-        <Link to='/dashboard/edit-recipes'>
-          <button className="bg-primary font-medium text-white rounded-lg inline-flex items-center justify-center lg:px-8 px-4 lg:py-3 py-2 border border-primary hover:bg-transparent duration-300 transition-all group hover:text-primary">
-            Edit Recipe
-          </button>
-        </Link>
-      </div>
-
       {/* Details */}
-      <div className="mt-7 xl:mt-16 2xl:mt-20">
+      <div className="">
         {/* video */}
         <div className="w-full 2xl:h-[480px] h-[250px] md:h-[300px] relative group">
           <video
