@@ -17,10 +17,10 @@ const RecipeDetails = () => {
       />
 
       {/* Main Container */}
-      <section className="lg:pb-20 md:pb-10">
+      <section className="pb-8 xl:pb-10 2xl:pb-20">
         {/* about recipe */}
         <div className="container">
-          <div className="flex w-full gap-14 2xl:gap-24 lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
+          <div className="flex flex-col xl:flex-row w-full gap-5 lg:gap-8 xl:gap-14 2xl:gap-24 lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
             {/* left side contents */}
             <LeftSideContentsDetailsPage />
 
