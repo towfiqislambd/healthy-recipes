@@ -31,7 +31,7 @@ const RightSideContentsDetailsPage = ({ video }) => {
   return (
     <div className="h-full min-h-[50vh]">
       {/* edit button */}
-      <div className="lg:pt-12 xl:w-full w-[400px] flex items-center md:justify-end">
+      <div className="xl:w-full w-[400px] flex items-center md:justify-end">
         <Link to='/dashboard/edit-recipes'>
           <button className="bg-primary font-medium text-white rounded-lg inline-flex items-center justify-center lg:px-8 px-4 lg:py-3 py-2 border border-primary hover:bg-transparent duration-300 transition-all group hover:text-primary">
             Edit Recipe
@@ -40,7 +40,7 @@ const RightSideContentsDetailsPage = ({ video }) => {
       </div>
 
       {/* Details */}
-      <div className="xl:mt-32 mt-10">
+      <div className="mt-20">
         {/* video */}
         <div className="xl:w-full lg:h-[480px] h-[300px] relative group">
           <video
@@ -71,7 +71,7 @@ const RightSideContentsDetailsPage = ({ video }) => {
         </div>
 
         {/* instructions */}
-        <div className="xl:p-12 pt-5">
+        <div className="pt-5">
           {/* title */}
           <h5 className="text-black text-2xl font-bold leading-[130%] font-merriweather">
             Instructions:

@@ -2,12 +2,12 @@ import { EmptyStarSvg } from "../svg-container/SvgContainer";
 
 const ReviewLeftSection = () => {
   return (
-    <div className="2xl:p-12 w-full">
+    <div className="w-full">
       {/* title */}
       <h5 className="text-2xl font-semibold text-black">Submit your review</h5>
 
       {/* form */}
-      <div className="lg:py-8 w-full md:w-[720px] lg:min-w-[560px]">
+      <div className="py-4 xl:py-8 w-full">
         {/* rating */}
         <div className="w-full">
           <p className="text-textColor text-sm font-medium">

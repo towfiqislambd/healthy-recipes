@@ -6,13 +6,13 @@ const AllRecipeCardsSection = ({ items }) => {
 
   return (
     <div>
-      <div className="pt-8 md:pb-10 space-y-5">
+      <div className="pt-7 lg:pb-10 space-y-5">
         {/* Full rows with 4 items each */}
         {Array.from({ length: rows + (lastRowCount > 0 ? 1 : 0) }).map(
           (_, rowIndex) => (
             <div
               key={rowIndex}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 2xl:gap-5 gap-5"
+              className="grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5"
             >
               {items.slice(rowIndex * 4, rowIndex * 4 + 4).map((item, idx) => (
                 <RecipeCategoryCard key={idx} item={item} />

@@ -9,8 +9,8 @@ import {
 
 const ShareRecipeSection = () => {
   return (
-    <section className="w-full container flex items-center lg:justify-center mt-8 px-5 lg:px-0">
-      <div>
+    <section className="w-full container flex items-center lg:justify-center mt-8">
+      <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
         {/* title */}
         <h5 className="font-merriweather text-2xl text-black font-bold">
           Share

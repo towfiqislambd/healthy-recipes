@@ -19,12 +19,14 @@ const RecipeDetails = () => {
       {/* Main Container */}
       <section className="lg:pb-20 md:pb-10">
         {/* about recipe */}
-        <div className="container flex flex-col lg:flex-row w-full xl:gap-24 gap-10 px-5 2xl:px-0">
-          {/* left side contents */}
-          <LeftSideContentsDetailsPage />
+        <div className="container">
+          <div className="flex w-full gap-14 2xl:gap-24 lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
+            {/* left side contents */}
+            <LeftSideContentsDetailsPage />
 
-          {/* right side contents */}
-          <RightSideContentsDetailsPage video={recipe} />
+            {/* right side contents */}
+            <RightSideContentsDetailsPage video={recipe} />
+          </div>
         </div>
 
         {/* share */}

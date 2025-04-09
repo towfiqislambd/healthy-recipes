@@ -1,15 +1,15 @@
 const LeftSideContentsDetailsPage = () => {
   return (
-    <div className="2xl:p-12 mt-5 bg-white rounded-lg h-full xl:max-w-[420px]">
+    <div className="mt-5 bg-white rounded-lg h-full xl:max-w-[420px] p-5">
       {/* Ingredients */}
       <div>
         {/* title */}
-        <h5 className="text-black text-2xl font-bold leading-[130%] font-merriweather">
+        <h5 className="text-black text-xl 2xl:text-2xl font-bold leading-[130%] font-merriweather">
           Ingredients:
         </h5>
 
         {/* description */}
-        <div className="mt-8 space-y-5">
+        <div className="mt-5 2xl:mt-8 space-y-4 2xl:space-y-5">
           <p className="text-textColor leading-[130%]">
             Ripe bananas (the ripper the better)
           </p>
@@ -33,7 +33,7 @@ const LeftSideContentsDetailsPage = () => {
       </div>
 
       {/* stats */}
-      <div className="mt-10 space-y-4">
+      <div className="mt-10 space-y-3 2xl:space-y-4">
         <div className="w-full flex items-center justify-between">
           <p className="text-textColor">Serving number</p>
           <p className="text-black font-medium">4</p>
@@ -47,12 +47,12 @@ const LeftSideContentsDetailsPage = () => {
       {/* Nutrition */}
       <div className="pt-8">
         {/* title */}
-        <h5 className="text-black text-2xl font-bold leading-[130%] font-merriweather">
+        <h5 className="text-black text-xl 2xl:text-2xl font-bold leading-[130%] font-merriweather">
           Nutrition:
         </h5>
 
         {/* description */}
-        <div className="mt-8 space-y-5">
+        <div className="mt-5 2xl:mt-8 space-y-5">
           <p className="text-textColor leading-[130%]">
             Calories: 100-150 calories
           </p>
@@ -71,12 +71,12 @@ const LeftSideContentsDetailsPage = () => {
       {/* Tags */}
       <div className="pt-8">
         {/* title */}
-        <h5 className="text-black text-2xl font-bold leading-[130%] font-merriweather">
+        <h5 className="text-black text-xl 2xl:text-2xl font-bold leading-[130%] font-merriweather">
           Tags:
         </h5>
 
         {/* description */}
-        <div className="mt-8 flex items-center flex-wrap gap-3">
+        <div className="mt-5 2xl:mt-8 flex items-center flex-wrap gap-3">
           <div className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor">
             Dairy free food
           </div>
