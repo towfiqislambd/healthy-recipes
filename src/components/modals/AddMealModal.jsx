@@ -41,14 +41,14 @@ const AddMealModal = ({ setOpen, plannerItem, tableData, setTableData }) => {
         <DialogDescription></DialogDescription>
         <div className="w-full">
           {/* title */}
-          <h5 className=" font-newBaskerville text-[#5A5C5F] leading-[132%] text-xl">
+          <h5 className=" font-newBaskerville text-[#5A5C5F] leading-[132%] text-lg mt-5 md:text-xl">
             Choose day of the week to save meal to:
           </h5>
 
-          <div className="flex gap-5 items-center mt-7 mb-7">
+          <div className="flex gap-5 items-center mt-5 md:mt-7 mb-5 md:mb-7">
             <Popover>
               <PopoverTrigger asChild>
-                <button className='flex-1 py-3 px-5 text-[#5A5C5F] border rounded-lg border-[#8993A4]'>
+                <button className='flex-1 px-3 py-2 md:py-3 md:px-5 text-[#5A5C5F] border rounded-lg border-[#8993A4]'>
                   {startDate ? format(startDate, "PPP") : <span>Start date</span>}
                 </button>
               </PopoverTrigger>
@@ -64,7 +64,7 @@ const AddMealModal = ({ setOpen, plannerItem, tableData, setTableData }) => {
             <span>or</span>
             <Popover>
               <PopoverTrigger asChild>
-                <button className='flex-1 py-3 px-5 text-[#5A5C5F] border rounded-lg border-[#8993A4]'>
+                <button className='flex-1 px-3 py-2 md:py-3 md:px-5 text-[#5A5C5F] border rounded-lg border-[#8993A4]'>
                   {endDate ? format(endDate, "PPP") : <span>End date</span>}
                 </button>
               </PopoverTrigger>
@@ -95,7 +95,7 @@ const AddMealModal = ({ setOpen, plannerItem, tableData, setTableData }) => {
           </Select>
 
           {/* buttons */}
-          <div className="py-6 flex items-center justify-end gap-3">
+          <div className="pt-6 pb-3 flex items-center justify-center gap-3">
             <button
               onClick={handleAdd}
               className="px-5 py-2.5 border border-primary bg-primary text-white rounded-md"

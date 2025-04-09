@@ -2,12 +2,12 @@ import { EmptyStarSvg } from "../svg-container/SvgContainer";
 
 const ReviewLeftSection = () => {
   return (
-    <div className="2xl:p-12 w-full">
+    <div className="w-full">
       {/* title */}
-      <h5 className="text-2xl font-semibold text-black">Submit your review</h5>
+      <h5 className="text-xl lg:text-2xl font-semibold text-black">Submit your review</h5>
 
       {/* form */}
-      <div className="lg:py-8 w-full md:w-[720px] lg:min-w-[560px]">
+      <div className="py-2 lg:py-4 xl:py-8 w-full">
         {/* rating */}
         <div className="w-full">
           <p className="text-textColor text-sm font-medium">
@@ -34,7 +34,7 @@ const ReviewLeftSection = () => {
               </label>
 
               <input
-                className="px-4 py-4 border border-[#8993A4] focus:outline-none rounded-lg w-full"
+                className="px-3 lg:px-4 py-2 lg:py-4 border border-[#8993A4] focus:outline-none rounded-lg w-full"
                 placeholder="johndoe456@gmail.com"
                 type="email"
                 name="email"
@@ -50,7 +50,7 @@ const ReviewLeftSection = () => {
               </label>
 
               <input
-                className="px-4 py-4 border border-[#8993A4] focus:outline-none rounded-lg w-full"
+                className="px-3 lg:px-4 py-2 lg:py-4 border border-[#8993A4] focus:outline-none rounded-lg w-full"
                 placeholder="John Doe"
                 type="text"
                 name="name"
@@ -67,7 +67,7 @@ const ReviewLeftSection = () => {
 
               <textarea
                 rows={5}
-                className="px-4 resize-none py-4 border border-[#8993A4] focus:outline-none rounded-lg w-full"
+                className="px-3 lg:px-4 py-2 lg:py-4 resize-none border border-[#8993A4] focus:outline-none rounded-lg w-full"
                 placeholder="John Doe"
                 type="text"
                 name="review"
@@ -78,7 +78,7 @@ const ReviewLeftSection = () => {
             {/* submit button */}
             <div>
               <button
-                className="px-8 py-3 text-white font-medium bg-primary hover:bg-transparent transition-all duration-300 rounded-full hover:text-primary border border-primary"
+                className="px-5 lg:px-8 py-2 lg:py-3 text-white font-medium bg-primary hover:bg-transparent transition-all duration-300 rounded-full hover:text-primary border border-primary"
                 type="submit"
               >
                 Submit Review

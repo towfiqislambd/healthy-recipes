@@ -10,7 +10,7 @@ const RecipeCategoryCard = ({ item }) => {
       className={`w-full bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl `}
     >
       {/* image */}
-      <div className="2xl:h-[370px] h-[300px] w-full relative rounded-sm overflow-hidden">
+      <div className="h-[200px] lg:h-[300px] w-full relative rounded-sm overflow-hidden">
         <img
           className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
           src={item?.image}
@@ -21,32 +21,17 @@ const RecipeCategoryCard = ({ item }) => {
       </div>
 
       {/* description */}
-      <div className="py-4 px-4 border-b border-dashed border-black">
-        <h5 className="text-xl font-bold font-merriweather text-black">
+      <div className="py-4 px-4 ">
+        <h5 className="text-lg 3xl:text-xl font-bold font-merriweather text-black">
           {item?.title}
         </h5>
-        <div className="mt-4 space-y-2">
-          <div className="flex items-center gap-3">
+        <div className="mt-2 3xl:mt-4 space-y-2">
+          <div className="flex gap-3">
             <RecipeBookSvg />
             <p className="text-textColor font-medium">
               12 recipes | Multiple authors
             </p>
           </div>
-        </div>
-      </div>
-
-      {/* stats */}
-      <div className="px-7 py-5 w-full flex items-center justify-between">
-        {/* views */}
-        <div className="flex items-center gap-1">
-          <FireSvg />
-          <span className="text-textColor text-sm font-medium">5720 views</span>
-        </div>
-
-        {/* reviews */}
-        <div className="flex items-center gap-1">
-          <StarSvg />
-          <span className="text-textColor text-sm font-medium">4.8/5</span>
         </div>
       </div>
     </Link>

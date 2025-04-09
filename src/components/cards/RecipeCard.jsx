@@ -111,7 +111,7 @@ const RecipeCard = ({ item, isPlanner, setOpen, handleAddMealFunc }) => {
         <div className="px-5">
           <button
             onClick={(e) => handleAddToPlanner(e, item)}
-            className="hover:bg-primary border border-primary px-5 py-3 rounded-lg hover:text-white text-[#5A5C5F] duration-300 transition-all"
+            className="hover:bg-primary border border-primary px-3 lg:px-5 py-2 lg:py-3 rounded-lg hover:text-white text-[#5A5C5F] duration-300 transition-all"
           >
             + Add to planner
           </button>

@@ -3,7 +3,6 @@ import {
   PauseButtonSvg,
   PlayButtonSvg,
 } from "@/components/svg-container/SvgContainer";
-import { Link } from "react-router-dom";
 
 const RightSideContentsDetailsPage = ({ video }) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -30,22 +29,13 @@ const RightSideContentsDetailsPage = ({ video }) => {
   };
   return (
     <div className="h-full min-h-[50vh]">
-      {/* edit button */}
-      <div className="lg:pt-12 xl:w-full w-[400px] flex items-center md:justify-end">
-        <Link to='/dashboard/edit-recipes'>
-          <button className="bg-primary font-medium text-white rounded-lg inline-flex items-center justify-center lg:px-8 px-4 lg:py-3 py-2 border border-primary hover:bg-transparent duration-300 transition-all group hover:text-primary">
-            Edit Recipe
-          </button>
-        </Link>
-      </div>
-
       {/* Details */}
-      <div className="xl:mt-32 mt-10">
+      <div className="">
         {/* video */}
-        <div className="xl:w-full lg:h-[480px] h-[300px] relative group">
+        <div className="w-full 2xl:h-[480px] h-[250px] md:h-[300px] relative group">
           <video
             ref={videoRef}
-            className="xl:w-full w-full xl:h-full h-[300px] object-cover rounded-2xl"
+            className="w-full h-full object-cover rounded-2xl"
             src={video}
           ></video>
 
@@ -71,14 +61,14 @@ const RightSideContentsDetailsPage = ({ video }) => {
         </div>
 
         {/* instructions */}
-        <div className="xl:p-12 pt-5">
+        <div className="pt-5">
           {/* title */}
-          <h5 className="text-black text-2xl font-bold leading-[130%] font-merriweather">
+          <h5 className="text-black text-xl lg:text-2xl font-bold leading-[130%] font-merriweather">
             Instructions:
           </h5>
 
           {/* steps */}
-          <div className="lg:mt-8 mt-4 space-y-6">
+          <div className="lg:mt-8 mt-4 space-y-4 lg:space-y-6">
             <p className="text-textColor text-xl font-medium leading-[150%]">
               Step 1.
               <span className="text-base">

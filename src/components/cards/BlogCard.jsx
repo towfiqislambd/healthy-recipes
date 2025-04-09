@@ -33,11 +33,12 @@ const BlogCard = ({ data }) => {
           <h4 className="text-lg 2xl:text-xl font-bold leading-[160%] font-merriweather text-black">
             {data?.title}
           </h4>
-          <p className="text-textColor leading-[150%] h-14">{data?.subtitle}</p>
+          <p className="text-textColor leading-[150%] ">{data?.subtitle}</p>
         </div>
 
+
         {/* user info */}
-        <div className="sm:mt-12 mt-6 w-full flex items-center justify-between">
+        <div className="mt-3 w-full flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="size-10">
               <img
