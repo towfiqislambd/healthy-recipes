@@ -87,6 +87,7 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc })
             </div>
             <p className="text-textColor text-[15px] xl:text-base font-medium">
               {item?.servings} servings | {item?.duration} needed
+              {/* | {item?.allergens} */}
             </p>
           </div>
           <div>
