@@ -14,6 +14,7 @@ const SharedRecipes = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5 2xl:px-0">
                 {sharedRecipes?.map((item, idx) => (
                     <RecipeCard
+                        isMyRecipe={true}
                         key={idx}
                         item={item}
                         down={idx % 2 !== 0}

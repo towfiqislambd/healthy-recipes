@@ -30,7 +30,8 @@ import RecipeCard from '../../components/cards/RecipeCard';
 
 const DashboardSavedRecipes = () => {
     const [activeTab, setActiveTab] = useState(allTabs[0]);
-    const [updatedRecipes, setUpdatedRecipes] = useState(allRecipes);
+    const [updatedRecipes] = useState(allRecipes);
+    // const [updatedRecipes, setUpdatedRecipes] = useState(allRecipes);
 
 
     //functions:
@@ -72,6 +73,7 @@ const DashboardSavedRecipes = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5 2xl:px-0">
                 {filteredRecipes?.map((item, idx) => (
                     <RecipeCard
+                        isMyRecipe={true}
                         key={idx}
                         item={item}
                         down={idx % 2 !== 0}

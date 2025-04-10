@@ -114,7 +114,7 @@ export const router = createBrowserRouter([
         element: <DashboardSavedRecipes />,
       },
       {
-        path: 'edit-recipes',
+        path: 'edit-recipe/:id',
         element: <EditRecipes />,
       },
     ]
