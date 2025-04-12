@@ -3,7 +3,7 @@ import logo from '../assets/images/logo.png';
 import { LoveSvg, SearchSvg } from '@/components/svg-container/SvgContainer';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 
 
@@ -19,6 +19,18 @@ const Navbar = () => {
     { path: '/meal-planner', title: 'Meal planner' },
     { path: '/blog', title: 'Blog' },
   ];
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    // Cleanup when component unmounts just in case
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isOpen]);
 
   return (
     <header className='py-1 lg:py-2 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] bg-[#F6F5F2] fixed w-full left-0 top-0 z-50 navbar'>
@@ -103,6 +115,7 @@ const Navbar = () => {
           <div className="flex flex-col gap-5 xl:gap-6">
             {navLinks?.map((item) => (
               <NavLink
+                onClick={() => setOpen(false)}
                 to={item?.path}
                 className={({ isActive }) =>
                   `${isActive ? 'text-primary' : 'text-textColor'
