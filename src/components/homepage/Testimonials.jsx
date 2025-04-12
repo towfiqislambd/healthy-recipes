@@ -1,5 +1,3 @@
-import avatar1 from "../../assets/images/avatar-1.jpg";
-import avatar2 from "../../assets/images/avatar-2.jpg";
 import { useState } from "react";
 import TestimonialCard from "../cards/TestimonialCard";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,68 +6,11 @@ import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import { SliderNextSvg, SliderPrevSvg } from "../svg-container/SvgContainer";
 import SectionTitle from "../common/SectionTitle";
+import { useTestimonial } from "@/hooks/cms.queries";
 
 const Testimonials = () => {
   const [swiperRef, setSwiperRef] = useState(null);
-
-  const testimonialsData = [
-    {
-      image: avatar1,
-      review:
-        "I love that this site tailors recipes by age! It’s a lifesaver for finding nutritious meals my kids enjoy while meeting my own dietary needs.",
-      name: "Sarah Jamil",
-      designation: "Freelancer",
-    },
-    {
-      image: avatar2,
-      review:
-        "I love that this site tailors recipes by age! It’s a lifesaver for finding nutritious meals my kids enjoy while meeting my own dietary needs.",
-      name: "John Doe",
-      designation: "Businessman",
-    },
-    {
-      image: avatar1,
-      review:
-        "I love that this site tailors recipes by age! It’s a lifesaver for finding nutritious meals my kids enjoy while meeting my own dietary needs. ",
-      name: "Sarah Jamil",
-      designation: "Freelancer",
-    },
-    {
-      image: avatar2,
-      review:
-        "I love that this site tailors recipes by age! It’s a lifesaver for finding nutritious meals my kids enjoy while meeting my own dietary needs. ",
-      name: "John Doe",
-      designation: "Businessman",
-    },
-    {
-      image: avatar1,
-      review:
-        "I love that this site tailors recipes by age! It’s a lifesaver for finding nutritious meals my kids enjoy while meeting my own dietary needs.",
-      name: "Sarah Jamil",
-      designation: "Freelancer",
-    },
-    {
-      image: avatar2,
-      review:
-        "I love that this site tailors recipes by age! It’s a lifesaver for finding nutritious meals my kids enjoy while meeting my own dietary needs.",
-      name: "John Doe",
-      designation: "Businessman",
-    },
-    {
-      image: avatar1,
-      review:
-        "I love that this site tailors recipes by age! It’s a lifesaver for finding nutritious meals my kids enjoy while meeting my own dietary needs. ",
-      name: "Sarah Jamil",
-      designation: "Freelancer",
-    },
-    {
-      image: avatar2,
-      review:
-        "I love that this site tailors recipes by age! It’s a lifesaver for finding nutritious meals my kids enjoy while meeting my own dietary needs. ",
-      name: "John Doe",
-      designation: "Businessman",
-    },
-  ];
+  const { data: testimonial } = useTestimonial()
 
   return (
     <section className="py-7 lg:py-12 2xl:py-16 3xl:py-20 bg-[#FCFCFC] px-6 sm:px-0">
@@ -111,7 +52,7 @@ const Testimonials = () => {
                   1460: { slidesPerView: 4, spaceBetween: 20 },
                 }}
               >
-                {testimonialsData?.map((item, index) => (
+                {testimonial?.map((item, index) => (
                   <SwiperSlide key={index}>
                     <TestimonialCard item={item} />
                   </SwiperSlide>
