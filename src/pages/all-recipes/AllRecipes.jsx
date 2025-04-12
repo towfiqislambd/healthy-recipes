@@ -4,11 +4,10 @@ import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection
 import { Link, useParams } from "react-router-dom";
 
 const AllRecipes = () => {
-  const slug = useParams().slug;
-  const recipeTitle = slug
-    .split("-")
-    ?.map((item) => item.charAt(0).toUpperCase() + item?.slice(1))
-    ?.join(" ");
+  const { id } = useParams();
+  console.log(id);
+  
+
 
   return (
     <div className="mt-[100px] lg:mt-[144px]">
@@ -31,10 +30,10 @@ const AllRecipes = () => {
             </Link>
             <span className="text-gray-500"> {">"} </span>
             <Link
-              to={`/recipe-library/${slug}`}
+              // to={`/recipe-library/${slug}`}
               className="text-textColor hover:text-primary leading-[130%] transition-all divide-blue-300"
             >
-              {recipeTitle}
+              {/* {recipeTitle} */}
             </Link>
           </div>
         </div>
@@ -44,7 +43,7 @@ const AllRecipes = () => {
       <div className="mt-5 2xl:mt-7 container">
         <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
           <h2 className="text-xl lg:text-2xl 2xl:text-3xl 3xl:text-4xl font-merriweather font-bold leading-[130%] text-black">
-            {recipeTitle}
+            {/* {recipeTitle} */}
           </h2>
         </div>
       </div>

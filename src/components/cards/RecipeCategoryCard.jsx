@@ -1,12 +1,20 @@
-import { Link } from "react-router-dom";
-import { FireSvg, RecipeBookSvg, StarSvg } from "../svg-container/SvgContainer";
+import { Link, useParams } from "react-router-dom";
+import { RecipeBookSvg } from "../svg-container/SvgContainer";
 
 const RecipeCategoryCard = ({ item }) => {
-  const slug = item?.title?.toLowerCase()?.split(" ").join("-");
+
+  const { id } = useParams();
+  console.log(id);
+
+
 
   return (
     <Link
-      to={`/recipe-library/${slug}`}
+      onClick={() => {
+        console.log(item.id);
+
+      }}
+      to={`/recipes/recipe_library_id/${item?.id}`}
       className={`w-full bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl `}
     >
       {/* image */}
