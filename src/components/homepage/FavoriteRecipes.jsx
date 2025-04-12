@@ -59,7 +59,7 @@ const FavoriteRecipes = () => {
               >
                 {allRecipes?.map((item, index) => (
                   <SwiperSlide key={index}>
-                    <RecipeCard item={item} down={index % 2 !== 0} />
+                    <RecipeCard item={item} down={index % 2 !== 0} isMyRecipe={true} />
                   </SwiperSlide>
                 ))}
               </Swiper>
