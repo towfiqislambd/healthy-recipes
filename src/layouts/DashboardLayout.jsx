@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
-import logo from '../assets/images/logo.png';
-import { LoveSvg, SearchSvg } from "@/components/svg-container/SvgContainer";
-import ButtonTransparent from "@/components/buttons/ButtonTransparent";
 import { FaBars } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
+import { LoveSvg, SearchSvg } from "@/components/svg-container/SvgContainer";
+import logo from '../assets/images/logo.png';
+import ButtonTransparent from "@/components/buttons/ButtonTransparent";
 import profile from "../assets/images/profile.png";
 
 const DashboardLayout = () => {

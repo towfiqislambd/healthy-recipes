@@ -58,7 +58,7 @@ const TrendingDiet = () => {
             >
               {allRecipes?.map((item, idx) => (
                 <SwiperSlide key={idx}>
-                  <RecipeCard item={item} down={idx % 2 !== 0} />
+                  <RecipeCard item={item} down={idx % 2 !== 0} isMyRecipe={true} />
                 </SwiperSlide>
               ))}
             </Swiper>

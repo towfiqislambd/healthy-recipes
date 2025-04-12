@@ -176,6 +176,7 @@ const MealPlannerTabSection = () => {
         <div className="mt-10 grid lg:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4 gap-6">
           {filteredRecipes?.map((item, idx) => (
             <RecipeCard
+              isMyRecipe={true}
               setOpen={setOpen}
               isPlanner={true}
               key={idx}

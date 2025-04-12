@@ -22,7 +22,7 @@ const RecipeCategoryCard = ({ item }) => {
 
       {/* description */}
       <div className="py-4 px-4 ">
-        <h5 className="text-lg 3xl:text-xl font-bold font-merriweather text-black">
+        <h5 className="text-lg 3xl:text-xl font-bold font-merriweather text-black truncate">
           {item?.title}
         </h5>
         <div className="mt-2 3xl:mt-4 space-y-2">

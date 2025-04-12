@@ -6,7 +6,7 @@ const BlogCard = ({ data }) => {
   return (
     <Link
       to={`/blog/${data?.id}`}
-      className="bg-white block rounded-lg shadow-[0px_0px_8px_0px_rgba(0,0,0,0.06)] px-3 pt-3 pb-8 group"
+      className="bg-white block h-[490px] rounded-lg shadow-[0px_0px_8px_0px_rgba(0,0,0,0.06)] px-3 pt-3 pb-8 group"
     >
       {/* image */}
       <div>
@@ -29,11 +29,11 @@ const BlogCard = ({ data }) => {
           </p>
         </div>
         {/* title */}
-        <div className="space-y-3">
-          <h4 className="text-lg 2xl:text-xl font-bold leading-[160%] font-merriweather text-black">
+        <div className="space-y-2 mt-1">
+          <h4 className="text-lg 2xl:text-xl font-bold leading-[160%] font-merriweather text-black truncate">
             {data?.title}
           </h4>
-          <p className="text-textColor leading-[150%] ">{data?.subtitle}</p>
+          <p className="text-textColor leading-[150%] ">{data?.subtitle.slice(0, 90)}...</p>
         </div>
 
 
