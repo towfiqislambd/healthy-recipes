@@ -3,7 +3,7 @@ import { useBlogs } from "@/hooks/cms.queries";
 
 const Blog = () => {
   const { data: blogs } = useBlogs();
-  
+
   return (
     <section className="mt-[110px] lg:mt-[154px]">
       <div className="container">

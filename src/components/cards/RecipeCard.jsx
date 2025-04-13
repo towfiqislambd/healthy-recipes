@@ -38,7 +38,7 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc })
           <div className="sm:h-[350px] h-[250px] w-full relative rounded-sm overflow-hidden">
             <img
               className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
-              src={item?.image}
+              src={`${import.meta.env.VITE_SITE_URL}/${item?.recipe_image}`}
               alt=""
             />
             {/* Overlay with Linear Gradient */}
@@ -76,7 +76,7 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc })
         <div className="absolute top-3 left-3">
           <p className="px-3 py-1.5 rounded-sm bg-white/50 text-black text-sm">
             <span>
-              {item?.diet} | {item?.type}
+              {item?.library_name} | {item?.category_name}
             </span>
           </p>
         </div>
@@ -85,7 +85,7 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc })
       {/* description */}
       <div className="py-4 px-3 text-wrap border-b border-dashed border-black">
         <h5 className="text-lg lg:text-xl font-bold font-merriweather text-black truncate">
-          {item?.title}
+          {item?.recipe_name}
         </h5>
         <div className="mt-2 xl:mt-4 space-y-2">
           <div className="flex flex-wrap gap-2">
@@ -93,18 +93,18 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc })
               <RecipeBookSvg />
             </div>
             <p className="text-textColor text-[15px] xl:text-base font-medium">
-              {item?.servings} servings | {item?.duration} needed
+              {item?.serving_number} servings | {item?.preparation_time} needed
               {/* | {item?.allergens} */}
             </p>
           </div>
           <div>
             <p className="text-textColor font-medium text-[15px] xl:text-base">
-              For: <span className="capitalize"> {item?.for}</span>
+              For: <span className="capitalize"> {item?.age_group}</span>
             </p>
           </div>
           <div>
             <p className="text-textColor font-medium text-[15px] xl:text-base">
-              {item?.ingredients} ingredients | {item?.author}
+              {item?.total_ingredients} ingredients | {item?.recipe_creator}
             </p>
           </div>
         </div>
@@ -115,7 +115,7 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc })
         {/* views */}
         <div className="flex items-center gap-1">
           <FireSvg />
-          <span className="text-textColor text-sm font-medium">5720 views</span>
+          <span className="text-textColor text-sm font-medium">{item?.views}</span>
         </div>
 
         {/* reviews */}

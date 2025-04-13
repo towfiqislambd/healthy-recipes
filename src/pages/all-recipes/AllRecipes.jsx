@@ -1,10 +1,12 @@
 import AllRecipesTabs from "@/components/all-recipes/AllRecipesTabs";
 import RecipeBlogs from "@/components/homepage/RecipeBlogs";
 import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection";
-import { useAllCategories, useAllRecipes } from "@/hooks/cms.queries";
+import { useAllCategories, useAllRecipes, useBlogs, useShareYourRecipe } from "@/hooks/cms.queries";
 import { Link, useParams } from "react-router-dom";
 
 const AllRecipes = () => {
+  const { data: shareYourRecipe } = useShareYourRecipe();
+  const { data: blogs } = useBlogs();
   const { data: allCategories } = useAllCategories();
   const { data: allRecipes } = useAllRecipes();
 
@@ -52,10 +54,9 @@ const AllRecipes = () => {
 
       {/* tabs */}
       <AllRecipesTabs data={allCategories} recipes={allRecipes} />
-
-      <ShareYourRecipeSection />
-
-      <RecipeBlogs />
+      
+      <ShareYourRecipeSection data={shareYourRecipe} />
+      <RecipeBlogs data={blogs} />
     </div>
   );
 };

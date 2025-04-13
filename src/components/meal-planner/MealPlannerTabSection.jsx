@@ -1,31 +1,4 @@
 import { useState } from 'react';
-const allTabs = [
-  {
-    title: 'All recipes',
-  },
-  {
-    title: 'Breakfast',
-  },
-  {
-    title: 'Dinner',
-  },
-  {
-    title: 'Appetizer',
-  },
-  {
-    title: 'Beverages',
-  },
-  {
-    title: 'Salad',
-  },
-  {
-    title: 'Desserts',
-  },
-  {
-    title: 'Snacks',
-  },
-];
-import { allRecipes } from '@/data/data';
 import {
   Select,
   SelectContent,
@@ -38,9 +11,10 @@ import RecipeCard from '../cards/RecipeCard';
 import Modal from '../modals/Modal';
 import AddMealModal from '../modals/AddMealModal';
 
-const MealPlannerTabSection = () => {
+const MealPlannerTabSection = ({ allCategories, allRecipes }) => {
+
   const [open, setOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState(allTabs[0]);
+  const [activeTab, setActiveTab] = useState(allCategories[0]);
   const [updatedRecipes, setUpdatedRecipes] = useState(allRecipes);
   const [selectedAge, setSelectedAge] = useState('');
   const [selectedDiet, setSelectedDiet] = useState('');
@@ -50,23 +24,23 @@ const MealPlannerTabSection = () => {
 
   //functions:
   const getCountByType = (type) => {
-    if (type === 'All recipes') {
+    if (type === 'All Recipes') {
       return updatedRecipes?.length;
     } else {
-      return updatedRecipes?.filter((recipe) => recipe.type === type)?.length;
+      return updatedRecipes?.filter((recipe) => recipe?.category_name === type)?.length;
     }
   };
 
   const handleFilterChange = (age) => {
     // Update updatedRecipes based on the selected allergen
-    const filteredRecipes = allRecipes.filter((item) => item?.for === age);
+    const filteredRecipes = allRecipes?.filter((item) => item?.age_group === age);
     setSelectedAge(age);
     setUpdatedRecipes(filteredRecipes);
   };
 
   const handleDietChange = (diet) => {
     // Update updatedRecipes based on the selected allergen
-    const filteredRecipes = allRecipes.filter((item) => item?.diet === diet);
+    const filteredRecipes = allRecipes?.filter((item) => item?.library_name === diet);
     setSelectedDiet(diet);
     setUpdatedRecipes(filteredRecipes);
   };
@@ -74,14 +48,14 @@ const MealPlannerTabSection = () => {
   const handleReset = () => {
     setSelectedAge('');
     setSelectedDiet('');
-    setActiveTab(allTabs[0]);
+    setActiveTab(allCategories[0]);
     setUpdatedRecipes(allRecipes);
   };
 
   const filteredRecipes =
-    activeTab?.title == 'All recipes'
+    activeTab?.category_name == 'All Recipes'
       ? updatedRecipes
-      : updatedRecipes?.filter((recipe) => recipe.type === activeTab?.title);
+      : updatedRecipes?.filter((recipe) => recipe.category_name === activeTab?.category_name);
 
   const handleAddMealFunc = (item) => {
     setPlannerItem(item)
@@ -91,19 +65,19 @@ const MealPlannerTabSection = () => {
       <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
         {/* tabs */}
         <div className="py-8 w-full flex flex-wrap items-center justify-center 2xl:justify-between gap-x-1 gap-y-2">
-          {allTabs?.map((tab) => (
+          {allCategories?.map((tab) => (
             <button
-              key={tab.title}
+              key={tab.id}
               onClick={() => setActiveTab(tab)}
               className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full  font-medium
-          ${tab?.title === activeTab?.title
+          ${tab?.category_name === activeTab?.category_name
                   ? 'bg-[#3A3A3A] text-white'
                   : 'bg-transparent text-textColor'
                 }
           `}
             >
-              {tab?.title}
-              <span>({getCountByType(tab?.title)})</span>
+              {tab?.category_name}
+              <span>({getCountByType(tab?.category_name)})</span>
             </button>
           ))}
         </div>
@@ -138,25 +112,25 @@ const MealPlannerTabSection = () => {
                 <SelectValue placeholder="Filter by diet" />
               </SelectTrigger>
               <SelectContent className="px-0 py-0">
-                <SelectItem value="keto-diet" className={filterClass}>
+                <SelectItem value="Keto Diet Recipe" className={filterClass}>
                   Keto Diet Recipe
                 </SelectItem>
-                <SelectItem value="mediterranean-diet" className={filterClass}>
+                <SelectItem value="Mediterranean Diet Recipe" className={filterClass}>
                   Mediterranean Diet Recipe
                 </SelectItem>
-                <SelectItem value="vegan-diet" className={filterClass}>
+                <SelectItem value="Vegan Diet Recipe" className={filterClass}>
                   Vegan Diet Recipe
                 </SelectItem>
-                <SelectItem value="paleo-diet" className={filterClass}>
+                <SelectItem value="Paleo Diet Recipe" className={filterClass}>
                   Paleo Diet Recipe
                 </SelectItem>
-                <SelectItem value="low-carb-diet" className={filterClass}>
+                <SelectItem value="Low-Carb Diet Recipe" className={filterClass}>
                   Low-Carb Diet Recipe
                 </SelectItem>
-                <SelectItem value="dash-diet" className={filterClass}>
+                <SelectItem value=" DASH Diet Recipe" className={filterClass}>
                   DASH Diet Recipe
                 </SelectItem>
-                <SelectItem value="carnivore-diet" className={filterClass}>
+                <SelectItem value=" Carnivore Diet Recipe" className={filterClass}>
                   Carnivore Diet Recipe
                 </SelectItem>
               </SelectContent>

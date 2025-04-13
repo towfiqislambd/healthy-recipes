@@ -5,7 +5,7 @@ import parse from 'html-react-parser';
 const BlogCard = ({ item }) => {
   return (
     <Link
-      to={`/blog/${item?.category_id}`}
+      to={`/blog/${item?.slug}`}
       className="bg-white block h-[490px] rounded-lg shadow-[0px_0px_8px_0px_rgba(0,0,0,0.06)] px-3 pt-3 pb-8 group"
     >
       {/* image */}

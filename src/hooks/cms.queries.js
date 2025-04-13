@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AllCategories, AllRecipes, Blogs, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, OurMealPlanner, RecipeLibrary, ShareYourRecipe, Testimonial, WhyChooseUs } from './cms.api';
+import { AllCategories, AllRecipes, BlogDetails, Blogs, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, OurMealPlanner, RecipeLibrary, ShareYourRecipe, Testimonial, WhyChooseUs } from './cms.api';
 
 // Homepage - Banner
 export const useHomepageBanner = () => {
@@ -71,6 +71,14 @@ export const useBlogs = () => {
       queryKey: ['blogs'],
       queryFn: Blogs,
     });
+};
+// Blog Details Page - Blog Detail
+export const useBlogDetails = (slug) => {
+  return useQuery({
+    queryKey: ['blog-details', slug], 
+    queryFn: () => BlogDetails(slug),
+    enabled: !!slug,
+     });
 };
 
 //==================== 2nd day =====================

@@ -54,7 +54,11 @@ export const Blogs = async () => {
   const { data } = await axiosPublic('/api/blogs');
   return data?.data;
 };
-
+// Blog Details Page - Blog Detail
+export const BlogDetails = async (slug) => {
+    const { data } = await axiosPublic(`/api/blog/${slug}`);
+    return data?.data;
+};
 //=================== 2nd day ===================
 
 // All Recipe Page - All Categories

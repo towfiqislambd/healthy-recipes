@@ -10,11 +10,10 @@ import {
 import RecipeCard from "../cards/RecipeCard";
 import { allRecipes } from "@/data/data";
 
-const AllRecipesTabs = ({ data }) => {
+const AllRecipesTabs = ({ data, recipes }) => {
   const [activeTab, setActiveTab] = useState(data?.[0] || {});
   const [selectedAllergen, setSelectedAllergen] = useState("");
   const [updatedRecipes, setUpdatedRecipes] = useState(allRecipes);
-
   const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
   useEffect(() => {
@@ -24,11 +23,11 @@ const AllRecipesTabs = ({ data }) => {
     }
   }, [data]);
 
-  const getCountByType = (type) => {
-    if (type === "All recipes") {
-      return updatedRecipes?.length;
+  const getCountByType = (category_name) => {
+    if (category_name === "All recipes") {
+      return recipes?.length;
     } else {
-      return updatedRecipes?.filter((recipe) => recipe.type === type)?.length;
+      return recipes?.filter((recipe) => recipe.category_name === category_name)?.length;
     }
   };
 
@@ -43,14 +42,14 @@ const AllRecipesTabs = ({ data }) => {
   const handleReset = () => {
     setSelectedAllergen("");
     setActiveTab(data?.[0] || {});
-    setUpdatedRecipes(allRecipes);
+    setUpdatedRecipes(recipes);
   };
 
   const filteredRecipes =
     activeTab?.category_name === "All recipes"
-      ? updatedRecipes
-      : updatedRecipes?.filter(
-        (recipe) => recipe.type === activeTab?.category_name
+      ? recipes
+      : recipes?.filter(
+        (recipe) => recipe.category_name === activeTab?.category_name
       );
 
   return (
