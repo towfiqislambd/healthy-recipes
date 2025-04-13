@@ -55,14 +55,21 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc })
               <LoveSvg isFavorite={isFavorite} />
             </button>
             :
-            <Link
-              to={`/dashboard/edit-recipe/${item.id}`}
+            <button
               onClick={e => e.stopPropagation()}
               className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${isFavorite ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
                 }`}
             >
               <FiEdit className='text-lg' />
-            </Link>
+            </button>
+          // <Link
+          //   to={`/dashboard/edit-recipe/${item.id}`}
+          //   onClick={e => e.stopPropagation()}
+          //   className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${isFavorite ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
+          //     }`}
+          // >
+          //   <FiEdit className='text-lg' />
+          // </Link>
         }
 
         {/* type */}
