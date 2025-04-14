@@ -76,10 +76,10 @@ export const useAllRecipes = () => {
 // Meal Planner Page - Recipe Details
 export const useRecipeDetails = (id) => {
   return useQuery({
-    queryKey: ['recipe-details', id],
-    queryFn: () => RecipeDetails(id),
-    enabled: !!id,
-  });
+       queryKey: ['recipe-details', id],
+       queryFn: RecipeDetails(id),
+       enabled: !!id,
+     });
 };
 
 // Meal Planner Page - All Categories

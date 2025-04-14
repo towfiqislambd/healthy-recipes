@@ -37,7 +37,7 @@ const RecipeCategoryCard = ({ item }) => {
           <div className="flex gap-3">
             <RecipeBookSvg />
             <p className="text-textColor font-medium">
-              12 recipes | Multiple authors
+              {item?.recipes_count} | Multiple authors
             </p>
           </div>
         </div>

@@ -61,13 +61,11 @@ export const RecipeDetails = async (id) => {
     return data?.data;
 };
 
-
 // Meal Planner Page - All Categories
 export const AllCategories = async () => {
     const { data } = await axiosPublic('/api/categories');
     return data?.data;
 };
-
 
 // Blog Page - All Blogs
 export const Blogs = async () => {

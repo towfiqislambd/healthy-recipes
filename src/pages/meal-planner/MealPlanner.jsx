@@ -3,29 +3,17 @@ import RecipeBlogs from '@/components/homepage/RecipeBlogs';
 import ShareYourRecipeSection from '@/components/homepage/ShareYourRecipeSection';
 import MealPlannerTabSection from '@/components/meal-planner/MealPlannerTabSection';
 import {
-  useAllCategories,
-  useAllRecipes,
   useBlogs,
   useMealPlannerCard,
   useMealPlannerTitleAndDesc,
   useShareYourRecipe,
 } from '@/hooks/cms.queries';
-import React from 'react';
 
 const MealPlanner = () => {
   const { data: shareYourRecipe } = useShareYourRecipe();
   const { data: mealPlannerTitleAndDesc } = useMealPlannerTitleAndDesc();
   const { data: mealPlannerCard } = useMealPlannerCard();
   const { data: blogs } = useBlogs();
-
-  const { data: allCategories, isLoading: catLoading, isFetching: catFetching, isPending: catPending } = useAllCategories();
-  const { data: allRecipes, isLoading: recipeLoading, isFetching: recipeFetching, isPending: recipePending } = useAllRecipes();
-
-  const isLoading = catLoading || catFetching || catPending || recipeLoading || recipeFetching || recipePending;
-
-  if (isLoading) {
-    return <p className="h-svh">loading....</p>;
-  }
 
   return (
     <div className="mt-10 md:mt-[70px] 3xl:mt-[104px]">
@@ -55,7 +43,7 @@ const MealPlanner = () => {
       </section>
 
       {/* tab section */}
-      <MealPlannerTabSection allCategories={allCategories} allRecipes={allRecipes} />
+      <MealPlannerTabSection />
 
       <ShareYourRecipeSection data={shareYourRecipe} />
 
