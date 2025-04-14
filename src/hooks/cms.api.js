@@ -49,6 +49,26 @@ export const MealPlannerCard = async () => {
     return data?.data;
 };
 
+// Meal Planner Page - All Recipes
+export const AllRecipes = async () => {
+    const { data } = await axiosPublic('/api/recipes');
+    return data?.data;
+};
+
+// Meal Planner Page - Recipe Details
+export const RecipeDetails = async (id) => {
+    const { data } = await axiosPublic(`/api/single-recipe/${id}`);
+    return data?.data;
+};
+
+
+// Meal Planner Page - All Categories
+export const AllCategories = async () => {
+    const { data } = await axiosPublic('/api/categories');
+    return data?.data;
+};
+
+
 // Blog Page - All Blogs
 export const Blogs = async () => {
   const { data } = await axiosPublic('/api/blogs');
@@ -61,12 +81,5 @@ export const BlogDetails = async (slug) => {
 };
 //=================== 2nd day ===================
 
-// All Recipe Page - All Categories
-export const AllCategories = async () => {
-    const { data } = await axiosPublic('/api/categories');
-    return data?.data;
-};
-export const AllRecipes = async () => {
-    const { data } = await axiosPublic('/api/recipes');
-    return data?.data;
-};
+
+

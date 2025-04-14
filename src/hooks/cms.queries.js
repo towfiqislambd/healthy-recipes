@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AllCategories, AllRecipes, BlogDetails, Blogs, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, OurMealPlanner, RecipeLibrary, ShareYourRecipe, Testimonial, WhyChooseUs } from './cms.api';
+import { AllCategories, AllRecipes, BlogDetails, Blogs, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, OurMealPlanner, RecipeDetails, RecipeLibrary, ShareYourRecipe, Testimonial, WhyChooseUs } from './cms.api';
 
 // Homepage - Banner
 export const useHomepageBanner = () => {
@@ -65,6 +65,31 @@ export const useMealPlannerCard = () => {
     });
 };
 
+// Meal Planner Page - All Recipes
+export const useAllRecipes = () => {
+  return useQuery({
+       queryKey: ['all-recipes'],
+       queryFn: AllRecipes,
+     });
+};
+
+// Meal Planner Page - Recipe Details
+export const useRecipeDetails = (id) => {
+  return useQuery({
+    queryKey: ['recipe-details', id],
+    queryFn: () => RecipeDetails(id),
+    enabled: !!id,
+  });
+};
+
+// Meal Planner Page - All Categories
+export const useAllCategories = () => {
+  return useQuery({
+       queryKey: ['all-categories'],
+       queryFn: AllCategories,
+     });
+};
+
 // Blog Page - All Blogs
 export const useBlogs = () => {
  return useQuery({
@@ -72,7 +97,8 @@ export const useBlogs = () => {
       queryFn: Blogs,
     });
 };
-// Blog Details Page - Blog Detail
+
+// Blog Details Page - Blog Details
 export const useBlogDetails = (slug) => {
   return useQuery({
     queryKey: ['blog-details', slug], 
@@ -82,17 +108,3 @@ export const useBlogDetails = (slug) => {
 };
 
 //==================== 2nd day =====================
-
-// All Recipe Page - All Categories
-export const useAllCategories = () => {
-  return useQuery({
-       queryKey: ['all-categories'],
-       queryFn: AllCategories,
-     });
-};
-export const useAllRecipes = () => {
-  return useQuery({
-       queryKey: ['all-recipes'],
-       queryFn: AllRecipes,
-     });
-};

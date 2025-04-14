@@ -16,22 +16,10 @@ const MealPlanner = () => {
   const { data: shareYourRecipe } = useShareYourRecipe();
   const { data: mealPlannerTitleAndDesc } = useMealPlannerTitleAndDesc();
   const { data: mealPlannerCard } = useMealPlannerCard();
-
-  const {
-    data: allCategories,
-    isLoading: catLoading,
-    isFetching: catFetching,
-    isPending: catPending,
-  } = useAllCategories();
-
-  const {
-    data: allRecipes,
-    isLoading: recipeLoading,
-    isFetching: recipeFetching,
-    isPending: recipePending,
-  } = useAllRecipes();
-
   const { data: blogs } = useBlogs();
+
+  const { data: allCategories, isLoading: catLoading, isFetching: catFetching, isPending: catPending } = useAllCategories();
+  const { data: allRecipes, isLoading: recipeLoading, isFetching: recipeFetching, isPending: recipePending } = useAllRecipes();
 
   const isLoading = catLoading || catFetching || catPending || recipeLoading || recipeFetching || recipePending;
 

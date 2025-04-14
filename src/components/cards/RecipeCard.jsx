@@ -121,7 +121,7 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc })
         {/* reviews */}
         <div className="flex items-center gap-1">
           <StarSvg />
-          <span className="text-textColor text-sm font-medium">4.8/5</span>
+          <span className="text-textColor text-sm font-medium">{item?.average_rating}</span>
         </div>
       </div>
 
