@@ -77,7 +77,7 @@ export const useAllRecipes = () => {
 export const useRecipeDetails = (id) => {
   return useQuery({
        queryKey: ['recipe-details', id],
-       queryFn: RecipeDetails(id),
+       queryFn: () => RecipeDetails(id),
        enabled: !!id,
      });
 };

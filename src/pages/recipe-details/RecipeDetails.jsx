@@ -11,6 +11,7 @@ const RecipeDetails = () => {
   const { id } = useParams();
   const fullLocation = `${window.location.origin}/${id}`
   const { data: recipeData } = useRecipeDetails(id);
+  console.log(recipeData)
 
   return (
     <div className="mt-[104px]">

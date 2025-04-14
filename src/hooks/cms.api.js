@@ -57,7 +57,7 @@ export const AllRecipes = async () => {
 
 // Meal Planner Page - Recipe Details
 export const RecipeDetails = async (id) => {
-    const { data } = await axiosPublic(`/api/single-recipe/${id}`);
+    const { data } = await axiosPublic.get(`/api/single-recipe/${id}`);
     return data?.data;
 };
 

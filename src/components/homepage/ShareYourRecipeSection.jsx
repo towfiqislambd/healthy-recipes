@@ -17,9 +17,9 @@ const ShareYourRecipeSection = ({ data }) => {
               <div className="flex-shrink-0">
                 <img src={`${import.meta.env.VITE_SITE_URL}/${item?.image}`} alt="" />
               </div>
-              <p className="max-w-[700px] font-inter lg:text-lg xl:text-xl 2xl:text-2xl font-medium leading-[150%] text-white">
+              <div className="max-w-[700px] font-inter lg:text-lg xl:text-xl 2xl:text-2xl font-medium leading-[150%] text-white">
                 {parse(item?.description)}
-              </p>
+              </div>
             </div>
 
             {/* share recipe button */}
