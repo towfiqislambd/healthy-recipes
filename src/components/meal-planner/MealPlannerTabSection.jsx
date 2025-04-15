@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Select,
   SelectContent,
@@ -10,66 +10,50 @@ import { RiResetLeftFill } from 'react-icons/ri';
 import RecipeCard from '../cards/RecipeCard';
 import Modal from '../modals/Modal';
 import AddMealModal from '../modals/AddMealModal';
-import { useAllCategories, useAllRecipes } from '@/hooks/cms.queries';
+import { useAllCategories, useAllRecipes, useRecipeLibrary } from '@/hooks/cms.queries';
 
-const MealPlannerTabSection = () => {
-  const [activeTab, setActiveTab] = useState({ category_name: 'All Recipes' });
-  const { data: allCategories, isLoading: catLoading, isFetching: catFetching, isPending: catPending } = useAllCategories();
-  const { data: allRecipes, isLoading: recipeLoading, isFetching: recipeFetching, isPending: recipePending } = useAllRecipes();
-
-  const isLoading = catLoading || catFetching || catPending || recipeLoading || recipeFetching || recipePending;
-
+const MealPlannerTabSection = ({ recipes }) => {
+  const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
+  const [ageGroup, setAgeGroup] = useState(null);
+  const [library, setLibrary] = useState(null);
   const [open, setOpen] = useState(false);
-  const [updatedRecipes, setUpdatedRecipes] = useState([]);
   const [selectedAge, setSelectedAge] = useState('');
   const [selectedDiet, setSelectedDiet] = useState('');
   const [plannerItem, setPlannerItem] = useState(null);
   const [tableData, setTableData] = useState([]);
 
+  const { data: allCategories } = useAllCategories();
+  const { data: recipeLibrary } = useRecipeLibrary()
+  const { data: allRecipes, isLoading, isFetching, isPending } = useAllRecipes(activeTab?.id, library, ageGroup);
+
+  if (isLoading || isFetching || isPending) return <p className="h-svh">loading....</p>;
+
   const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
-  useEffect(() => {
-    if (allRecipes) {
-      setUpdatedRecipes(allRecipes);
-    }
-  }, [allRecipes]);
 
   const getCountByType = (type) => {
-    if (type === 'All Recipes') return updatedRecipes?.length;
-    return updatedRecipes?.filter((recipe) => recipe?.category_name === type)?.length;
+    if (type === 'All Recipes') {
+      return recipes?.length || 0;
+    } else {
+      return recipes?.filter((recipe) => recipe?.category_name === type)?.length || 0;
+    }
   };
 
-  const handleFilterChange = (age) => {
-    const filteredRecipes = allRecipes?.filter((item) => item?.age_group === age);
-    setSelectedAge(age);
-    setSelectedDiet('');
-    setUpdatedRecipes(filteredRecipes);
-  };
-
-  const handleDietChange = (diet) => {
-    const filteredRecipes = allRecipes?.filter((item) => item?.library_name === diet);
-    setSelectedDiet(diet);
-    setSelectedAge('');
-    setUpdatedRecipes(filteredRecipes);
-  };
 
   const handleReset = () => {
     setSelectedAge('');
     setSelectedDiet('');
+    setAgeGroup(null);
+    setLibrary(null);
     setActiveTab({ category_name: 'All Recipes' });
-    setUpdatedRecipes(allRecipes);
   };
 
-  const filteredRecipes =
-    activeTab?.category_name === 'All Recipes'
-      ? updatedRecipes
-      : updatedRecipes?.filter((recipe) => recipe.category_name === activeTab.category_name);
 
   const handleAddMealFunc = (item) => {
     setPlannerItem(item);
   };
 
-  if (isLoading) return <p className="h-svh">loading....</p>;
+
 
   return (
     <section className="py-5 3xl:py-12 container">
@@ -105,7 +89,7 @@ const MealPlannerTabSection = () => {
         <div className="my-2 w-full md:w-[400px] lg:w-auto mx-auto border lg:border-none p-5 rounded-lg lg:p-0 3xl:py-12 flex flex-col lg:flex-row items-center justify-center gap-3 2xl:gap-5">
           <div className="flex flex-col lg:flex-row w-full lg:w-auto gap-3 lg:gap-0">
             {/* Age Filter */}
-            <Select value={selectedAge} onValueChange={handleFilterChange}>
+            <Select value={selectedAge} onValueChange={(age) => setAgeGroup(age)}>
               <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[460px] lg:h-14 h-11 lg:rounded-l-full lg:px-6 px-3 text-base focus:ring-primary">
                 <SelectValue placeholder="Filter by age group" />
               </SelectTrigger>
@@ -118,22 +102,14 @@ const MealPlannerTabSection = () => {
             </Select>
 
             {/* Diet Filter */}
-            <Select value={selectedDiet} onValueChange={handleDietChange}>
+            <Select value={selectedDiet} onValueChange={(lib) => setLibrary(lib)}>
               <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[450px] lg:h-14 h-11 lg:rounded-r-full lg:border-l-0 px-3 lg:px-6 text-base focus:ring-primary">
                 <SelectValue placeholder="Filter by diet" />
               </SelectTrigger>
               <SelectContent className="px-0 py-0">
-                {[
-                  'Keto Diet Recipe',
-                  'Mediterranean Diet Recipe',
-                  'Vegan Diet Recipe',
-                  'Paleo Diet Recipe',
-                  'Low-Carb Diet Recipe',
-                  'DASH Diet Recipe',
-                  'Carnivore Diet Recipe',
-                ].map((diet) => (
-                  <SelectItem key={diet.trim()} value={diet.trim()} className={filterClass}>
-                    {diet}
+                {recipeLibrary?.map((library) => (
+                  <SelectItem key={library.id} value={library.id} className={filterClass}>
+                    {library?.diet_name}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -152,7 +128,7 @@ const MealPlannerTabSection = () => {
 
         {/* Recipe Cards */}
         <div className="mt-10 grid lg:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4 gap-6">
-          {filteredRecipes?.map((item, idx) => (
+          {allRecipes?.map((item, idx) => (
             <RecipeCard
               key={idx}
               isMyRecipe={true}

@@ -55,11 +55,7 @@ export const MealPlannerCard = async () => {
     return data?.data;
 };
 
-// Meal Planner Page - All Recipes
-export const AllRecipes = async () => {
-    const { data } = await axiosPublic('/api/recipes');
-    return data?.data;
-};
+
 
 // Meal Planner Page - Recipe Details
 export const RecipeDetails = async (id) => {
@@ -86,10 +82,19 @@ export const BlogDetails = async (slug) => {
 };
 //=================== 2nd day ===================
 
-// Recipe Library Page - Recipes
-export const RecipesByLibraries = async (id) => {
-    const { data } = await axiosPublic(`/api/recipes?recipe_library_id=${id}`);
+// Meal Planner Page - All Recipes
+export const AllRecipes = async (category_id, recipe_library_id, age_group) => {
+    let url = '/api/recipes?';
+    
+    if (category_id) url += `category_id=${category_id}&`;
+    if (recipe_library_id) url += `recipe_library_id=${recipe_library_id}&`;
+    if (age_group) url += `age_group=${age_group}&`;
+    
+    // Remove the last '&' if we added any parameters
+    url = url.endsWith('&') ? url.slice(0, -1) : url;
+    // If no parameters were added, remove the '?'
+    url = url.endsWith('?') ? url.slice(0, -1) : url;
+    
+    const { data } = await axiosPublic(url);
     return data?.data;
-};
-
-
+  };

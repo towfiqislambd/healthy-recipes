@@ -8,15 +8,18 @@ import {
   SelectValue,
 } from "../ui/select";
 import RecipeCard from "../cards/RecipeCard";
+import { useAllRecipes } from "@/hooks/cms.queries";
 
-const AllRecipesTabs = ({ data, recipes }) => {
-
-  const [activeTab, setActiveTab] = useState({ category_name: 'All Recipes' });
+const AllRecipesTabs = ({ data, recipes, libraryId }) => {
+  const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
   // const [selectedAllergen, setSelectedAllergen] = useState("");
   // const [updatedRecipes, setUpdatedRecipes] = useState(recipes);
   // const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
-
+  const { data: allRecipes, isLoading, isFetching, isPending } = useAllRecipes(activeTab?.id, libraryId);
+  if (isLoading || isFetching || isPending) {
+    return <p>Loading.....</p>
+  }
 
   const getCountByType = (type) => {
     if (type === 'All Recipes') {
@@ -40,20 +43,16 @@ const AllRecipesTabs = ({ data, recipes }) => {
   //   setUpdatedRecipes(recipes);
   // };
 
-  const filteredRecipes =
-    activeTab?.category_name === 'All Recipes'
-      ? recipes
-      : recipes?.filter((recipe) => recipe.category_name === activeTab.category_name);
+
 
   return (
     <div className="container pb-7 xl:pb-10 2xl:pb-20">
       <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
 
-
         {/* Tabs */}
         <div className="py-8 w-full flex flex-wrap items-center justify-center 2xl:justify-between gap-x-1 gap-y-2">
           <button
-            onClick={() => setActiveTab({ category_name: 'All Recipes' })}
+            onClick={() => setActiveTab({ id: 0, category_name: 'All Recipes' })}
             className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium ${activeTab?.category_name === 'All Recipes'
               ? 'bg-[#3A3A3A] text-white'
               : 'bg-transparent text-textColor'
@@ -122,8 +121,8 @@ const AllRecipesTabs = ({ data, recipes }) => {
         {/* Cards */}
         <div className="mt-10 grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6">
           {
-            filteredRecipes?.length > 0 ?
-              filteredRecipes?.map((item, idx) => (
+            allRecipes?.length > 0 ?
+              allRecipes?.map((item, idx) => (
                 <RecipeCard key={idx} item={item} down={idx % 2 !== 0} />
               ))
               :

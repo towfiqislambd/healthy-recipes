@@ -3,6 +3,7 @@ import RecipeBlogs from '@/components/homepage/RecipeBlogs';
 import ShareYourRecipeSection from '@/components/homepage/ShareYourRecipeSection';
 import MealPlannerTabSection from '@/components/meal-planner/MealPlannerTabSection';
 import {
+  useAllRecipes,
   useBlogs,
   useMealPlannerCard,
   useMealPlannerTitleAndDesc,
@@ -14,6 +15,7 @@ const MealPlanner = () => {
   const { data: mealPlannerTitleAndDesc } = useMealPlannerTitleAndDesc();
   const { data: mealPlannerCard } = useMealPlannerCard();
   const { data: blogs } = useBlogs();
+  const { data: recipes } = useAllRecipes();
 
   return (
     <div className="mt-10 md:mt-[70px] 3xl:mt-[104px]">
@@ -43,7 +45,7 @@ const MealPlanner = () => {
       </section>
 
       {/* tab section */}
-      <MealPlannerTabSection />
+      <MealPlannerTabSection recipes={recipes} />
 
       <ShareYourRecipeSection data={shareYourRecipe} />
 

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AllCategories, AllRecipes, BlogDetails, Blogs, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, OurMealPlanner, RecipeDetails, RecipeLibrary, RecipesByLibraries, ShareYourRecipe, Testimonial, TrendingRecipes, WhyChooseUs } from './cms.api';
+import { AllCategories, AllRecipes, BlogDetails, Blogs, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, OurMealPlanner, RecipeDetails, RecipeLibrary, ShareYourRecipe, Testimonial, TrendingRecipes, WhyChooseUs } from './cms.api';
 
 // Homepage - Banner
 export const useHomepageBanner = () => {
@@ -73,13 +73,6 @@ export const useMealPlannerCard = () => {
     });
 };
 
-// Meal Planner Page - All Recipes
-export const useAllRecipes = () => {
-  return useQuery({
-       queryKey: ['all-recipes'],
-       queryFn: AllRecipes,
-     });
-};
 
 // Meal Planner Page - Recipe Details
 export const useRecipeDetails = (id) => {
@@ -117,11 +110,10 @@ export const useBlogDetails = (slug) => {
 
 //==================== 2nd day =====================
 
-// Recipe Library Page - Recipes
-export const useRecipesByLibraries = (id) => {
+// Meal Planner Page - All Recipes
+export const useAllRecipes = (category_id, recipe_library_id, age_group) => {
   return useQuery({
-       queryKey: ['recipes-by-libraries', id],
-       queryFn: () => RecipesByLibraries(id),
-       enabled: !!id,
-     });
+    queryKey: ['all-recipes', category_id, recipe_library_id, age_group],
+    queryFn: () => AllRecipes(category_id, recipe_library_id, age_group),
+  });
 };
