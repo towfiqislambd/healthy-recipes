@@ -31,6 +31,13 @@ export const Testimonial = async () => {
     return data?.data;
 };
 
+// Home Page - Trending Recipes
+export const TrendingRecipes = async () => {
+    const { data } = await axiosPublic('/api/guest/trending-recipes');
+    return data?.data;
+};
+
+
 // Recipe Library Page - Recipe Library
 export const RecipeLibrary = async () => {
     const { data } = await axiosPublic('/api/recipe-libraries');

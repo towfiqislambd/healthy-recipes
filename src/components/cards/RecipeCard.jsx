@@ -93,8 +93,7 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc })
               <RecipeBookSvg />
             </div>
             <p className="text-textColor text-[15px] xl:text-base font-medium">
-              {item?.serving_number} servings | {item?.preparation_time} needed
-              {/* | {item?.allergens} */}
+              {item?.serving_number} servings | {item?.preparation_time} min needed
             </p>
           </div>
           <div>

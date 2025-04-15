@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AllCategories, AllRecipes, BlogDetails, Blogs, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, OurMealPlanner, RecipeDetails, RecipeLibrary, ShareYourRecipe, Testimonial, WhyChooseUs } from './cms.api';
+import { AllCategories, AllRecipes, BlogDetails, Blogs, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, OurMealPlanner, RecipeDetails, RecipeLibrary, ShareYourRecipe, Testimonial, TrendingRecipes, WhyChooseUs } from './cms.api';
 
 // Homepage - Banner
 export const useHomepageBanner = () => {
@@ -39,6 +39,14 @@ export const useTestimonial = () => {
       queryKey: ['testimonial'],
       queryFn: Testimonial,
     });
+};
+
+// Home Page - Trending Recipes
+export const useTrendingRecipes = () => {
+  return useQuery({
+       queryKey: ['trending-recipes'],
+       queryFn: TrendingRecipes,
+     });
 };
 
 // Recipe Library Page - Recipe Library

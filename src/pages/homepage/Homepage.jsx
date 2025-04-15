@@ -6,7 +6,7 @@ import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection
 import Testimonials from "@/components/homepage/Testimonials";
 import TrendingDiet from "@/components/homepage/TrendingDiet";
 import WhyChooseUs from "@/components/homepage/WhyChooseUs";
-import { useBlogs, useHomepageBanner, useOurMealPlanner, useRecipeLibrary, useShareYourRecipe, useTestimonial, useWhyChooseUs } from "@/hooks/cms.queries";
+import { useBlogs, useHomepageBanner, useOurMealPlanner, useRecipeLibrary, useShareYourRecipe, useTestimonial, useTrendingRecipes, useWhyChooseUs } from "@/hooks/cms.queries";
 
 const Homepage = () => {
   const { data: homepageBanner } = useHomepageBanner();
@@ -16,12 +16,13 @@ const Homepage = () => {
   const { data: testimonial } = useTestimonial();
   const { data: blogs } = useBlogs();
   const { data: recipeLibrary } = useRecipeLibrary();
+  const { data: trendingRecipes } = useTrendingRecipes();
 
   return (
     <div className="mt-[80px] lg:mt-[104px]">
       <HomepageBanner data={homepageBanner} />
       <WhyChooseUs data={whyChooseUs} />
-      <TrendingDiet />
+      <TrendingDiet data={trendingRecipes}/>
       <RecipeLibrarySection data={recipeLibrary} />
       <OurMealPlanner data={ourMealPlanner} />
       <ShareYourRecipeSection data={shareYourRecipe} />

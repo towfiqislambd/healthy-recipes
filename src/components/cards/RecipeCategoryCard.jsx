@@ -6,8 +6,6 @@ const RecipeCategoryCard = ({ item }) => {
   const { id } = useParams();
   console.log(id);
 
-
-
   return (
     <Link
       onClick={() => {

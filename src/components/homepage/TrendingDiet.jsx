@@ -6,9 +6,8 @@ import { Navigation } from "swiper/modules";
 import { SliderNextSvg, SliderPrevSvg } from "../svg-container/SvgContainer";
 import RecipeCard from "../cards/RecipeCard";
 import { useState } from "react";
-import { allRecipes } from "@/data/data";
 
-const TrendingDiet = () => {
+const TrendingDiet = ({ data }) => {
   const [swiperRef, setSwiperRef] = useState(null);
 
   return (
@@ -56,7 +55,7 @@ const TrendingDiet = () => {
                 1460: { slidesPerView: 4, spaceBetween: 20 },
               }}
             >
-              {allRecipes?.map((item, idx) => (
+              {data?.map((item, idx) => (
                 <SwiperSlide key={idx}>
                   <RecipeCard item={item} down={idx % 2 !== 0} isMyRecipe={true} />
                 </SwiperSlide>
