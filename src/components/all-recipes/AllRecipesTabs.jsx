@@ -12,11 +12,11 @@ import { useAllRecipes } from "@/hooks/cms.queries";
 
 const AllRecipesTabs = ({ data, recipes, libraryId }) => {
   const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
-  // const [selectedAllergen, setSelectedAllergen] = useState("");
-  // const [updatedRecipes, setUpdatedRecipes] = useState(recipes);
-  // const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
+  const [tag, setTag] = useState(null);
+  const [selectedAllergen, setSelectedAllergen] = useState("");
+  const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
-  const { data: allRecipes, isLoading, isFetching, isPending } = useAllRecipes(activeTab?.id, libraryId);
+  const { data: allRecipes, isLoading, isFetching, isPending } = useAllRecipes(activeTab?.id, libraryId, null, tag);
   if (isLoading || isFetching || isPending) {
     return <p>Loading.....</p>
   }
@@ -29,21 +29,11 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
     }
   };
 
-  // const handleFilterChange = (allergen) => {
-  //   const filteredRecipes = recipes.filter(
-  //     (item) => item?.allergens === allergen
-  //   );
-  //   setSelectedAllergen(allergen);
-  //   setUpdatedRecipes(filteredRecipes);
-  // };
-
-  // const handleReset = () => {
-  //   setSelectedAllergen("");
-  //   setActiveTab(data?.[0] || {});
-  //   setUpdatedRecipes(recipes);
-  // };
-
-
+  const handleReset = () => {
+    setSelectedAllergen("");
+    setTag(null);
+    setActiveTab({ id: 0, category_name: 'All Recipes' });
+  };
 
   return (
     <div className="container pb-7 xl:pb-10 2xl:pb-20">
@@ -76,36 +66,19 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
         </div>
 
         {/* Filter */}
-        {/* <div className="w-full flex flex-col md:flex-row items-center justify-center 2xl:justify-end gap-3 xl:gap-3 2xl:gap-5">
-          <Select value={selectedAllergen} onValueChange={handleFilterChange}>
+        <div className="w-full flex flex-col md:flex-row items-center justify-center 2xl:justify-end gap-3 xl:gap-3 2xl:gap-5">
+          <Select value={selectedAllergen} onValueChange={(tag) => setTag(tag)}>
             <SelectTrigger className="w-[300px] md:w-[380px] 2xl:w-[450px] h-11 2xl:h-14 rounded-full px-3 2xl:px-6 text-base focus:ring-primary">
               <SelectValue placeholder="Select for recipes by allergens..." />
             </SelectTrigger>
             <SelectContent className="px-0 py-0">
-              <SelectItem value="Dairy-Free" className={filterClass}>
-                Dairy-Free
-              </SelectItem>
-              <SelectItem value="Gluten-Free" className={filterClass}>
-                Gluten-Free
-              </SelectItem>
-              <SelectItem value="Nut-Free" className={filterClass}>
-                Nut-Free
-              </SelectItem>
-              <SelectItem value="Soy-Free" className={filterClass}>
-                Soy-Free
-              </SelectItem>
-              <SelectItem value="Egg-Free" className={filterClass}>
-                Egg-Free
-              </SelectItem>
-              <SelectItem value="Shellfish-Free" className={filterClass}>
-                Shellfish-Free
-              </SelectItem>
-              <SelectItem value="Fish-Free" className={filterClass}>
-                Fish-Free
-              </SelectItem>
-              <SelectItem value="Sesame-Free" className={filterClass}>
-                Sesame-Free
-              </SelectItem>
+              {
+                recipes?.map(recipe => (
+                  recipe.tag_names?.map(tag => <SelectItem key={tag.id} value={tag?.id} className={filterClass}>
+                    {tag?.tag_name}
+                  </SelectItem>)
+                ))
+              }
             </SelectContent>
           </Select>
 
@@ -116,7 +89,7 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
             <RiResetLeftFill />
             Reset
           </button>
-        </div> */}
+        </div>
 
         {/* Cards */}
         <div className="mt-10 grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6">

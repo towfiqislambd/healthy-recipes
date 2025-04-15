@@ -83,12 +83,13 @@ export const BlogDetails = async (slug) => {
 //=================== 2nd day ===================
 
 // Meal Planner Page - All Recipes
-export const AllRecipes = async (category_id, recipe_library_id, age_group) => {
+export const AllRecipes = async (category_id, recipe_library_id, age_group, tag_id) => {
     let url = '/api/recipes?';
     
     if (category_id) url += `category_id=${category_id}&`;
     if (recipe_library_id) url += `recipe_library_id=${recipe_library_id}&`;
     if (age_group) url += `age_group=${age_group}&`;
+    if (tag_id) url += `tag_id=${tag_id}&`;
     
     // Remove the last '&' if we added any parameters
     url = url.endsWith('&') ? url.slice(0, -1) : url;

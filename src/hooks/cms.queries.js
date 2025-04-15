@@ -111,9 +111,9 @@ export const useBlogDetails = (slug) => {
 //==================== 2nd day =====================
 
 // Meal Planner Page - All Recipes
-export const useAllRecipes = (category_id, recipe_library_id, age_group) => {
+export const useAllRecipes = (category_id, recipe_library_id, age_group, tag_id) => {
   return useQuery({
-    queryKey: ['all-recipes', category_id, recipe_library_id, age_group],
-    queryFn: () => AllRecipes(category_id, recipe_library_id, age_group),
+    queryKey: ['all-recipes', category_id, recipe_library_id, age_group, tag_id],
+    queryFn: () => AllRecipes(category_id, recipe_library_id, age_group, tag_id),
   });
 };

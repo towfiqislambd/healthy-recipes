@@ -30,7 +30,6 @@ const MealPlannerTabSection = ({ recipes }) => {
 
   const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
-
   const getCountByType = (type) => {
     if (type === 'All Recipes') {
       return recipes?.length || 0;
@@ -38,7 +37,6 @@ const MealPlannerTabSection = ({ recipes }) => {
       return recipes?.filter((recipe) => recipe?.category_name === type)?.length || 0;
     }
   };
-
 
   const handleReset = () => {
     setSelectedAge('');
@@ -48,11 +46,9 @@ const MealPlannerTabSection = ({ recipes }) => {
     setActiveTab({ category_name: 'All Recipes' });
   };
 
-
   const handleAddMealFunc = (item) => {
     setPlannerItem(item);
   };
-
 
 
   return (
