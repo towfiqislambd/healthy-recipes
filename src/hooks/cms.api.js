@@ -37,6 +37,24 @@ export const TrendingRecipes = async () => {
     return data?.data;
 };
 
+// All Recipes
+export const AllRecipes = async (category_id, recipe_library_id, age_group, tag_id) => {
+    let url = '/api/recipes?';
+    
+    if (category_id) url += `category_id=${category_id}&`;
+    if (recipe_library_id) url += `recipe_library_id=${recipe_library_id}&`;
+    if (age_group) url += `age_group=${age_group}&`;
+    if (tag_id) url += `tag_id=${tag_id}&`;
+    
+    // Remove the last '&' if we added any parameters
+    url = url.endsWith('&') ? url.slice(0, -1) : url;
+    // If no parameters were added, remove the '?'
+    url = url.endsWith('?') ? url.slice(0, -1) : url;
+    
+    const { data } = await axiosPublic(url);
+    return data?.data;
+};
+
 // Recipe Library Page - Recipe Library
 export const RecipeLibrary = async () => {
     const { data } = await axiosPublic('/api/recipe-libraries');
@@ -54,8 +72,6 @@ export const MealPlannerCard = async () => {
     const { data } = await axiosPublic('/api/cms/meal-planner-card');
     return data?.data;
 };
-
-
 
 // Meal Planner Page - Recipe Details
 export const RecipeDetails = async (id) => {
@@ -82,20 +98,3 @@ export const BlogDetails = async (slug) => {
 };
 //=================== 2nd day ===================
 
-// Meal Planner Page - All Recipes
-export const AllRecipes = async (category_id, recipe_library_id, age_group, tag_id) => {
-    let url = '/api/recipes?';
-    
-    if (category_id) url += `category_id=${category_id}&`;
-    if (recipe_library_id) url += `recipe_library_id=${recipe_library_id}&`;
-    if (age_group) url += `age_group=${age_group}&`;
-    if (tag_id) url += `tag_id=${tag_id}&`;
-    
-    // Remove the last '&' if we added any parameters
-    url = url.endsWith('&') ? url.slice(0, -1) : url;
-    // If no parameters were added, remove the '?'
-    url = url.endsWith('?') ? url.slice(0, -1) : url;
-    
-    const { data } = await axiosPublic(url);
-    return data?.data;
-  };

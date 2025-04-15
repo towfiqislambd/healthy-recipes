@@ -49,6 +49,14 @@ export const useTrendingRecipes = () => {
      });
 };
 
+// All Recipes
+export const useAllRecipes = (category_id, recipe_library_id, age_group, tag_id) => {
+  return useQuery({
+    queryKey: ['all-recipes', category_id, recipe_library_id, age_group, tag_id],
+    queryFn: () => AllRecipes(category_id, recipe_library_id, age_group, tag_id),
+  });
+};
+
 // Recipe Library Page - Recipe Library
 export const useRecipeLibrary = () => {
  return useQuery({
@@ -72,7 +80,6 @@ export const useMealPlannerCard = () => {
       queryFn: MealPlannerCard,
     });
 };
-
 
 // Meal Planner Page - Recipe Details
 export const useRecipeDetails = (id) => {
@@ -109,11 +116,3 @@ export const useBlogDetails = (slug) => {
 };
 
 //==================== 2nd day =====================
-
-// Meal Planner Page - All Recipes
-export const useAllRecipes = (category_id, recipe_library_id, age_group, tag_id) => {
-  return useQuery({
-    queryKey: ['all-recipes', category_id, recipe_library_id, age_group, tag_id],
-    queryFn: () => AllRecipes(category_id, recipe_library_id, age_group, tag_id),
-  });
-};
