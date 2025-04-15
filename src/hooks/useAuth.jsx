@@ -1,4 +1,4 @@
-import { AuthContextProvider } from '@/Provider/AuthProvider';
+import { AuthContextProvider } from '@/components/provider/AuthProvider';
 import { useContext } from 'react';
 
 const useAuth = () => {
