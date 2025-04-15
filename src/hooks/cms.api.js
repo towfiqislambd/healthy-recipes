@@ -37,7 +37,6 @@ export const TrendingRecipes = async () => {
     return data?.data;
 };
 
-
 // Recipe Library Page - Recipe Library
 export const RecipeLibrary = async () => {
     const { data } = await axiosPublic('/api/recipe-libraries');
@@ -79,6 +78,7 @@ export const Blogs = async () => {
   const { data } = await axiosPublic('/api/blogs');
   return data?.data;
 };
+
 // Blog Details Page - Blog Detail
 export const BlogDetails = async (slug) => {
     const { data } = await axiosPublic(`/api/blog/${slug}`);
@@ -86,5 +86,10 @@ export const BlogDetails = async (slug) => {
 };
 //=================== 2nd day ===================
 
+// Recipe Library Page - Recipes
+export const RecipesByLibraries = async (id) => {
+    const { data } = await axiosPublic(`/api/recipes?recipe_library_id=${id}`);
+    return data?.data;
+};
 
 

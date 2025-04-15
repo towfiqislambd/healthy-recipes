@@ -21,9 +21,9 @@ const HomepageBanner = ({ data }) => {
                   <span className="text-primary ml-4">Recipes & Tips</span> for All
                   thys */}
                 </h1>
-                <p className="text-textColor leading-[150%] max-w-[740px] ">
+                <div className="text-textColor leading-[150%] max-w-[740px] ">
                   {parse(data?.description)}
-                </p>
+                </div>
               </div>
 
               {/* button */}

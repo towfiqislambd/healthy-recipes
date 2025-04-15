@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AllCategories, AllRecipes, BlogDetails, Blogs, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, OurMealPlanner, RecipeDetails, RecipeLibrary, ShareYourRecipe, Testimonial, TrendingRecipes, WhyChooseUs } from './cms.api';
+import { AllCategories, AllRecipes, BlogDetails, Blogs, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, OurMealPlanner, RecipeDetails, RecipeLibrary, RecipesByLibraries, ShareYourRecipe, Testimonial, TrendingRecipes, WhyChooseUs } from './cms.api';
 
 // Homepage - Banner
 export const useHomepageBanner = () => {
@@ -116,3 +116,12 @@ export const useBlogDetails = (slug) => {
 };
 
 //==================== 2nd day =====================
+
+// Recipe Library Page - Recipes
+export const useRecipesByLibraries = (id) => {
+  return useQuery({
+       queryKey: ['recipes-by-libraries', id],
+       queryFn: () => RecipesByLibraries(id),
+       enabled: !!id,
+     });
+};

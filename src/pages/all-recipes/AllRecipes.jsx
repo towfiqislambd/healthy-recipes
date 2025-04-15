@@ -1,17 +1,15 @@
 import AllRecipesTabs from "@/components/all-recipes/AllRecipesTabs";
 import RecipeBlogs from "@/components/homepage/RecipeBlogs";
 import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection";
-import { useAllCategories, useAllRecipes, useBlogs, useShareYourRecipe } from "@/hooks/cms.queries";
+import { useAllCategories, useBlogs, useRecipesByLibraries, useShareYourRecipe } from "@/hooks/cms.queries";
 import { Link, useParams } from "react-router-dom";
 
 const AllRecipes = () => {
+  const { id } = useParams();
+  const { data: allCategories } = useAllCategories();
   const { data: shareYourRecipe } = useShareYourRecipe();
   const { data: blogs } = useBlogs();
-  const { data: allCategories } = useAllCategories();
-  const { data: allRecipes } = useAllRecipes();
-
-  const { id } = useParams();
-  console.log(id);
+  const { data: recipeLibrariesData } = useRecipesByLibraries(id);
 
   return (
     <div className="mt-[100px] lg:mt-[144px]">
@@ -53,8 +51,8 @@ const AllRecipes = () => {
       </div>
 
       {/* tabs */}
-      <AllRecipesTabs data={allCategories} recipes={allRecipes} />
-      
+      <AllRecipesTabs data={allCategories} recipes={recipeLibrariesData} />
+
       <ShareYourRecipeSection data={shareYourRecipe} />
       <RecipeBlogs data={blogs} />
     </div>
