@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { Link, useLocation } from "react-router-dom";
 import { CgSpinnerTwo } from "react-icons/cg";
 import OTPInput from "react-otp-input";
-import { useVerifyOtp } from "@/hooks/auth.hook.";
+import { useResendOtp, useVerifyOtp } from "@/hooks/auth.hook.";
 
 const VerifyOtp = () => {
   const [loading, setLoading] = useState(false);
@@ -12,7 +12,6 @@ const VerifyOtp = () => {
   const [isReset, setIsReset] = useState(false);
   const location = useLocation();
   const email = location.state?.email;
-
   const {
     control,
     handleSubmit,
@@ -22,6 +21,7 @@ const VerifyOtp = () => {
 
   // mutation:
   const { mutateAsync: verifyOtpMutation } = useVerifyOtp(reset);
+  const { mutateAsync: resendOtpMutation } = useResendOtp();
 
   // Catch OTP here..
   const onSubmit = async (data) => {
@@ -40,7 +40,11 @@ const VerifyOtp = () => {
   };
 
   //   handle resend:
-  const handleResendCode = () => {
+  const handleResendCode = (e) => {
+    e.preventDefault();
+    if (email) {
+      resendOtpMutation({ email: email });
+    }
     setActiveResendButton(false);
     setTimer(60);
     setIsReset(false);
@@ -108,11 +112,12 @@ const VerifyOtp = () => {
             <p>
               <button
                 onClick={handleResendCode}
-                disabled={!activeResendButton}
+                // disabled={!activeResendButton}
                 type="button"
                 className={`font-semibold ${activeResendButton
                   ? "text-secondary cursor-pointer"
-                  : "text-textColor cursor-not-allowed"
+                  : "text-textColor"
+                  // cursor-not-allowed
                   }`}
               >
                 Resend

@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { GetUserDataFunc, LoginFunc, LogOutFunc, OtpVerifyFunc, RegisterFunc, ResetPasswordFunc, VerifyEmailFunc } from "./auth.api";
+import { GetUserDataFunc, LoginFunc, LogOutFunc, OtpResendFunc, OtpVerifyFunc, RegisterFunc, ResetPasswordFunc, VerifyEmailFunc } from "./auth.api";
 import toast from "react-hot-toast";
 import useAuth from "./useAuth";
 
@@ -166,6 +166,27 @@ export const useResetPassword = () => {
         toast.success('Password reset successfully');
         navigate('/auth/login');
       }
+    },
+    onError: (err) => {
+      setLoading(false);
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// resend otp:
+export const useResendOtp = () => {
+  const { setLoading } = useAuth();
+  
+  return useMutation({
+    mutationKey: ['resend-otp'],
+    mutationFn: (payload) => OtpResendFunc(payload),
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: () => {
+      setLoading(false);
+      toast.success('New OTP sent to your email');
     },
     onError: (err) => {
       setLoading(false);

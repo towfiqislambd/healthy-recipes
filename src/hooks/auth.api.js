@@ -37,9 +37,14 @@ export const OtpVerifyFunc = async (payload) => {
     return data?.data;
 };
 
+// otp resend:
+export const OtpResendFunc = async (payload) => {
+    const { data } = await axiosPublic.post('/api/users/login/otp-resend', payload);
+    return data?.data;
+};
+
 // reset password::
 export const ResetPasswordFunc = async (payload) => {
     const { data } = await axiosPublic.post('/api/users/login/reset-password', payload);
     return data?.data;
 };
-  
