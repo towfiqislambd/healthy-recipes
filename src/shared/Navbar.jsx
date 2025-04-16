@@ -5,11 +5,20 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
+import useAuth from '@/hooks/useAuth';
+import { useLogOut } from '@/hooks/auth.hook.';
 
 
 const Navbar = () => {
+  const { user } = useAuth();
+  const { mutate: logOutMutate } = useLogOut();
   const [isOpen, setOpen] = useState(false);
   const location = useLocation()?.pathname;
+
+  // Mutation
+  const handleLogout = () => {
+    logOutMutate()
+  }
 
   const navLinks = [
     { path: '/', title: 'Home' },
@@ -19,6 +28,7 @@ const Navbar = () => {
     { path: '/meal-planner', title: 'Meal planner' },
     { path: '/blog', title: 'Blog' },
   ];
+
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("overflow-hidden");
@@ -26,7 +36,6 @@ const Navbar = () => {
       document.body.classList.remove("overflow-hidden");
     }
 
-    // Cleanup when component unmounts just in case
     return () => {
       document.body.classList.remove("overflow-hidden");
     };
@@ -82,7 +91,14 @@ const Navbar = () => {
               <Link to="/dashboard/dashboard-saved-recipes" className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center">
                 <LoveSvg />
               </Link>
-              <ButtonTransparent path="/auth/register" title="Sign Up" />
+              {
+                user ?
+                  <button onClick={handleLogout}>
+                    <ButtonTransparent title="Log Out" />
+                  </button>
+                  :
+                  <ButtonTransparent path="/auth/register" title="Sign Up" />
+              }
             </div>
           </div>
 
@@ -133,13 +149,24 @@ const Navbar = () => {
               <LoveSvg />
             </Link>
 
-            {/* button */}
-            <Link
-              to='/auth/register'
-              className="text-textColor font-merriweather px-5 py-2 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white"
-            >
-              Sign Up
-            </Link>
+            {/* Sign Up And Logout btns */}
+            {
+              user ?
+                <button
+                  onClick={handleLogout}
+                  className="text-textColor font-merriweather px-5 py-2 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white"
+                >
+                  Log Out
+                </button>
+                :
+                <Link
+                  to='/auth/register'
+                  className="text-textColor font-merriweather px-5 py-2 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white"
+                >
+                  Sign Up
+                </Link>
+            }
+
           </div>
         </div>
 

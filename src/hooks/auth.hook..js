@@ -1,6 +1,6 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { LoginFunc, RegisterFunc } from "./auth.api";
+import { GetUserDataFunc, LoginFunc, LogOutFunc, RegisterFunc } from "./auth.api";
 import toast from "react-hot-toast";
 import useAuth from "./useAuth";
 
@@ -57,3 +57,38 @@ export const useLogin = () => {
       },
     });
   };
+
+
+// logout:
+export const useLogOut = () => {
+  const { setLoading, clearToken } = useAuth();
+  const navigate = useNavigate();
+
+  return useMutation({
+    mutationKey: ['logout'],
+    mutationFn: LogOutFunc,
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: () => {
+      clearToken();
+      navigate('/auth/login');
+      setLoading(false);
+      toast.success('User Logged out Successfully');
+    },
+    onError: (err) => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+
+// get user data:
+export const useGetUserData = (token) => {
+  return useQuery({
+    queryKey: ['user', token],
+    queryFn: GetUserDataFunc,
+    enabled: !!token, // Only run the query if token is truthy
+    refetchInterval: 1000 * 60 * 60, // refetch every hour
+  });
+};
