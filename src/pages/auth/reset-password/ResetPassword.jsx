@@ -4,15 +4,20 @@ import {
 } from "@/components/svg-container/SvgContainer";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CgSpinnerTwo } from "react-icons/cg";
-import toast from "react-hot-toast";
+import { useResetPassword } from "@/hooks/auth.hook.";
 
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setConfirmShowPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const location = useLocation();
+  const email = location?.state?.email;
+  const key = location?.state?.key;
+
+  //mutation:
+  const { mutateAsync: resetPasswordMutation } = useResetPassword();
 
   // css:
   const inputClass =
@@ -22,26 +27,30 @@ const ResetPassword = () => {
     register,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    if (data) {
-      console.log(data);
-      if (data?.confirm_new_password == data?.new_password) {
-        setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-          reset();
-          toast.success("Login successful!");
-          navigate("/auth/login");
-        }, 1500);
-      } else {
-        toast.error("Passwords do not match");
-      }
+  // Form Data
+  const onSubmit = async (data) => {
+    setLoading(true); // ✅ Set loading to true before API call
+    try {
+      const updatedData = {
+        email,
+        key,
+        password: data.password,
+        password_confirmation: data.password_confirmation,
+      };
+      await resetPasswordMutation(updatedData);
+      reset();
+    }
+    catch (err) {
+      console.log(err);
+    }
+    finally {
+      setLoading(false); // ✅ Always reset loading after the attempt
     }
   };
-
   return (
     <section>
       {/* top section */}
@@ -61,73 +70,61 @@ const ResetPassword = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="lg:mt-8 mt-5 lg:space-y-6 space-y-3"
       >
-        {/*new password */}
-        <div>
-          <div className="flex flex-col gap-1">
-            <div className="w-full flex justify-between">
-              <label
-                htmlFor="new_password"
-                className="text-black leading-[175%] tracking-[-0.064px]"
-              >
-                New password
-              </label>
-              {errors.new_password && (
-                <span className="text-red-500">Required</span>
-              )}
-            </div>
-            <div
-              className={`w-full ${inputClass} relative ${errors.new_password ? "border-red-500" : "border-[#9D9D9D]"
-                }`}
-            >
-              <input
-                {...register("new_password", { required: true })}
-                placeholder="Enter your new password"
-                className="focus:outline-none w-full"
-                type={!showPassword ? "password" : "text"}
-              />
-              <div
-                onClick={() => setShowPassword((prev) => !prev)}
-                className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
-              >
-                {showPassword ? <ShowPassSvg /> : <HidePassSvg />}
-              </div>
-            </div>
-          </div>
-          <p className="pt-2 text-sm text-textColor">
-            Password must have 8 char, a number and a special char
-          </p>
-        </div>
-
-        {/* confirm new password */}
+        {/* Password */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
-            <label
-              htmlFor="confirm_new_password"
-              className="text-black leading-[175%] tracking-[-0.064px]"
-            >
-              Confirm new password
+            <label htmlFor="password" className="text-black leading-[175%] tracking-[-0.064px]">
+              New Password
             </label>
-            {errors.confirm_new_password && (
-              <span className="text-red-500">Required</span>
-            )}
+            {errors.password && <span className="text-red-500">Password is required</span>}
           </div>
           <div
-            className={`w-full ${inputClass} relative ${errors.confirm_new_password
-              ? "border-red-500"
-              : "border-[#9D9D9D]"
+            className={`w-full ${inputClass} relative ${errors.password ? "border-red-500" : "border-[#9D9D9D]"
               }`}
           >
             <input
-              {...register("confirm_new_password", { required: true })}
-              placeholder="Enter your new password"
-              className="focus:outline-none w-full"
-              type={!showConfirmPassword ? "password" : "text"}
+              {...register("password", { required: true })}
+              placeholder="Enter password"
+              className="focus:outline-none w-full bg-transparent"
+              type={!showPassword ? "password" : "text"}
+              id="password"
             />
             <div
-              onClick={() => setConfirmShowPassword((prev) => !prev)}
+              onClick={() => setShowPassword((prev) => !prev)}
               className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
             >
-              {showConfirmPassword ? <ShowPassSvg /> : <HidePassSvg />}
+              {showPassword ? <ShowPassSvg /> : <HidePassSvg />}
+            </div>
+          </div>
+        </div>
+
+        {/* Confirm Password */}
+        <div className="flex flex-col gap-1">
+          <div className="w-full flex justify-between">
+            <label htmlFor="password_confirmation" className="text-black leading-[175%] tracking-[-0.064px]">
+              Confirm New Password
+            </label>
+            {errors.password_confirmation && (
+              <span className="text-red-500">{errors.password_confirmation.message}</span>
+            )}
+          </div>
+          <div className={`w-full ${inputClass} relative ${errors.password_confirmation ? "border-red-500" : "border-[#9D9D9D]"}`}>
+            <input
+              {...register("password_confirmation", {
+                required: "Confirm Password is required",
+                validate: (value) =>
+                  value === getValues("password") || "Passwords do not match",
+              })}
+              placeholder="Enter password again"
+              className="focus:outline-none w-full bg-transparent"
+              type={!confirmPassword ? "password" : "text"}
+              id="confirmPassword"
+            />
+            <div
+              onClick={() => setConfirmPassword((prev) => !prev)}
+              className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
+            >
+              {confirmPassword ? <ShowPassSvg /> : <HidePassSvg />}
             </div>
           </div>
         </div>
