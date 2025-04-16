@@ -82,7 +82,7 @@ const Navbar = () => {
               <Link to="/dashboard/dashboard-saved-recipes" className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center">
                 <LoveSvg />
               </Link>
-              <ButtonTransparent path="/auth/login" title="Sign Up" />
+              <ButtonTransparent path="/auth/register" title="Sign Up" />
             </div>
           </div>
 
@@ -135,7 +135,7 @@ const Navbar = () => {
 
             {/* button */}
             <Link
-              to='/auth/login'
+              to='/auth/register'
               className="text-textColor font-merriweather px-5 py-2 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white"
             >
               Sign Up

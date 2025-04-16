@@ -6,17 +6,19 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { CgSpinnerTwo } from "react-icons/cg";
-import toast from "react-hot-toast";
 import { useRegister } from "@/hooks/auth.hook.";
 
 const Register = () => {
+  // State:
   const [showPassword, setShowPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // CSS:
   const inputClass =
-    "rounded-lg border-[0.5px]  shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-3 lg:px-5 py-2 lg:py-3";
+    "rounded-lg border-[0.5px] bg-none shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-3 lg:px-5 py-2 lg:py-3";
 
+  // Hook Form 
   const {
     register,
     handleSubmit,
@@ -25,17 +27,21 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
+  // Mutation
   const { mutateAsync: registerMutation } = useRegister();
 
+  // All Form Data
   const onSubmit = async (data) => {
+    setLoading(true); // ✅ Set loading to true before API call
     try {
       await registerMutation(data);
-      setTimeout(() => {
-        reset();
-        toast.success("Registration successful!");
-      }, 1500);
-    } catch (err) {
+      reset();
+    }
+    catch (err) {
       console.log(err);
+    }
+    finally {
+      setLoading(false); // ✅ Always reset loading after the attempt
     }
   };
 
@@ -94,7 +100,7 @@ const Register = () => {
             <input
               {...register("password", { required: true })}
               placeholder="Enter password"
-              className="focus:outline-none w-full"
+              className="focus:outline-none w-full bg-transparent"
               type={!showPassword ? "password" : "text"}
               id="password"
             />
@@ -117,10 +123,7 @@ const Register = () => {
               <span className="text-red-500">{errors.password_confirmation.message}</span>
             )}
           </div>
-          <div
-            className={`w-full ${inputClass} relative ${errors.password_confirmation ? "border-red-500" : "border-[#9D9D9D]"
-              }`}
-          >
+          <div className={`w-full ${inputClass} relative ${errors.password_confirmation ? "border-red-500" : "border-[#9D9D9D]"}`}>
             <input
               {...register("password_confirmation", {
                 required: "Confirm Password is required",
@@ -128,7 +131,7 @@ const Register = () => {
                   value === getValues("password") || "Passwords do not match",
               })}
               placeholder="Enter password again"
-              className="focus:outline-none w-full"
+              className="focus:outline-none w-full bg-transparent"
               type={!confirmPassword ? "password" : "text"}
               id="confirmPassword"
             />

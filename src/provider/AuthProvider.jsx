@@ -4,9 +4,10 @@ import { createContext, useState } from "react";
 export const AuthContextProvider = createContext(null);
 
 const AuthProvider = ({ children }) => {
-    const [loading, setLoading] = useState(false);
     const [user, setUser] = useState();
+    const [loading, setLoading] = useState(false);
     const [token, setToken, clearToken] = useLocalStorage('token', null);
+    console.log(loading)
 
     // values to pass:
     const allValues = {
