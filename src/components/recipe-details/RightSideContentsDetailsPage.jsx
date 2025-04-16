@@ -4,7 +4,7 @@ import {
   PlayButtonSvg,
 } from "@/components/svg-container/SvgContainer";
 
-const RightSideContentsDetailsPage = ({ video }) => {
+const RightSideContentsDetailsPage = ({ data }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef(null); // Create a ref for the video element
 
@@ -36,7 +36,7 @@ const RightSideContentsDetailsPage = ({ video }) => {
           <video
             ref={videoRef}
             className="w-full h-full object-cover rounded-2xl"
-            src={video}
+            src={`${import.meta.env.VITE_SITE_URL}/${data?.recipe_video}`}
           ></video>
 
           {/* buttons */}
@@ -68,31 +68,12 @@ const RightSideContentsDetailsPage = ({ video }) => {
           </h5>
 
           {/* steps */}
-          <div className="lg:mt-8 mt-4 space-y-4 lg:space-y-6">
-            <p className="text-textColor text-xl font-medium leading-[150%]">
-              Step 1.
-              <span className="text-base">
-                Blend banana, eggs, oats, and baking powder in a blender until
-                smooth, about 45 seconds. Mix egg white part , cinnamon powder
-                and salt with this mixture.
-              </span>
-            </p>
-            <p className="text-textColor text-xl font-medium leading-[150%]">
-              Step 2.
-              <span className="text-base">
-                Spray a griddle or skillet with cooking spray and heat over
-                medium-high heat.
-              </span>
-            </p>
-            <p className="text-textColor text-xl font-medium leading-[150%]">
-              Step 3.
-              <span className="text-base">
-                Drop batter by large spoonfuls onto the griddle and cook until
-                bubbles form and the edges are dry, 3 to 4 minutes. Flip and
-                cook until browned on the other side, 2 to 3 minutes. Repeat as
-                necessary.
-              </span>
-            </p>
+          <div className="lg:mt-6 mt-4 space-y-5">
+            {
+              data?.instructions?.map((item, idx) => <p key={item.id} className="text-textColor xl:text-lg font-medium">
+                <span>Step-{idx + 1}: </span> {item?.step}
+              </p>)
+            }
           </div>
         </div>
       </div>

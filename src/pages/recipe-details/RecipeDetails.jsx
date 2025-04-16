@@ -1,25 +1,24 @@
 import LeftSideContentsDetailsPage from "@/components/recipe-details/LeftSideContentsDetailsPage";
-import banner from "../../assets/images/jjj.jpg";
 import CommonHeroBanner from "@/components/common/CommonHeroBanner";
-import recipe from "../../assets/videos/recipe.mp4";
 import RightSideContentsDetailsPage from "@/components/recipe-details/RightSideContentsDetailsPage";
 import ShareRecipeSection from "@/components/recipe-details/ShareRecipeSection";
 import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection";
 import ReviewSection from "@/components/recipe-details/ReviewSection";
 import { useParams } from "react-router-dom";
+import { useRecipeDetails } from "@/hooks/cms.queries";
 
 const RecipeDetails = () => {
   const { id } = useParams();
   const fullLocation = `${window.location.origin}/${id}`
-
-  console.log(fullLocation);
+  const { data: recipeData } = useRecipeDetails(id);
+  console.log(recipeData)
 
   return (
     <div className="mt-[104px]">
       {/* banner */}
       <CommonHeroBanner
-        image={banner}
-        title="Banana Oat Pancakes (Dairy-Free)"
+        image={`${import.meta.env.VITE_SITE_URL}/${recipeData?.recipe_image}`}
+        title={recipeData?.recipe_name}
       />
 
       {/* Main Container */}
@@ -28,10 +27,14 @@ const RecipeDetails = () => {
         <div className="container">
           <div className="flex flex-col xl:flex-row w-full gap-5 lg:gap-8 xl:gap-14 2xl:gap-24 lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
             {/* left side contents */}
-            <LeftSideContentsDetailsPage />
+            <div className="">
+              <LeftSideContentsDetailsPage data={recipeData} />
+            </div>
 
             {/* right side contents */}
-            <RightSideContentsDetailsPage video={recipe} />
+            <div className="">
+              <RightSideContentsDetailsPage data={recipeData} />
+            </div>
           </div>
         </div>
 

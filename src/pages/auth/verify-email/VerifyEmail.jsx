@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { CgSpinnerTwo } from 'react-icons/cg';
-import toast from 'react-hot-toast';
+import { useVerifyEmail } from '@/hooks/auth.hook.';
 
 const VerifyEmail = () => {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+
+  //   mutation::
+  const { mutateAsync: verifyEmailMutation } = useVerifyEmail();
 
   // css:
   const inputClass =
@@ -19,16 +21,18 @@ const VerifyEmail = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    if (data) {
-      console.log(data);
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        reset();
-        toast.success('Email Verification successful!');
-        navigate('/auth/verify-otp');
-      }, 1500);
+  // Form Data
+  const onSubmit = async (data) => {
+    setLoading(true); // ✅ Set loading to true before API call
+    try {
+      await verifyEmailMutation(data);
+      reset();
+    }
+    catch (err) {
+      console.log(err);
+    }
+    finally {
+      setLoading(false); // ✅ Always reset loading after the attempt
     }
   };
 

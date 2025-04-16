@@ -1,19 +1,17 @@
 import { Link } from "react-router-dom";
-import { FireSvg, RecipeBookSvg, StarSvg } from "../svg-container/SvgContainer";
+import { RecipeBookSvg } from "../svg-container/SvgContainer";
 
 const RecipeCategoryCard = ({ item }) => {
-  const slug = item?.title?.toLowerCase()?.split(" ").join("-");
-
   return (
     <Link
-      to={`/recipe-library/${slug}`}
+      to={`/recipes/recipe_library/${item?.id}`}
       className={`w-full bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl `}
     >
       {/* image */}
       <div className="h-[200px] lg:h-[300px] w-full relative rounded-sm overflow-hidden">
         <img
           className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
-          src={item?.image}
+          src={`${import.meta.env.VITE_SITE_URL}/${item?.image}`}
           alt=""
         />
         {/* Overlay with Linear Gradient */}
@@ -23,13 +21,13 @@ const RecipeCategoryCard = ({ item }) => {
       {/* description */}
       <div className="py-4 px-4 ">
         <h5 className="text-lg 3xl:text-xl font-bold font-merriweather text-black truncate">
-          {item?.title}
+          {item?.diet_name}
         </h5>
         <div className="mt-2 3xl:mt-4 space-y-2">
           <div className="flex gap-3">
             <RecipeBookSvg />
             <p className="text-textColor font-medium">
-              12 recipes | Multiple authors
+              {item?.recipes_count} | Multiple authors
             </p>
           </div>
         </div>

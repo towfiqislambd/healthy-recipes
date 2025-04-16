@@ -1,11 +1,11 @@
-import avatar from '../../assets/images/avatar-1.jpg';
 import { Link } from 'react-router-dom';
 import { ArrowTopRightSvg } from '../svg-container/SvgContainer';
+import parse from 'html-react-parser';
 
-const BlogCard = ({ data }) => {
+const BlogCard = ({ item }) => {
   return (
     <Link
-      to={`/blog/${data?.id}`}
+      to={`/blog/${item?.slug}`}
       className="bg-white block h-[490px] rounded-lg shadow-[0px_0px_8px_0px_rgba(0,0,0,0.06)] px-3 pt-3 pb-8 group"
     >
       {/* image */}
@@ -13,7 +13,7 @@ const BlogCard = ({ data }) => {
         <div className="w-full h-[250px] overflow-hidden rounded-lg">
           <img
             className="w-full h-full object-cover rounded-sm group-hover:scale-110 transition-all duration-300"
-            src={data?.image}
+            src={`${import.meta.env.VITE_SITE_URL}/${item?.image}`}
             alt=""
           />
         </div>
@@ -22,20 +22,19 @@ const BlogCard = ({ data }) => {
       <div className="mt-6">
         <div className="w-full flex items-center justify-between">
           <h5 className="leading-[20px] font-medium text-sm text-primary">
-            Keto diet | {data?.time}.
+            {item?.category?.category_name} | {item?.time_ago}.
           </h5>
           <p className="leading-[20px] font-medium text-sm text-primary">
-            {data?.date}
+            {item?.created_date}
           </p>
         </div>
         {/* title */}
         <div className="space-y-2 mt-1">
           <h4 className="text-lg 2xl:text-xl font-bold leading-[160%] font-merriweather text-black truncate">
-            {data?.title}
+            {item?.title}
           </h4>
-          <p className="text-textColor leading-[150%] ">{data?.subtitle.slice(0, 90)}...</p>
+          <div className="text-textColor leading-[150%] ">{parse(item?.description.slice(0, 80))}</div>
         </div>
-
 
         {/* user info */}
         <div className="mt-3 w-full flex items-center justify-between">
@@ -43,17 +42,15 @@ const BlogCard = ({ data }) => {
             <div className="size-10">
               <img
                 className="h-full w-full object-cover rounded-full"
-                src={avatar}
-                alt=""
+                src={`${import.meta.env.VITE_SITE_URL}/${item?.author_image}`}
+                alt="author"
               />
             </div>
             <div>
               <h5 className="text-black font-medium leading-[140%] text-sm">
-                Olivia Rhye
+                {item?.author_name}
               </h5>
-              <p className="text-textColor text-sm leading-[140%]">
-                20 Jan 2022
-              </p>
+              <p className="text-textColor text-sm leading-[140%]">{item?.created_date}</p>
             </div>
           </div>
 

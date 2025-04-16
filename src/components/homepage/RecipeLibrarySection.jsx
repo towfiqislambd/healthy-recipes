@@ -1,39 +1,9 @@
 import { Link } from "react-router-dom";
 import SectionTitle from "../common/SectionTitle";
-import banner from "../../assets/images/banner-8.jpg";
 import RecipeCategoryCard from "../cards/RecipeCategoryCard";
 
-const RecipeLibrarySection = () => {
-  const items = [
-    {
-      image: banner,
-      title: 'Keto Diet Recipe',
-    },
-    {
-      image: banner,
-      title: 'Mediterranean Diet Recipe',
-    },
-    {
-      image: banner,
-      title: 'Vegan Diet Recipe',
-    },
-    {
-      image: banner,
-      title: 'Paleo Diet Recipe',
-    },
-    {
-      image: banner,
-      title: 'Low-Carb Diet Recipe',
-    },
-    {
-      image: banner,
-      title: 'DASH Diet Recipe',
-    },
-    {
-      image: banner,
-      title: 'Carnivore Diet Recipe',
-    },
-  ];
+const RecipeLibrarySection = ({ data }) => {
+
   return (
     <section className="bg-[#FCFCFC] py-7 md:py-10 2xl:py-16 3xl:py-24">
       <div className="container">
@@ -54,7 +24,7 @@ const RecipeLibrarySection = () => {
 
             {/* all cards */}
             <div className="grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-5 pt-8">
-              {items?.slice(0, 4)?.map((item, idx) => (
+              {data?.slice(0, 4)?.map((item, idx) => (
                 <RecipeCategoryCard key={idx} item={item} />
               ))}
             </div>

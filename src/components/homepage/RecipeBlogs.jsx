@@ -1,14 +1,12 @@
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { SliderNextSvg, SliderPrevSvg } from "../svg-container/SvgContainer";
 import { useState } from "react";
 import BlogCard from "../cards/BlogCard";
-import { allBlogs } from "@/data/data";
 import { Navigation } from "swiper/modules";
 
-const RecipeBlogs = () => {
+const RecipeBlogs = ({ data }) => {
   const [swiperRef, setSwiperRef] = useState(null);
 
   return (
@@ -56,9 +54,9 @@ const RecipeBlogs = () => {
                   1460: { slidesPerView: 4, spaceBetween: 25 },
                 }}
               >
-                {allBlogs?.map((item) => (
-                  <SwiperSlide key={item?.id}>
-                    <BlogCard data={item} />
+                {data?.map((item, idx) => (
+                  <SwiperSlide key={idx}>
+                    <BlogCard item={item} />
                   </SwiperSlide>
                 ))}
               </Swiper>

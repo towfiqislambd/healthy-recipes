@@ -2,39 +2,13 @@ import RecipeBlogs from "@/components/homepage/RecipeBlogs";
 import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection";
 import AllRecipeCardsSection from "@/components/recipe-library/AllRecipeCardsSection";
 import { Link } from "react-router-dom";
-import banner from "@/assets/images/banner-8.jpg";
+import { useBlogs, useRecipeLibrary, useShareYourRecipe } from "@/hooks/cms.queries";
 
 const RecipeLibrary = () => {
-  const items = [
-    {
-      image: banner,
-      title: "Keto Diet Recipe",
-    },
-    {
-      image: banner,
-      title: "Mediterranean Diet Recipe",
-    },
-    {
-      image: banner,
-      title: "Vegan Diet Recipe",
-    },
-    {
-      image: banner,
-      title: "Paleo Diet Recipe",
-    },
-    {
-      image: banner,
-      title: "Low-Carb Diet Recipe",
-    },
-    {
-      image: banner,
-      title: "DASH Diet Recipe",
-    },
-    {
-      image: banner,
-      title: "Carnivore Diet Recipe",
-    },
-  ];
+  const { data: recipeLibrary } = useRecipeLibrary();
+  const { data: shareYourRecipe } = useShareYourRecipe();
+  const { data: blogs } = useBlogs();
+
   return (
     <div className="mt-[100px] lg:mt-[134px]">
       {/* breadcrumbs */}
@@ -66,13 +40,13 @@ const RecipeLibrary = () => {
             All Recipe Library
           </h2>
 
-          <AllRecipeCardsSection items={items} />
+          <AllRecipeCardsSection data={recipeLibrary} />
         </div>
       </div>
 
-      <ShareYourRecipeSection />
+      <ShareYourRecipeSection data={shareYourRecipe} />
 
-      <RecipeBlogs />
+      <RecipeBlogs data={blogs} />
     </div>
   );
 };
