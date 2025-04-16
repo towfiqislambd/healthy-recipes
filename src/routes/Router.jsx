@@ -38,7 +38,7 @@ export const router = createBrowserRouter([
         element: <RecipeLibrary />,
       },
       {
-        path: '/recipe-library/:slug',
+        path: '/recipes/recipe_library/:id',
         element: <AllRecipes />,
       },
       {
@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
         element: <Blog />,
       },
       {
-        path: '/blog/:id',
+        path: '/blog/:slug',
         element: <BlogDetails />,
       },
     ],

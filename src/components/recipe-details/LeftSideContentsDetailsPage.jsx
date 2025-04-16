@@ -1,6 +1,8 @@
-const LeftSideContentsDetailsPage = () => {
+import parse from 'html-react-parser';
+
+const LeftSideContentsDetailsPage = ({ data }) => {
   return (
-    <div className="mt-5 bg-white rounded-lg h-full xl:max-w-[420px] p-5">
+    <div className="mt-5 bg-white rounded-lg h-full p-5">
       {/* Ingredients */}
       <div>
         {/* title */}
@@ -10,25 +12,11 @@ const LeftSideContentsDetailsPage = () => {
 
         {/* description */}
         <div className="mt-4 lg:mt-5 2xl:mt-8 space-y-4 2xl:space-y-5">
-          <p className="text-textColor leading-[130%]">
-            Ripe bananas (the ripper the better)
-          </p>
-          <p className="text-textColor leading-[130%]">
-            Egg whites (1 or 2 eggs)
-          </p>
-          <p className="text-textColor leading-[130%]">Rolled oats</p>
-          <p className="text-textColor leading-[130%]">
-            Cinnamon powder (a little bit)
-          </p>
-          <p className="text-textColor leading-[130%]">Baking powder</p>
-          <p className="text-textColor leading-[130%]">Salt</p>
-          <p className="text-textColor leading-[130%]">
-            Optional - add your favorite mix-ins like chopped walnuts or maybe
-            some chocolate chips!
-          </p>
-          <p className="text-textColor leading-[130%]">
-            Coconut oil (using cooking spray)
-          </p>
+          {
+            data?.ingredients.map(item => <li key={item.id} className="text-textColor leading-[130%]">
+              {item?.ingredient_name}
+            </li>)
+          }
         </div>
       </div>
 
@@ -36,11 +24,15 @@ const LeftSideContentsDetailsPage = () => {
       <div className="mt-7 lg:mt-10 space-y-3 2xl:space-y-4">
         <div className="w-full flex items-center justify-between">
           <p className="text-textColor">Serving number</p>
-          <p className="text-black font-medium">4</p>
+          <p className="text-black font-medium">{data?.serving_number}</p>
+        </div>
+        <div className="w-full flex items-center justify-between">
+          <p className="text-textColor">Preparation time</p>
+          <p className="text-black font-medium">{data?.preparation_time}</p>
         </div>
         <div className="w-full flex items-center justify-between">
           <p className="text-textColor">Cooking time</p>
-          <p className="text-black font-medium">30 Min.</p>
+          <p className="text-black font-medium">{data?.cooking_time}</p>
         </div>
       </div>
 
@@ -52,19 +44,8 @@ const LeftSideContentsDetailsPage = () => {
         </h5>
 
         {/* description */}
-        <div className="mt-5 2xl:mt-8 space-y-5">
-          <p className="text-textColor leading-[130%]">
-            Calories: 100-150 calories
-          </p>
-          <p className="text-textColor leading-[130%]">Fat: 7-12 grams</p>
-          <p className="text-textColor leading-[130%]">
-            Sodium: 100-300 milligrams
-          </p>
-          <p className="text-textColor leading-[130%]">
-            Carbohydrates: 5-10 grams
-          </p>
-          <p className="text-textColor leading-[130%]">Fiber: 1-3 grams</p>
-          <p className="text-textColor leading-[130%]">Protein: 4-7 grams</p>
+        <div className="mt-5 2xl:mt-8 space-y-5 text-textColor leading-10">
+          {typeof data?.nutritions === 'string' && parse(data.nutritions)}
         </div>
       </div>
 
@@ -77,18 +58,11 @@ const LeftSideContentsDetailsPage = () => {
 
         {/* description */}
         <div className="mt-5 2xl:mt-8 flex items-center flex-wrap gap-3">
-          <div className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor">
-            Dairy free food
-          </div>
-          <div className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor">
-            Dairy free food
-          </div>
-          <div className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor">
-            Dairy free food
-          </div>
-          <div className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor">
-            Dairy free food
-          </div>
+          {
+            data?.tag_names.map(item => <div key={item.id} className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor">
+              {item?.tag_name}
+            </div>)
+          }
         </div>
       </div>
     </div>

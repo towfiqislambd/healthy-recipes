@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CgSpinnerTwo } from "react-icons/cg";
-import toast from "react-hot-toast";
 import OTPInput from "react-otp-input";
+import { useResendOtp, useVerifyOtp } from "@/hooks/auth.hook.";
 
 const VerifyOtp = () => {
   const [loading, setLoading] = useState(false);
   const [activeResendButton, setActiveResendButton] = useState(false);
   const [timer, setTimer] = useState(60);
   const [isReset, setIsReset] = useState(false);
-
-  const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state?.email;
   const {
     control,
     handleSubmit,
@@ -19,22 +19,32 @@ const VerifyOtp = () => {
     formState: { errors },
   } = useForm();
 
-  //submit otp:
-  const onSubmit = (data) => {
-    if (data) {
-      console.log(data);
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        reset();
-        toast.success("OTP verification successful!");
-        navigate("/auth/reset-password");
-      }, 1500);
+  // mutation:
+  const { mutateAsync: verifyOtpMutation } = useVerifyOtp(reset);
+  const { mutateAsync: resendOtpMutation } = useResendOtp();
+
+  // Catch OTP here..
+  const onSubmit = async (data) => {
+    setLoading(true); // ✅ Set loading to true before API call
+    try {
+      const updatedData = { email, otp: data.otp };
+      await verifyOtpMutation(updatedData);
+      reset();
+    }
+    catch (err) {
+      console.log(err);
+    }
+    finally {
+      setLoading(false); // ✅ Always reset loading after the attempt
     }
   };
 
   //   handle resend:
-  const handleResendCode = () => {
+  const handleResendCode = (e) => {
+    e.preventDefault();
+    if (email) {
+      resendOtpMutation({ email: email });
+    }
     setActiveResendButton(false);
     setTimer(60);
     setIsReset(false);
@@ -102,11 +112,12 @@ const VerifyOtp = () => {
             <p>
               <button
                 onClick={handleResendCode}
-                disabled={!activeResendButton}
+                // disabled={!activeResendButton}
                 type="button"
                 className={`font-semibold ${activeResendButton
                   ? "text-secondary cursor-pointer"
-                  : "text-textColor cursor-not-allowed"
+                  : "text-textColor"
+                  // cursor-not-allowed
                   }`}
               >
                 Resend

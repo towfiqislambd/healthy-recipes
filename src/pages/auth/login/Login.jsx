@@ -6,16 +6,21 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { CgSpinnerTwo } from "react-icons/cg";
-import toast from "react-hot-toast";
+import { useLogin } from "@/hooks/auth.hook.";
 
 const Login = () => {
+  // State:
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // css:
+  // CSS:
   const inputClass =
-    "rounded-lg border-[0.5px]  shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-3 lg:px-5 py-2 lg:py-3";
+    "rounded-lg border-[0.5px] bg-transparent shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-3 lg:px-5 py-2 lg:py-3";
 
+  // Mutation:
+  const { mutateAsync: loginMutation } = useLogin();
+
+  // Hook Form 
   const {
     register,
     handleSubmit,
@@ -23,15 +28,18 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    if (data) {
-      console.log(data);
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        reset();
-        toast.success("Login successful!");
-      }, 1500);
+  // All Form Data
+  const onSubmit = async (data) => {
+    setLoading(true); // ✅ Set loading to true before API call
+    try {
+      await loginMutation(data);
+      reset();
+    }
+    catch (err) {
+      console.log(err);
+    }
+    finally {
+      setLoading(false); // ✅ Always reset loading after the attempt
     }
   };
 
@@ -53,7 +61,7 @@ const Login = () => {
             >
               Email
             </label>
-            {errors.email && <span className="text-red-500">Required</span>}
+            {errors.email && <span className="text-red-500">Email is required</span>}
           </div>
           <input
             {...register("email", { required: true })}
@@ -75,7 +83,7 @@ const Login = () => {
             >
               Password
             </label>
-            {errors.password && <span className="text-red-500">Required</span>}
+            {errors.password && <span className="text-red-500">Password is required</span>}
           </div>
           <div
             className={`w-full ${inputClass} relative ${errors.password ? "border-red-500" : "border-[#9D9D9D]"
@@ -84,7 +92,7 @@ const Login = () => {
             <input
               {...register("password", { required: true })}
               placeholder="Enter password"
-              className="focus:outline-none w-full"
+              className="focus:outline-none w-full bg-transparent"
               type={!showPassword ? "password" : "text"}
               name="password"
               id="password"
@@ -141,7 +149,7 @@ const Login = () => {
         </h6>
       </div>
 
-      {/* go to home button */}
+      {/* Go to home button */}
       <div className="pt-2 lg:pt-12 text-center">
         <Link to="/" className="text-primary underline">
           Go to home

@@ -1,7 +1,9 @@
 import BlogCard from "@/components/cards/BlogCard";
-import { allBlogs } from "@/data/data";
+import { useBlogs } from "@/hooks/cms.queries";
 
 const Blog = () => {
+  const { data: blogs } = useBlogs();
+
   return (
     <section className="mt-[110px] lg:mt-[154px]">
       <div className="container">
@@ -20,8 +22,8 @@ const Blog = () => {
 
           {/* all blogs */}
           <div className="grid lg:grid-cols-2  2xl:grid-cols-3 3xl:grid-cols-4 gap-5 mt-10 mb-10 3xl:mb-14 3xl:mt-14">
-            {allBlogs?.map((item) => (
-              <BlogCard key={item?.id} data={item} />
+            {blogs?.map((item, idx) => (
+              <BlogCard key={idx} item={item} />
             ))}
           </div>
         </div>
