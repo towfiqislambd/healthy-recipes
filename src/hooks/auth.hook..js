@@ -148,6 +148,28 @@ export const useVerifyOtp = (reset) => {
 };
 
 
+// otp resend:
+export const useResendOtp = () => {
+  const { setLoading } = useAuth();
+  
+  return useMutation({
+    mutationKey: ['resend-otp'],
+    mutationFn: (payload) => OtpResendFunc(payload),
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: () => {
+      setLoading(false);
+      toast.success('New OTP sent to your email');
+    },
+    onError: (err) => {
+      setLoading(false);
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+
 // reset password:
 export const useResetPassword = () => {
   const { setLoading } = useAuth();
@@ -166,27 +188,6 @@ export const useResetPassword = () => {
         toast.success('Password reset successfully');
         navigate('/auth/login');
       }
-    },
-    onError: (err) => {
-      setLoading(false);
-      toast.error(err?.response?.data?.message);
-    },
-  });
-};
-
-// resend otp:
-export const useResendOtp = () => {
-  const { setLoading } = useAuth();
-  
-  return useMutation({
-    mutationKey: ['resend-otp'],
-    mutationFn: (payload) => OtpResendFunc(payload),
-    onMutate: () => {
-      setLoading(true);
-    },
-    onSuccess: () => {
-      setLoading(false);
-      toast.success('New OTP sent to your email');
     },
     onError: (err) => {
       setLoading(false);

@@ -14,8 +14,8 @@ const AuthProvider = ({ children }) => {
         isFetching: fetchingUserData,
     } = useGetUserData(token);
 
-    
-    //get user info::
+
+    // Get user info:
     useEffect(() => {
         if (!token) {
             setUser(null);
@@ -29,7 +29,6 @@ const AuthProvider = ({ children }) => {
             setUser(null);
         }
 
-        
         if (loadingUserData) {
             setLoading(true);
         } else {
