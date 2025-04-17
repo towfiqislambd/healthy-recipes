@@ -1,7 +1,7 @@
 import toast from 'react-hot-toast';
 import useAuth from './useAuth';
 import { useMutation } from '@tanstack/react-query';
-import { AddReview } from './cms.api';
+import { AddReview, AddWishlist } from './cms.api';
 
 // Add reviews
 export const useAddReview = (id) => {
@@ -17,9 +17,31 @@ export const useAddReview = (id) => {
         setLoading(false);
         toast.success('Review added Successfully');
       },
-      onError: () => {
+      onError: (err) => {
         setLoading(false);
-        toast.error('Something went wrong. Please try again.');
+        toast.error(err?.response?.data?.message || 'Something went wrong. Please try again.');
       },
     });
-  };
+};
+
+
+// Add wishlist
+export const useAddWishlist = (id) => {
+    const { setLoading } = useAuth();
+    
+    return useMutation({
+      mutationKey: ['add-wishlist'],
+      mutationFn: () => AddWishlist(id),
+      onMutate: () => {
+        setLoading(true);
+      },
+      onSuccess: () => {
+        setLoading(false);
+        toast.success('Added in wishlist');
+      },
+      onError: (err) => {
+        setLoading(false);
+        toast.error(err?.response?.data?.message || 'Something went wrong. Please try again.');
+      },
+    });
+};

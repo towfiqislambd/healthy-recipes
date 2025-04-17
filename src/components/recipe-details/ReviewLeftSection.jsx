@@ -4,8 +4,11 @@ import Rating from "react-rating";
 import { EmptyStarSvg, FullStarSvg } from "../svg-container/SvgContainer";
 import useAuth from "@/hooks/useAuth";
 import { useAddReview } from "@/hooks/cms.mutations";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const ReviewLeftSection = ({ id, refetch }) => {
+  const navigate = useNavigate()
   const { user } = useAuth();
   const [rating, setRating] = useState(0);
   const [formSubmitted, setFormSubmitted] = useState(false);  // Track if form is submitted
@@ -19,18 +22,23 @@ const ReviewLeftSection = ({ id, refetch }) => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    if (id) {
-      if (rating === 0) {
-        setFormSubmitted(true);  // Show rating error if submitted without rating
-        return;
-      }
+    if (user) {
+      if (id) {
+        if (rating === 0) {
+          setFormSubmitted(true);  // Show rating error if submitted without rating
+          return;
+        }
 
-      const formData = { ...data, rating };
-      await reviewMutation(formData);
-      reset();
-      refetch();
-      setRating(0);
-      setFormSubmitted(false);  // Reset the form submission status
+        const formData = { ...data, rating };
+        await reviewMutation(formData);
+        reset();
+        refetch();
+        setRating(0);
+        setFormSubmitted(false);  // Reset the form submission status
+      }
+    } else {
+      toast.error('Please login first')
+      navigate('/auth/login')
     }
   };
 

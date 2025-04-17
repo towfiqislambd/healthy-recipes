@@ -122,3 +122,15 @@ export const AddReview = async (id, payload) => {
     const { data } = await axiosSecure.post(`/api/review/${id}`, payload);
     return data?.data;
 };
+
+// Add Wishlist
+export const AddWishlist = async (id) => {
+    const { data } = await axiosSecure.post(`/api/wishlist/${id}`);
+    return data?.data;
+};
+
+// Get Wishlist
+export const GetWishlist = async () => {
+    const { data } = await axiosSecure(`/api/wishlists`);
+    return data?.data;
+};

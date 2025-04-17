@@ -1,6 +1,5 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FiEdit } from "react-icons/fi";
-
 import {
   FireSvg,
   LoveSvg,
@@ -8,9 +7,18 @@ import {
   StarSvg,
 } from '../svg-container/SvgContainer';
 import { useState } from 'react';
+import useAuth from '@/hooks/useAuth';
+import toast from 'react-hot-toast';
+import { useAddWishlist } from '@/hooks/cms.mutations';
+import { useGetWishlist } from '@/hooks/cms.queries';
 
 const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { mutateAsync: wishlistMutation } = useAddWishlist(item?.id);
+  const { data: wishlists } = useGetWishlist();
+  console.log(wishlists)
 
   // Function to handle Add to planner button click
   const handleAddToPlanner = (e, item) => {
@@ -24,7 +32,15 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc })
   const handleWishlistClick = (e) => {
     e.stopPropagation(); // Prevents the click event from bubbling up
     e.preventDefault(); // Prevents the default link navigation
-    setIsFavorite((prev) => !prev); // Toggle favorite state
+
+    if (user) {
+      setIsFavorite((prev) => !prev); // Toggle favorite state
+      wishlistMutation()
+    }
+    else {
+      toast.error('Please login first')
+      navigate('/auth/login')
+    }
   };
 
   return (
@@ -62,14 +78,6 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc })
             >
               <FiEdit className='text-lg' />
             </button>
-          // <Link
-          //   to={`/dashboard/edit-recipe/${item.id}`}
-          //   onClick={e => e.stopPropagation()}
-          //   className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${isFavorite ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
-          //     }`}
-          // >
-          //   <FiEdit className='text-lg' />
-          // </Link>
         }
 
         {/* type */}
