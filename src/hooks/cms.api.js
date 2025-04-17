@@ -1,5 +1,5 @@
 import { axiosPublic } from './useAxiosPublic';
-// import { axiosSecure } from './useAxiosSecure';
+import { axiosSecure } from './useAxiosSecure';
 
 // Homepage - Banner
 export const HomepageBanner = async () => {
@@ -96,5 +96,41 @@ export const BlogDetails = async (slug) => {
     const { data } = await axiosPublic(`/api/blog/${slug}`);
     return data?.data;
 };
+
+// Footer Info:
+export const FooterInfo = async () => {
+    const { data } = await axiosPublic('/api/site-settings');
+    return data?.data;
+};
+
+// Social Info:
+export const SocialInfo = async () => {
+    const { data } = await axiosPublic('/api/social-links');
+    return data?.data;
+};
+
+// Recipe reviews
+export const RecipeReviews = async (id) => {
+    const { data } = await axiosPublic(`/api/reviews/${id}`);
+    return data?.data;
+};
+
 //=================== 2nd day ===================
 
+// Add reviews
+export const AddReview = async (id, payload) => {
+    const { data } = await axiosSecure.post(`/api/review/${id}`, payload);
+    return data?.data;
+};
+
+// Add Wishlist
+export const AddWishlist = async (id) => {
+    const { data } = await axiosSecure.post(`/api/wishlist/${id}`);
+    return data?.data;
+};
+
+// Get Wishlist
+export const GetWishlist = async () => {
+    const { data } = await axiosSecure(`/api/wishlists`);
+    return data?.data;
+};
