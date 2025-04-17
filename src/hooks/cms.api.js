@@ -1,5 +1,5 @@
 import { axiosPublic } from './useAxiosPublic';
-// import { axiosSecure } from './useAxiosSecure';
+import { axiosSecure } from './useAxiosSecure';
 
 // Homepage - Banner
 export const HomepageBanner = async () => {
@@ -114,5 +114,10 @@ export const SocialInfo = async () => {
 // Recipe reviews
 export const RecipeReviews = async (id) => {
     const { data } = await axiosPublic(`/api/reviews/${id}`);
+    return data?.data;
+};
+// Recipe reviews
+export const RecipePost = async (id, payload) => {
+    const { data } = await axiosSecure.post(`/api/review/${id}`, payload);
     return data?.data;
 };
