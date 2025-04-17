@@ -110,3 +110,9 @@ export const SocialInfo = async () => {
 };
 
 //=================== 2nd day ===================
+
+// Recipe reviews
+export const RecipeReviews = async (id) => {
+    const { data } = await axiosPublic(`/api/reviews/${id}`);
+    return data?.data;
+};
