@@ -1,10 +1,20 @@
-import { EmptyStarSvg } from "../svg-container/SvgContainer";
+import { useState } from "react";
+import Rating from "react-rating";
+import { EmptyStarSvg, FullStarSvg } from "../svg-container/SvgContainer";
 
 const ReviewLeftSection = () => {
+  const [rating, setRating] = useState(0);
+
+  const handleRatingChange = (rate) => {
+    setRating(rate);
+  };
+
   return (
     <div className="w-full">
       {/* title */}
-      <h5 className="text-xl lg:text-2xl font-semibold text-black">Submit your review</h5>
+      <h5 className="text-xl lg:text-2xl font-semibold text-black">
+        Submit your review
+      </h5>
 
       {/* form */}
       <div className="py-2 lg:py-4 xl:py-8 w-full">
@@ -14,13 +24,15 @@ const ReviewLeftSection = () => {
             Add your rating <span className="text-[#FF5630]">*</span>
           </p>
 
-          {/* stars */}
+          {/* interactive stars */}
           <div className="mt-2 flex items-center gap-2">
-            <EmptyStarSvg />
-            <EmptyStarSvg />
-            <EmptyStarSvg />
-            <EmptyStarSvg />
-            <EmptyStarSvg />
+            <Rating
+              initialRating={rating}
+              onChange={handleRatingChange}
+              emptySymbol={<EmptyStarSvg />}
+              fullSymbol={<FullStarSvg />}
+              fractions={1}
+            />
           </div>
 
           {/* form inputs */}
@@ -38,7 +50,7 @@ const ReviewLeftSection = () => {
                 placeholder="johndoe456@gmail.com"
                 type="email"
                 name="email"
-                id=""
+                id="email"
               />
             </div>
             <div className="flex flex-col gap-2 w-full">
@@ -54,7 +66,7 @@ const ReviewLeftSection = () => {
                 placeholder="John Doe"
                 type="text"
                 name="name"
-                id=""
+                id="name"
               />
             </div>
             <div className="flex flex-col gap-2 w-full">
@@ -68,10 +80,9 @@ const ReviewLeftSection = () => {
               <textarea
                 rows={5}
                 className="px-3 lg:px-4 py-2 lg:py-4 resize-none border border-[#8993A4] focus:outline-none rounded-lg w-full"
-                placeholder="John Doe"
-                type="text"
+                placeholder="Share your thoughts here..."
                 name="review"
-                id=""
+                id="review"
               ></textarea>
             </div>
 
