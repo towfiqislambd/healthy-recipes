@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AllCategories, AllRecipes, BlogDetails, Blogs, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, OurMealPlanner, RecipeDetails, RecipeLibrary, ShareYourRecipe, Testimonial, TrendingRecipes, WhyChooseUs } from './cms.api';
+import { AllCategories, AllRecipes, BlogDetails, Blogs, FooterInfo, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, OurMealPlanner, RecipeDetails, RecipeLibrary, ShareYourRecipe, SocialInfo, Testimonial, TrendingRecipes, WhyChooseUs } from './cms.api';
 
 // Homepage - Banner
 export const useHomepageBanner = () => {
@@ -113,6 +113,22 @@ export const useBlogDetails = (slug) => {
     queryFn: () => BlogDetails(slug),
     enabled: !!slug,
      });
+};
+
+// Footer Info:
+export const useFooterInfo = () => {
+  return useQuery({
+    queryKey: ['footer-info'],
+    queryFn: FooterInfo,
+  });
+};
+
+// Social Info:
+export const useSocialInfo = () => {
+  return useQuery({
+    queryKey: ['social-links'],
+    queryFn: SocialInfo,
+  });
 };
 
 //==================== 2nd day =====================

@@ -96,5 +96,17 @@ export const BlogDetails = async (slug) => {
     const { data } = await axiosPublic(`/api/blog/${slug}`);
     return data?.data;
 };
-//=================== 2nd day ===================
 
+// Footer Info:
+export const FooterInfo = async () => {
+    const { data } = await axiosPublic('/api/site-settings');
+    return data?.data;
+};
+
+// Social Info:
+export const SocialInfo = async () => {
+    const { data } = await axiosPublic('/api/social-links');
+    return data?.data;
+};
+
+//=================== 2nd day ===================
