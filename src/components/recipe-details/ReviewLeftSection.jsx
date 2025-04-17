@@ -3,11 +3,13 @@ import { useForm } from "react-hook-form";
 import Rating from "react-rating";
 import { EmptyStarSvg, FullStarSvg } from "../svg-container/SvgContainer";
 import useAuth from "@/hooks/useAuth";
+import { useAddReview } from "@/hooks/cms.mutations";
 
-const ReviewLeftSection = () => {
+const ReviewLeftSection = ({ id, refetch }) => {
   const { user } = useAuth();
   const [rating, setRating] = useState(0);
   const [formSubmitted, setFormSubmitted] = useState(false);  // Track if form is submitted
+  const { mutateAsync: reviewMutation } = useAddReview(id);
 
   const {
     register,
@@ -16,17 +18,20 @@ const ReviewLeftSection = () => {
     reset,
   } = useForm();
 
-  const onSubmit = (data) => {
-    if (rating === 0) {
-      setFormSubmitted(true);  // Show rating error if submitted without rating
-      return;
-    }
+  const onSubmit = async (data) => {
+    if (id) {
+      if (rating === 0) {
+        setFormSubmitted(true);  // Show rating error if submitted without rating
+        return;
+      }
 
-    const formData = { ...data, rating };
-    console.log(formData);
-    reset();
-    setRating(0);
-    setFormSubmitted(false);  // Reset the form submission status
+      const formData = { ...data, rating };
+      await reviewMutation(formData);
+      reset();
+      refetch();
+      setRating(0);
+      setFormSubmitted(false);  // Reset the form submission status
+    }
   };
 
   return (

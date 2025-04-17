@@ -12,7 +12,7 @@ const RecipeDetails = () => {
   const fullLocation = `${window.location.origin}/${id}`;
   const { data: shareYourRecipe } = useShareYourRecipe();
   const { data: recipeData } = useRecipeDetails(id);
-  const { data: allReviews, isLoading } = useRecipeReviews(id);
+  const { data: allReviews, isLoading, refetch } = useRecipeReviews(id);
   if (isLoading) {
     return <p>Loading....</p>
   }
@@ -49,7 +49,7 @@ const RecipeDetails = () => {
       <ShareYourRecipeSection data={shareYourRecipe} />
 
       {/* review section */}
-      <ReviewSection allReviews={allReviews} />
+      <ReviewSection id={id} refetch={refetch} allReviews={allReviews} />
     </div>
   );
 };
