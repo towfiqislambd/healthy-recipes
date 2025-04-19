@@ -22,6 +22,7 @@ import RecipeDetails from '@/pages/recipe-details/RecipeDetails';
 import RecipeLibrary from '@/pages/recipe-library/RecipeLibrary';
 import { createBrowserRouter } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
+import MyRecipeDetails from '@/pages/dashboard/MyRecipeDetails';
 
 export const router = createBrowserRouter([
   // Main Layout
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
       {
         path: '/blog/:slug',
         element: <BlogDetails />,
+      },
+      {
+        path: '/my-recipe-details/:id',
+        element: <PrivateRoute><MyRecipeDetails /></PrivateRoute>,
       },
     ],
   },

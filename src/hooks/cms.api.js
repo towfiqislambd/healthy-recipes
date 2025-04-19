@@ -160,3 +160,9 @@ export const MyRecipes = async (page_id, category_id) => {
     const { data } = await axiosSecure(url);
     return data?.data;
 };
+
+// My Recipe Details
+export const MyRecipeDetails = async (id) => {
+    const { data } = await axiosSecure.get(`/api/my-recipe-details/${id}`);
+    return data?.data;
+};

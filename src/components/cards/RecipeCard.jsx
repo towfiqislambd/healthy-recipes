@@ -11,7 +11,6 @@ import toast from 'react-hot-toast';
 import { useAddWishlist } from '@/hooks/cms.mutations';
 
 const RecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, handleAddMealFunc }) => {
-  console.log(item)
   // const [isFavorite, setIsFavorite] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();

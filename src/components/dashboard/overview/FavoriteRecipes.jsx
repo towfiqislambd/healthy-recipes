@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import { sharedRecipes } from '@/data/data';
 import RecipeCard from "@/components/cards/RecipeCard";
 
-const FavoriteRecipes = () => {
+const FavoriteRecipes = ({ savedRecipes }) => {
     return (
         <div className="mb-10">
             <div className="flex mb-6 justify-between items-center">
@@ -12,11 +11,11 @@ const FavoriteRecipes = () => {
                 </button>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5 2xl:px-0">
-                {sharedRecipes?.map((item, idx) => (
+                {savedRecipes?.wishlist?.data?.slice(0, 4)?.map((item, idx) => (
                     <RecipeCard
                         isMyRecipe={true}
                         key={idx}
-                        item={item}
+                        item={item?.recipe}
                         down={idx % 2 !== 0}
                     />
                 ))}

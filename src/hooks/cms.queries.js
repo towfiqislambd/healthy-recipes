@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AllCategories, AllRecipes, BlogDetails, Blogs, FooterInfo, GetWishlist, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, MyRecipes, OurMealPlanner, RecipeDetails, RecipeLibrary, RecipeReviews, ShareYourRecipe, SocialInfo, Testimonial, TrendingRecipes, WhyChooseUs } from './cms.api';
+import { AllCategories, AllRecipes, BlogDetails, Blogs, FooterInfo, GetWishlist, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, MyRecipeDetails, MyRecipes, OurMealPlanner, RecipeDetails, RecipeLibrary, RecipeReviews, ShareYourRecipe, SocialInfo, Testimonial, TrendingRecipes, WhyChooseUs } from './cms.api';
 
 // Homepage - Banner
 export const useHomepageBanner = () => {
@@ -154,4 +154,13 @@ export const useMyRecipes = (page_id, category_id) => {
     queryKey: ['my-recipes', page_id, category_id],
     queryFn:() =>  MyRecipes(page_id, category_id),
   });
+};
+
+// My Recipe Details
+export const useMyRecipeDetails = (id) => {
+  return useQuery({
+       queryKey: ['my-recipe-details', id],
+       queryFn: () => MyRecipeDetails(id),
+       enabled: !!id,
+     });
 };

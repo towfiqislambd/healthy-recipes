@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import RecipeCard from '../../components/cards/RecipeCard';
 import { useAllCategories, useMyRecipes } from '@/hooks/cms.queries';
+import MyRecipeCard from './MyRecipeCard';
 
 const DashboardSavedRecipes = () => {
     const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
     const [activePage, setActivePage] = useState(1);
     const { data: allCategories } = useAllCategories();
     const { data: myRecipes, isLoading, isFetching, isPending } = useMyRecipes(activePage, activeTab?.id);
-    
+
     if (isLoading || isFetching || isPending) return <p className="h-svh">loading....</p>;
 
     return (
@@ -46,7 +46,7 @@ const DashboardSavedRecipes = () => {
                 {
                     myRecipes?.recipes?.data.length > 0 ?
                         myRecipes?.recipes?.data?.map((item, idx) => (
-                            <RecipeCard
+                            <MyRecipeCard
                                 isSavedRecipe={true}
                                 isMyRecipe={false}
                                 key={idx}
