@@ -136,12 +136,6 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, handl
         <div className="flex items-center gap-1">
           <StarSvg />
           <span className="text-textColor text-sm font-medium">
-            {
-              isSavedRecipe ?
-                item?.reviews_avg
-                :
-                item?.average_rating
-            }
             {item?.average_rating}
           </span>
         </div>

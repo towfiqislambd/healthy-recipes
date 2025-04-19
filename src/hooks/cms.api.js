@@ -144,3 +144,19 @@ export const GetWishlist = async (page_id, category_id) => {
     const { data } = await axiosSecure(url);
     return data?.data;
 };
+
+// My Recipes
+export const MyRecipes = async (page_id, category_id) => {
+    let url = '/api/my-recipes?';
+
+    if (page_id) url += `page=${page_id}&`;
+    if (category_id) url += `category_id=${category_id}&`;
+
+     // Remove the last '&' if we added any parameters
+     url = url.endsWith('&') ? url.slice(0, -1) : url;
+     // If no parameters were added, remove the '?'
+     url = url.endsWith('?') ? url.slice(0, -1) : url;
+
+    const { data } = await axiosSecure(url);
+    return data?.data;
+};

@@ -34,6 +34,7 @@ const DashboardShareRecipe = () => {
     const [inputValue, setInputValue] = useState("");
     const [instructions, setInstructions] = useState([{ id: Date.now(), value: "" }]);
     const [ingredients, setIngredients] = useState([{ id: Date.now(), value: "" }]);
+    const [nutritionInfo, setNutritionInfo] = useState([{ id: Date.now(), value: "" }]);
     const [customErrors, setCustomErrors] = useState({});
 
     const {
@@ -60,6 +61,8 @@ const DashboardShareRecipe = () => {
             newErrors.ingredients = "Add at least one ingredient.";
         if (instructions.filter(i => i.value.trim()).length === 0)
             newErrors.instructions = "Add at least one instruction.";
+        if (nutritionInfo.filter(i => i.value.trim()).length === 0)
+            newErrors.nutritionInfo = "Add at least one nutrition info.";
 
         setCustomErrors(newErrors);
 
@@ -72,6 +75,7 @@ const DashboardShareRecipe = () => {
             tags,
             ingredients: ingredients.map(i => i.value).filter(Boolean),
             instructions: instructions.map(i => i.value).filter(Boolean),
+            nutritionInfo: nutritionInfo.map(i => i.value).filter(Boolean),
         };
 
         console.log(formData);
@@ -121,6 +125,23 @@ const DashboardShareRecipe = () => {
     const addInstruction = () => {
         setInstructions([...instructions, { id: Date.now(), value: "" }]);
     };
+
+
+
+    const handleNutritionChange = (e, id) => {
+        const updated = nutritionInfo.map((nutrition) =>
+            nutrition.id === id ? { ...nutrition, value: e.target.value } : nutrition
+        );
+        setNutritionInfo(updated);
+        if (updated.some(i => i.value.trim())) updateCustomErrors("nutritionInfo");
+    };
+
+    const addNutrition = () => {
+        setNutritionInfo([...nutritionInfo, { id: Date.now(), value: "" }]);
+    };
+
+
+
 
     return (
         <div className="max-w-[752px] mx-auto py-10">
@@ -272,10 +293,30 @@ const DashboardShareRecipe = () => {
 
                 {/* Nutrition Info */}
                 <div>
-                    <label htmlFor="content" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Content</label>
-                    <textarea id="content" rows={5} className="border rounded-[5px] px-4 py-3 outline-none block w-full" placeholder="Write here...." {...register('content', { required: true })}></textarea>
-                    <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Maximum 1000 words</p>
-                    {errors.content && <span className="text-red-500 block mt-2 text-[15px]">Content is required</span>}
+                    {nutritionInfo.map((nutrition, index) => (
+                        <div className="mt-5" key={nutrition.id}>
+                            <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Nutrition Info ({index + 1})</label>
+                            <input
+                                className="border rounded-[5px] px-4 py-3 outline-none block w-full"
+                                value={nutrition.value}
+                                onChange={(e) => handleNutritionChange(e, nutrition.id)}
+                            />
+                            {index === 0 && (
+                                <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">e.g. "¼ teaspoon salt"</p>
+                            )}
+                        </div>
+                    ))}
+                    {customErrors.nutritionInfo && <p className="text-red-500 mt-2">{customErrors.nutritionInfo}</p>}
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            addNutrition();
+                        }}
+                        className="flex mt-5 gap-2 w-fit cursor-pointer items-center text-white py-[10px] px-4 rounded-lg bg-primary"
+                    >
+                        <AddMoreSvg />
+                        <p>Add more</p>
+                    </button>
                 </div>
 
                 {/* Tags */}
