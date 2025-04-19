@@ -21,6 +21,7 @@ import MealPlanner from '@/pages/meal-planner/MealPlanner';
 import RecipeDetails from '@/pages/recipe-details/RecipeDetails';
 import RecipeLibrary from '@/pages/recipe-library/RecipeLibrary';
 import { createBrowserRouter } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
   // Main Layout
@@ -90,7 +91,7 @@ export const router = createBrowserRouter([
   // Dashboard Layout
   {
     path: '/dashboard',
-    element: <DashboardLayout />,
+    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
     errorElement: <ErrorPage />,
     children: [
       {

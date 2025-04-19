@@ -5,9 +5,9 @@ import { useGetWishlist, useAllCategories } from '@/hooks/cms.queries';
 const DashboardSavedRecipes = () => {
     const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
     const [activePage, setActivePage] = useState(1);
-    const { data: savedRecipes, isLoading, isFetching, isPending } = useGetWishlist(activePage, activeTab?.id);
-    console.log(savedRecipes)
     const { data: allCategories } = useAllCategories();
+    const { data: savedRecipes, isLoading, isFetching, isPending } = useGetWishlist(activePage, activeTab?.id);
+
     if (isLoading || isFetching || isPending) return <p className="h-svh">loading....</p>;
 
     return (
@@ -59,10 +59,19 @@ const DashboardSavedRecipes = () => {
 
             {/* Pagination */}
             <div className="mt-10 flex justify-center items-center gap-3">
-                {
-                    savedRecipes?.wishlist?.links.map((item, idx) => <button onClick={() => setActivePage(item?.url.split('=')[1])} key={idx} className='px-3 py-1 rounded border'>{item?.label}</button>)
-                }
+                {savedRecipes?.wishlist?.links.map((item, idx) => (
+                    <button
+                        key={idx}
+                        onClick={() => item.url && setActivePage(item.url.split('=')[1])}
+                        className={`px-3 py-1 rounded border transition-all duration-150 
+        ${item.active ? 'bg-primary text-white' : 'bg-white text-gray-700'} 
+        ${!item.url ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'}`}
+                        disabled={!item.url}
+                        dangerouslySetInnerHTML={{ __html: item.label }}
+                    />
+                ))}
             </div>
+
         </section>
     );
 };
