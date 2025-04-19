@@ -143,9 +143,9 @@ export const useRecipeReviews = (id) => {
 };
 
 // Get Wishlist
-export const useGetWishlist = () => {
+export const useGetWishlist = (page_id, category_id) => {
   return useQuery({
-    queryKey: ['get-wishlist'],
-    queryFn: GetWishlist,
+    queryKey: ['get-wishlists', page_id, category_id],
+    queryFn:() =>  GetWishlist(page_id, category_id),
   });
 };

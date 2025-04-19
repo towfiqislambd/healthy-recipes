@@ -10,15 +10,13 @@ import { useState } from 'react';
 import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
 import { useAddWishlist } from '@/hooks/cms.mutations';
-import { useGetWishlist } from '@/hooks/cms.queries';
 
 const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc }) => {
+  console.log(item)
   const [isFavorite, setIsFavorite] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
   const { mutateAsync: wishlistMutation } = useAddWishlist(item?.id);
-  const { data: wishlists } = useGetWishlist();
-  console.log(wishlists)
 
   // Function to handle Add to planner button click
   const handleAddToPlanner = (e, item) => {
