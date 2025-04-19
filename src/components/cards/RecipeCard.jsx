@@ -11,7 +11,6 @@ import toast from 'react-hot-toast';
 import { useAddWishlist } from '@/hooks/cms.mutations';
 
 const RecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, handleAddMealFunc }) => {
-  console.log(isSavedRecipe)
   console.log(item)
   // const [isFavorite, setIsFavorite] = useState(false);
   const { user } = useAuth();
@@ -81,7 +80,12 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, handl
         <div className="absolute top-3 left-3">
           <p className="px-3 py-1.5 rounded-sm bg-white/50 text-black text-sm">
             <span>
-              {item?.library_name} | {item?.category_name}
+              {
+                isSavedRecipe ?
+                  `${item?.recipe_library?.diet_name} | ${item?.category?.category_name}`
+                  :
+                  `${item?.library_name} | ${item?.category_name}`
+              }
             </span>
           </p>
         </div>
@@ -108,7 +112,13 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, handl
           </div>
           <div>
             <p className="text-textColor font-medium text-[15px] xl:text-base">
-              {item?.total_ingredients} ingredients | {item?.recipe_creator}
+              {/* Working left */}
+              {
+                isSavedRecipe ?
+                  `${item?.recipe_library?.diet_name} | ${item?.category?.category_name}`
+                  :
+                  `${item?.total_ingredients} ingredients | ${item?.recipe_creator}`
+              }
             </p>
           </div>
         </div>
@@ -125,7 +135,15 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, handl
         {/* reviews */}
         <div className="flex items-center gap-1">
           <StarSvg />
-          <span className="text-textColor text-sm font-medium">{item?.average_rating}</span>
+          <span className="text-textColor text-sm font-medium">
+            {
+              isSavedRecipe ?
+                item?.reviews_avg
+                :
+                item?.average_rating
+            }
+            {item?.average_rating}
+          </span>
         </div>
       </div>
 
