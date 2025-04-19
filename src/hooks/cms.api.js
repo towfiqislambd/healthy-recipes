@@ -109,13 +109,13 @@ export const SocialInfo = async () => {
     return data?.data;
 };
 
+//=================== 2nd day ===================
+
 // Recipe reviews
-export const RecipeReviews = async (id) => {
-    const { data } = await axiosPublic(`/api/reviews/${id}`);
+export const RecipeReviews = async (recipe_id, page_id) => {
+    const { data } = await axiosPublic(`/api/reviews-with-pagination/${recipe_id}?page=${page_id}`);
     return data?.data;
 };
-
-//=================== 2nd day ===================
 
 // Add reviews
 export const AddReview = async (id, payload) => {
@@ -123,14 +123,46 @@ export const AddReview = async (id, payload) => {
     return data?.data;
 };
 
-// Add Wishlist
+// Add/Remove Wishlist
 export const AddWishlist = async (id) => {
     const { data } = await axiosSecure.post(`/api/wishlist/${id}`);
     return data?.data;
 };
 
 // Get Wishlist
-export const GetWishlist = async () => {
-    const { data } = await axiosSecure(`/api/wishlists`);
+export const GetWishlist = async (page_id, category_id) => {
+    let url = '/api/wishlists?';
+
+    if (page_id) url += `page=${page_id}&`;
+    if (category_id) url += `category_id=${category_id}&`;
+
+     // Remove the last '&' if we added any parameters
+     url = url.endsWith('&') ? url.slice(0, -1) : url;
+     // If no parameters were added, remove the '?'
+     url = url.endsWith('?') ? url.slice(0, -1) : url;
+
+    const { data } = await axiosSecure(url);
+    return data?.data;
+};
+
+// My Recipes
+export const MyRecipes = async (page_id, category_id) => {
+    let url = '/api/my-recipes?';
+
+    if (page_id) url += `page=${page_id}&`;
+    if (category_id) url += `category_id=${category_id}&`;
+
+     // Remove the last '&' if we added any parameters
+     url = url.endsWith('&') ? url.slice(0, -1) : url;
+     // If no parameters were added, remove the '?'
+     url = url.endsWith('?') ? url.slice(0, -1) : url;
+
+    const { data } = await axiosSecure(url);
+    return data?.data;
+};
+
+// My Recipe Details
+export const MyRecipeDetails = async (id) => {
+    const { data } = await axiosSecure.get(`/api/my-recipe-details/${id}`);
     return data?.data;
 };

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AllCategories, AllRecipes, BlogDetails, Blogs, FooterInfo, GetWishlist, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, OurMealPlanner, RecipeDetails, RecipeLibrary, RecipeReviews, ShareYourRecipe, SocialInfo, Testimonial, TrendingRecipes, WhyChooseUs } from './cms.api';
+import { AllCategories, AllRecipes, BlogDetails, Blogs, FooterInfo, GetWishlist, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, MyRecipeDetails, MyRecipes, OurMealPlanner, RecipeDetails, RecipeLibrary, RecipeReviews, ShareYourRecipe, SocialInfo, Testimonial, TrendingRecipes, WhyChooseUs } from './cms.api';
 
 // Homepage - Banner
 export const useHomepageBanner = () => {
@@ -134,18 +134,33 @@ export const useSocialInfo = () => {
 //==================== 2nd day =====================
 
 // Recipe reviews
-export const useRecipeReviews = (id) => {
+export const useRecipeReviews = (recipe_id, page_id) => {
   return useQuery({
-       queryKey: ['recipe-reviews', id],
-       queryFn: () => RecipeReviews(id),
-       enabled: !!id,
-     });
+    queryKey: ['recipe-reviews', recipe_id, page_id],
+    queryFn: () => RecipeReviews(recipe_id, page_id),
+  });
 };
 
 // Get Wishlist
-export const useGetWishlist = () => {
+export const useGetWishlist = (page_id, category_id) => {
   return useQuery({
-    queryKey: ['get-wishlist'],
-    queryFn: GetWishlist,
+    queryKey: ['get-wishlists', page_id, category_id],
+    queryFn:() =>  GetWishlist(page_id, category_id),
   });
+};
+// My Recipes
+export const useMyRecipes = (page_id, category_id) => {
+  return useQuery({
+    queryKey: ['my-recipes', page_id, category_id],
+    queryFn:() =>  MyRecipes(page_id, category_id),
+  });
+};
+
+// My Recipe Details
+export const useMyRecipeDetails = (id) => {
+  return useQuery({
+       queryKey: ['my-recipe-details', id],
+       queryFn: () => MyRecipeDetails(id),
+       enabled: !!id,
+     });
 };

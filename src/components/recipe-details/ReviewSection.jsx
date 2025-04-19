@@ -1,20 +1,14 @@
-import { useState } from "react";
 import ReviewLeftSection from "./ReviewLeftSection";
 import ReviewCard from "../cards/ReviewCard";
+import { useState } from "react";
+import { useRecipeReviews } from "@/hooks/cms.queries";
 
-const ReviewSection = ({ id, allReviews, refetch }) => {
-  const [page, setPage] = useState(0);
-  const itemsPerPage = 3;
+const ReviewSection = ({ id }) => {
+  const [activePage, setActivePage] = useState(1);
+  const { data: allReviews, isLoading, refetch } = useRecipeReviews(id, activePage);
+  console.log(allReviews)
 
-  const startIdx = page * itemsPerPage;
-  const endIdx = startIdx + itemsPerPage;
-  const currentItems = allReviews.slice(startIdx, endIdx);
-
-  const hasMore = endIdx < allReviews.length;
-
-  const handleSeeMore = () => {
-    setPage((prev) => prev + 1);
-  };
+  if (isLoading) return <p className="h-svh">loading....</p>;
 
   return (
     <section className="container py-8 xl:py-10 2xl:py-16 3xl:py-24">
@@ -26,25 +20,29 @@ const ReviewSection = ({ id, allReviews, refetch }) => {
 
         {/* right side contents */}
         <div className="space-y-5 xl:flex-1 w-full">
-          {allReviews.length > 0 ? (
-            <>
-              {currentItems.map((item, idx) => (
-                <ReviewCard key={startIdx + idx} data={item} />
-              ))}
-              {hasMore && (
-                <div className="pt-2">
-                  <button
-                    onClick={handleSeeMore}
-                    className="text-primary font-medium hover:underline"
-                  >
-                    See More
-                  </button>
-                </div>
-              )}
-            </>
-          ) : (
-            <p>No review yet</p>
-          )}
+          {
+            allReviews.data?.length > 0 ?
+              allReviews?.data?.map((item, idx) =>
+                <ReviewCard key={idx} data={item} />
+              )
+              :
+              <p>No review yet</p>
+          }
+
+          {/* Pagination */}
+          <div className="mt-10 flex justify-center items-center gap-2 flex-wrap">
+            {allReviews?.links.map((item, idx) => (
+              <button
+                key={idx}
+                onClick={() => item.url && setActivePage(item.url.split('=')[1])}
+                className={`px-3 py-1 rounded border transition-all duration-150 
+        ${item.active ? 'bg-primary text-white' : 'bg-white text-gray-700'} 
+        ${!item.url ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'}`}
+                disabled={!item.url}
+                dangerouslySetInnerHTML={{ __html: item.label }}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

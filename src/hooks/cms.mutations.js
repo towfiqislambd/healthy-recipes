@@ -25,7 +25,7 @@ export const useAddReview = (id) => {
 };
 
 
-// Add wishlist
+// Add/Remove wishlist
 export const useAddWishlist = (id) => {
     const { setLoading } = useAuth();
     
@@ -35,9 +35,15 @@ export const useAddWishlist = (id) => {
       onMutate: () => {
         setLoading(true);
       },
-      onSuccess: () => {
-        setLoading(false);
-        toast.success('Added in wishlist');
+      onSuccess: (data) => {
+        if(data.length === 0){
+          setLoading(false);
+          toast.error('Removed from wishlist');
+      }
+       else{
+          setLoading(false);
+          toast.success('Added in wishlist');
+       }
       },
       onError: (err) => {
         setLoading(false);
