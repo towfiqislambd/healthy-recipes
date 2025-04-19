@@ -109,13 +109,13 @@ export const SocialInfo = async () => {
     return data?.data;
 };
 
+//=================== 2nd day ===================
+
 // Recipe reviews
-export const RecipeReviews = async (id) => {
-    const { data } = await axiosPublic(`/api/reviews/${id}`);
+export const RecipeReviews = async (recipe_id, page_id) => {
+    const { data } = await axiosPublic(`/api/reviews-with-pagination/${recipe_id}?page=${page_id}`);
     return data?.data;
 };
-
-//=================== 2nd day ===================
 
 // Add reviews
 export const AddReview = async (id, payload) => {

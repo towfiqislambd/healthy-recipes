@@ -47,6 +47,7 @@ const DashboardSavedRecipes = () => {
                     savedRecipes?.wishlist?.data.length > 0 ?
                         savedRecipes?.wishlist?.data?.map((item, idx) => (
                             <RecipeCard
+                                isSavedRecipe={true}
                                 isMyRecipe={true}
                                 key={idx}
                                 item={item?.recipe}
@@ -58,7 +59,7 @@ const DashboardSavedRecipes = () => {
             </div>
 
             {/* Pagination */}
-            <div className="mt-10 flex justify-center items-center gap-3">
+            <div className="mt-10 flex justify-center items-center gap-2 flex-wrap">
                 {savedRecipes?.wishlist?.links.map((item, idx) => (
                     <button
                         key={idx}

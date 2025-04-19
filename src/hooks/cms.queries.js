@@ -134,12 +134,11 @@ export const useSocialInfo = () => {
 //==================== 2nd day =====================
 
 // Recipe reviews
-export const useRecipeReviews = (id) => {
+export const useRecipeReviews = (recipe_id, page_id) => {
   return useQuery({
-       queryKey: ['recipe-reviews', id],
-       queryFn: () => RecipeReviews(id),
-       enabled: !!id,
-     });
+    queryKey: ['recipe-reviews', recipe_id, page_id],
+    queryFn: () => RecipeReviews(recipe_id, page_id),
+  });
 };
 
 // Get Wishlist

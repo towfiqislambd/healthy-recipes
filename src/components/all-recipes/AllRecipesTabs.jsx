@@ -96,7 +96,7 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
           {
             allRecipes?.length > 0 ?
               allRecipes?.map((item, idx) => (
-                <RecipeCard key={idx} item={item} down={idx % 2 !== 0} />
+                <RecipeCard key={idx} item={item}  isMyRecipe={true} />
               ))
               :
               'No data found'
