@@ -6,14 +6,13 @@ import {
   RecipeBookSvg,
   StarSvg,
 } from '../svg-container/SvgContainer';
-import { useState } from 'react';
 import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
 import { useAddWishlist } from '@/hooks/cms.mutations';
 
 const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc }) => {
   console.log(item)
-  const [isFavorite, setIsFavorite] = useState(false);
+  // const [isFavorite, setIsFavorite] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
   const { mutateAsync: wishlistMutation } = useAddWishlist(item?.id);
@@ -32,7 +31,7 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc })
     e.preventDefault(); // Prevents the default link navigation
 
     if (user) {
-      setIsFavorite((prev) => !prev); // Toggle favorite state
+      // setIsFavorite((prev) => !prev); // Toggle favorite state
       wishlistMutation()
     }
     else {
@@ -63,16 +62,15 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc })
           isMyRecipe ?
             <button
               onClick={handleWishlistClick}
-              className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${isFavorite ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
+              className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${item?.is_wishlisted ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
                 }`}
             >
-              <LoveSvg isFavorite={isFavorite} />
+              <LoveSvg isFavorite={item?.is_wishlisted} />
             </button>
             :
             <button
               onClick={e => e.stopPropagation()}
-              className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${isFavorite ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
-                }`}
+              className='absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer'
             >
               <FiEdit className='text-lg' />
             </button>

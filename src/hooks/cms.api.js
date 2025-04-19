@@ -123,7 +123,7 @@ export const AddReview = async (id, payload) => {
     return data?.data;
 };
 
-// Add Wishlist
+// Add/Remove Wishlist
 export const AddWishlist = async (id) => {
     const { data } = await axiosSecure.post(`/api/wishlist/${id}`);
     return data?.data;
