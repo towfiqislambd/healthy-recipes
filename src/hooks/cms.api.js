@@ -166,3 +166,9 @@ export const MyRecipeDetails = async (id) => {
     const { data } = await axiosSecure.get(`/api/my-recipe-details/${id}`);
     return data?.data;
 };
+
+// Home Page - Trending Recipes (Private)
+export const TrendingRecipesPrivate = async () => {
+    const { data } = await axiosSecure.get('/api/auth/trending-recipes');
+    return data?.data;
+};

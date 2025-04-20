@@ -10,8 +10,7 @@ import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
 import { useAddWishlist } from '@/hooks/cms.mutations';
 
-const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc }) => {
-  // const [isFavorite, setIsFavorite] = useState(false);
+const RecipeCard = ({ item, refetch, isPlanner, isMyRecipe, setOpen, handleAddMealFunc }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { mutateAsync: wishlistMutation } = useAddWishlist(item?.id);
@@ -25,14 +24,15 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc })
   };
 
   // Function to handle wishlist button click
-  const handleWishlistClick = (e) => {
+  const handleWishlistClick = async (e) => {
     e.stopPropagation(); // Prevents the click event from bubbling up
     e.preventDefault(); // Prevents the default link navigation
 
     if (user) {
-      // setIsFavorite((prev) => !prev); // Toggle favorite state
-      wishlistMutation()
+      await wishlistMutation();
+      refetch();
     }
+
     else {
       toast.error('Please login first')
       navigate('/auth/login')

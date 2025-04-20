@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { AllCategories, AllRecipes, BlogDetails, Blogs, FooterInfo, GetWishlist, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, MyRecipeDetails, MyRecipes, OurMealPlanner, RecipeDetails, RecipeLibrary, RecipeReviews, ShareYourRecipe, SocialInfo, Testimonial, TrendingRecipes, WhyChooseUs } from './cms.api';
+import { AllCategories, AllRecipes, BlogDetails, Blogs, FooterInfo, GetWishlist, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, MyRecipeDetails, MyRecipes, OurMealPlanner, RecipeDetails, RecipeLibrary, RecipeReviews, ShareYourRecipe, SocialInfo, Testimonial, TrendingRecipes, TrendingRecipesPrivate, WhyChooseUs } from './cms.api';
+import useAuth from './useAuth';
 
 // Homepage - Banner
 export const useHomepageBanner = () => {
@@ -162,5 +163,16 @@ export const useMyRecipeDetails = (id) => {
        queryKey: ['my-recipe-details', id],
        queryFn: () => MyRecipeDetails(id),
        enabled: !!id,
+     });
+};
+
+
+// Home Page - Trending Recipes (Private)
+export const useTrendingRecipePrivate = () => {
+  const {user} = useAuth();
+  return useQuery({
+       queryKey: ['trending-recipes-private'],
+       queryFn: TrendingRecipesPrivate,
+       enabled: !!user
      });
 };
