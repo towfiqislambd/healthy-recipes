@@ -4,18 +4,30 @@ import ShareYourRecipeSection from '@/components/homepage/ShareYourRecipeSection
 import MealPlannerTabSection from '@/components/meal-planner/MealPlannerTabSection';
 import {
   useAllRecipes,
+  useAllRecipesPrivate,
   useBlogs,
   useMealPlannerCard,
   useMealPlannerTitleAndDesc,
   useShareYourRecipe,
 } from '@/hooks/cms.queries';
+import useAuth from '@/hooks/useAuth';
 
 const MealPlanner = () => {
+  const { user } = useAuth()
   const { data: shareYourRecipe } = useShareYourRecipe();
   const { data: mealPlannerTitleAndDesc } = useMealPlannerTitleAndDesc();
   const { data: mealPlannerCard } = useMealPlannerCard();
   const { data: blogs } = useBlogs();
   const { data: recipes } = useAllRecipes();
+  const { data: recipesPrivate } = useAllRecipesPrivate();
+
+  let recipeData = null;
+  if (user) {
+    recipeData = recipesPrivate;
+  }
+  else {
+    recipeData = recipes;
+  }
 
   return (
     <div className="mt-10 md:mt-[70px] 3xl:mt-[104px]">
@@ -45,7 +57,7 @@ const MealPlanner = () => {
       </section>
 
       {/* tab section */}
-      <MealPlannerTabSection recipes={recipes} />
+      <MealPlannerTabSection recipes={recipeData} />
 
       <ShareYourRecipeSection data={shareYourRecipe} />
 

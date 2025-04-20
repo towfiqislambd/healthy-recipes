@@ -6,9 +6,11 @@ import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection
 import Testimonials from "@/components/homepage/Testimonials";
 import TrendingDiet from "@/components/homepage/TrendingDiet";
 import WhyChooseUs from "@/components/homepage/WhyChooseUs";
-import { useBlogs, useHomepageBanner, useOurMealPlanner, useRecipeLibrary, useShareYourRecipe, useTestimonial, useTrendingRecipes, useWhyChooseUs } from "@/hooks/cms.queries";
+import { useBlogs, useHomepageBanner, useOurMealPlanner, useRecipeLibrary, useShareYourRecipe, useTestimonial, useTrendingRecipePrivate, useTrendingRecipes, useWhyChooseUs } from "@/hooks/cms.queries";
+import useAuth from "@/hooks/useAuth";
 
 const Homepage = () => {
+  const { user } = useAuth();
   const { data: homepageBanner } = useHomepageBanner();
   const { data: whyChooseUs } = useWhyChooseUs();
   const { data: ourMealPlanner } = useOurMealPlanner();
@@ -17,12 +19,21 @@ const Homepage = () => {
   const { data: blogs } = useBlogs();
   const { data: recipeLibrary } = useRecipeLibrary();
   const { data: trendingRecipes } = useTrendingRecipes();
+  const { data: trendingRecipesPrivate, refetch } = useTrendingRecipePrivate();
+
+  let trendingData = null;
+  if (user) {
+    trendingData = trendingRecipesPrivate;
+  }
+  else {
+    trendingData = trendingRecipes;
+  }
 
   return (
     <div className="mt-[80px] lg:mt-[104px]">
       <HomepageBanner data={homepageBanner} />
       <WhyChooseUs data={whyChooseUs} />
-      <TrendingDiet data={trendingRecipes}/>
+      <TrendingDiet data={trendingData} refetch={refetch} />
       <RecipeLibrarySection data={recipeLibrary} />
       <OurMealPlanner data={ourMealPlanner} />
       <ShareYourRecipeSection data={shareYourRecipe} />

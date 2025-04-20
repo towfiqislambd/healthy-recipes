@@ -31,15 +31,21 @@ export const Testimonial = async () => {
     return data?.data;
 };
 
-// Home Page - Trending Recipes
+// Home Page - Trending Recipes (Public)
 export const TrendingRecipes = async () => {
     const { data } = await axiosPublic('/api/guest/trending-recipes');
     return data?.data;
 };
 
-// All Recipes
+// Home Page - Trending Recipes (Private)
+export const TrendingRecipesPrivate = async () => {
+    const { data } = await axiosSecure.get('/api/auth/trending-recipes');
+    return data?.data;
+};
+
+// All Recipes (Public)
 export const AllRecipes = async (category_id, recipe_library_id, age_group, tag_id) => {
-    let url = '/api/recipes?';
+    let url = '/api/guest/recipes?';
     
     if (category_id) url += `category_id=${category_id}&`;
     if (recipe_library_id) url += `recipe_library_id=${recipe_library_id}&`;
@@ -55,7 +61,25 @@ export const AllRecipes = async (category_id, recipe_library_id, age_group, tag_
     return data?.data;
 };
 
-// Recipe Library Page - Recipe Library
+// All Recipes (Private)
+export const AllRecipesPrivate = async (category_id, recipe_library_id, age_group, tag_id) => {
+    let url = '/api/auth/recipes?';
+    
+    if (category_id) url += `category_id=${category_id}&`;
+    if (recipe_library_id) url += `recipe_library_id=${recipe_library_id}&`;
+    if (age_group) url += `age_group=${age_group}&`;
+    if (tag_id) url += `tag_id=${tag_id}&`;
+    
+    // Remove the last '&' if we added any parameters
+    url = url.endsWith('&') ? url.slice(0, -1) : url;
+    // If no parameters were added, remove the '?'
+    url = url.endsWith('?') ? url.slice(0, -1) : url;
+    
+    const { data } = await axiosSecure(url);
+    return data?.data;
+};
+
+// Recipe Library Page - all library
 export const RecipeLibrary = async () => {
     const { data } = await axiosPublic('/api/recipe-libraries');
     return data?.data;
@@ -97,6 +121,22 @@ export const BlogDetails = async (slug) => {
     return data?.data;
 };
 
+// Get Wishlist
+export const GetWishlist = async (page_id, category_id) => {
+    let url = '/api/wishlists?';
+
+    if (page_id) url += `page=${page_id}&`;
+    if (category_id) url += `category_id=${category_id}&`;
+
+     // Remove the last '&' if we added any parameters
+     url = url.endsWith('&') ? url.slice(0, -1) : url;
+     // If no parameters were added, remove the '?'
+     url = url.endsWith('?') ? url.slice(0, -1) : url;
+
+    const { data } = await axiosSecure(url);
+    return data?.data;
+};
+
 // Footer Info:
 export const FooterInfo = async () => {
     const { data } = await axiosPublic('/api/site-settings');
@@ -109,13 +149,45 @@ export const SocialInfo = async () => {
     return data?.data;
 };
 
-// Recipe reviews
-export const RecipeReviews = async (id) => {
-    const { data } = await axiosPublic(`/api/reviews/${id}`);
+// My Recipes
+export const MyRecipes = async (page_id, category_id) => {
+    let url = '/api/my-recipes?';
+
+    if (page_id) url += `page=${page_id}&`;
+    if (category_id) url += `category_id=${category_id}&`;
+
+     // Remove the last '&' if we added any parameters
+     url = url.endsWith('&') ? url.slice(0, -1) : url;
+     // If no parameters were added, remove the '?'
+     url = url.endsWith('?') ? url.slice(0, -1) : url;
+
+    const { data } = await axiosSecure(url);
     return data?.data;
 };
 
-//=================== 2nd day ===================
+// My Recipe Details
+export const MyRecipeDetails = async (id) => {
+    const { data } = await axiosSecure.get(`/api/my-recipe-details/${id}`);
+    return data?.data;
+};
+
+// Recipe reviews
+export const RecipeReviews = async (recipe_id, page_id) => {
+    const { data } = await axiosPublic(`/api/reviews-with-pagination/${recipe_id}?page=${page_id}`);
+    return data?.data;
+};
+
+// Meal Planner Table
+export const MealPlannerTableData = async (category_id) => {
+    let url = '/api/get-meal-plans?';
+    if (category_id) url += `category_id=${category_id}&`;
+
+    url = url.endsWith('&') ? url.slice(0, -1) : url;
+    url = url.endsWith('?') ? url.slice(0, -1) : url;
+
+    const { data } = await axiosSecure(url);
+    return data?.data;
+};
 
 // Add reviews
 export const AddReview = async (id, payload) => {
@@ -123,14 +195,23 @@ export const AddReview = async (id, payload) => {
     return data?.data;
 };
 
-// Add Wishlist
+// Add/Remove Wishlist
 export const AddWishlist = async (id) => {
     const { data } = await axiosSecure.post(`/api/wishlist/${id}`);
     return data?.data;
 };
 
-// Get Wishlist
-export const GetWishlist = async () => {
-    const { data } = await axiosSecure(`/api/wishlists`);
+// Add New Recipe
+export const AddRecipe = async (payload) => {
+    const { data } = await axiosSecure.post('api/recipe/store', payload);
+    return data?.data;
+};
+
+
+
+
+// Add Meal Planner
+export const AddMealPlanner = async (recipe_id, payload) => {
+    const { data } = await axiosSecure.post(`api/meal-plans/${recipe_id}`, payload);
     return data?.data;
 };

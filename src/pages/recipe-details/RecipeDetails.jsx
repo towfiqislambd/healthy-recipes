@@ -5,17 +5,13 @@ import ShareRecipeSection from "@/components/recipe-details/ShareRecipeSection";
 import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection";
 import ReviewSection from "@/components/recipe-details/ReviewSection";
 import { useParams } from "react-router-dom";
-import { useRecipeDetails, useRecipeReviews, useShareYourRecipe } from "@/hooks/cms.queries";
+import { useRecipeDetails, useShareYourRecipe } from "@/hooks/cms.queries";
 
 const RecipeDetails = () => {
   const { id } = useParams();
   const fullLocation = `${window.location.origin}/${id}`;
   const { data: shareYourRecipe } = useShareYourRecipe();
   const { data: recipeData } = useRecipeDetails(id);
-  const { data: allReviews, isLoading, refetch } = useRecipeReviews(id);
-  if (isLoading) {
-    return <p>Loading....</p>
-  }
 
   return (
     <div className="mt-[104px]">
@@ -31,12 +27,12 @@ const RecipeDetails = () => {
         <div className="container">
           <div className="flex flex-col xl:flex-row w-full gap-5 lg:gap-8 xl:gap-14 2xl:gap-24 lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
             {/* left side contents */}
-            <div className="">
+            <div className="w-[400px]">
               <LeftSideContentsDetailsPage data={recipeData} />
             </div>
 
             {/* right side contents */}
-            <div className="">
+            <div className="flex-grow">
               <RightSideContentsDetailsPage data={recipeData} />
             </div>
           </div>
@@ -49,7 +45,7 @@ const RecipeDetails = () => {
       <ShareYourRecipeSection data={shareYourRecipe} />
 
       {/* review section */}
-      <ReviewSection id={id} refetch={refetch} allReviews={allReviews} />
+      <ReviewSection id={id} />
     </div>
   );
 };

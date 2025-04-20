@@ -39,8 +39,6 @@ const RightSideContentsDetailsPage = ({ data }) => {
             src={`${import.meta.env.VITE_SITE_URL}/${data?.recipe_video}`}
           ></video>
 
-          {/* buttons */}
-
           {/* play button */}
           <div
             onClick={handlePlay}
