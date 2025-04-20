@@ -95,7 +95,6 @@ const MyRecipeCard = ({ item, isMyRecipe }) => {
                     </div>
                     <div>
                         <p className="text-textColor font-medium text-[15px] xl:text-base">
-                            {/* Working left */}
                             {
                                 `${item?.total_ingredients} ingredients | ${item?.recipe_creator}`
                             }

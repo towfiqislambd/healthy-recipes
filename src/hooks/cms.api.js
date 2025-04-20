@@ -188,4 +188,10 @@ export const AddWishlist = async (id) => {
     const { data } = await axiosSecure.post(`/api/wishlist/${id}`);
     return data?.data;
 };
+
+// Add New Recipe
+export const AddRecipe = async (payload) => {
+    const { data } = await axiosSecure.post('api/recipe/store', payload);
+    return data?.data;
+};
 //=================== 2nd day ===================

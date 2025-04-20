@@ -1,14 +1,15 @@
 import toast from 'react-hot-toast';
 import useAuth from './useAuth';
 import { useMutation } from '@tanstack/react-query';
-import { AddReview, AddWishlist } from './cms.api';
+import { AddRecipe, AddReview, AddWishlist } from './cms.api';
+import { useNavigate } from 'react-router-dom';
 
 // Add reviews
 export const useAddReview = (id) => {
     const { setLoading } = useAuth();
     
     return useMutation({
-      mutationKey: ['add-recipe'],
+      mutationKey: ['add-review'],
       mutationFn: (payload) => AddReview(id, payload),
       onMutate: () => {
         setLoading(true);
@@ -50,4 +51,29 @@ export const useAddWishlist = (id) => {
         toast.error(err?.response?.data?.message || 'Something went wrong. Please try again.');
       },
     });
+};
+
+
+// Add New Recipe
+export const useAddRecipe = () => {
+  const navigate = useNavigate()
+  const { setLoading } = useAuth();
+  
+  return useMutation({
+    mutationKey: ['add-recipe'],
+    mutationFn: (payload) => AddRecipe(payload),
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: (data) => {
+      console.log(data)
+      setLoading(false);
+      toast.success('Recipe added Successfully');
+      navigate('/dashboard/dashboard-my-recipes')
+    },
+    onError: (err) => {
+      setLoading(false);
+      toast.error(err?.response?.data?.message);
+    },
+  });
 };
