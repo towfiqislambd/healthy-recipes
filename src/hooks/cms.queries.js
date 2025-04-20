@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AllCategories, AllRecipes, AllRecipesPrivate, BlogDetails, Blogs, FooterInfo, GetWishlist, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, MyRecipeDetails, MyRecipes, OurMealPlanner, RecipeDetails, RecipeLibrary, RecipeReviews, ShareYourRecipe, SocialInfo, Testimonial, TrendingRecipes, TrendingRecipesPrivate, WhyChooseUs } from './cms.api';
+import { AllCategories, AllRecipes, AllRecipesPrivate, BlogDetails, Blogs, FooterInfo, GetWishlist, HomepageBanner, MealPlannerCard, MealPlannerTableData, MealPlannerTitleAndDesc, MyRecipeDetails, MyRecipes, OurMealPlanner, RecipeDetails, RecipeLibrary, RecipeReviews, ShareYourRecipe, SocialInfo, Testimonial, TrendingRecipes, TrendingRecipesPrivate, WhyChooseUs } from './cms.api';
 import useAuth from './useAuth';
 
 // Homepage - Banner
@@ -184,4 +184,11 @@ export const useMyRecipeDetails = (id) => {
        enabled: !!id,
      });
 };
-//==================== 2nd day =====================
+
+// Meal Planner Table
+export const useMealPlannerTable = (category_id) => {
+  return useQuery({
+       queryKey: ['meal-planner-table',category_id],
+       queryFn: () => MealPlannerTableData(category_id),
+     });
+};

@@ -177,6 +177,18 @@ export const RecipeReviews = async (recipe_id, page_id) => {
     return data?.data;
 };
 
+// Meal Planner Table
+export const MealPlannerTableData = async (category_id) => {
+    let url = '/api/get-meal-plans?';
+    if (category_id) url += `category_id=${category_id}&`;
+
+    url = url.endsWith('&') ? url.slice(0, -1) : url;
+    url = url.endsWith('?') ? url.slice(0, -1) : url;
+    
+    const { data } = await axiosSecure(url);
+    return data?.data;
+};
+
 // Add reviews
 export const AddReview = async (id, payload) => {
     const { data } = await axiosSecure.post(`/api/review/${id}`, payload);
@@ -194,4 +206,3 @@ export const AddRecipe = async (payload) => {
     const { data } = await axiosSecure.post('api/recipe/store', payload);
     return data?.data;
 };
-//=================== 2nd day ===================
