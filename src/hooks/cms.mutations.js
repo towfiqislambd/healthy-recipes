@@ -25,7 +25,7 @@ export const useAddReview = (id) => {
 };
 
 
-// Add/Remove wishlist
+// Add or Remove wishlist
 export const useAddWishlist = (id) => {
     const { setLoading } = useAuth();
     

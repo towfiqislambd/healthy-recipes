@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AllCategories, AllRecipes, BlogDetails, Blogs, FooterInfo, GetWishlist, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, MyRecipeDetails, MyRecipes, OurMealPlanner, RecipeDetails, RecipeLibrary, RecipeReviews, ShareYourRecipe, SocialInfo, Testimonial, TrendingRecipes, TrendingRecipesPrivate, WhyChooseUs } from './cms.api';
+import { AllCategories, AllRecipes, AllRecipesPrivate, BlogDetails, Blogs, FooterInfo, GetWishlist, HomepageBanner, MealPlannerCard, MealPlannerTitleAndDesc, MyRecipeDetails, MyRecipes, OurMealPlanner, RecipeDetails, RecipeLibrary, RecipeReviews, ShareYourRecipe, SocialInfo, Testimonial, TrendingRecipes, TrendingRecipesPrivate, WhyChooseUs } from './cms.api';
 import useAuth from './useAuth';
 
 // Homepage - Banner
@@ -42,7 +42,7 @@ export const useTestimonial = () => {
     });
 };
 
-// Home Page - Trending Recipes
+// Home Page - Trending Recipes (Public)
 export const useTrendingRecipes = () => {
   return useQuery({
        queryKey: ['trending-recipes'],
@@ -50,7 +50,17 @@ export const useTrendingRecipes = () => {
      });
 };
 
-// All Recipes
+// Home Page - Trending Recipes (Private)
+export const useTrendingRecipePrivate = () => {
+  const {user} = useAuth();
+  return useQuery({
+       queryKey: ['trending-recipes-private'],
+       queryFn: TrendingRecipesPrivate,
+       enabled: !!user
+     });
+};
+
+// All Recipes (Public)
 export const useAllRecipes = (category_id, recipe_library_id, age_group, tag_id) => {
   return useQuery({
     queryKey: ['all-recipes', category_id, recipe_library_id, age_group, tag_id],
@@ -58,7 +68,17 @@ export const useAllRecipes = (category_id, recipe_library_id, age_group, tag_id)
   });
 };
 
-// Recipe Library Page - Recipe Library
+// All Recipes (Private)
+export const useAllRecipesPrivate = (category_id, recipe_library_id, age_group, tag_id) => {
+  const {user} = useAuth();
+  return useQuery({
+    queryKey: ['all-recipes-private', category_id, recipe_library_id, age_group, tag_id],
+    queryFn: () => AllRecipesPrivate(category_id, recipe_library_id, age_group, tag_id),
+    enabled: !!user
+  });
+};
+
+// All Recipe Library
 export const useRecipeLibrary = () => {
  return useQuery({
       queryKey: ['recipe-library'],
@@ -147,6 +167,7 @@ export const useGetWishlist = (page_id, category_id) => {
     queryFn:() =>  GetWishlist(page_id, category_id),
   });
 };
+
 // My Recipes
 export const useMyRecipes = (page_id, category_id) => {
   return useQuery({
@@ -163,16 +184,4 @@ export const useMyRecipeDetails = (id) => {
        enabled: !!id,
      });
 };
-
-
-// Home Page - Trending Recipes (Private)
-export const useTrendingRecipePrivate = () => {
-  const {user} = useAuth();
-  return useQuery({
-       queryKey: ['trending-recipes-private'],
-       queryFn: TrendingRecipesPrivate,
-       enabled: !!user
-     });
-};
-
 //==================== 2nd day =====================

@@ -50,7 +50,7 @@ const DashboardSavedRecipes = () => {
                                 isSavedRecipe={true}
                                 isMyRecipe={true}
                                 key={idx}
-                                item={item?.recipe}
+                                item={item}
                             />
                         ))
                         :

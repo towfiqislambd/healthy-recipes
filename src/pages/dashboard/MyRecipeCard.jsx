@@ -1,10 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { FiEdit } from "react-icons/fi";
 import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
 import { useAddWishlist } from '@/hooks/cms.mutations';
 import { StarSvg, FireSvg, LoveSvg, RecipeBookSvg } from '@/components/svg-container/SvgContainer';
 
-const MyRecipeCard = ({ item }) => {
+const MyRecipeCard = ({ item, isMyRecipe }) => {
     const { user } = useAuth();
     const navigate = useNavigate();
     const { mutateAsync: wishlistMutation } = useAddWishlist(item?.id);
@@ -41,15 +42,23 @@ const MyRecipeCard = ({ item }) => {
                         <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30"></div>
                     </div>
                 </div>
-
-                {/* Wishlist */}
-                <button
-                    onClick={handleWishlistClick}
-                    className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${item?.is_wishlisted ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
-                        }`}
-                >
-                    <LoveSvg isFavorite={item?.is_wishlisted} />
-                </button>
+                {
+                    isMyRecipe ?
+                        <button
+                            onClick={handleWishlistClick}
+                            className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${item?.is_wishlisted ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
+                                }`}
+                        >
+                            <LoveSvg isFavorite={item?.is_wishlisted} />
+                        </button>
+                        :
+                        <button
+                            onClick={e => e.stopPropagation()}
+                            className='absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer'
+                        >
+                            <FiEdit className='text-lg' />
+                        </button>
+                }
 
                 {/* type */}
                 <div className="absolute top-3 left-3">

@@ -48,7 +48,6 @@ const DashboardSavedRecipes = () => {
                         myRecipes?.recipes?.data?.map((item, idx) => (
                             <MyRecipeCard
                                 isSavedRecipe={true}
-                                isMyRecipe={false}
                                 key={idx}
                                 item={item}
                             />

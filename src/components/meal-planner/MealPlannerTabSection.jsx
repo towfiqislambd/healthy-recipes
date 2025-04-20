@@ -10,9 +10,11 @@ import { RiResetLeftFill } from 'react-icons/ri';
 import RecipeCard from '../cards/RecipeCard';
 import Modal from '../modals/Modal';
 import AddMealModal from '../modals/AddMealModal';
-import { useAllCategories, useAllRecipes, useRecipeLibrary } from '@/hooks/cms.queries';
+import { useAllCategories, useAllRecipes, useAllRecipesPrivate, useRecipeLibrary } from '@/hooks/cms.queries';
+import useAuth from '@/hooks/useAuth';
 
 const MealPlannerTabSection = ({ recipes }) => {
+  const { user } = useAuth()
   const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
   const [ageGroup, setAgeGroup] = useState(null);
   const [library, setLibrary] = useState(null);
@@ -21,12 +23,20 @@ const MealPlannerTabSection = ({ recipes }) => {
   const [selectedDiet, setSelectedDiet] = useState('');
   const [plannerItem, setPlannerItem] = useState(null);
   const [tableData, setTableData] = useState([]);
-
   const { data: allCategories } = useAllCategories();
   const { data: recipeLibrary } = useRecipeLibrary()
-  const { data: allRecipes, isLoading, isFetching, isPending } = useAllRecipes(activeTab?.id, library, ageGroup);
+  const { data: allRecipes, isLoading: loadingAllRecipe } = useAllRecipes(activeTab?.id, library, ageGroup);
+  const { data: recipesPrivate, isLoading: loadingAllRecipePrivate, refetch } = useAllRecipesPrivate(activeTab?.id, library, ageGroup);
 
-  if (isLoading || isFetching || isPending) return <p className="h-svh">loading....</p>;
+  let recipeData = null;
+  if (user) {
+    recipeData = recipesPrivate;
+  }
+  else {
+    recipeData = allRecipes;
+  }
+
+  if (loadingAllRecipe || loadingAllRecipePrivate) return <p>loading....</p>;
 
   const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
@@ -124,14 +134,14 @@ const MealPlannerTabSection = ({ recipes }) => {
 
         {/* Recipe Cards */}
         <div className="mt-10 grid lg:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4 gap-6">
-          {allRecipes?.map((item, idx) => (
+          {recipeData?.map((item, idx) => (
             <RecipeCard
+              refetch={refetch}
               key={idx}
               isMyRecipe={true}
               isPlanner={true}
               setOpen={setOpen}
               item={item}
-              down={idx % 2 !== 0}
               handleAddMealFunc={handleAddMealFunc}
             />
           ))}

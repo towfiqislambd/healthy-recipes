@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import RecipeCard from "@/components/cards/RecipeCard";
 
 const FavoriteRecipes = ({ savedRecipes }) => {
+    console.log(savedRecipes?.wishlist?.data)
     return (
         <div className="mb-10">
             <div className="flex mb-6 justify-between items-center">
@@ -15,8 +16,7 @@ const FavoriteRecipes = ({ savedRecipes }) => {
                     <RecipeCard
                         isMyRecipe={true}
                         key={idx}
-                        item={item?.recipe}
-                        down={idx % 2 !== 0}
+                        item={item}
                     />
                 ))}
             </div>

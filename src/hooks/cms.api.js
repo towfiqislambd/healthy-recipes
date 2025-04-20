@@ -31,15 +31,21 @@ export const Testimonial = async () => {
     return data?.data;
 };
 
-// Home Page - Trending Recipes
+// Home Page - Trending Recipes (Public)
 export const TrendingRecipes = async () => {
     const { data } = await axiosPublic('/api/guest/trending-recipes');
     return data?.data;
 };
 
-// All Recipes
+// Home Page - Trending Recipes (Private)
+export const TrendingRecipesPrivate = async () => {
+    const { data } = await axiosSecure.get('/api/auth/trending-recipes');
+    return data?.data;
+};
+
+// All Recipes (Public)
 export const AllRecipes = async (category_id, recipe_library_id, age_group, tag_id) => {
-    let url = '/api/recipes?';
+    let url = '/api/guest/recipes?';
     
     if (category_id) url += `category_id=${category_id}&`;
     if (recipe_library_id) url += `recipe_library_id=${recipe_library_id}&`;
@@ -55,7 +61,25 @@ export const AllRecipes = async (category_id, recipe_library_id, age_group, tag_
     return data?.data;
 };
 
-// Recipe Library Page - Recipe Library
+// All Recipes (Private)
+export const AllRecipesPrivate = async (category_id, recipe_library_id, age_group, tag_id) => {
+    let url = '/api/auth/recipes?';
+    
+    if (category_id) url += `category_id=${category_id}&`;
+    if (recipe_library_id) url += `recipe_library_id=${recipe_library_id}&`;
+    if (age_group) url += `age_group=${age_group}&`;
+    if (tag_id) url += `tag_id=${tag_id}&`;
+    
+    // Remove the last '&' if we added any parameters
+    url = url.endsWith('&') ? url.slice(0, -1) : url;
+    // If no parameters were added, remove the '?'
+    url = url.endsWith('?') ? url.slice(0, -1) : url;
+    
+    const { data } = await axiosSecure(url);
+    return data?.data;
+};
+
+// Recipe Library Page - all library
 export const RecipeLibrary = async () => {
     const { data } = await axiosPublic('/api/recipe-libraries');
     return data?.data;
@@ -97,36 +121,6 @@ export const BlogDetails = async (slug) => {
     return data?.data;
 };
 
-// Footer Info:
-export const FooterInfo = async () => {
-    const { data } = await axiosPublic('/api/site-settings');
-    return data?.data;
-};
-
-// Social Info:
-export const SocialInfo = async () => {
-    const { data } = await axiosPublic('/api/social-links');
-    return data?.data;
-};
-
-// Recipe reviews
-export const RecipeReviews = async (recipe_id, page_id) => {
-    const { data } = await axiosPublic(`/api/reviews-with-pagination/${recipe_id}?page=${page_id}`);
-    return data?.data;
-};
-
-// Add reviews
-export const AddReview = async (id, payload) => {
-    const { data } = await axiosSecure.post(`/api/review/${id}`, payload);
-    return data?.data;
-};
-
-// Add/Remove Wishlist
-export const AddWishlist = async (id) => {
-    const { data } = await axiosSecure.post(`/api/wishlist/${id}`);
-    return data?.data;
-};
-
 // Get Wishlist
 export const GetWishlist = async (page_id, category_id) => {
     let url = '/api/wishlists?';
@@ -140,6 +134,18 @@ export const GetWishlist = async (page_id, category_id) => {
      url = url.endsWith('?') ? url.slice(0, -1) : url;
 
     const { data } = await axiosSecure(url);
+    return data?.data;
+};
+
+// Footer Info:
+export const FooterInfo = async () => {
+    const { data } = await axiosPublic('/api/site-settings');
+    return data?.data;
+};
+
+// Social Info:
+export const SocialInfo = async () => {
+    const { data } = await axiosPublic('/api/social-links');
     return data?.data;
 };
 
@@ -165,10 +171,21 @@ export const MyRecipeDetails = async (id) => {
     return data?.data;
 };
 
-// Home Page - Trending Recipes (Private)
-export const TrendingRecipesPrivate = async () => {
-    const { data } = await axiosSecure.get('/api/auth/trending-recipes');
+// Recipe reviews
+export const RecipeReviews = async (recipe_id, page_id) => {
+    const { data } = await axiosPublic(`/api/reviews-with-pagination/${recipe_id}?page=${page_id}`);
     return data?.data;
 };
 
+// Add reviews
+export const AddReview = async (id, payload) => {
+    const { data } = await axiosSecure.post(`/api/review/${id}`, payload);
+    return data?.data;
+};
+
+// Add/Remove Wishlist
+export const AddWishlist = async (id) => {
+    const { data } = await axiosSecure.post(`/api/wishlist/${id}`);
+    return data?.data;
+};
 //=================== 2nd day ===================
