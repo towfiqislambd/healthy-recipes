@@ -8,8 +8,6 @@ import {
 } from '../ui/select';
 import { RiResetLeftFill } from 'react-icons/ri';
 import RecipeCard from '../cards/RecipeCard';
-import Modal from '../modals/Modal';
-import AddMealModal from '../modals/AddMealModal';
 import { useAllCategories, useAllRecipes, useAllRecipesPrivate, useRecipeLibrary } from '@/hooks/cms.queries';
 import useAuth from '@/hooks/useAuth';
 
@@ -18,11 +16,8 @@ const MealPlannerTabSection = ({ recipes }) => {
   const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
   const [ageGroup, setAgeGroup] = useState(null);
   const [library, setLibrary] = useState(null);
-  const [open, setOpen] = useState(false);
   const [selectedAge, setSelectedAge] = useState('');
   const [selectedDiet, setSelectedDiet] = useState('');
-  const [plannerItem, setPlannerItem] = useState(null);
-  const [tableData, setTableData] = useState([]);
   const { data: allCategories } = useAllCategories();
   const { data: recipeLibrary } = useRecipeLibrary()
   const { data: allRecipes, isLoading: loadingAllRecipe } = useAllRecipes(activeTab?.id, library, ageGroup);
@@ -55,11 +50,6 @@ const MealPlannerTabSection = ({ recipes }) => {
     setLibrary(null);
     setActiveTab({ category_name: 'All Recipes' });
   };
-
-  const handleAddMealFunc = (item) => {
-    setPlannerItem(item);
-  };
-
 
   return (
     <section className="py-5 3xl:py-12 container">
@@ -140,24 +130,11 @@ const MealPlannerTabSection = ({ recipes }) => {
               key={idx}
               isMyRecipe={true}
               isPlanner={true}
-              setOpen={setOpen}
               item={item}
-              handleAddMealFunc={handleAddMealFunc}
             />
           ))}
         </div>
       </div>
-
-      {/* Modal */}
-      <Modal open={open} setOpen={setOpen}>
-        <AddMealModal
-          open={open}
-          setOpen={setOpen}
-          tableData={tableData}
-          setTableData={setTableData}
-          plannerItem={plannerItem}
-        />
-      </Modal>
     </section>
   );
 };

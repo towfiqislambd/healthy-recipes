@@ -184,7 +184,7 @@ export const MealPlannerTableData = async (category_id) => {
 
     url = url.endsWith('&') ? url.slice(0, -1) : url;
     url = url.endsWith('?') ? url.slice(0, -1) : url;
-    
+
     const { data } = await axiosSecure(url);
     return data?.data;
 };
@@ -204,5 +204,14 @@ export const AddWishlist = async (id) => {
 // Add New Recipe
 export const AddRecipe = async (payload) => {
     const { data } = await axiosSecure.post('api/recipe/store', payload);
+    return data?.data;
+};
+
+
+
+
+// Add Meal Planner
+export const AddMealPlanner = async (recipe_id, payload) => {
+    const { data } = await axiosSecure.post(`api/meal-plans/${recipe_id}`, payload);
     return data?.data;
 };

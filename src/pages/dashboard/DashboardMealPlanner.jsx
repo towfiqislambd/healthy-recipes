@@ -25,6 +25,7 @@ const DashboardMealPlanner = () => {
 
             {/* Tabs */}
             <div className="py-8 w-full flex flex-wrap items-center justify-center 2xl:justify-between gap-x-1 gap-y-2">
+                
                 <button
                     onClick={() => setActiveTab({ id: 0, category_name: 'All Recipes' })}
                     className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium ${activeTab?.category_name === 'All Recipes'
