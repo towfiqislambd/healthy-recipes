@@ -6,7 +6,6 @@ import { useRecipeReviews } from "@/hooks/cms.queries";
 const ReviewSection = ({ id }) => {
   const [activePage, setActivePage] = useState(1);
   const { data: allReviews, isLoading, refetch } = useRecipeReviews(id, activePage);
-  console.log(allReviews)
 
   if (isLoading) return <p className="h-svh">loading....</p>;
 

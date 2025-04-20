@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import RecipeCard from "@/components/cards/RecipeCard";
+import MyRecipeCard from "@/pages/dashboard/MyRecipeCard";
 
 const SharedRecipes = ({ myRecipes }) => {
     return (
@@ -12,7 +12,7 @@ const SharedRecipes = ({ myRecipes }) => {
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5 2xl:px-0">
                 {myRecipes?.recipes?.data?.slice(0, 4)?.map((item, idx) => (
-                    <RecipeCard
+                    <MyRecipeCard
                         isMyRecipe={true}
                         key={idx}
                         item={item}

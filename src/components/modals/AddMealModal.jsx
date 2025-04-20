@@ -16,21 +16,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-
 import { format } from "date-fns"
 import { Calendar } from "@/components/ui/calendar"
 import { useState } from 'react';
 
-
-const AddMealModal = ({ setOpen, plannerItem, tableData, setTableData }) => {
-
-  const handleAdd = () => {
-    setTableData(prev => [...prev, { id: 1, startDate: "", endDate: "", items: [plannerItem] }]);
-    setOpen(false);
-  };
-
-  console.log(tableData);
-
+const AddMealModal = ({ recipeId, setOpen }) => {
+  console.log(recipeId)
   const [startDate, setStartDate] = useState(null)
   const [endDate, setEndDate] = useState(null)
 
@@ -97,7 +88,6 @@ const AddMealModal = ({ setOpen, plannerItem, tableData, setTableData }) => {
           {/* buttons */}
           <div className="pt-6 pb-3 flex items-center justify-center gap-3">
             <button
-              onClick={handleAdd}
               className="px-5 py-2.5 border border-primary bg-primary text-white rounded-md"
             >
               Add to planner

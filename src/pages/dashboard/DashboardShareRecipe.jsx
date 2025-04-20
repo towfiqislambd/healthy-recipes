@@ -1,4 +1,5 @@
 import { AddMoreSvg, CameraSvg } from "@/components/svg-container/SvgContainer";
+import { useAddRecipe } from "@/hooks/cms.mutations";
 import { useAllCategories, useRecipeLibrary } from "@/hooks/cms.queries";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -26,6 +27,7 @@ const ageData = [
 ]
 
 const DashboardShareRecipe = () => {
+    const { mutateAsync: recipeMutation } = useAddRecipe();
     const { data: recipeCategory } = useAllCategories();
     const { data: allLibrary } = useRecipeLibrary();
     const [recipe_video, setRecipeVideo] = useState(null);
@@ -39,6 +41,7 @@ const DashboardShareRecipe = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm();
 
@@ -50,9 +53,8 @@ const DashboardShareRecipe = () => {
         });
     };
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         const newErrors = {};
-
         if (!recipe_video) newErrors.recipe_video = "Recipe video is required.";
         if (!recipe_image) newErrors.recipe_image = "Thumbnail image is required.";
         if (tags.length === 0) newErrors.tags = "At least one tag is required.";
@@ -60,25 +62,40 @@ const DashboardShareRecipe = () => {
             newErrors.ingredients = "Add at least one ingredient.";
         if (instructions.filter(i => i.value.trim()).length === 0)
             newErrors.instructions = "Add at least one instruction.";
-
         setCustomErrors(newErrors);
-
         if (Object.keys(newErrors).length > 0) return;
 
-        const formData = {
-            ...data,
-            recipe_video,
-            recipe_image,
-            tags,
-            ingredients: ingredients.map(i => i.value).filter(Boolean),
-            instructions: instructions.map(i => i.value).filter(Boolean),
-        };
+        const formData = new FormData();
 
-        console.log(formData);
+        // Append regular fields
+        formData.append("recipe_name", data.recipe_name);
+        formData.append("category_id", data.category_id);
+        formData.append("recipe_library_id", data.recipe_library_id);
+        formData.append("age_group", data.age_group);
+        formData.append("serving_number", data.serving_number);
+        formData.append("cooking_time", data.cooking_time);
+        formData.append("preparation_time", data.preparation_time);
+        formData.append("nutrition_info", data.nutrition_info);
+        formData.append("resource_link", data.resource_link);
+
+        // Append files
+        formData.append("recipe_video", recipe_video);
+        formData.append("recipe_image", recipe_image);
+
+        // Append array data
+        tags.forEach((tag, i) => formData.append(`tags[${i}]`, tag));
+        ingredients
+            .filter(i => i.value.trim())
+            .forEach((ing, i) => formData.append(`ingredients[${i}]`, ing.value));
+        instructions
+            .filter(i => i.value.trim())
+            .forEach((inst, i) => formData.append(`instructions[${i}]`, inst.value));
+
+        await recipeMutation(formData);
+        reset();
     };
 
     const handleInputChange = (e) => setInputValue(e.target.value);
-
     const handleKeyDown = (e) => {
         const value = inputValue.trim();
         if ((e.key === "Enter" || e.key === "," || e.key === " ") && value && tags.length < 10) {
@@ -91,13 +108,11 @@ const DashboardShareRecipe = () => {
             setInputValue("");
         }
     };
-
     const handleTagRemove = (tagToRemove) => {
         const updatedTags = tags.filter((tag) => tag !== tagToRemove);
         setTags(updatedTags);
         if (updatedTags.length > 0) updateCustomErrors("tags");
     };
-
     const handleIngredientChange = (e, id) => {
         const updated = ingredients.map((ingredient) =>
             ingredient.id === id ? { ...ingredient, value: e.target.value } : ingredient
@@ -273,7 +288,7 @@ const DashboardShareRecipe = () => {
 
                 {/* Nutrition Info */}
                 <div>
-                    <label htmlFor="nutrition_info" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Content</label>
+                    <label htmlFor="nutrition_info" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Nutrition Info</label>
                     <textarea id="nutrition_info" rows={5} className="border rounded-[5px] px-4 py-3 outline-none block w-full" placeholder="Write here...." {...register('nutrition_info', { required: true })}></textarea>
                     <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Maximum 1000 words</p>
                     {errors.nutrition_info && <span className="text-red-500 block mt-2 text-[15px]">Nutrition Info is required</span>}

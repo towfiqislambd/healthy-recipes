@@ -12,7 +12,6 @@ const MyRecipeDetails = () => {
     const fullLocation = `${window.location.origin}/${id}`;
     const { data: shareYourRecipe } = useShareYourRecipe();
     const { data: myRecipeData } = useMyRecipeDetails(id);
-    console.log(myRecipeData)
 
     return (
         <div className="mt-[104px]">

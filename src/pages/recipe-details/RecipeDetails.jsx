@@ -12,7 +12,7 @@ const RecipeDetails = () => {
   const fullLocation = `${window.location.origin}/${id}`;
   const { data: shareYourRecipe } = useShareYourRecipe();
   const { data: recipeData } = useRecipeDetails(id);
-  
+
   return (
     <div className="mt-[104px]">
       {/* banner */}
@@ -27,12 +27,12 @@ const RecipeDetails = () => {
         <div className="container">
           <div className="flex flex-col xl:flex-row w-full gap-5 lg:gap-8 xl:gap-14 2xl:gap-24 lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
             {/* left side contents */}
-            <div className="">
+            <div className="w-[400px]">
               <LeftSideContentsDetailsPage data={recipeData} />
             </div>
 
             {/* right side contents */}
-            <div className="">
+            <div className="flex-grow">
               <RightSideContentsDetailsPage data={recipeData} />
             </div>
           </div>

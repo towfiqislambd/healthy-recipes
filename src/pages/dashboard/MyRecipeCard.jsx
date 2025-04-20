@@ -5,19 +5,10 @@ import toast from 'react-hot-toast';
 import { useAddWishlist } from '@/hooks/cms.mutations';
 import { StarSvg, FireSvg, LoveSvg, RecipeBookSvg } from '@/components/svg-container/SvgContainer';
 
-const MyRecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, handleAddMealFunc }) => {
-    // const [isFavorite, setIsFavorite] = useState(false);
+const MyRecipeCard = ({ item, isMyRecipe }) => {
     const { user } = useAuth();
     const navigate = useNavigate();
     const { mutateAsync: wishlistMutation } = useAddWishlist(item?.id);
-
-    // Function to handle Add to planner button click
-    const handleAddToPlanner = (e, item) => {
-        e.stopPropagation();
-        e.preventDefault();
-        setOpen(true);
-        handleAddMealFunc(item)
-    };
 
     // Function to handle wishlist button click
     const handleWishlistClick = (e) => {
@@ -25,7 +16,6 @@ const MyRecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, han
         e.preventDefault(); // Prevents the default link navigation
 
         if (user) {
-            // setIsFavorite((prev) => !prev); // Toggle favorite state
             wishlistMutation()
         }
         else {
@@ -75,10 +65,9 @@ const MyRecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, han
                     <p className="px-3 py-1.5 rounded-sm bg-white/50 text-black text-sm">
                         <span>
                             {
-                                isSavedRecipe ?
-                                    `${item?.recipe_library?.diet_name} | ${item?.category?.category_name}`
-                                    :
-                                    `${item?.library_name} | ${item?.category_name}`
+                                `${item?.library_name || item?.recipe_library?.diet_name}
+                                | 
+                                ${item?.category_name || item?.category?.category_name}`
                             }
                         </span>
                     </p>
@@ -106,12 +95,8 @@ const MyRecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, han
                     </div>
                     <div>
                         <p className="text-textColor font-medium text-[15px] xl:text-base">
-                            {/* Working left */}
                             {
-                                isSavedRecipe ?
-                                    `${item?.recipe_library?.diet_name} | ${item?.category?.category_name}`
-                                    :
-                                    `${item?.total_ingredients} ingredients | ${item?.recipe_creator}`
+                                `${item?.total_ingredients} ingredients | ${item?.recipe_creator}`
                             }
                         </p>
                     </div>
@@ -134,20 +119,6 @@ const MyRecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, han
                     </span>
                 </div>
             </div>
-
-            {/* add meal button */}
-            {
-                isPlanner && (
-                    <div className="px-5">
-                        <button
-                            onClick={(e) => handleAddToPlanner(e, item)}
-                            className="hover:bg-primary border border-primary px-3 lg:px-5 py-2 lg:py-3 rounded-lg hover:text-white text-[#5A5C5F] duration-300 transition-all"
-                        >
-                            + Add to planner
-                        </button>
-                    </div>
-                )
-            }
         </Link >
     );
 };

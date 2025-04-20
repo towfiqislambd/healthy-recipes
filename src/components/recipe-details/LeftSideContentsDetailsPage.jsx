@@ -1,6 +1,6 @@
 import parse from 'html-react-parser';
 
-const LeftSideContentsDetailsPage = ({ data, isMyRecipe }) => {
+const LeftSideContentsDetailsPage = ({ data }) => {
   return (
     <div className="mt-5 bg-white rounded-lg h-full p-5">
       {/* Ingredients */}
@@ -59,12 +59,13 @@ const LeftSideContentsDetailsPage = ({ data, isMyRecipe }) => {
         {/* description */}
         <div className="mt-5 2xl:mt-8 flex items-center flex-wrap gap-3">
           {
-            isMyRecipe ?
-              data?.tags.map(item => <div key={item.id} className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor">
+            data?.tag_names
+              ?
+              data?.tag_names?.map(item => <div key={item.id} className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor">
                 {item?.tag_name}
               </div>)
               :
-              data?.tag_names.map(item => <div key={item.id} className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor">
+              data?.tags?.map(item => <div key={item.id} className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor">
                 {item?.tag_name}
               </div>)
           }
