@@ -132,8 +132,6 @@ export const useSocialInfo = () => {
   });
 };
 
-//==================== 2nd day =====================
-
 // Recipe reviews
 export const useRecipeReviews = (recipe_id, page_id) => {
   return useQuery({
@@ -176,3 +174,5 @@ export const useTrendingRecipePrivate = () => {
        enabled: !!user
      });
 };
+
+//==================== 2nd day =====================

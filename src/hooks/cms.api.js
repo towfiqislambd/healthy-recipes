@@ -109,8 +109,6 @@ export const SocialInfo = async () => {
     return data?.data;
 };
 
-//=================== 2nd day ===================
-
 // Recipe reviews
 export const RecipeReviews = async (recipe_id, page_id) => {
     const { data } = await axiosPublic(`/api/reviews-with-pagination/${recipe_id}?page=${page_id}`);
@@ -172,3 +170,5 @@ export const TrendingRecipesPrivate = async () => {
     const { data } = await axiosSecure.get('/api/auth/trending-recipes');
     return data?.data;
 };
+
+//=================== 2nd day ===================
