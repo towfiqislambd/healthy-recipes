@@ -273,7 +273,7 @@ const DashboardShareRecipe = () => {
 
                 {/* Nutrition Info */}
                 <div>
-                    <label htmlFor="nutrition_info" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Content</label>
+                    <label htmlFor="nutrition_info" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Nutrition Info</label>
                     <textarea id="nutrition_info" rows={5} className="border rounded-[5px] px-4 py-3 outline-none block w-full" placeholder="Write here...." {...register('nutrition_info', { required: true })}></textarea>
                     <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Maximum 1000 words</p>
                     {errors.nutrition_info && <span className="text-red-500 block mt-2 text-[15px]">Nutrition Info is required</span>}

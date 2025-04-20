@@ -10,7 +10,7 @@ import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
 import { useAddWishlist } from '@/hooks/cms.mutations';
 
-const RecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, handleAddMealFunc }) => {
+const RecipeCard = ({ item, isPlanner, isMyRecipe, setOpen, handleAddMealFunc }) => {
   // const [isFavorite, setIsFavorite] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -80,10 +80,9 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, handl
           <p className="px-3 py-1.5 rounded-sm bg-white/50 text-black text-sm">
             <span>
               {
-                isSavedRecipe ?
-                  `${item?.recipe_library?.diet_name} | ${item?.category?.category_name}`
-                  :
-                  `${item?.library_name} | ${item?.category_name}`
+                `${item?.library_name || item?.recipe_library?.diet_name}
+                 | 
+                 ${item?.category_name || item?.category?.category_name}`
               }
             </span>
           </p>
@@ -113,10 +112,7 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, handl
             <p className="text-textColor font-medium text-[15px] xl:text-base">
               {/* Working left */}
               {
-                isSavedRecipe ?
-                  `${item?.recipe_library?.diet_name} | ${item?.category?.category_name}`
-                  :
-                  `${item?.total_ingredients} ingredients | ${item?.recipe_creator}`
+                `${item?.total_ingredients} ingredients | ${item?.recipe_creator}`
               }
             </p>
           </div>
@@ -135,7 +131,7 @@ const RecipeCard = ({ item, isPlanner, isMyRecipe, isSavedRecipe, setOpen, handl
         <div className="flex items-center gap-1">
           <StarSvg />
           <span className="text-textColor text-sm font-medium">
-            {item?.average_rating}
+            {item?.average_rating || item?.reviews_avg}
           </span>
         </div>
       </div>
