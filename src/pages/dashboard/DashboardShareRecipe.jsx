@@ -379,11 +379,10 @@ const DashboardShareRecipe = () => {
                 <div>
                     <label htmlFor="resource_link" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Recipe Source Link</label>
                     <input
-                        {...register('resource_link', { required: true })}
+                        {...register('resource_link')}
                         className="border rounded-[5px] px-4 py-3 outline-none block w-full"
                     />
                     <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">e.g. https://example.com/easy-chicken-dinner-recipe</p>
-                    {errors.resource_link && <span className="text-red-500 block mt-2 text-[15px]">Recipe source link is required</span>}
                 </div>
 
                 {/* Submit & Cancel */}

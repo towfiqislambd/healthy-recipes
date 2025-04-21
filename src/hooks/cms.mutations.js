@@ -65,8 +65,7 @@ export const useAddRecipe = () => {
     onMutate: () => {
       setLoading(true);
     },
-    onSuccess: (data) => {
-      console.log(data)
+    onSuccess: () => {
       setLoading(false);
       toast.success('Recipe added Successfully');
       navigate('/dashboard/dashboard-my-recipes')
@@ -77,10 +76,6 @@ export const useAddRecipe = () => {
     },
   });
 };
-
-
-
-
 
 
 // Add Meal Planner
@@ -94,9 +89,14 @@ export const useAddMealPlanner = (recipe_id) => {
       setLoading(true);
     },
     onSuccess: (data) => {
-      console.log(data)
-      setLoading(false);
-      toast.success('Added in meal planner');
+      if(data?.data?.length > 0) {
+        setLoading(false);
+        toast.success(data?.message);
+      }
+      else{
+        setLoading(false);
+        toast.error(data?.message);
+      }
     },
     onError: (err) => {
       setLoading(false);

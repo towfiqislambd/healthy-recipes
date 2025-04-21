@@ -173,7 +173,7 @@ export const MyRecipeDetails = async (id) => {
 
 // Recipe reviews
 export const RecipeReviews = async (recipe_id, page_id) => {
-    const { data } = await axiosPublic(`/api/reviews-with-pagination/${recipe_id}?page=${page_id}`);
+    const { data } = await axiosPublic(`/api/reviews-by-pagination/${recipe_id}?page=${page_id}`);
     return data?.data;
 };
 
@@ -188,6 +188,8 @@ export const MealPlannerTableData = async (category_id) => {
     const { data } = await axiosSecure(url);
     return data?.data;
 };
+
+// ###################### POST API (Mutation) ########################
 
 // Add reviews
 export const AddReview = async (id, payload) => {
@@ -207,11 +209,8 @@ export const AddRecipe = async (payload) => {
     return data?.data;
 };
 
-
-
-
 // Add Meal Planner
 export const AddMealPlanner = async (recipe_id, payload) => {
     const { data } = await axiosSecure.post(`api/meal-plans/${recipe_id}`, payload);
-    return data?.data;
+    return data;
 };

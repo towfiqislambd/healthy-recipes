@@ -24,7 +24,7 @@ const DashboardLayout = () => {
         { path: '/dashboard/dashboard-meal-planner', label: 'Meal planner' },
         { path: '/dashboard/dashboard-share-recipes', label: 'Share recipes' },
         { path: '/dashboard/dashboard-my-recipes', label: 'My recipes' },
-        { path: '/dashboard/dashboard-saved-recipes', label: 'Saved recipes' },
+        { path: '/dashboard/dashboard-saved-recipes', label: 'Favorite recipes' },
     ];
 
     return (
