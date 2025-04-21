@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useAllCategories, useMyRecipes } from '@/hooks/cms.queries';
 import MyRecipeCard from './MyRecipeCard';
+import useAuth from '@/hooks/useAuth';
 
 const DashboardSavedRecipes = () => {
+    const { search } = useAuth();
     const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
     const [activePage, setActivePage] = useState(1);
     const { data: allCategories } = useAllCategories();
-    const { data: myRecipes, isLoading, isFetching, isPending } = useMyRecipes(activePage, activeTab?.id);
+    const { data: myRecipes, isLoading, isFetching, isPending } = useMyRecipes(activePage, activeTab?.id, search);
 
     if (isLoading || isFetching || isPending) return <p className="h-svh">loading....</p>;
 

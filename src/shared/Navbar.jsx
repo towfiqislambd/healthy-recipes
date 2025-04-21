@@ -1,7 +1,7 @@
 import ButtonTransparent from '@/components/buttons/ButtonTransparent';
 import logo from '../assets/images/logo.png';
 import { LoveSvg, SearchSvg } from '@/components/svg-container/SvgContainer';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
@@ -10,6 +10,7 @@ import { useLogOut } from '@/hooks/auth.hook.';
 
 
 const Navbar = () => {
+  const navigate = useNavigate()
   const { user } = useAuth();
   const { mutate: logOutMutate } = useLogOut();
   const [isOpen, setOpen] = useState(false);
@@ -41,6 +42,10 @@ const Navbar = () => {
     };
   }, [isOpen]);
 
+  const handleSearch = () => {
+   navigate('/dashboard/dashboard-my-recipes')
+  }
+
   return (
     <header className='py-1 lg:py-2 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] bg-[#F6F5F2] fixed w-full left-0 top-0 z-50 navbar'>
       <nav className="container w-full">
@@ -61,6 +66,7 @@ const Navbar = () => {
                 type="text"
                 name="search"
                 id="search"
+                onClick={handleSearch}
               />
             </div>
           </div>

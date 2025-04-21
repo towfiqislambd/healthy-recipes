@@ -169,10 +169,10 @@ export const useGetWishlist = (page_id, category_id) => {
 };
 
 // My Recipes
-export const useMyRecipes = (page_id, category_id) => {
+export const useMyRecipes = (page_id, category_id, search) => {
   return useQuery({
-    queryKey: ['my-recipes', page_id, category_id],
-    queryFn:() =>  MyRecipes(page_id, category_id),
+    queryKey: ['my-recipes', page_id, category_id, search],
+    queryFn:() =>  MyRecipes(page_id, category_id, search),
   });
 };
 
