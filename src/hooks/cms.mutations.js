@@ -1,7 +1,7 @@
 import toast from 'react-hot-toast';
 import useAuth from './useAuth';
 import { useMutation } from '@tanstack/react-query';
-import { AddMealPlanner, AddRecipe, AddReview, AddWishlist, DeleteMealPlan } from './cms.api';
+import { AddMealPlanner, AddRecipe, AddReview, AddWishlist, DeleteMealPlan, EditMealPlanner } from './cms.api';
 import { useNavigate } from 'react-router-dom';
 
 // Add reviews
@@ -119,6 +119,29 @@ export const useDeleteMealPlan = (meal_plan_id) => {
     onSuccess: (data) => {
       setLoading(false);
         toast.success(data?.message);
+    },
+    onError: (err) => {
+      setLoading(false);
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+
+// Edit Meal Planner
+export const useEditMealPlanner = (item_id) => {
+  const { setLoading } = useAuth();
+  
+  return useMutation({
+    mutationKey: ['edit-meal-planner'],
+    mutationFn: (payload) => EditMealPlanner(item_id, payload),
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: (data) => {
+      console.log(data)
+      setLoading(false);
+      toast.success('Recipe name changed successfully');
     },
     onError: (err) => {
       setLoading(false);

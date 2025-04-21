@@ -5,8 +5,12 @@ import { Link } from 'react-router-dom';
 import { useAllCategories, useMealPlannerTable } from '@/hooks/cms.queries';
 import { useDeleteMealPlan } from '@/hooks/cms.mutations';
 import { Loader } from '@/components/loader/Loader';
+import Modal from '@/components/modals/Modal';
+import EditMealModal from '@/components/modals/EditMealModal';
 
 const DashboardMealPlanner = () => {
+    const [itemId, setItemId] = useState('')
+    const [open, setOpen] = useState(false);
     const [mealPlannerId, setMealPlannerId] = useState('');
     const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
     const { data: allCategories, isLoading: categoryLoading } = useAllCategories();
@@ -23,6 +27,11 @@ const DashboardMealPlanner = () => {
             setMealPlannerId(meal_plan_id)
             await deleteMealPlan()
         }
+    }
+
+    const handleEditPlan = (item_id) => {
+        setOpen(true);
+        setItemId(item_id)
     }
 
     return (
@@ -100,7 +109,7 @@ const DashboardMealPlanner = () => {
                                                         </PopoverTrigger>
                                                         <PopoverContent className='w-28 border space-y-2'>
                                                             <button><Link to='/meal-planner'>Add meal</Link></button>
-                                                            <button>Edit</button>
+                                                            <button onClick={() => handleEditPlan(item?.id)}>Edit</button>
                                                             <button onClick={() => handleDeletePlan(item?.meal_plan_id)} className='text-red-500'>Delete</button>
                                                         </PopoverContent>
                                                     </Popover>
@@ -115,6 +124,15 @@ const DashboardMealPlanner = () => {
                     }
                 </tbody>
             </table>
+
+            {/* Modal */}
+            <Modal open={open} setOpen={setOpen}>
+                <EditMealModal
+                    open={open}
+                    setOpen={setOpen}
+                    itemId={itemId}
+                />
+            </Modal>
         </section>
     );
 };
