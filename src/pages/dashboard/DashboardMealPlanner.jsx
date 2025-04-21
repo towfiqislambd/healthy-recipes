@@ -1,23 +1,20 @@
 import { ThreeDotSvg } from '@/components/svg-container/SvgContainer';
 import { useState } from 'react';
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Link } from 'react-router-dom';
 import { useAllCategories, useMealPlannerTable } from '@/hooks/cms.queries';
 import { useDeleteMealPlan } from '@/hooks/cms.mutations';
+import { Loader } from '@/components/loader/Loader';
 
 const DashboardMealPlanner = () => {
     const [mealPlannerId, setMealPlannerId] = useState('');
     const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
-    const { data: allCategories } = useAllCategories();
-    const { data: mealPlannerTableData, isLoading } = useMealPlannerTable(activeTab?.id);
+    const { data: allCategories, isLoading: categoryLoading } = useAllCategories();
+    const { data: mealPlannerTableData, isLoading: mealPlannerLoading } = useMealPlannerTable(activeTab?.id);
     const { mutateAsync: deleteMealPlan } = useDeleteMealPlan(mealPlannerId);
 
-    if (isLoading) {
-        return <p>Loading...</p>
+    if (categoryLoading || mealPlannerLoading) {
+        return <div className="flex justify-center items-center h-[85vh]"><Loader /></div>;
     }
 
     // Delete Meal Plan

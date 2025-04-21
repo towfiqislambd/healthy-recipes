@@ -6,20 +6,36 @@ import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection
 import Testimonials from "@/components/homepage/Testimonials";
 import TrendingDiet from "@/components/homepage/TrendingDiet";
 import WhyChooseUs from "@/components/homepage/WhyChooseUs";
+import { Loader } from "@/components/loader/Loader";
 import { useBlogs, useHomepageBanner, useOurMealPlanner, useRecipeLibrary, useShareYourRecipe, useTestimonial, useTrendingRecipePrivate, useTrendingRecipes, useWhyChooseUs } from "@/hooks/cms.queries";
 import useAuth from "@/hooks/useAuth";
 
 const Homepage = () => {
   const { user } = useAuth();
-  const { data: homepageBanner } = useHomepageBanner();
-  const { data: whyChooseUs } = useWhyChooseUs();
-  const { data: ourMealPlanner } = useOurMealPlanner();
-  const { data: shareYourRecipe } = useShareYourRecipe();
-  const { data: testimonial } = useTestimonial();
-  const { data: blogs } = useBlogs();
-  const { data: recipeLibrary } = useRecipeLibrary();
-  const { data: trendingRecipes } = useTrendingRecipes();
-  const { data: trendingRecipesPrivate, refetch } = useTrendingRecipePrivate();
+  const { data: homepageBanner, isLoading: isHomepageBannerLoading } = useHomepageBanner();
+  const { data: whyChooseUs, isLoading: isWhyChooseUsLoading } = useWhyChooseUs();
+  const { data: ourMealPlanner, isLoading: isOurMealPlannerLoading } = useOurMealPlanner();
+  const { data: shareYourRecipe, isLoading: isShareYourRecipeLoading } = useShareYourRecipe();
+  const { data: testimonial, isLoading: isTestimonialLoading } = useTestimonial();
+  const { data: blogs, isLoading: isBlogsLoading } = useBlogs();
+  const { data: recipeLibrary, isLoading: isRecipeLibraryLoading } = useRecipeLibrary();
+  const { data: trendingRecipes, isLoading: isTrendingRecipesLoading } = useTrendingRecipes();
+  const { data: trendingRecipesPrivate, isLoading: isTrendingRecipesPrivateLoading, refetch } = useTrendingRecipePrivate();
+
+  const isLoading =
+    isHomepageBannerLoading ||
+    isWhyChooseUsLoading ||
+    isOurMealPlannerLoading ||
+    isShareYourRecipeLoading ||
+    isTestimonialLoading ||
+    isBlogsLoading ||
+    isRecipeLibraryLoading ||
+    isTrendingRecipesLoading ||
+    isTrendingRecipesPrivateLoading;
+
+  if (isLoading) {
+    return <div className="h-screen flex justify-center items-center"><Loader /></div>;
+  }
 
   let trendingData = null;
   if (user) {

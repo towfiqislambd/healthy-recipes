@@ -4,12 +4,20 @@ import RecipeBlogs from "@/components/homepage/RecipeBlogs";
 import { useParams } from "react-router-dom";
 import { useBlogDetails, useBlogs, useShareYourRecipe } from "@/hooks/cms.queries";
 import parse from 'html-react-parser';
+import { Loader } from "@/components/loader/Loader";
 
 const BlogDetails = () => {
   const { slug } = useParams();
-  const { data: blogDetail } = useBlogDetails(slug);
-  const { data: shareYourRecipe } = useShareYourRecipe();
-  const { data: blogs } = useBlogs();
+  const { data: blogDetail, isLoading: isLoadingBlogDetail } = useBlogDetails(slug);
+  const { data: shareYourRecipe, isLoading: isLoadingSharedRecipes } = useShareYourRecipe();
+  const { data: blogs, isLoading: isLoadingBlogs } = useBlogs();
+
+  const isLoading = isLoadingBlogDetail || isLoadingSharedRecipes || isLoadingBlogs;
+
+  if (isLoading) {
+    return <div className="flex justify-center items-center h-screen"><Loader /></div>;
+  }
+
 
   return (
     <div className="mt-[104px]">
