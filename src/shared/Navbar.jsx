@@ -1,5 +1,4 @@
 import ButtonTransparent from '@/components/buttons/ButtonTransparent';
-import logo from '../assets/images/logo.png';
 import { LoveSvg, SearchSvg } from '@/components/svg-container/SvgContainer';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
@@ -7,7 +6,8 @@ import { useEffect, useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import useAuth from '@/hooks/useAuth';
 import { useLogOut } from '@/hooks/auth.hook.';
-
+import { useFooterInfo } from '@/hooks/cms.queries';
+import { Loader } from '@/components/loader/Loader';
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -42,8 +42,14 @@ const Navbar = () => {
     };
   }, [isOpen]);
 
+  const { data: siteSettings, isLoading } = useFooterInfo();
+
+  if (isLoading) {
+    return <div className="h-screen flex justify-center items-center"><Loader /></div>;
+  }
+
   const handleSearch = () => {
-   navigate('/dashboard/dashboard-my-recipes')
+    navigate('/dashboard/dashboard-my-recipes')
   }
 
   return (
@@ -54,7 +60,12 @@ const Navbar = () => {
           <div className="flex items-center gap-7">
             {/* logo */}
             <Link to="/">
-              <img src={logo} alt="Logo" className='size-[72px] lg:size-auto' />
+              <figure className="w-[80px] h-[70px] lg:w-[100px] lg:h-[87px]">
+                <img
+                  className="w-full h-full object-cover"
+                  src={`${import.meta.env.VITE_SITE_URL}/${siteSettings?.logo}`}
+                  alt="logo" />
+              </figure>
             </Link>
 
             {/* search bar */}
@@ -128,8 +139,13 @@ const Navbar = () => {
       <div className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} duration-500 transition-transform fixed top-0 z-[999] left-0 bg-white p-5 lg:p-7 shadow-lg overflow-y-auto  border-r max-h-screen min-h-screen w-[250px] lg:w-[270px] 2xl:hidden`}
       >
         {/* logo */}
-        <Link to="/" className="size-[80px]">
-          <img className="object-cover mx-auto" src={logo} alt="Logo" />
+        <Link to="/">
+          <figure className="w-[90px] h-[80px]">
+            <img
+              className="object-cover w-full h-full mx-auto"
+              src={`${import.meta.env.VITE_SITE_URL}/${siteSettings?.logo}`}
+              alt="logo" />
+          </figure>
         </Link>
 
         <div className="flex flex-col mt-7 lg:mt-10 gap-6">
