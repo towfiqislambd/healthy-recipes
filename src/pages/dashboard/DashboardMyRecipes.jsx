@@ -1,14 +1,19 @@
 import { useState } from 'react';
 import { useAllCategories, useMyRecipes } from '@/hooks/cms.queries';
 import MyRecipeCard from './MyRecipeCard';
+import useAuth from '@/hooks/useAuth';
+import { Loader } from '@/components/loader/Loader';
 
 const DashboardSavedRecipes = () => {
+    const { search } = useAuth();
     const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
     const [activePage, setActivePage] = useState(1);
-    const { data: allCategories } = useAllCategories();
-    const { data: myRecipes, isLoading, isFetching, isPending } = useMyRecipes(activePage, activeTab?.id);
+    const { data: allCategories, isLoading: categoryLoading } = useAllCategories();
+    const { data: myRecipes, isLoading: myRecipeLoading } = useMyRecipes(activePage, activeTab?.id, search);
 
-    if (isLoading || isFetching || isPending) return <p className="h-svh">loading....</p>;
+    if (myRecipeLoading || categoryLoading) {
+        return <div className="flex justify-center items-center h-[85vh]"><Loader /></div>;
+    }
 
     return (
         <section className="p-5">
@@ -39,7 +44,6 @@ const DashboardSavedRecipes = () => {
                     </button>
                 ))}
             </div>
-
 
             {/* cards */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5 2xl:px-0">

@@ -1,20 +1,37 @@
 import { ThreeDotSvg } from '@/components/svg-container/SvgContainer';
 import { useState } from 'react';
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Link } from 'react-router-dom';
 import { useAllCategories, useMealPlannerTable } from '@/hooks/cms.queries';
+import { useDeleteMealPlan } from '@/hooks/cms.mutations';
+import { Loader } from '@/components/loader/Loader';
+import Modal from '@/components/modals/Modal';
+import EditMealModal from '@/components/modals/EditMealModal';
 
 const DashboardMealPlanner = () => {
+    const [itemId, setItemId] = useState('')
+    const [open, setOpen] = useState(false);
+    const [mealPlannerId, setMealPlannerId] = useState('');
     const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
-    const { data: allCategories } = useAllCategories();
-    const { data: mealPlannerTableData, isLoading } = useMealPlannerTable(activeTab?.id);
+    const { data: allCategories, isLoading: categoryLoading } = useAllCategories();
+    const { data: mealPlannerTableData, isLoading: mealPlannerLoading } = useMealPlannerTable(activeTab?.id);
+    const { mutateAsync: deleteMealPlan } = useDeleteMealPlan(mealPlannerId);
 
-    if (isLoading) {
-        return <p>Loading...</p>
+    if (categoryLoading || mealPlannerLoading) {
+        return <div className="flex justify-center items-center h-[85vh]"><Loader /></div>;
+    }
+
+    // Delete Meal Plan
+    const handleDeletePlan = async (meal_plan_id) => {
+        if (meal_plan_id) {
+            setMealPlannerId(meal_plan_id)
+            await deleteMealPlan()
+        }
+    }
+
+    const handleEditPlan = (item_id) => {
+        setOpen(true);
+        setItemId(item_id)
     }
 
     return (
@@ -25,7 +42,7 @@ const DashboardMealPlanner = () => {
 
             {/* Tabs */}
             <div className="py-8 w-full flex flex-wrap items-center justify-center 2xl:justify-between gap-x-1 gap-y-2">
-                
+
                 <button
                     onClick={() => setActiveTab({ id: 0, category_name: 'All Recipes' })}
                     className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium ${activeTab?.category_name === 'All Recipes'
@@ -90,9 +107,10 @@ const DashboardMealPlanner = () => {
                                                         <PopoverTrigger>
                                                             <ThreeDotSvg />
                                                         </PopoverTrigger>
-                                                        <PopoverContent className='w-28 text-center space-y-2'>
+                                                        <PopoverContent className='w-28 border space-y-2'>
                                                             <button><Link to='/meal-planner'>Add meal</Link></button>
-                                                            <button>Delete</button>
+                                                            <button onClick={() => handleEditPlan(item?.id)}>Edit</button>
+                                                            <button onClick={() => handleDeletePlan(item?.meal_plan_id)} className='text-red-500'>Delete</button>
                                                         </PopoverContent>
                                                     </Popover>
                                                 </div>
@@ -106,6 +124,15 @@ const DashboardMealPlanner = () => {
                     }
                 </tbody>
             </table>
+
+            {/* Modal */}
+            <Modal open={open} setOpen={setOpen}>
+                <EditMealModal
+                    open={open}
+                    setOpen={setOpen}
+                    itemId={itemId}
+                />
+            </Modal>
         </section>
     );
 };

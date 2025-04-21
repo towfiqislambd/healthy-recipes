@@ -10,18 +10,29 @@ import { RiResetLeftFill } from 'react-icons/ri';
 import RecipeCard from '../cards/RecipeCard';
 import { useAllCategories, useAllRecipes, useAllRecipesPrivate, useRecipeLibrary } from '@/hooks/cms.queries';
 import useAuth from '@/hooks/useAuth';
+import { Loader } from '../loader/Loader';
 
-const MealPlannerTabSection = ({ recipes }) => {
+const MealPlannerTabSection = () => {
   const { user } = useAuth()
   const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
   const [ageGroup, setAgeGroup] = useState(null);
   const [library, setLibrary] = useState(null);
   const [selectedAge, setSelectedAge] = useState('');
   const [selectedDiet, setSelectedDiet] = useState('');
-  const { data: allCategories } = useAllCategories();
-  const { data: recipeLibrary } = useRecipeLibrary()
+  const { data: allCategories, isLoading: isAllCategoryLoading } = useAllCategories();
+  const { data: recipeLibrary, isLoading: isRecipeLibraryLoading } = useRecipeLibrary()
   const { data: allRecipes, isLoading: loadingAllRecipe } = useAllRecipes(activeTab?.id, library, ageGroup);
   const { data: recipesPrivate, isLoading: loadingAllRecipePrivate, refetch } = useAllRecipesPrivate(activeTab?.id, library, ageGroup);
+
+  const isLoading =
+    isAllCategoryLoading ||
+    isRecipeLibraryLoading ||
+    loadingAllRecipe ||
+    loadingAllRecipePrivate;
+
+  if (isLoading) {
+    return <div className="flex justify-center items-center h-[50vh]"><Loader /></div>;
+  }
 
   let recipeData = null;
   if (user) {
@@ -31,17 +42,15 @@ const MealPlannerTabSection = ({ recipes }) => {
     recipeData = allRecipes;
   }
 
-  if (loadingAllRecipe || loadingAllRecipePrivate) return <p>loading....</p>;
-
   const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
-  const getCountByType = (type) => {
-    if (type === 'All Recipes') {
-      return recipes?.length || 0;
-    } else {
-      return recipes?.filter((recipe) => recipe?.category_name === type)?.length || 0;
-    }
-  };
+  // const getCountByType = (type) => {
+  //   if (type === 'All Recipes') {
+  //     return recipeData?.length || 0;
+  //   } else {
+  //     return recipeData?.filter((recipe) => recipe?.category_name === type)?.length || 0;
+  //   }
+  // };
 
   const handleReset = () => {
     setSelectedAge('');
@@ -64,7 +73,8 @@ const MealPlannerTabSection = ({ recipes }) => {
               : 'bg-transparent text-textColor'
               }`}
           >
-            All Recipes <span>({getCountByType('All Recipes')})</span>
+            All Recipes
+            {/* <span>({getCountByType('All Recipes')})</span> */}
           </button>
 
           {allCategories?.map((tab) => (
@@ -76,7 +86,8 @@ const MealPlannerTabSection = ({ recipes }) => {
                 : 'bg-transparent text-textColor'
                 }`}
             >
-              {tab?.category_name} <span>({getCountByType(tab?.category_name)})</span>
+              {tab?.category_name}
+              {/* <span>({getCountByType(tab?.category_name)})</span> */}
             </button>
           ))}
         </div>

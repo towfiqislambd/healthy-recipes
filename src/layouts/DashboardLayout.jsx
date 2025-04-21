@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { LoveSvg, SearchSvg } from "@/components/svg-container/SvgContainer";
 import logo from '../assets/images/logo.png';
 import ButtonTransparent from "@/components/buttons/ButtonTransparent";
 import profile from "../assets/images/profile.png";
+import useAuth from "@/hooks/useAuth";
 
 const DashboardLayout = () => {
+    const { setSearch } = useAuth();
+    const navigate = useNavigate()
     const location = useLocation()?.pathname;
     const [isOpen, setOpen] = useState(false);
 
@@ -24,8 +27,12 @@ const DashboardLayout = () => {
         { path: '/dashboard/dashboard-meal-planner', label: 'Meal planner' },
         { path: '/dashboard/dashboard-share-recipes', label: 'Share recipes' },
         { path: '/dashboard/dashboard-my-recipes', label: 'My recipes' },
-        { path: '/dashboard/dashboard-saved-recipes', label: 'Saved recipes' },
+        { path: '/dashboard/dashboard-saved-recipes', label: 'Favorite recipes' },
     ];
+
+    const handleSearch = () => {
+        navigate('/dashboard/dashboard-my-recipes')
+    }
 
     return (
         <section className="min-h-screen max-h-screen flex flex-col">
@@ -45,6 +52,8 @@ const DashboardLayout = () => {
                                 type="text"
                                 name="search"
                                 id="search"
+                                onClick={handleSearch}
+                                onChange={(e) => setSearch(e.target.value)}
                             />
                         </div>
                     </div>
@@ -104,6 +113,8 @@ const DashboardLayout = () => {
                                 type="text"
                                 name="search"
                                 id="search"
+                                onClick={handleSearch}
+                                onChange={(e) => setSearch(e.target.value)}
                             />
                         </div>
                         <div className="flex flex-col mt-5 items-center gap-6">

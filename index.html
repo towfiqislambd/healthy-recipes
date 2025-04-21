@@ -9,44 +9,5 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-
-    <!-- For Dynamic Favicon -->
-    <script>
-      let myFavicon;
-    
-      const fetchSiteSettings = async () => {
-        const siteUrl = 'https://mohammadhasanii.softvencefsd.xyz/api/site-settings';
-    
-        try {
-          const res = await fetch(siteUrl);
-          const formattedData = await res.json();
-          
-          if (formattedData?.data) {
-            myFavicon = formattedData?.data?.favicon;
-            updateFavicon(myFavicon);
-          }
-        } catch (err) {
-          console.error('Fetch error:', err);
-        }
-      };
-    
-      // Function to update the favicon in the DOM
-      function updateFavicon(faviconUrl) {
-        const link = document.querySelector("link[rel~='icon']") || document.createElement('link');
-        link.rel = 'icon';
-        link.href = `https://mohammadhasanii.softvencefsd.xyz/${faviconUrl}`;
-        document.head.appendChild(link);
-      }
-    
-      // Run on page load
-      window.addEventListener('DOMContentLoaded', fetchSiteSettings);
-    
-      // Override reload to fetch again
-      const originalReload = window.location.reload;
-      window.location.reload = function() {
-        fetchSiteSettings();
-        originalReload.call(window.location); 
-      };
-    </script>
   </body>
 </html>

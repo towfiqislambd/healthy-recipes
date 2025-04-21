@@ -150,11 +150,12 @@ export const SocialInfo = async () => {
 };
 
 // My Recipes
-export const MyRecipes = async (page_id, category_id) => {
+export const MyRecipes = async (page_id, category_id, search) => {
     let url = '/api/my-recipes?';
 
     if (page_id) url += `page=${page_id}&`;
     if (category_id) url += `category_id=${category_id}&`;
+    if (search) url += `search=${search}&`;
 
      // Remove the last '&' if we added any parameters
      url = url.endsWith('&') ? url.slice(0, -1) : url;
@@ -173,7 +174,7 @@ export const MyRecipeDetails = async (id) => {
 
 // Recipe reviews
 export const RecipeReviews = async (recipe_id, page_id) => {
-    const { data } = await axiosPublic(`/api/reviews-with-pagination/${recipe_id}?page=${page_id}`);
+    const { data } = await axiosPublic(`/api/reviews-by-pagination/${recipe_id}?page=${page_id}`);
     return data?.data;
 };
 
@@ -188,6 +189,8 @@ export const MealPlannerTableData = async (category_id) => {
     const { data } = await axiosSecure(url);
     return data?.data;
 };
+
+// ###################### POST API (Mutation) ########################
 
 // Add reviews
 export const AddReview = async (id, payload) => {
@@ -207,11 +210,20 @@ export const AddRecipe = async (payload) => {
     return data?.data;
 };
 
-
-
-
 // Add Meal Planner
 export const AddMealPlanner = async (recipe_id, payload) => {
     const { data } = await axiosSecure.post(`api/meal-plans/${recipe_id}`, payload);
+    return data;
+};
+
+// Delete Meal Planner
+export const DeleteMealPlan = async (meal_plan_id) => {
+    const { data } = await axiosSecure.delete(`api/meal/${meal_plan_id}`);
+    return data;
+};
+
+// Edit Meal Planner
+export const EditMealPlanner = async (item_id, payload) => {
+    const { data } = await axiosSecure.post(`api/meal-update/${item_id}`, payload);
     return data?.data;
 };

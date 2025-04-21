@@ -1,8 +1,13 @@
 import BlogCard from "@/components/cards/BlogCard";
+import { Loader } from "@/components/loader/Loader";
 import { useBlogs } from "@/hooks/cms.queries";
 
 const Blog = () => {
-  const { data: blogs } = useBlogs();
+  const { data: blogs, isLoading } = useBlogs();
+
+  if (isLoading) {
+    return <div className="flex justify-center items-center h-svh"><Loader /></div>;
+  }
 
   return (
     <section className="mt-[110px] lg:mt-[154px]">

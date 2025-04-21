@@ -9,6 +9,7 @@ import {
 } from "../ui/select";
 import RecipeCard from "../cards/RecipeCard";
 import { useAllRecipes } from "@/hooks/cms.queries";
+import { Loader } from "../loader/Loader";
 
 const AllRecipesTabs = ({ data, recipes, libraryId }) => {
   const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
@@ -16,9 +17,9 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
   const [selectedAllergen, setSelectedAllergen] = useState("");
   const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
-  const { data: allRecipes, isLoading, isFetching, isPending } = useAllRecipes(activeTab?.id, libraryId, null, tag);
-  if (isLoading || isFetching || isPending) {
-    return <p>Loading.....</p>
+  const { data: allRecipes, isLoading } = useAllRecipes(activeTab?.id, libraryId, null, tag);
+  if (isLoading) {
+    return <div className="h-[50vh] flex justify-center items-center"><Loader /></div>;
   }
 
   const getCountByType = (type) => {
@@ -96,7 +97,7 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
           {
             allRecipes?.length > 0 ?
               allRecipes?.map((item, idx) => (
-                <RecipeCard key={idx} item={item}  isMyRecipe={true} />
+                <RecipeCard key={idx} item={item} isMyRecipe={true} />
               ))
               :
               'No data found'

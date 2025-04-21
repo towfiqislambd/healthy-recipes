@@ -1,15 +1,8 @@
 import { ThreeDotSvg } from '@/components/svg-container/SvgContainer';
-import { useMealPlannerTable } from '@/hooks/cms.queries';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Link } from 'react-router-dom';
 
-const MealPlanner = () => {
-    const { data: mealPlannerTableData, isLoading } = useMealPlannerTable();
-
-    if (isLoading) {
-        return <p>Loading...</p>
-    }
-
+const MealPlanner = ({ mealPlannerTableData }) => {
     return (
         <div>
             <h3 className="font-merriweather font-semibold text-[#141414] text-xl">Your customize meal planner</h3>
