@@ -1,28 +1,29 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { FiEdit } from "react-icons/fi";
-import useAuth from '@/hooks/useAuth';
-import toast from 'react-hot-toast';
-import { useAddWishlist } from '@/hooks/cms.mutations';
+import { Link } from 'react-router-dom';
+// import { FiEdit } from "react-icons/fi";
+// import useAuth from '@/hooks/useAuth';
+// import toast from 'react-hot-toast';
+// import { useAddWishlist } from '@/hooks/cms.mutations';
 import { StarSvg, FireSvg, LoveSvg, RecipeBookSvg } from '@/components/svg-container/SvgContainer';
 
-const MyRecipeCard = ({ item, isMyRecipe }) => {
-    const { user } = useAuth();
-    const navigate = useNavigate();
-    const { mutateAsync: wishlistMutation } = useAddWishlist(item?.id);
+const MyRecipeCard = ({ item }) => {
+    // isMyRecipe (props)
+    // const { user } = useAuth();
+    // const navigate = useNavigate();
+    // const { mutateAsync: wishlistMutation } = useAddWishlist(item?.id);
 
     // Function to handle wishlist button click
-    const handleWishlistClick = (e) => {
-        e.stopPropagation(); // Prevents the click event from bubbling up
-        e.preventDefault(); // Prevents the default link navigation
+    // const handleWishlistClick = (e) => {
+    //     e.stopPropagation(); // Prevents the click event from bubbling up
+    //     e.preventDefault(); // Prevents the default link navigation
 
-        if (user) {
-            wishlistMutation()
-        }
-        else {
-            toast.error('Please login first')
-            navigate('/auth/login')
-        }
-    };
+    //     if (user) {
+    //         wishlistMutation()
+    //     }
+    //     else {
+    //         toast.error('Please login first')
+    //         navigate('/auth/login')
+    //     }
+    // };
 
     return (
         <Link
@@ -42,7 +43,7 @@ const MyRecipeCard = ({ item, isMyRecipe }) => {
                         <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30"></div>
                     </div>
                 </div>
-                {
+                {/* {
                     isMyRecipe ?
                         <button
                             onClick={handleWishlistClick}
@@ -58,7 +59,7 @@ const MyRecipeCard = ({ item, isMyRecipe }) => {
                         >
                             <FiEdit className='text-lg' />
                         </button>
-                }
+                } */}
 
                 {/* type */}
                 <div className="absolute top-3 left-3">

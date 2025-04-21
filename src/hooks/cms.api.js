@@ -214,3 +214,9 @@ export const AddMealPlanner = async (recipe_id, payload) => {
     const { data } = await axiosSecure.post(`api/meal-plans/${recipe_id}`, payload);
     return data;
 };
+
+// Delete Meal Planner
+export const DeleteMealPlan = async (meal_plan_id) => {
+    const { data } = await axiosSecure.delete(`api/meal/${meal_plan_id}`);
+    return data;
+};
