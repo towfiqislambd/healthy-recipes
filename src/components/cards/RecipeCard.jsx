@@ -53,12 +53,12 @@ const RecipeCard = ({ item, refetch, isPlanner }) => {
     <>
       <Link
         to={`/recipe-details/${item.id}`}
-        className={`bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] pb-5 flex flex-col justify-between group rounded-2xl`}
+        className={`bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] pb-1 4xl:pb-5 flex flex-col justify-between group rounded-2xl`}
       >
         <div className="relative">
           {/* image and overlay */}
           <div className="block">
-            <div className="h-[250px] sm:h-[300px] 2xl:h-[350px] w-full relative rounded-sm overflow-hidden">
+            <div className="h-[250px] sm:h-[300px] w-full relative rounded-sm overflow-hidden">
               <img
                 className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
                 src={`${import.meta.env.VITE_SITE_URL}/${item?.recipe_image}`}
@@ -72,7 +72,7 @@ const RecipeCard = ({ item, refetch, isPlanner }) => {
           {/* Wishlist */}
           <button
             onClick={handleWishlistClick}
-            className={`absolute size-9 2xl:size-10 z-20 flex items-center justify-center top-3 2xl:top-4 right-3 2xl:right-4 border border-[#CB4242] rounded-full cursor-pointer ${item?.is_wishlisted ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
+            className={`absolute size-9 4xl:size-10 z-20 flex items-center justify-center top-3 4xl:top-4 right-3 4xl:right-4 border border-[#CB4242] rounded-full cursor-pointer ${item?.is_wishlisted ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
               }`}
           >
             <LoveSvg isFavorite={item?.is_wishlisted} />
@@ -80,7 +80,7 @@ const RecipeCard = ({ item, refetch, isPlanner }) => {
 
           {/* type */}
           <div className="absolute top-3 left-3">
-            <p className="px-3 py-1.5 rounded-sm bg-white/50 text-black text-sm">
+            <p className="px-2 4xl:px-3 py-1 4xl:py-1.5 rounded-sm bg-white/50 text-black text-sm truncate">
               <span>
                 {
                   `${item?.library_name || item?.recipe_library?.diet_name}
@@ -93,11 +93,11 @@ const RecipeCard = ({ item, refetch, isPlanner }) => {
         </div>
 
         {/* description */}
-        <div className="py-4 px-3 text-wrap border-b border-dashed border-black">
-          <h5 className="text-lg 2xl:text-xl font-bold font-merriweather text-black truncate">
+        <div className="py-3 4xl:py-4 px-3 text-wrap border-b border-dashed border-black">
+          <h5 className="text-lg 4xl:text-xl font-bold font-merriweather text-black truncate">
             {item?.recipe_name}
           </h5>
-          <div className="mt-2 2xl:mt-4 space-y-1 2xl:space-y-2">
+          <div className="mt-2 4xl:mt-4 space-y-1 4xl:space-y-2">
             <div className="flex flex-wrap gap-2 truncate">
               <div className="flex-shrink-0">
                 <RecipeBookSvg />
@@ -122,7 +122,7 @@ const RecipeCard = ({ item, refetch, isPlanner }) => {
         </div>
 
         {/* stats */}
-        <div className="px-5 py-3 2xl:py-5 w-full flex items-center justify-between">
+        <div className="px-5 py-3 4xl:py-5 w-full flex items-center justify-between">
           {/* views */}
           <div className="flex items-center gap-1">
             <FireSvg />

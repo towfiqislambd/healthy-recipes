@@ -2,7 +2,7 @@ import parse from 'html-react-parser';
 
 const LeftSideContentsDetailsPage = ({ data }) => {
   return (
-    <div className="mt-5 bg-white rounded-lg h-full p-5">
+    <div className="3xl:mt-5 bg-white rounded-lg h-full p-5">
       {/* Ingredients */}
       <div>
         {/* title */}

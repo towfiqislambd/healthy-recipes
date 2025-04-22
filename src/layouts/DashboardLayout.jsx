@@ -146,14 +146,14 @@ const DashboardLayout = () => {
             {/* Layout Body */}
             <div className="flex mt-[90px] h-[calc(100vh-90px)] bg-white">
                 {/* Sidebar with map */}
-                <aside className="w-[237px] bg-[#F6F7FB] overflow-y-auto pt-7 h-full">
-                    <ul className="text-[#5A5C5F] font-medium space-y-3">
+                <aside className="w-[210px] 2xl:w-[237px] bg-[#F6F7FB] overflow-y-auto pt-7 h-full">
+                    <ul className="text-[#5A5C5F] font-medium space-y-1 2xl:space-y-3">
                         {sidebarLinks.map(({ path, label }) => (
                             <li key={path}>
                                 <NavLink
                                     to={path}
                                     className={({ isActive }) =>
-                                        `px-7 py-3 block w-full duration-300 transition-all ${isActive
+                                        `px-6 2xl:px-7 py-[11px] 2xl:py-3 block w-full duration-300 transition-all ${isActive
                                             ? 'bg-primary text-white'
                                             : 'hover:bg-primary hover:text-white text-[#5A5C5F]'
                                         }`

@@ -28,16 +28,16 @@ const MyRecipeCard = ({ item }) => {
     return (
         <Link
             to={`/my-recipe-details/${item.id}`}
-            className={`bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] pb-5 flex flex-col justify-between group rounded-2xl`}
+            className={`bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] pb-1 4xl:pb-5 flex flex-col justify-between group rounded-2xl`}
         >
             <div className="relative">
                 {/* image and overlay */}
                 <div className="block">
-                    <div className="sm:h-[350px] h-[250px] w-full relative rounded-sm overflow-hidden">
+                    <div className="h-[250px] sm:h-[300px] w-full relative rounded-sm overflow-hidden">
                         <img
                             className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
                             src={`${import.meta.env.VITE_SITE_URL}/${item?.recipe_image}`}
-                            alt=""
+                            alt="image"
                         />
                         {/* Overlay with Linear Gradient */}
                         <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30"></div>
@@ -63,7 +63,7 @@ const MyRecipeCard = ({ item }) => {
 
                 {/* type */}
                 <div className="absolute top-3 left-3">
-                    <p className="px-3 py-1.5 rounded-sm bg-white/50 text-black text-sm">
+                    <p className="px-2 4xl:px-3 py-1 4xl:py-1.5 rounded-sm bg-white/50 text-black text-sm">
                         <span>
                             {
                                 `${item?.library_name || item?.recipe_library?.diet_name}
@@ -76,11 +76,11 @@ const MyRecipeCard = ({ item }) => {
             </div>
 
             {/* description */}
-            <div className="py-4 px-3 text-wrap border-b border-dashed border-black">
-                <h5 className="text-lg lg:text-xl font-bold font-merriweather text-black truncate">
+            <div className="py-3 4xl:py-4 px-3 text-wrap border-b border-dashed border-black">
+                <h5 className="text-lg 4xl:text-xl font-bold font-merriweather text-black truncate">
                     {item?.recipe_name}
                 </h5>
-                <div className="mt-2 xl:mt-4 space-y-2">
+                <div className="mt-2 4xl:mt-4 space-y-1 4xl:space-y-2">
                     <div className="flex flex-wrap gap-2">
                         <div className="flex-shrink-0">
                             <RecipeBookSvg />
@@ -105,7 +105,7 @@ const MyRecipeCard = ({ item }) => {
             </div>
 
             {/* stats */}
-            <div className="px-5 py-5 w-full flex items-center justify-between">
+            <div className="px-5 py-3 4xl:py-5 w-full flex items-center justify-between">
                 {/* views */}
                 <div className="flex items-center gap-1">
                     <FireSvg />

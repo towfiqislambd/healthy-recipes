@@ -139,8 +139,8 @@ const DashboardShareRecipe = () => {
 
 
     return (
-        <div className="max-w-[752px] mx-auto py-10">
-            <h3 className="mb-7 text-2xl text-[#E48E19] font-semibold font-merriweather">Share your recipe</h3>
+        <div className="max-w-[752px] mx-auto py-3 2xl:py-10">
+            <h3 className="mb-5 3xl:mb-7 text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">Share your recipe</h3>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
 
                 {/* Recipe Name */}
