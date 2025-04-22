@@ -168,7 +168,7 @@ const Navbar = () => {
           </div>
           {/* cta */}
           <div className="flex gap-3 items-center lg:mt-2">
-            <Link className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center  ">
+            <Link to="/dashboard/dashboard-saved-recipes" className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center  ">
               <LoveSvg />
             </Link>
 

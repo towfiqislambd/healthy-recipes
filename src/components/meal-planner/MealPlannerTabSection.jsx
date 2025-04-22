@@ -97,7 +97,7 @@ const MealPlannerTabSection = () => {
           <div className="flex flex-col lg:flex-row w-full lg:w-auto gap-3 lg:gap-0">
             {/* Age Filter */}
             <Select value={selectedAge} onValueChange={(age) => setAgeGroup(age)}>
-              <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[460px] lg:h-14 h-11 lg:rounded-l-full lg:px-6 px-3 text-base focus:ring-primary">
+              <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[460px] 2xl:h-14 h-11 lg:rounded-l-full lg:px-6 px-3 text-base focus:ring-primary">
                 <SelectValue placeholder="Filter by age group" />
               </SelectTrigger>
               <SelectContent className="px-0 py-0">
@@ -110,7 +110,7 @@ const MealPlannerTabSection = () => {
 
             {/* Diet Filter */}
             <Select value={selectedDiet} onValueChange={(lib) => setLibrary(lib)}>
-              <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[450px] lg:h-14 h-11 lg:rounded-r-full lg:border-l-0 px-3 lg:px-6 text-base focus:ring-primary">
+              <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[450px] 2xl:h-14 h-11 lg:rounded-r-full lg:border-l-0 px-3 lg:px-6 text-base focus:ring-primary">
                 <SelectValue placeholder="Filter by diet" />
               </SelectTrigger>
               <SelectContent className="px-0 py-0">
@@ -126,7 +126,7 @@ const MealPlannerTabSection = () => {
           {/* Reset Button */}
           <button
             onClick={handleReset}
-            className="h-11 lg:h-14 w-full lg:w-auto px-3 justify-center lg:px-6 border border-primary rounded-full flex items-center gap-2 bg-primary text-white transition-all duration-300 hover:bg-transparent hover:text-primary"
+            className="h-11 2xl:h-14 w-full lg:w-auto px-3 justify-center lg:px-6 border border-primary rounded-full flex items-center gap-2 bg-primary text-white transition-all duration-300 hover:bg-transparent hover:text-primary"
           >
             <RiResetLeftFill />
             Reset

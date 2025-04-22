@@ -33,7 +33,9 @@ const BlogCard = ({ item }) => {
           <h4 className="text-lg 2xl:text-xl font-bold leading-[160%] font-merriweather text-black truncate">
             {item?.title}
           </h4>
-          <div className="text-textColor leading-[150%] ">{parse(item?.description.slice(0, 80))}</div>
+          <div className="text-textColor 2xl:leading-[150%] ">
+            {typeof item?.description === 'string' ? parse(item?.description.slice(0, 80)) : item?.description}
+          </div>
         </div>
 
         {/* user info */}

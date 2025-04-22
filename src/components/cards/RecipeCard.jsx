@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { FiEdit } from "react-icons/fi";
 import {
   FireSvg,
   LoveSvg,
@@ -13,7 +12,7 @@ import { useState } from 'react';
 import Modal from '../modals/Modal';
 import AddMealModal from '../modals/AddMealModal';
 
-const RecipeCard = ({ item, refetch, isPlanner, isMyRecipe }) => {
+const RecipeCard = ({ item, refetch, isPlanner }) => {
   const [recipeId, setRecipeId] = useState(null);
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
@@ -59,7 +58,7 @@ const RecipeCard = ({ item, refetch, isPlanner, isMyRecipe }) => {
         <div className="relative">
           {/* image and overlay */}
           <div className="block">
-            <div className="sm:h-[350px] h-[250px] w-full relative rounded-sm overflow-hidden">
+            <div className="h-[250px] sm:h-[300px] 2xl:h-[350px] w-full relative rounded-sm overflow-hidden">
               <img
                 className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
                 src={`${import.meta.env.VITE_SITE_URL}/${item?.recipe_image}`}
@@ -69,23 +68,15 @@ const RecipeCard = ({ item, refetch, isPlanner, isMyRecipe }) => {
               <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30"></div>
             </div>
           </div>
-          {
-            isMyRecipe ?
-              <button
-                onClick={handleWishlistClick}
-                className={`absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer ${item?.is_wishlisted ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
-                  }`}
-              >
-                <LoveSvg isFavorite={item?.is_wishlisted} />
-              </button>
-              :
-              <button
-                onClick={e => e.stopPropagation()}
-                className='absolute size-10 z-20 flex items-center justify-center top-4 right-4 border border-[#CB4242] rounded-full cursor-pointer'
-              >
-                <FiEdit className='text-lg' />
-              </button>
-          }
+
+          {/* Wishlist */}
+          <button
+            onClick={handleWishlistClick}
+            className={`absolute size-9 2xl:size-10 z-20 flex items-center justify-center top-3 2xl:top-4 right-3 2xl:right-4 border border-[#CB4242] rounded-full cursor-pointer ${item?.is_wishlisted ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
+              }`}
+          >
+            <LoveSvg isFavorite={item?.is_wishlisted} />
+          </button>
 
           {/* type */}
           <div className="absolute top-3 left-3">
@@ -107,7 +98,7 @@ const RecipeCard = ({ item, refetch, isPlanner, isMyRecipe }) => {
             {item?.recipe_name}
           </h5>
           <div className="mt-2 xl:mt-4 space-y-2">
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 truncate">
               <div className="flex-shrink-0">
                 <RecipeBookSvg />
               </div>
@@ -121,7 +112,7 @@ const RecipeCard = ({ item, refetch, isPlanner, isMyRecipe }) => {
               </p>
             </div>
             <div>
-              <p className="text-textColor font-medium text-[15px] xl:text-base">
+              <p className="text-textColor font-medium text-[15px] xl:text-base truncate">
                 {
                   `${item?.total_ingredients} ingredients | ${item?.recipe_creator}`
                 }

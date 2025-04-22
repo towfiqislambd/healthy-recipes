@@ -14,7 +14,7 @@ const LeftSideContentsDetailsPage = ({ data }) => {
         <div className="mt-4 lg:mt-5 2xl:mt-8 space-y-4 2xl:space-y-5">
           {
             data?.ingredients.map(item => <li key={item.id} className="text-textColor leading-[130%]">
-              {item?.ingredient_name}
+              {typeof item?.ingredient_name === 'string' ? parse(item?.ingredient_name) : item?.ingredient_name}
             </li>)
           }
         </div>
