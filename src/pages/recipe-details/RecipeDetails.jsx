@@ -32,7 +32,7 @@ const RecipeDetails = () => {
         <div className="container">
           <div className="flex flex-col xl:flex-row w-full gap-5 lg:gap-8 xl:gap-10 3xl:gap-24 lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
             {/* left side contents */}
-            <div className="w-[500px]">
+            <div className="w-full xl:w-[500px]">
               <LeftSideContentsDetailsPage data={recipeData} />
             </div>
 

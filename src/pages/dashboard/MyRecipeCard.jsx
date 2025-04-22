@@ -33,7 +33,7 @@ const MyRecipeCard = ({ item }) => {
             <div className="relative">
                 {/* image and overlay */}
                 <div className="block">
-                    <div className="h-[250px] sm:h-[300px] w-full relative rounded-sm overflow-hidden">
+                    <div className="h-[250px] sm:h-[330px] w-full relative rounded-sm overflow-hidden">
                         <img
                             className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
                             src={`${import.meta.env.VITE_SITE_URL}/${item?.recipe_image}`}
