@@ -5,6 +5,7 @@ import { createContext, useEffect, useState } from 'react';
 export const AuthContextProvider = createContext(null);
 
 const AuthProvider = ({ children }) => {
+    const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState();
     const [token, setToken, clearToken] = useLocalStorage('token', null);
@@ -46,7 +47,9 @@ const AuthProvider = ({ children }) => {
         user,
         loadingUserData,
         fetchingUserData,
+        search,
         setUser,
+        setSearch,
         setLoading,
     };
     return (

@@ -61,19 +61,19 @@ export const useTrendingRecipePrivate = () => {
 };
 
 // All Recipes (Public)
-export const useAllRecipes = (category_id, recipe_library_id, age_group, tag_id) => {
+export const useAllRecipes = (category_id, recipe_library_id, age_group, tag_id, search) => {
   return useQuery({
-    queryKey: ['all-recipes', category_id, recipe_library_id, age_group, tag_id],
-    queryFn: () => AllRecipes(category_id, recipe_library_id, age_group, tag_id),
+    queryKey: ['all-recipes', category_id, recipe_library_id, age_group, tag_id, search],
+    queryFn: () => AllRecipes(category_id, recipe_library_id, age_group, tag_id, search),
   });
 };
 
 // All Recipes (Private)
-export const useAllRecipesPrivate = (category_id, recipe_library_id, age_group, tag_id) => {
+export const useAllRecipesPrivate = (category_id, recipe_library_id, age_group, tag_id, search) => {
   const {user} = useAuth();
   return useQuery({
-    queryKey: ['all-recipes-private', category_id, recipe_library_id, age_group, tag_id],
-    queryFn: () => AllRecipesPrivate(category_id, recipe_library_id, age_group, tag_id),
+    queryKey: ['all-recipes-private', category_id, recipe_library_id, age_group, tag_id, search],
+    queryFn: () => AllRecipesPrivate(category_id, recipe_library_id, age_group, tag_id, search),
     enabled: !!user
   });
 };
@@ -186,9 +186,9 @@ export const useMyRecipeDetails = (id) => {
 };
 
 // Meal Planner Table
-export const useMealPlannerTable = (category_id) => {
+export const useMealPlannerTable = (category_id, selectedMonth) => {
   return useQuery({
-       queryKey: ['meal-planner-table',category_id],
-       queryFn: () => MealPlannerTableData(category_id),
+       queryKey: ['meal-planner-table',category_id, selectedMonth],
+       queryFn: () => MealPlannerTableData(category_id, selectedMonth),
      });
 };

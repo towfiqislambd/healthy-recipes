@@ -2,12 +2,13 @@ import ReviewLeftSection from "./ReviewLeftSection";
 import ReviewCard from "../cards/ReviewCard";
 import { useState } from "react";
 import { useRecipeReviews } from "@/hooks/cms.queries";
+import { Loader } from "../loader/Loader";
 
 const ReviewSection = ({ id }) => {
   const [activePage, setActivePage] = useState(1);
   const { data: allReviews, isLoading, refetch } = useRecipeReviews(id, activePage);
 
-  if (isLoading) return <p className="h-svh">loading....</p>;
+  if (isLoading) return <div className="h-[50vh] flex justify-center items-center"><Loader /></div>;
 
   return (
     <section className="container py-8 xl:py-10 2xl:py-16 3xl:py-24">

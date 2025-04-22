@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { LoveSvg, SearchSvg } from "@/components/svg-container/SvgContainer";
 import logo from '../assets/images/logo.png';
 import ButtonTransparent from "@/components/buttons/ButtonTransparent";
-import profile from "../assets/images/profile.png";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import useAuth from "@/hooks/useAuth";
 
 const DashboardLayout = () => {
+    const { user } = useAuth();
+    const navigate = useNavigate()
     const location = useLocation()?.pathname;
     const [isOpen, setOpen] = useState(false);
 
@@ -24,8 +27,12 @@ const DashboardLayout = () => {
         { path: '/dashboard/dashboard-meal-planner', label: 'Meal planner' },
         { path: '/dashboard/dashboard-share-recipes', label: 'Share recipes' },
         { path: '/dashboard/dashboard-my-recipes', label: 'My recipes' },
-        { path: '/dashboard/dashboard-saved-recipes', label: 'Saved recipes' },
+        { path: '/dashboard/dashboard-saved-recipes', label: 'Favorite recipes' },
     ];
+
+    const handleSearch = () => {
+        navigate('/meal-planner')
+    }
 
     return (
         <section className="min-h-screen max-h-screen flex flex-col">
@@ -41,10 +48,11 @@ const DashboardLayout = () => {
                             <SearchSvg />
                             <input
                                 className="focus:outline-none w-full"
-                                placeholder="Search for recipes by ingredients..."
+                                placeholder="Search for recipes name..."
                                 type="text"
                                 name="search"
                                 id="search"
+                                onClick={handleSearch}
                             />
                         </div>
                     </div>
@@ -71,9 +79,9 @@ const DashboardLayout = () => {
                             <Link to='/dashboard/dashboard-saved-recipes' className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center">
                                 <LoveSvg />
                             </Link>
-                            <figure className="w-12 h-12 rounded-full">
-                                <img src={profile} alt="Profile" className="w-full h-full rounded-full" />
-                            </figure>
+                            <Avatar className="w-12 h-12 rounded-full">
+                                <AvatarFallback className='text-[22px] font-medium w-full h-full rounded-full'>{user?.name.slice(0, 1)}</AvatarFallback>
+                            </Avatar>
                         </div>
                     </div>
 
@@ -100,10 +108,11 @@ const DashboardLayout = () => {
                             <SearchSvg />
                             <input
                                 className="focus:outline-none w-full"
-                                placeholder="Search for recipes by ingredients..."
+                                placeholder="Search for recipes name..."
                                 type="text"
                                 name="search"
                                 id="search"
+                                onClick={handleSearch}
                             />
                         </div>
                         <div className="flex flex-col mt-5 items-center gap-6">

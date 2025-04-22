@@ -11,13 +11,18 @@ const SharedRecipes = ({ myRecipes }) => {
                 </button>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5 2xl:px-0">
-                {myRecipes?.recipes?.data?.slice(0, 4)?.map((item, idx) => (
-                    <MyRecipeCard
-                        isMyRecipe={true}
-                        key={idx}
-                        item={item}
-                    />
-                ))}
+                {
+                    myRecipes?.recipes?.data?.length > 0 ?
+                        myRecipes?.recipes?.data?.slice(0, 4)?.map((item, idx) => (
+                            <MyRecipeCard
+                                isMyRecipe={true}
+                                key={idx}
+                                item={item}
+                            />
+                        ))
+                        :
+                        'No data found'
+                }
             </div>
         </div>
     );

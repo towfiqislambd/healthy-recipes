@@ -14,7 +14,6 @@ const ShareRecipeSection = ({ fullLocation }) => {
     const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
       url
     )}&text=${encodeURIComponent(text)}`;
-
     window.open(twitterShareUrl, "_blank");
   };
 

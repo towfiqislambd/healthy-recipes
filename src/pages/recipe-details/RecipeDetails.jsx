@@ -6,12 +6,17 @@ import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection
 import ReviewSection from "@/components/recipe-details/ReviewSection";
 import { useParams } from "react-router-dom";
 import { useRecipeDetails, useShareYourRecipe } from "@/hooks/cms.queries";
+import { Loader } from "@/components/loader/Loader";
 
 const RecipeDetails = () => {
   const { id } = useParams();
   const fullLocation = `${window.location.origin}/${id}`;
-  const { data: shareYourRecipe } = useShareYourRecipe();
-  const { data: recipeData } = useRecipeDetails(id);
+  const { data: shareYourRecipe, isLoading: shareRecipeLoading } = useShareYourRecipe();
+  const { data: recipeData, isLoading: recipeDataLoading } = useRecipeDetails(id);
+
+  if (shareRecipeLoading || recipeDataLoading) {
+    return <div className="h-screen flex justify-center items-center"><Loader /></div>;
+  }
 
   return (
     <div className="mt-[104px]">

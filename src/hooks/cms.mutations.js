@@ -1,7 +1,7 @@
 import toast from 'react-hot-toast';
 import useAuth from './useAuth';
 import { useMutation } from '@tanstack/react-query';
-import { AddMealPlanner, AddRecipe, AddReview, AddWishlist } from './cms.api';
+import { AddMealPlanner, AddRecipe, AddReview, AddWishlist, DeleteMealPlan, EditMealPlanner } from './cms.api';
 import { useNavigate } from 'react-router-dom';
 
 // Add reviews
@@ -39,11 +39,11 @@ export const useAddWishlist = (id) => {
       onSuccess: (data) => {
         if(data.length === 0){
           setLoading(false);
-          toast.error('Removed from wishlist');
+          toast.error('Removed from favorites');
       }
        else{
           setLoading(false);
-          toast.success('Added in wishlist');
+          toast.success('Added to favorites');
        }
       },
       onError: (err) => {
@@ -65,8 +65,7 @@ export const useAddRecipe = () => {
     onMutate: () => {
       setLoading(true);
     },
-    onSuccess: (data) => {
-      console.log(data)
+    onSuccess: () => {
       setLoading(false);
       toast.success('Recipe added Successfully');
       navigate('/dashboard/dashboard-my-recipes')
@@ -79,12 +78,9 @@ export const useAddRecipe = () => {
 };
 
 
-
-
-
-
 // Add Meal Planner
 export const useAddMealPlanner = (recipe_id) => {
+  const navigate = useNavigate()
   const { setLoading } = useAuth();
   
   return useMutation({
@@ -94,9 +90,59 @@ export const useAddMealPlanner = (recipe_id) => {
       setLoading(true);
     },
     onSuccess: (data) => {
-      console.log(data)
+      if(data?.data?.length > 0) {
+        setLoading(false);
+        toast.success(data?.message);
+        navigate('/dashboard/dashboard-meal-planner')
+      }
+      else{
+        setLoading(false);
+        toast.error(data?.message);
+      }
+    },
+    onError: (err) => {
       setLoading(false);
-      toast.success('Added in meal planner');
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+
+// Delete Meal Planner
+export const useDeleteMealPlan = (meal_plan_id) => {
+  const { setLoading } = useAuth();
+  
+  return useMutation({
+    mutationKey: ['delete-meal-plan'],
+    mutationFn: () => DeleteMealPlan(meal_plan_id),
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: (data) => {
+      setLoading(false);
+        toast.success(data?.message);
+    },
+    onError: (err) => {
+      setLoading(false);
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+
+// Edit Meal Planner
+export const useEditMealPlanner = (item_id) => {
+  const { setLoading } = useAuth();
+  
+  return useMutation({
+    mutationKey: ['edit-meal-planner'],
+    mutationFn: (payload) => EditMealPlanner(item_id, payload),
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: () => {
+      setLoading(false);
+      toast.success('Recipe name changed successfully');
     },
     onError: (err) => {
       setLoading(false);

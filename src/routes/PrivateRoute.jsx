@@ -1,3 +1,4 @@
+import { Loader } from '@/components/loader/Loader';
 import useAuth from '@/hooks/useAuth';
 import { Navigate } from 'react-router-dom';
 
@@ -5,8 +6,7 @@ const PrivateRoute = ({ children }) => {
   const { user, token, loading } = useAuth();
 
   if (loading) {
-    return <p>Loading....</p>
-    // return <Loader />;
+    return <div className='h-svh flex justify-center items-center'><Loader /></div>;
   }
   if (token || user) return children;
 

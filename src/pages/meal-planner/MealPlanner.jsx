@@ -1,32 +1,29 @@
 import MealPlannerStatsCard from '@/components/cards/MealPlannerStatsCard';
 import RecipeBlogs from '@/components/homepage/RecipeBlogs';
 import ShareYourRecipeSection from '@/components/homepage/ShareYourRecipeSection';
+import { Loader } from '@/components/loader/Loader';
 import MealPlannerTabSection from '@/components/meal-planner/MealPlannerTabSection';
 import {
-  useAllRecipes,
-  useAllRecipesPrivate,
   useBlogs,
   useMealPlannerCard,
   useMealPlannerTitleAndDesc,
   useShareYourRecipe,
 } from '@/hooks/cms.queries';
-import useAuth from '@/hooks/useAuth';
 
 const MealPlanner = () => {
-  const { user } = useAuth()
-  const { data: shareYourRecipe } = useShareYourRecipe();
-  const { data: mealPlannerTitleAndDesc } = useMealPlannerTitleAndDesc();
-  const { data: mealPlannerCard } = useMealPlannerCard();
-  const { data: blogs } = useBlogs();
-  const { data: recipes } = useAllRecipes();
-  const { data: recipesPrivate } = useAllRecipesPrivate();
+  const { data: shareYourRecipe, isLoading: loadingShareYourRecipe } = useShareYourRecipe();
+  const { data: mealPlannerTitleAndDesc, isLoading: loadingMealPlannerTitleAndDesc } = useMealPlannerTitleAndDesc();
+  const { data: mealPlannerCard, isLoading: loadingMealPlannerCard } = useMealPlannerCard();
+  const { data: blogs, isLoading: loadingBlogs } = useBlogs();
 
-  let recipeData = null;
-  if (user) {
-    recipeData = recipesPrivate;
-  }
-  else {
-    recipeData = recipes;
+  const isLoading =
+    loadingShareYourRecipe ||
+    loadingMealPlannerTitleAndDesc ||
+    loadingMealPlannerCard ||
+    loadingBlogs
+
+  if (isLoading) {
+    return <div className="h-screen flex justify-center items-center"><Loader /></div>;
   }
 
   return (
@@ -57,7 +54,7 @@ const MealPlanner = () => {
       </section>
 
       {/* tab section */}
-      <MealPlannerTabSection recipes={recipeData} />
+      <MealPlannerTabSection />
 
       <ShareYourRecipeSection data={shareYourRecipe} />
 
