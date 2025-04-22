@@ -73,7 +73,7 @@ const Navbar = () => {
               <SearchSvg />
               <input
                 className="focus:outline-none w-full placeholder:text-[15px] 3xl:placeholder:text-base"
-                placeholder="Search for recipes by ingredients..."
+                placeholder="Search for recipes name..."
                 type="text"
                 name="search"
                 id="search"

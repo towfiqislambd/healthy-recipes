@@ -135,15 +135,20 @@ const MealPlannerTabSection = () => {
 
         {/* Recipe Cards */}
         <div className="mt-10 grid lg:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4 gap-6">
-          {recipeData?.map((item, idx) => (
-            <RecipeCard
-              refetch={refetch}
-              key={idx}
-              isMyRecipe={true}
-              isPlanner={true}
-              item={item}
-            />
-          ))}
+          {
+            recipeData?.length > 0 ?
+              recipeData?.map((item, idx) => (
+                <RecipeCard
+                  refetch={refetch}
+                  key={idx}
+                  isMyRecipe={true}
+                  isPlanner={true}
+                  item={item}
+                />
+              ))
+              :
+              'No data found'
+          }
         </div>
       </div>
     </section>

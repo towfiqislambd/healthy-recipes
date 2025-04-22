@@ -46,7 +46,7 @@ const DashboardLayout = () => {
                             <SearchSvg />
                             <input
                                 className="focus:outline-none w-full"
-                                placeholder="Search for recipes by ingredients..."
+                                placeholder="Search for recipes name..."
                                 type="text"
                                 name="search"
                                 id="search"
@@ -106,7 +106,7 @@ const DashboardLayout = () => {
                             <SearchSvg />
                             <input
                                 className="focus:outline-none w-full"
-                                placeholder="Search for recipes by ingredients..."
+                                placeholder="Search for recipes name..."
                                 type="text"
                                 name="search"
                                 id="search"
