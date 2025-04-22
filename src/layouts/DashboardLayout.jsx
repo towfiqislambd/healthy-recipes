@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { LoveSvg, SearchSvg } from "@/components/svg-container/SvgContainer";
@@ -10,7 +10,7 @@ import useAuth from "@/hooks/useAuth";
 
 const DashboardLayout = () => {
     const { user } = useAuth();
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const location = useLocation()?.pathname;
     const [isOpen, setOpen] = useState(false);
 
@@ -30,9 +30,9 @@ const DashboardLayout = () => {
         { path: '/dashboard/dashboard-saved-recipes', label: 'Favorite recipes' },
     ];
 
-    const handleSearch = () => {
-        navigate('/meal-planner')
-    }
+    // const handleSearch = () => {
+    //     navigate('/meal-planner')
+    // }
 
     return (
         <section className="min-h-screen max-h-screen flex flex-col">
@@ -44,7 +44,7 @@ const DashboardLayout = () => {
                         <Link to="/">
                             <img src={logo} alt="Logo" />
                         </Link>
-                        <div className="px-3 py-[10px] hidden xl:flex items-center gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white 2xl:min-w-[420px]">
+                        {/* <div className="px-3 py-[10px] hidden xl:flex items-center gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white 2xl:min-w-[420px]">
                             <SearchSvg />
                             <input
                                 className="focus:outline-none w-full"
@@ -54,7 +54,7 @@ const DashboardLayout = () => {
                                 id="search"
                                 onClick={handleSearch}
                             />
-                        </div>
+                        </div> */}
                     </div>
 
                     {/* Right */}
@@ -104,7 +104,7 @@ const DashboardLayout = () => {
                         <Link to="/" className="size-[80px]">
                             <img className="object-cover mx-auto" src={logo} alt="Logo" />
                         </Link>
-                        <div className="flex items-center gap-2 md:px-5 px-3 md:py-4 py-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white min-w-[100px] mx-5 md:mx-0 mt-5 md:mt-0">
+                        {/* <div className="flex items-center gap-2 md:px-5 px-3 md:py-4 py-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white min-w-[100px] mx-5 md:mx-0 mt-5 md:mt-0">
                             <SearchSvg />
                             <input
                                 className="focus:outline-none w-full"
@@ -114,7 +114,7 @@ const DashboardLayout = () => {
                                 id="search"
                                 onClick={handleSearch}
                             />
-                        </div>
+                        </div> */}
                         <div className="flex flex-col mt-5 items-center gap-6">
                             <div className="flex flex-col gap-5">
                                 {navLinks.map((item) => (
