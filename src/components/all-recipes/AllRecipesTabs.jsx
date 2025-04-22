@@ -15,7 +15,7 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
   const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
   const [tag, setTag] = useState(null);
   const [selectedAllergen, setSelectedAllergen] = useState("");
-  const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
+  const filterClass = `text-base py-2 xl:py-3 px-3 xl:px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
   const { data: allRecipes, isLoading } = useAllRecipes(activeTab?.id, libraryId, null, tag);
   if (isLoading) {

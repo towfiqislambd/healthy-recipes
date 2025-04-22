@@ -141,7 +141,7 @@ const Navbar = () => {
       >
         {/* logo */}
         <Link to="/">
-          <figure className="w-[90px] h-[80px]">
+          <figure className="w-[100px] h-[90px]">
             <img
               className="object-cover w-full h-full mx-auto"
               src={`${import.meta.env.VITE_SITE_URL}/${siteSettings?.logo}`}
@@ -149,7 +149,7 @@ const Navbar = () => {
           </figure>
         </Link>
 
-        <div className="flex flex-col mt-7 lg:mt-10 gap-6">
+        <div className="flex flex-col mt-7 gap-6">
           {/* tabs */}
           <div className="flex flex-col gap-5 xl:gap-6">
             {navLinks?.map((item) => (
