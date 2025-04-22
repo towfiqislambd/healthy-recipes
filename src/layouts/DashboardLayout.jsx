@@ -131,7 +131,7 @@ const DashboardLayout = () => {
                 </aside>
 
                 {/* Page Content */}
-                <main className="flex-1 overflow-y-auto p-5">
+                <main className={`flex-1 overflow-y-auto ${location !== '/dashboard/overview' ? 'p-5' : 'lg:p-5'}`}>
                     <Outlet />
                 </main>
             </div>
