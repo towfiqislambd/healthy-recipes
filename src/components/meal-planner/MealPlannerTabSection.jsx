@@ -134,7 +134,7 @@ const MealPlannerTabSection = () => {
         </div>
 
         {/* Recipe Cards */}
-        <div className="mt-10 grid lg:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4 gap-6">
+        <div className="mt-10 grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6">
           {
             recipeData?.length > 0 ?
               recipeData?.map((item, idx) => (

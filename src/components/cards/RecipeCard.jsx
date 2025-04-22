@@ -94,10 +94,10 @@ const RecipeCard = ({ item, refetch, isPlanner }) => {
 
         {/* description */}
         <div className="py-4 px-3 text-wrap border-b border-dashed border-black">
-          <h5 className="text-lg lg:text-xl font-bold font-merriweather text-black truncate">
+          <h5 className="text-lg 2xl:text-xl font-bold font-merriweather text-black truncate">
             {item?.recipe_name}
           </h5>
-          <div className="mt-2 xl:mt-4 space-y-2">
+          <div className="mt-2 2xl:mt-4 space-y-1 2xl:space-y-2">
             <div className="flex flex-wrap gap-2 truncate">
               <div className="flex-shrink-0">
                 <RecipeBookSvg />
@@ -122,7 +122,7 @@ const RecipeCard = ({ item, refetch, isPlanner }) => {
         </div>
 
         {/* stats */}
-        <div className="px-5 py-5 w-full flex items-center justify-between">
+        <div className="px-5 py-3 2xl:py-5 w-full flex items-center justify-between">
           {/* views */}
           <div className="flex items-center gap-1">
             <FireSvg />
@@ -144,7 +144,7 @@ const RecipeCard = ({ item, refetch, isPlanner }) => {
             <div className="px-5">
               <button
                 onClick={(e) => handleAddToPlanner(e, item)}
-                className="hover:bg-primary border border-primary px-3 lg:px-5 py-2 lg:py-3 rounded-lg hover:text-white text-[#5A5C5F] duration-300 transition-all"
+                className="hover:bg-primary border border-primary px-3 2xl:px-5 py-2 2xl:py-3 rounded-lg hover:text-white text-[#5A5C5F] duration-300 transition-all"
               >
                 + Add to planner
               </button>

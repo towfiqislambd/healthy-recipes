@@ -6,12 +6,12 @@ const LeftSideContentsDetailsPage = ({ data }) => {
       {/* Ingredients */}
       <div>
         {/* title */}
-        <h5 className="text-black text-xl 2xl:text-2xl font-bold leading-[130%] font-merriweather">
+        <h5 className="text-black text-xl 2xl:text-2xl font-bold 2xl:leading-[130%] font-merriweather">
           Ingredients:
         </h5>
 
         {/* description */}
-        <div className="mt-4 lg:mt-5 2xl:mt-8 space-y-4 2xl:space-y-5">
+        <div className="mt-4 lg:mt-5 2xl:mt-8 space-y-3 2xl:space-y-5">
           {
             data?.ingredients.map(item => <li key={item.id} className="text-textColor leading-[130%]">
               {typeof item?.ingredient_name === 'string' ? parse(item?.ingredient_name) : item?.ingredient_name}
@@ -21,7 +21,7 @@ const LeftSideContentsDetailsPage = ({ data }) => {
       </div>
 
       {/* stats */}
-      <div className="mt-7 lg:mt-10 space-y-3 2xl:space-y-4">
+      <div className="mt-8 2xl:mt-10 space-y-3 2xl:space-y-4">
         <div className="w-full flex items-center justify-between">
           <p className="text-textColor">Serving number</p>
           <p className="text-black font-medium">{data?.serving_number}</p>
@@ -39,12 +39,12 @@ const LeftSideContentsDetailsPage = ({ data }) => {
       {/* Nutrition */}
       <div className="pt-7 lg:pt-8">
         {/* title */}
-        <h5 className="text-black text-xl 2xl:text-2xl font-bold leading-[130%] font-merriweather">
+        <h5 className="text-black text-xl 2xl:text-2xl font-bold 2xl:leading-[130%] font-merriweather">
           Nutrition:
         </h5>
 
         {/* description */}
-        <div className="mt-5 2xl:mt-8 space-y-5 text-textColor leading-10">
+        <div className="mt-3 2xl:mt-8 space-y-3 2xl:space-y-5 text-textColor leading-7 2xl:leading-10">
           {typeof data?.nutritions === 'string' ? parse(data.nutritions) : data?.nutrition_info}
         </div>
       </div>
