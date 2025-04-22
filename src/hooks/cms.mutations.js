@@ -140,8 +140,7 @@ export const useEditMealPlanner = (item_id) => {
     onMutate: () => {
       setLoading(true);
     },
-    onSuccess: (data) => {
-      console.log(data)
+    onSuccess: () => {
       setLoading(false);
       toast.success('Recipe name changed successfully');
     },

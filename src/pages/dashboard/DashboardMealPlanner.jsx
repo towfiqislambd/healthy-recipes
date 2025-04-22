@@ -132,7 +132,11 @@ const DashboardMealPlanner = () => {
                                                 className="border-r border-t border-b border-[#8993A4] px-4 py-5"
                                             >
                                                 <div className="flex items-center justify-between gap-2">
-                                                    <p>{item.item}</p>
+                                                    <p>
+                                                        {
+                                                            item?.name ? item?.name : item?.item
+                                                        }
+                                                    </p>
                                                     <Popover>
                                                         <PopoverTrigger>
                                                             <ThreeDotSvg />
