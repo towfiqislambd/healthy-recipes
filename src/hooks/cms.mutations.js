@@ -80,6 +80,7 @@ export const useAddRecipe = () => {
 
 // Add Meal Planner
 export const useAddMealPlanner = (recipe_id) => {
+  const navigate = useNavigate()
   const { setLoading } = useAuth();
   
   return useMutation({
@@ -92,6 +93,7 @@ export const useAddMealPlanner = (recipe_id) => {
       if(data?.data?.length > 0) {
         setLoading(false);
         toast.success(data?.message);
+        navigate('/dashboard/dashboard-meal-planner')
       }
       else{
         setLoading(false);

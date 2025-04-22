@@ -24,8 +24,15 @@ const RecipeCard = ({ item, refetch, isPlanner, isMyRecipe }) => {
   const handleAddToPlanner = (e, item) => {
     e.stopPropagation();
     e.preventDefault();
-    setOpen(true);
-    setRecipeId(item?.id)
+
+    if (user) {
+      setOpen(true);
+      setRecipeId(item?.id)
+    }
+    else {
+      toast.error('Please login first')
+      navigate('/auth/login')
+    }
   };
 
   // Function to handle wishlist button click
@@ -37,7 +44,6 @@ const RecipeCard = ({ item, refetch, isPlanner, isMyRecipe }) => {
       await wishlistMutation();
       refetch();
     }
-
     else {
       toast.error('Please login first')
       navigate('/auth/login')

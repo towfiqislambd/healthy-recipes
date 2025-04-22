@@ -9,17 +9,34 @@ import Modal from '@/components/modals/Modal';
 import EditMealModal from '@/components/modals/EditMealModal';
 
 const DashboardMealPlanner = () => {
+    const [selectedMonth, setSelectedMonth] = useState('');
     const [itemId, setItemId] = useState('')
     const [open, setOpen] = useState(false);
     const [mealPlannerId, setMealPlannerId] = useState('');
     const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
     const { data: allCategories, isLoading: categoryLoading } = useAllCategories();
-    const { data: mealPlannerTableData, isLoading: mealPlannerLoading } = useMealPlannerTable(activeTab?.id);
+    const { data: mealPlannerTableData, isLoading: mealPlannerLoading } = useMealPlannerTable(activeTab?.id, selectedMonth);
     const { mutateAsync: deleteMealPlan } = useDeleteMealPlan(mealPlannerId);
 
     if (categoryLoading || mealPlannerLoading) {
         return <div className="flex justify-center items-center h-[85vh]"><Loader /></div>;
     }
+
+    const monthData = [
+        { id: 0, month: 'All' },
+        { id: 1, month: 'January' },
+        { id: 2, month: 'February' },
+        { id: 3, month: 'March' },
+        { id: 4, month: 'April' },
+        { id: 5, month: 'May' },
+        { id: 6, month: 'June' },
+        { id: 7, month: 'July' },
+        { id: 8, month: 'August' },
+        { id: 9, month: 'September' },
+        { id: 10, month: 'October' },
+        { id: 11, month: 'November' },
+        { id: 12, month: 'December' },
+    ];
 
     // Delete Meal Plan
     const handleDeletePlan = async (meal_plan_id) => {
@@ -29,6 +46,7 @@ const DashboardMealPlanner = () => {
         }
     }
 
+    // Edit Meal Plan
     const handleEditPlan = (item_id) => {
         setOpen(true);
         setItemId(item_id)
@@ -71,8 +89,20 @@ const DashboardMealPlanner = () => {
             <table className="bg-[#F6F7FB] px-5 rounded w-full border-separate border-spacing-y-5">
                 <thead>
                     <tr className="text-[#5A5C5F] text-lg text-center font-merriweather">
-                        <th className="bg-[#FCBD66] w-[10%] py-3 px-5">
-                            Weekly Days (January)
+                        <th className="bg-[#FCBD66] w-[10%] py-3 px-3">
+                            <select
+                                className="border border-[#FCBD66] rounded-[5px] px-3 py-3 bg-transparent outline-none block w-full"
+                                value={selectedMonth}
+                                onChange={(e) => setSelectedMonth(Number(e.target.value))}
+                            >
+                                {monthData?.map((item, idx) => (
+                                    <option key={idx} value={item?.id}>
+                                        {item?.month}
+                                    </option>
+                                ))}
+                            </select>
+
+
                         </th>
                         <th
                             colSpan={7}
