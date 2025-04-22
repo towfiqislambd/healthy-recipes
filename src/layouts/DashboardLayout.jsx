@@ -6,10 +6,8 @@ import { LoveSvg, SearchSvg } from "@/components/svg-container/SvgContainer";
 import logo from '../assets/images/logo.png';
 import ButtonTransparent from "@/components/buttons/ButtonTransparent";
 import profile from "../assets/images/profile.png";
-import useAuth from "@/hooks/useAuth";
 
 const DashboardLayout = () => {
-    const { setSearch } = useAuth();
     const navigate = useNavigate()
     const location = useLocation()?.pathname;
     const [isOpen, setOpen] = useState(false);
@@ -31,7 +29,7 @@ const DashboardLayout = () => {
     ];
 
     const handleSearch = () => {
-        navigate('/dashboard/dashboard-my-recipes')
+        navigate('/meal-planner')
     }
 
     return (
@@ -53,7 +51,6 @@ const DashboardLayout = () => {
                                 name="search"
                                 id="search"
                                 onClick={handleSearch}
-                                onChange={(e) => setSearch(e.target.value)}
                             />
                         </div>
                     </div>
@@ -114,7 +111,6 @@ const DashboardLayout = () => {
                                 name="search"
                                 id="search"
                                 onClick={handleSearch}
-                                onChange={(e) => setSearch(e.target.value)}
                             />
                         </div>
                         <div className="flex flex-col mt-5 items-center gap-6">

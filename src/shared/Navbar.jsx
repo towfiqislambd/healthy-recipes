@@ -11,7 +11,7 @@ import { Loader } from '@/components/loader/Loader';
 
 const Navbar = () => {
   const navigate = useNavigate()
-  const { user } = useAuth();
+  const { user, setSearch } = useAuth();
   const { mutate: logOutMutate } = useLogOut();
   const [isOpen, setOpen] = useState(false);
   const location = useLocation()?.pathname;
@@ -49,7 +49,7 @@ const Navbar = () => {
   }
 
   const handleSearch = () => {
-    navigate('/dashboard/dashboard-my-recipes')
+    navigate('/meal-planner')
   }
 
   return (
@@ -78,6 +78,7 @@ const Navbar = () => {
                 name="search"
                 id="search"
                 onClick={handleSearch}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </div>
           </div>

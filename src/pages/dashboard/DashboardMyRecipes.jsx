@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import { useAllCategories, useMyRecipes } from '@/hooks/cms.queries';
 import MyRecipeCard from './MyRecipeCard';
-import useAuth from '@/hooks/useAuth';
 import { Loader } from '@/components/loader/Loader';
 
 const DashboardSavedRecipes = () => {
-    const { search } = useAuth();
     const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
     const [activePage, setActivePage] = useState(1);
     const { data: allCategories, isLoading: categoryLoading } = useAllCategories();
-    const { data: myRecipes, isLoading: myRecipeLoading } = useMyRecipes(activePage, activeTab?.id, search);
+    const { data: myRecipes, isLoading: myRecipeLoading } = useMyRecipes(activePage, activeTab?.id);
 
     if (myRecipeLoading || categoryLoading) {
         return <div className="flex justify-center items-center h-[85vh]"><Loader /></div>;

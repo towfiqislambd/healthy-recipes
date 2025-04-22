@@ -39,11 +39,11 @@ export const useAddWishlist = (id) => {
       onSuccess: (data) => {
         if(data.length === 0){
           setLoading(false);
-          toast.error('Removed from wishlist');
+          toast.error('Removed from favorites');
       }
        else{
           setLoading(false);
-          toast.success('Added in wishlist');
+          toast.success('Added to favorites');
        }
       },
       onError: (err) => {

@@ -44,13 +44,14 @@ export const TrendingRecipesPrivate = async () => {
 };
 
 // All Recipes (Public)
-export const AllRecipes = async (category_id, recipe_library_id, age_group, tag_id) => {
+export const AllRecipes = async (category_id, recipe_library_id, age_group, tag_id, search) => {
     let url = '/api/guest/recipes?';
     
     if (category_id) url += `category_id=${category_id}&`;
     if (recipe_library_id) url += `recipe_library_id=${recipe_library_id}&`;
     if (age_group) url += `age_group=${age_group}&`;
     if (tag_id) url += `tag_id=${tag_id}&`;
+    if (search) url += `search=${search}&`;
     
     // Remove the last '&' if we added any parameters
     url = url.endsWith('&') ? url.slice(0, -1) : url;
@@ -62,13 +63,14 @@ export const AllRecipes = async (category_id, recipe_library_id, age_group, tag_
 };
 
 // All Recipes (Private)
-export const AllRecipesPrivate = async (category_id, recipe_library_id, age_group, tag_id) => {
+export const AllRecipesPrivate = async (category_id, recipe_library_id, age_group, tag_id, search) => {
     let url = '/api/auth/recipes?';
     
     if (category_id) url += `category_id=${category_id}&`;
     if (recipe_library_id) url += `recipe_library_id=${recipe_library_id}&`;
     if (age_group) url += `age_group=${age_group}&`;
     if (tag_id) url += `tag_id=${tag_id}&`;
+    if (search) url += `search=${search}&`;
     
     // Remove the last '&' if we added any parameters
     url = url.endsWith('&') ? url.slice(0, -1) : url;
