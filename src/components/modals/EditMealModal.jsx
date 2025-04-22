@@ -1,50 +1,34 @@
 import { useState } from 'react';
 import { DialogContent, DialogHeader } from '../ui/dialog';
-import { useAllRecipes } from '@/hooks/cms.queries';
 import { useEditMealPlanner } from '@/hooks/cms.mutations';
 import toast from 'react-hot-toast';
 
 const EditMealModal = ({ itemId, setOpen }) => {
-    const { data: allRecipes } = useAllRecipes();
-    const [selectedRecipeId, setSelectedRecipeId] = useState('');
+    const [recipeRename, setRecipeRename] = useState('');
     const { mutateAsync: editMealPlan } = useEditMealPlanner(itemId);
 
-    const handleSelectChange = (e) => {
-        setSelectedRecipeId(e.target.value);
-    };
-
     const handleEditRecipe = () => {
-        if (!selectedRecipeId) {
-            toast.error('Please select a recipe before updating.');
+        if (!recipeRename) {
+            toast.error('Please write something before updating.');
             return;
         }
-
-        const data = { recipe_id: selectedRecipeId };
+        const data = { name: recipeRename };
         editMealPlan(data);
         setOpen(false);
     };
-
 
     return (
         <DialogContent className={'max-w-lg font-inter'}>
             <DialogHeader>
                 <>
                     <div>
-                        <label className="mb-3 font-poppins text-lg block font-medium text-[#5A5C5F]">All Recipes</label>
-                        <select
+                        <label className="mb-3 font-poppins text-lg block font-medium text-[#5A5C5F]">Edit Recipe</label>
+                        <input
+                            type="text"
                             className="border rounded-[5px] px-3 py-3 outline-none block w-full"
-                            value={selectedRecipeId}
-                            onChange={handleSelectChange}
-                        >
-                            {
-                                allRecipes?.map((item, idx) => (
-                                    <option key={idx} value={item?.id}>
-                                        {item?.recipe_name}
-                                    </option>
-                                ))
-                            }
-                        </select>
-
+                            placeholder='Write Something....'
+                            onChange={(e) => setRecipeRename(e.target.value)}
+                        />
                     </div>
 
                     {/* buttons */}

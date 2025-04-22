@@ -16,7 +16,6 @@ const MealPlanner = () => {
   const { data: mealPlannerCard, isLoading: loadingMealPlannerCard } = useMealPlannerCard();
   const { data: blogs, isLoading: loadingBlogs } = useBlogs();
 
-
   const isLoading =
     loadingShareYourRecipe ||
     loadingMealPlannerTitleAndDesc ||
@@ -26,7 +25,6 @@ const MealPlanner = () => {
   if (isLoading) {
     return <div className="h-screen flex justify-center items-center"><Loader /></div>;
   }
-
 
   return (
     <div className="mt-10 md:mt-[70px] 3xl:mt-[104px]">

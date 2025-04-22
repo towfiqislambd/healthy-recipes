@@ -39,11 +39,11 @@ export const useAddWishlist = (id) => {
       onSuccess: (data) => {
         if(data.length === 0){
           setLoading(false);
-          toast.error('Removed from wishlist');
+          toast.error('Removed from favorites');
       }
        else{
           setLoading(false);
-          toast.success('Added in wishlist');
+          toast.success('Added to favorites');
        }
       },
       onError: (err) => {
@@ -80,6 +80,7 @@ export const useAddRecipe = () => {
 
 // Add Meal Planner
 export const useAddMealPlanner = (recipe_id) => {
+  const navigate = useNavigate()
   const { setLoading } = useAuth();
   
   return useMutation({
@@ -92,6 +93,7 @@ export const useAddMealPlanner = (recipe_id) => {
       if(data?.data?.length > 0) {
         setLoading(false);
         toast.success(data?.message);
+        navigate('/dashboard/dashboard-meal-planner')
       }
       else{
         setLoading(false);
@@ -138,8 +140,7 @@ export const useEditMealPlanner = (item_id) => {
     onMutate: () => {
       setLoading(true);
     },
-    onSuccess: (data) => {
-      console.log(data)
+    onSuccess: () => {
       setLoading(false);
       toast.success('Recipe name changed successfully');
     },

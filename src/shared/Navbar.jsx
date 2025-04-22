@@ -11,7 +11,7 @@ import { Loader } from '@/components/loader/Loader';
 
 const Navbar = () => {
   const navigate = useNavigate()
-  const { user } = useAuth();
+  const { user, setSearch } = useAuth();
   const { mutate: logOutMutate } = useLogOut();
   const [isOpen, setOpen] = useState(false);
   const location = useLocation()?.pathname;
@@ -49,7 +49,7 @@ const Navbar = () => {
   }
 
   const handleSearch = () => {
-    navigate('/dashboard/dashboard-my-recipes')
+    navigate('/meal-planner')
   }
 
   return (
@@ -73,11 +73,12 @@ const Navbar = () => {
               <SearchSvg />
               <input
                 className="focus:outline-none w-full placeholder:text-[15px] 3xl:placeholder:text-base"
-                placeholder="Search for recipes by ingredients..."
+                placeholder="Search for recipes name..."
                 type="text"
                 name="search"
                 id="search"
                 onClick={handleSearch}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </div>
           </div>

@@ -13,7 +13,7 @@ import useAuth from '@/hooks/useAuth';
 import { Loader } from '../loader/Loader';
 
 const MealPlannerTabSection = () => {
-  const { user } = useAuth()
+  const { user, search } = useAuth();
   const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
   const [ageGroup, setAgeGroup] = useState(null);
   const [library, setLibrary] = useState(null);
@@ -21,8 +21,8 @@ const MealPlannerTabSection = () => {
   const [selectedDiet, setSelectedDiet] = useState('');
   const { data: allCategories, isLoading: isAllCategoryLoading } = useAllCategories();
   const { data: recipeLibrary, isLoading: isRecipeLibraryLoading } = useRecipeLibrary()
-  const { data: allRecipes, isLoading: loadingAllRecipe } = useAllRecipes(activeTab?.id, library, ageGroup);
-  const { data: recipesPrivate, isLoading: loadingAllRecipePrivate, refetch } = useAllRecipesPrivate(activeTab?.id, library, ageGroup);
+  const { data: allRecipes, isLoading: loadingAllRecipe } = useAllRecipes(activeTab?.id, library, ageGroup, null, search);
+  const { data: recipesPrivate, isLoading: loadingAllRecipePrivate, refetch } = useAllRecipesPrivate(activeTab?.id, library, ageGroup, null, search);
 
   const isLoading =
     isAllCategoryLoading ||
@@ -135,15 +135,20 @@ const MealPlannerTabSection = () => {
 
         {/* Recipe Cards */}
         <div className="mt-10 grid lg:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4 gap-6">
-          {recipeData?.map((item, idx) => (
-            <RecipeCard
-              refetch={refetch}
-              key={idx}
-              isMyRecipe={true}
-              isPlanner={true}
-              item={item}
-            />
-          ))}
+          {
+            recipeData?.length > 0 ?
+              recipeData?.map((item, idx) => (
+                <RecipeCard
+                  refetch={refetch}
+                  key={idx}
+                  isMyRecipe={true}
+                  isPlanner={true}
+                  item={item}
+                />
+              ))
+              :
+              'No data found'
+          }
         </div>
       </div>
     </section>
