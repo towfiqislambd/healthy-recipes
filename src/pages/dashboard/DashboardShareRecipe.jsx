@@ -139,8 +139,8 @@ const DashboardShareRecipe = () => {
 
 
     return (
-        <div className="max-w-[752px] mx-auto py-3 2xl:py-10">
-            <h3 className="mb-5 3xl:mb-7 text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">Share your recipe</h3>
+        <div className="max-w-[752px] mx-auto sm:py-3 2xl:py-10">
+            <h3 className="mb-3 sm:mb-5 3xl:mb-7 text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">Share your recipe</h3>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 lg:space-y-8">
 
                 {/* Recipe Name */}
@@ -159,7 +159,7 @@ const DashboardShareRecipe = () => {
                 <div>
                     <p className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Thumbnail</p>
                     <label htmlFor="recipe_image">
-                        <p className="flex gap-2 w-fit cursor-pointer items-center text-white py-2 lg:py-[10px] px-3 lg:px-4 rounded-lg bg-[#8993A4]">Select Featured Image</p>
+                        <p className="flex gap-2 w-fit cursor-pointer items-center text-white text-sm sm:text-base py-2 lg:py-[10px] px-3 lg:px-4 rounded sm:rounded-lg bg-[#8993A4]">Select Featured Image</p>
                     </label>
                     <input
                         onChange={(e) => {
@@ -183,7 +183,7 @@ const DashboardShareRecipe = () => {
                 <div>
                     <p className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Upload a video</p>
                     <label htmlFor="recipe_video">
-                        <p className="flex gap-2 w-fit cursor-pointer items-center text-white px-3 py-2 lg:py-[10px] lg:px-4 rounded-lg bg-primary">
+                        <p className="flex gap-1 sm:gap-2 w-fit text-sm sm:text-base cursor-pointer items-center text-white px-3 py-2 lg:py-[10px] lg:px-4 rounded sm:rounded-lg bg-primary">
                             <CameraSvg />
                             <span>Add Media</span>
                         </p>
@@ -339,7 +339,7 @@ const DashboardShareRecipe = () => {
                             e.preventDefault();
                             addIngredient();
                         }}
-                        className="flex mt-5 gap-2 w-fit cursor-pointer items-center text-white py-2 lg:py-[10px] px-[10px] lg:px-4 rounded-lg bg-primary"
+                        className="flex mt-5 gap-1 text-sm sm:text-base sm:gap-2 w-fit cursor-pointer items-center text-white py-2 lg:py-[10px] px-[10px] lg:px-4 rounded sm:rounded-lg bg-primary"
                     >
                         <AddMoreSvg />
                         <p>Add more ingredient</p>
@@ -368,7 +368,7 @@ const DashboardShareRecipe = () => {
                             e.preventDefault();
                             addInstruction();
                         }}
-                        className="flex mt-5 gap-2 w-fit cursor-pointer items-center text-white py-2 lg:py-[10px] px-3 lg:px-4 rounded-lg bg-primary"
+                        className="flex mt-5 gap-1 text-sm sm:text-base sm:gap-2 w-fit cursor-pointer items-center text-white py-2 lg:py-[10px] px-[10px] lg:px-4 rounded sm:rounded-lg bg-primary"
                     >
                         <AddMoreSvg />
                         <p>Add more instruction</p>
@@ -386,9 +386,9 @@ const DashboardShareRecipe = () => {
                 </div>
 
                 {/* Submit & Cancel */}
-                <div className="flex items-center gap-3">
-                    <button className="px-5 py-2 bg-[#3F3F3F] rounded-[6px] text-white border">Submit here</button>
-                    <button onClick={e => e.preventDefault()} className="px-5 py-2 border-[#3F3F3F] rounded-[6px] border">Cancel</button>
+                <div className="flex items-center gap-2 sm:gap-3">
+                    <button className="px-3 sm:px-5 py-[6px] sm:py-2 bg-[#3F3F3F] rounded-[6px] text-white border">Submit here</button>
+                    <button onClick={e => e.preventDefault()} className="px-3 sm:px-5 py-[6px] sm:py-2 border-[#3F3F3F] rounded-[6px] border">Cancel</button>
                 </div>
             </form>
         </div>

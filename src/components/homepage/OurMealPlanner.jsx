@@ -18,7 +18,7 @@ const OurMealPlanner = ({ data }) => {
 
               {/* explore more */}
               <div className="2xl:mt-10 mt-5">
-                <ButtonPrimary title={item?.btn_text} />
+                <ButtonPrimary path='meal-planner' title={item?.btn_text} />
               </div>
             </div>
             {/* right contents */}

@@ -45,7 +45,11 @@ const Navbar = () => {
   const { data: siteSettings, isLoading } = useFooterInfo();
 
   if (isLoading) {
+    document.body.style.overflow = 'hidden';
     return <div className="h-screen flex justify-center items-center"><Loader /></div>;
+  }
+  else {
+    document.body.style.overflow = '';
   }
 
   const handleSearch = () => {
@@ -123,9 +127,9 @@ const Navbar = () => {
           {/* Hamburger btn */}
           <button
             onClick={() => setOpen(!isOpen)}
-            className="bg-primary 2xl:hidden text-white w-10 h-10 rounded grid place-items-center"
+            className="bg-primary 2xl:hidden text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid place-items-center"
           >
-            <FaBars className="text-2xl" />
+            <FaBars className="text-[22px] sm:text-2xl" />
           </button>
         </div>
       </nav>
@@ -140,7 +144,7 @@ const Navbar = () => {
       <div className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} duration-500 transition-transform fixed top-0 z-[999] left-0 bg-white p-5 lg:p-7 shadow-lg overflow-y-auto  border-r max-h-screen min-h-screen w-[250px] lg:w-[270px] 2xl:hidden`}
       >
         {/* logo */}
-        <Link to="/">
+        <Link to="/" onClick={() => setOpen(false)}>
           <figure className="w-[100px] h-[90px]">
             <img
               className="object-cover w-full h-full mx-auto"

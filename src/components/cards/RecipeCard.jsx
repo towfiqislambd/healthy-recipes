@@ -11,8 +11,10 @@ import { useAddWishlist } from '@/hooks/cms.mutations';
 import { useState } from 'react';
 import Modal from '../modals/Modal';
 import AddMealModal from '../modals/AddMealModal';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
-const RecipeCard = ({ item, refetch, isPlanner }) => {
+const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
   const [recipeId, setRecipeId] = useState(null);
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
@@ -49,6 +51,21 @@ const RecipeCard = ({ item, refetch, isPlanner }) => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="bg-white rounded-2xl shadow-md p-3 space-y-3">
+        <Skeleton height={200} />
+        <Skeleton height={24} width="80%" />
+        <Skeleton count={2} />
+        <Skeleton width="60%" />
+        <div className="flex justify-between pt-2">
+          <Skeleton width={60} height={20} />
+          <Skeleton width={60} height={20} />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <Link
@@ -58,7 +75,7 @@ const RecipeCard = ({ item, refetch, isPlanner }) => {
         <div className="relative">
           {/* image and overlay */}
           <div className="block">
-            <div className="h-[260px] lg:h-[330px] w-full relative rounded-sm overflow-hidden">
+            <div className="h-[300px] lg:h-[320px] 2xl:h-[350px] w-full relative rounded-sm overflow-hidden">
               <img
                 className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
                 src={`${import.meta.env.VITE_SITE_URL}/${item?.recipe_image}`}
@@ -84,8 +101,8 @@ const RecipeCard = ({ item, refetch, isPlanner }) => {
               <span>
                 {
                   `${item?.library_name || item?.recipe_library?.diet_name}
-                 | 
-                 ${item?.category_name || item?.category?.category_name}`
+                   | 
+                   ${item?.category_name || item?.category?.category_name}`
                 }
               </span>
             </p>

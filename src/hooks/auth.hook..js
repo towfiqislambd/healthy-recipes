@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { GetUserDataFunc, LoginFunc, LogOutFunc, OtpResendFunc, OtpVerifyFunc, RegisterFunc, ResetPasswordFunc, VerifyEmailFunc } from "./auth.api";
 import toast from "react-hot-toast";
 import useAuth from "./useAuth";
@@ -44,6 +44,7 @@ export const useRegister = () => {
 export const useLogin = () => {
     const { setLoading, setToken } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
 
     return useMutation({
       mutationKey: ['login'],
@@ -57,7 +58,7 @@ export const useLogin = () => {
         if (data?.success) {
           if (data?.data?.token) {
             setToken(data?.data?.token);
-            navigate('/');
+            navigate(location?.state && location.state || '/')
           }
         }
       },

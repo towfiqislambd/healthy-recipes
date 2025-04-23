@@ -26,7 +26,7 @@ const Blog = () => {
           </div>
 
           {/* all blogs */}
-          <div className="grid lg:grid-cols-2  xl:grid-cols-3 3xl:grid-cols-4 gap-5 mt-10 mb-10 3xl:mb-14 3xl:mt-14">
+          <div className="grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-5 mt-10 mb-10 3xl:mb-14 3xl:mt-14">
             {blogs?.map((item, idx) => (
               <BlogCard key={idx} item={item} />
             ))}

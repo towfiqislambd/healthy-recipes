@@ -10,7 +10,7 @@ import { Loader } from "@/components/loader/Loader";
 
 const RecipeDetails = () => {
   const { id } = useParams();
-  const fullLocation = `${window.location.origin}/${id}`;
+  const fullLocation = `${window.location.origin}/recipe-details/${id}`;
   const { data: shareYourRecipe, isLoading: shareRecipeLoading } = useShareYourRecipe();
   const { data: recipeData, isLoading: recipeDataLoading } = useRecipeDetails(id);
 
@@ -19,7 +19,7 @@ const RecipeDetails = () => {
   }
 
   return (
-    <div className="mt-[104px]">
+    <div className="mt-[80px] lg:mt-[104px]">
       {/* banner */}
       <CommonHeroBanner
         image={`${import.meta.env.VITE_SITE_URL}/${recipeData?.recipe_image}`}

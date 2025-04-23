@@ -7,7 +7,7 @@ import { SliderNextSvg, SliderPrevSvg } from "../svg-container/SvgContainer";
 import RecipeCard from "../cards/RecipeCard";
 import { useState } from "react";
 
-const TrendingDiet = ({ data, refetch }) => {
+const TrendingDiet = ({ data, refetch, trendingLoading }) => {
   const [swiperRef, setSwiperRef] = useState(null);
 
   return (
@@ -55,11 +55,26 @@ const TrendingDiet = ({ data, refetch }) => {
                 1460: { slidesPerView: 4, spaceBetween: 20 },
               }}
             >
-              {data?.map((item, idx) => (
-                <SwiperSlide key={idx}>
-                  <RecipeCard refetch={refetch} item={item} down={idx % 2 !== 0} isMyRecipe={true} />
-                </SwiperSlide>
-              ))}
+              {
+                trendingLoading
+                  ? Array.from({ length: 4 }).map((_, idx) => (
+                    <SwiperSlide key={idx}>
+                      <RecipeCard loading={true} />
+                    </SwiperSlide>
+                  ))
+                  : data?.map((item, idx) => (
+                    <SwiperSlide key={idx}>
+                      <RecipeCard
+                        refetch={refetch}
+                        item={item}
+                        down={idx % 2 !== 0}
+                        isMyRecipe={true}
+                        loading={false}
+                      />
+                    </SwiperSlide>
+                  ))
+              }
+
             </Swiper>
           </div>
         </div>

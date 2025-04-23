@@ -6,11 +6,11 @@ const BlogCard = ({ item }) => {
   return (
     <Link
       to={`/blog/${item?.slug}`}
-      className="bg-white block h-[490px] rounded-lg shadow-[0px_0px_8px_0px_rgba(0,0,0,0.06)] px-3 pt-3 pb-8 group"
+      className="bg-white block rounded-lg shadow-[0px_0px_8px_0px_rgba(0,0,0,0.06)] px-3 pt-3 pb-8 group"
     >
       {/* image */}
       <div>
-        <div className="w-full h-[250px] overflow-hidden rounded-lg">
+        <div className="w-full h-[230px] md:h-[300px] lg:h-[250px] overflow-hidden rounded-lg">
           <img
             className="w-full h-full object-cover rounded-sm group-hover:scale-110 transition-all duration-300"
             src={`${import.meta.env.VITE_SITE_URL}/${item?.image}`}
@@ -21,7 +21,7 @@ const BlogCard = ({ item }) => {
       {/* contents */}
       <div className="mt-6">
         <div className="w-full flex items-center justify-between">
-          <h5 className="leading-[20px] font-medium text-sm text-primary">
+          <h5 className="sm:leading-[20px] font-medium text-sm text-primary">
             {item?.category?.category_name} | {item?.time_ago}.
           </h5>
           <p className="leading-[20px] font-medium text-sm text-primary">
@@ -30,7 +30,7 @@ const BlogCard = ({ item }) => {
         </div>
         {/* title */}
         <div className="space-y-2 mt-1">
-          <h4 className="text-lg 2xl:text-xl font-bold leading-[160%] font-merriweather text-black truncate">
+          <h4 className="text-lg 2xl:text-xl font-bold sm:leading-[160%] font-merriweather text-black sm:truncate">
             {item?.title}
           </h4>
           <div className="text-textColor 2xl:leading-[150%] ">

@@ -11,7 +11,7 @@ const AllRecipes = () => {
   const { data: shareYourRecipe, isLoading: isLoadingSharedRecipes } = useShareYourRecipe();
   const { data: blogs, isLoading: isLoadingBlogs } = useBlogs();
   const { data: allRecipes, isLoading: isLoadingRecipes } = useAllRecipes(null, id);
-  
+
   const isLoading = isLoadingCategories || isLoadingSharedRecipes || isLoadingBlogs || isLoadingRecipes;
 
   if (isLoading) {

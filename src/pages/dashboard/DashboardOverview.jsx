@@ -18,8 +18,8 @@ const DashboardOverview = () => {
     }
 
     return (
-        <section className="bg-[#F6F7FB] p-5 rounded">
-            <h3 className="mb-3 3xl:mb-5 text-2xl 3xl:text-3xl 4xl:text-4xl text-[#E48E19] font-semibold font-merriweather">Dashboard</h3>
+        <section className="bg-[#F6F7FB] p-4 sm:p-5 rounded">
+            <h3 className="mb-2 sm:mb-3 3xl:mb-5 text-[22px] sm:text-2xl 3xl:text-3xl 4xl:text-4xl text-[#E48E19] font-semibold font-merriweather">Dashboard</h3>
             <SharedRecipes myRecipes={myRecipes} />
             <FavoriteRecipes savedRecipes={savedRecipes} />
             <MealPlanner mealPlannerTableData={mealPlannerTableData} setSelectedMonth={setSelectedMonth} selectedMonth={selectedMonth} />
