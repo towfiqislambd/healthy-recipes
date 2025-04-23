@@ -22,7 +22,7 @@ const MealPlannerTabSection = () => {
   const { data: allCategories, isLoading: isAllCategoryLoading } = useAllCategories();
   const { data: recipeLibrary, isLoading: isRecipeLibraryLoading } = useRecipeLibrary()
   const { data: allRecipes, isLoading: loadingAllRecipe } = useAllRecipes(activeTab?.id, library, ageGroup, null, search);
-  const { data: recipesPrivate, refetch } = useAllRecipesPrivate(activeTab?.id, library, ageGroup, null, search);
+  const { data: recipesPrivate, refetch, isLoading: privateRecipesLoading } = useAllRecipesPrivate(activeTab?.id, library, ageGroup, null, search);
 
   const isLoading =
     isAllCategoryLoading ||
@@ -135,18 +135,24 @@ const MealPlannerTabSection = () => {
         {/* Recipe Cards */}
         <div className="mt-10 grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6">
           {
-            recipeData?.length > 0 ?
-              recipeData?.map((item, idx) => (
-                <RecipeCard
-                  refetch={refetch}
-                  key={idx}
-                  isMyRecipe={true}
-                  isPlanner={true}
-                  item={item}
-                />
+            privateRecipesLoading ?
+              Array.from({ length: 4 }).map((_, idx) => (
+                <RecipeCard idx={idx} loading={true} />
               ))
               :
-              'No data found'
+              recipeData?.length > 0 ?
+                recipeData?.map((item, idx) => (
+                  <RecipeCard
+                    refetch={refetch}
+                    key={idx}
+                    isMyRecipe={true}
+                    isPlanner={true}
+                    item={item}
+                    loading={false}
+                  />
+                ))
+                :
+                'No data found'
           }
         </div>
       </div>
