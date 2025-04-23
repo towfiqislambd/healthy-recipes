@@ -6,7 +6,7 @@ const MealPlannerStatsCard = ({ item }) => {
       {/* <div className="size-6 text-sm xl:text-base xl:size-8 flex items-center flex-shrink-0 justify-center bg-[#CFEDD9] rounded-full">
         {item}
       </div> */}
-      <div className="flex flex-col items-center gap-1">
+      <div className="flex flex-col items-center gap-1 text-center">
         <img
           src={`${import.meta.env.VITE_SITE_URL}/${item?.image}`}
           alt="Card"

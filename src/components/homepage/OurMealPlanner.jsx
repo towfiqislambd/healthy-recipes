@@ -13,7 +13,7 @@ const OurMealPlanner = ({ data }) => {
 
               {/* description */}
               <div className="space-y-3 2xl:space-y-6 mt-3 2xl:mt-5 3xl:mt-8 text-textColor leading-[150%]">
-                {parse(item?.description)}
+                {typeof item?.description === 'string' ? parse(item?.description) : item?.description}
               </div>
 
               {/* explore more */}

@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import RecipeCard from "@/components/cards/RecipeCard";
 
 const FavoriteRecipes = ({ savedRecipes }) => {
-    console.log(savedRecipes?.wishlist?.data)
     return (
         <div className="mb-10">
             <div className="flex mb-6 justify-between items-center">
@@ -11,7 +10,7 @@ const FavoriteRecipes = ({ savedRecipes }) => {
                     <Link to='/dashboard/dashboard-saved-recipes' className="text-primary font-poppins font-medium">View all</Link>
                 </button>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5 2xl:px-0">
+            <div className="grid md:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4 gap-5 3xl:px-5">
                 {
                     savedRecipes?.wishlist?.data?.length > 0 ?
                         savedRecipes?.wishlist?.data?.slice(0, 4)?.map((item, idx) => (

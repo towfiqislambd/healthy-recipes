@@ -7,7 +7,9 @@ const TestimonialCard = ({ item }) => {
     <div className="group">
       {/* Top section */}
       <div className="sm:px-12 px-6 md:py-16 py-10 bg-[#FF9F1C1F] rounded-[100px] relative group-hover:bg-[#FF9F1C7A] transition-all duration-300">
-        <p className="text-black text-center">{parse(item?.description)}</p>
+        <div className="text-black text-center">
+          {typeof item?.description === 'string' ? parse(item?.description) : item?.description}
+        </div>
         <div className="absolute top-4 right-12 opacity-0 group-hover:opacity-100 transition-all duration-300">
           <AppleBgSvg />
         </div>

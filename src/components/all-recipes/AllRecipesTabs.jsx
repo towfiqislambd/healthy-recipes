@@ -15,7 +15,7 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
   const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
   const [tag, setTag] = useState(null);
   const [selectedAllergen, setSelectedAllergen] = useState("");
-  const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
+  const filterClass = `text-base py-2 xl:py-3 px-3 xl:px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
   const { data: allRecipes, isLoading } = useAllRecipes(activeTab?.id, libraryId, null, tag);
   if (isLoading) {
@@ -41,7 +41,7 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
       <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
 
         {/* Tabs */}
-        <div className="py-8 w-full flex flex-wrap items-center justify-center 2xl:justify-between gap-x-1 gap-y-2">
+        <div className="py-8 w-full flex flex-wrap items-center justify-center 3xl:justify-between gap-x-1 gap-y-2">
           <button
             onClick={() => setActiveTab({ id: 0, category_name: 'All Recipes' })}
             className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium ${activeTab?.category_name === 'All Recipes'

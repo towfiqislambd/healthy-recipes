@@ -139,9 +139,9 @@ const DashboardShareRecipe = () => {
 
 
     return (
-        <div className="max-w-[752px] mx-auto py-10">
-            <h3 className="mb-7 text-2xl text-[#E48E19] font-semibold font-merriweather">Share your recipe</h3>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+        <div className="max-w-[752px] mx-auto py-3 2xl:py-10">
+            <h3 className="mb-5 3xl:mb-7 text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">Share your recipe</h3>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 lg:space-y-8">
 
                 {/* Recipe Name */}
                 <div>
@@ -149,7 +149,7 @@ const DashboardShareRecipe = () => {
                     <input
                         {...register('recipe_name', { required: true })}
                         placeholder="Write recipe name"
-                        className="border rounded-[5px] px-4 py-3 outline-none block w-full"
+                        className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
                     />
                     <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Maximum 20 words</p>
                     {errors.recipe_name && <span className="text-red-500 block mt-2 text-[15px]">Recipe name is required</span>}
@@ -159,7 +159,7 @@ const DashboardShareRecipe = () => {
                 <div>
                     <p className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Thumbnail</p>
                     <label htmlFor="recipe_image">
-                        <p className="flex gap-2 w-fit cursor-pointer items-center text-white py-[10px] px-4 rounded-lg bg-[#8993A4]">Select Featured Image</p>
+                        <p className="flex gap-2 w-fit cursor-pointer items-center text-white py-2 lg:py-[10px] px-3 lg:px-4 rounded-lg bg-[#8993A4]">Select Featured Image</p>
                     </label>
                     <input
                         onChange={(e) => {
@@ -183,7 +183,7 @@ const DashboardShareRecipe = () => {
                 <div>
                     <p className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Upload a video</p>
                     <label htmlFor="recipe_video">
-                        <p className="flex gap-2 w-fit cursor-pointer items-center text-white py-[10px] px-4 rounded-lg bg-primary">
+                        <p className="flex gap-2 w-fit cursor-pointer items-center text-white px-3 py-2 lg:py-[10px] lg:px-4 rounded-lg bg-primary">
                             <CameraSvg />
                             <span>Add Media</span>
                         </p>
@@ -212,7 +212,7 @@ const DashboardShareRecipe = () => {
                     <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Categories</label>
                     <select
                         {...register('category_id', { required: true })}
-                        className="border rounded-[5px] px-3 py-3 outline-none block w-full"
+                        className="border rounded-[5px] px-2 lg:px-3 py-2 lg:py-3 outline-none block w-full"
                     >
                         {
                             recipeCategory?.map((item, idx) => <option key={idx} value={item?.id}>{item?.category_name}</option>)
@@ -227,7 +227,7 @@ const DashboardShareRecipe = () => {
                     <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Select a library</label>
                     <select
                         {...register('recipe_library_id', { required: true })}
-                        className="border rounded-[5px] px-3 py-3 outline-none block w-full"
+                        className="border rounded-[5px] px-2 lg:px-3 py-2 lg:py-3 outline-none block w-full"
                     >
                         {
                             allLibrary?.map((item, idx) => <option key={idx} value={item?.id}>{item?.diet_name}</option>)
@@ -241,7 +241,7 @@ const DashboardShareRecipe = () => {
                     <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Select age group</label>
                     <select
                         {...register('age_group', { required: true })}
-                        className="border rounded-[5px] px-3 py-3 outline-none block w-full"
+                        className="border rounded-[5px] px-2 lg:px-3 py-2 lg:py-3 outline-none block w-full"
                     >
                         {
                             ageData?.map((item, idx) => <option key={idx} value={item?.value}>{item?.label}</option>)
@@ -256,7 +256,7 @@ const DashboardShareRecipe = () => {
                     <input
                         {...register('serving_number', { required: true })}
                         placeholder="4"
-                        className="border rounded-[5px] px-4 py-3 outline-none block w-full"
+                        className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
                     />
                     <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Numeric values e.g. 2, 3, 4, 5</p>
                     {errors.serving_number && <span className="text-red-500 block mt-2 text-[15px]">Serving number is required</span>}
@@ -268,7 +268,7 @@ const DashboardShareRecipe = () => {
                     <input
                         {...register('cooking_time', { required: true })}
                         placeholder="30 min"
-                        className="border rounded-[5px] px-4 py-3 outline-none block w-full"
+                        className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
                     />
                     <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Numeric values for time e.g. 20min, 30min, 40min</p>
                     {errors.cooking_time && <span className="text-red-500 block mt-2 text-[15px]">Cooking time is required</span>}
@@ -280,7 +280,7 @@ const DashboardShareRecipe = () => {
                     <input
                         {...register('preparation_time', { required: true })}
                         placeholder="40 min"
-                        className="border rounded-[5px] px-4 py-3 outline-none block w-full"
+                        className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
                     />
                     <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Numeric values for time e.g. 20min, 30min, 40min</p>
                     {errors.preparation_time && <span className="text-red-500 block mt-2 text-[15px]">Preparation time is required</span>}
@@ -289,7 +289,7 @@ const DashboardShareRecipe = () => {
                 {/* Nutrition Info */}
                 <div>
                     <label htmlFor="nutrition_info" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Nutrition Info</label>
-                    <textarea id="nutrition_info" rows={5} className="border rounded-[5px] px-4 py-3 outline-none block w-full" placeholder="Write here...." {...register('nutrition_info', { required: true })}></textarea>
+                    <textarea id="nutrition_info" rows={5} className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full" placeholder="Write here...." {...register('nutrition_info', { required: true })}></textarea>
                     <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Maximum 1000 words</p>
                     {errors.nutrition_info && <span className="text-red-500 block mt-2 text-[15px]">Nutrition Info is required</span>}
                 </div>
@@ -298,7 +298,7 @@ const DashboardShareRecipe = () => {
                 <div>
                     <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Tags</label>
                     <input
-                        className="border rounded-[5px] px-4 py-3 outline-none block w-full"
+                        className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
                         placeholder="Add tags (separate by commas or spaces)"
                         value={inputValue}
                         onChange={handleInputChange}
@@ -324,7 +324,7 @@ const DashboardShareRecipe = () => {
                         <div className="mt-5" key={ingredient.id}>
                             <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Ingredients ({index + 1})</label>
                             <input
-                                className="border rounded-[5px] px-4 py-3 outline-none block w-full"
+                                className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
                                 value={ingredient.value}
                                 onChange={(e) => handleIngredientChange(e, ingredient.id)}
                             />
@@ -339,7 +339,7 @@ const DashboardShareRecipe = () => {
                             e.preventDefault();
                             addIngredient();
                         }}
-                        className="flex mt-5 gap-2 w-fit cursor-pointer items-center text-white py-[10px] px-4 rounded-lg bg-primary"
+                        className="flex mt-5 gap-2 w-fit cursor-pointer items-center text-white py-2 lg:py-[10px] px-[10px] lg:px-4 rounded-lg bg-primary"
                     >
                         <AddMoreSvg />
                         <p>Add more ingredient</p>
@@ -353,7 +353,7 @@ const DashboardShareRecipe = () => {
                             <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Instructions (Step-{index + 1})</label>
                             <textarea
                                 rows={3}
-                                className="border rounded-[5px] px-4 py-3 outline-none block w-full"
+                                className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
                                 value={instruction.value}
                                 onChange={(e) => handleInstructionChange(e, instruction.id)}
                             />
@@ -368,7 +368,7 @@ const DashboardShareRecipe = () => {
                             e.preventDefault();
                             addInstruction();
                         }}
-                        className="flex mt-5 gap-2 w-fit cursor-pointer items-center text-white py-[10px] px-4 rounded-lg bg-primary"
+                        className="flex mt-5 gap-2 w-fit cursor-pointer items-center text-white py-2 lg:py-[10px] px-3 lg:px-4 rounded-lg bg-primary"
                     >
                         <AddMoreSvg />
                         <p>Add more instruction</p>
@@ -380,7 +380,7 @@ const DashboardShareRecipe = () => {
                     <label htmlFor="resource_link" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Recipe Source Link</label>
                     <input
                         {...register('resource_link')}
-                        className="border rounded-[5px] px-4 py-3 outline-none block w-full"
+                        className="border rounded-[5px] px-3 lg:px-4 py-2 lg:py-3 outline-none block w-full"
                     />
                     <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">e.g. https://example.com/easy-chicken-dinner-recipe</p>
                 </div>

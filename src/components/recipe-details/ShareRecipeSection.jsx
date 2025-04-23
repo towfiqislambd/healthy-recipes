@@ -3,29 +3,40 @@ import {
   CopyLinkSvg,
   FacebookShareSvg,
   InstagramShareSvg,
-  PinterestShareSvg,
   TwitterShareSvg,
 } from "../svg-container/SvgContainer";
+import toast from "react-hot-toast";
 
 const ShareRecipeSection = ({ fullLocation }) => {
+
+  // For Twitter
   const handleTwitterRedirect = () => {
-    const url = fullLocation; // Replace with your actual URL
-    const text = "Follow me on Gift a coffee!"; // Replace with your custom message
+    const text = "Follow me on Gift a coffee!";
     const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-      url
+      fullLocation
     )}&text=${encodeURIComponent(text)}`;
     window.open(twitterShareUrl, "_blank");
   };
 
+  // For Facebook
   const handleFacebookRedirect = () => {
-    const url = fullLocation; // Replace with your actual URL
     const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-      url
+      fullLocation
     )}`;
-
     window.open(facebookShareUrl, "_blank");
   };
 
+  // For Instagram
+  const handleInstagramRedirect = () => {
+    window.open("https://www.instagram.com/", "_blank");
+  };
+
+  // Copy Link
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(fullLocation).then(() => {
+      toast.success("Link copied to clipboard!");
+    });
+  };
 
   return (
     <section className="w-full container flex items-center lg:justify-center mt-8">
@@ -40,12 +51,9 @@ const ShareRecipeSection = ({ fullLocation }) => {
           <button onClick={handleFacebookRedirect}>
             <FacebookShareSvg />
           </button>
-          <Link>
+          <button onClick={handleInstagramRedirect}>
             <InstagramShareSvg />
-          </Link>
-          <Link>
-            <PinterestShareSvg />
-          </Link>
+          </button>
           <button onClick={handleTwitterRedirect}>
             <TwitterShareSvg />
           </button>
@@ -56,7 +64,10 @@ const ShareRecipeSection = ({ fullLocation }) => {
           <p className="text-textColor text-sm md:text-base">
             Want to share a link instead?
           </p>
-          <p className="flex items-center md:gap-2 gap-1 flex-shrink-0  cursor-pointer">
+          <p
+            className="flex items-center md:gap-2 gap-1 flex-shrink-0 cursor-pointer"
+            onClick={handleCopyLink}
+          >
             <CopyLinkSvg />
             <span className="text-[#0065FF] text-sm md:text-base">
               Copy link

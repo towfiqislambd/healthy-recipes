@@ -22,7 +22,7 @@ const HomepageBanner = ({ data }) => {
                   thys */}
                 </h1>
                 <div className="text-textColor leading-[150%] max-w-[740px] ">
-                  {parse(data?.description)}
+                  {typeof data?.description === 'string' ? parse(data?.description) : data?.description}
                 </div>
               </div>
 
