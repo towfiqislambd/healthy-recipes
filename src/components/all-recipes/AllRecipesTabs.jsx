@@ -67,7 +67,7 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
         </div>
 
         {/* Filter */}
-        <div className="w-full flex flex-col md:flex-row items-center justify-center 2xl:justify-end gap-3 xl:gap-3 2xl:gap-5">
+        <div className="w-full flex flex-wrap items-center justify-center 2xl:justify-end gap-3 xl:gap-3 2xl:gap-5">
           <Select value={selectedAllergen} onValueChange={(tag) => setTag(tag)}>
             <SelectTrigger className="w-[300px] md:w-[380px] 2xl:w-[450px] h-9 sm:h-11 2xl:h-14 rounded-full px-4 2xl:px-6 text-base focus:ring-primary">
               <SelectValue placeholder="Select recipes by tags..." />
@@ -85,7 +85,7 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
 
           <button
             onClick={handleReset}
-            className="h-11 2xl:h-14 px-3 2xl:px-6 border border-primary rounded-full flex items-center gap-2 bg-primary text-white transition-all duration-300 hover:bg-transparent hover:text-primary"
+            className="h-9 sm:h-11 2xl:h-14 px-3 2xl:px-6 border border-primary rounded-full flex items-center gap-2 bg-primary text-white transition-all duration-300 hover:bg-transparent hover:text-primary"
           >
             <RiResetLeftFill />
             Reset
