@@ -23,7 +23,11 @@ const MealPlanner = () => {
     loadingBlogs
 
   if (isLoading) {
+    document.body.style.overflow = 'hidden';
     return <div className="h-screen flex justify-center items-center"><Loader /></div>;
+  }
+  else {
+    document.body.style.overflow = '';
   }
 
   return (

@@ -20,7 +20,7 @@ const Homepage = () => {
   const { data: blogs, isLoading: isBlogsLoading } = useBlogs();
   const { data: recipeLibrary, isLoading: isRecipeLibraryLoading } = useRecipeLibrary();
   const { data: trendingRecipes, isLoading: isTrendingRecipesLoading } = useTrendingRecipes();
-  const { data: trendingRecipesPrivate, isLoading: isTrendingRecipesPrivateLoading, refetch } = useTrendingRecipePrivate();
+  const { data: trendingRecipesPrivate, refetch } = useTrendingRecipePrivate();
 
   const isLoading =
     isHomepageBannerLoading ||
@@ -30,11 +30,14 @@ const Homepage = () => {
     isTestimonialLoading ||
     isBlogsLoading ||
     isRecipeLibraryLoading ||
-    isTrendingRecipesLoading ||
-    isTrendingRecipesPrivateLoading;
+    isTrendingRecipesLoading 
 
   if (isLoading) {
+    document.body.style.overflow = 'hidden';
     return <div className="h-screen flex justify-center items-center"><Loader /></div>;
+  }
+  else {
+    document.body.style.overflow = '';
   }
 
   let trendingData = null;

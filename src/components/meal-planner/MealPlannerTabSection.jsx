@@ -22,13 +22,12 @@ const MealPlannerTabSection = () => {
   const { data: allCategories, isLoading: isAllCategoryLoading } = useAllCategories();
   const { data: recipeLibrary, isLoading: isRecipeLibraryLoading } = useRecipeLibrary()
   const { data: allRecipes, isLoading: loadingAllRecipe } = useAllRecipes(activeTab?.id, library, ageGroup, null, search);
-  const { data: recipesPrivate, isLoading: loadingAllRecipePrivate, refetch } = useAllRecipesPrivate(activeTab?.id, library, ageGroup, null, search);
+  const { data: recipesPrivate, refetch } = useAllRecipesPrivate(activeTab?.id, library, ageGroup, null, search);
 
   const isLoading =
     isAllCategoryLoading ||
     isRecipeLibraryLoading ||
-    loadingAllRecipe ||
-    loadingAllRecipePrivate;
+    loadingAllRecipe
 
   if (isLoading) {
     return <div className="flex justify-center items-center h-[50vh]"><Loader /></div>;

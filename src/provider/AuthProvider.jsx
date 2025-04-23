@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         if (!token) {
             setUser(null);
-            // setLoading(false);
+            setLoading(false);
             return;
         }
 
