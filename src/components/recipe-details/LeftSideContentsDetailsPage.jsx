@@ -37,7 +37,7 @@ const LeftSideContentsDetailsPage = ({ data }) => {
       </div>
 
       {/* Nutrition */}
-      <div className="pt-7 lg:pt-8">
+      <div className="pt-5 sm:pt-7 lg:pt-8">
         {/* title */}
         <h5 className="text-black text-lg sm:text-xl 2xl:text-2xl font-bold 2xl:leading-[130%] font-merriweather">
           Nutrition:
@@ -55,7 +55,7 @@ const LeftSideContentsDetailsPage = ({ data }) => {
       </div>
 
       {/* Tags */}
-      <div className="pt-8">
+      <div className="pt-5 sm:pt-8">
         {/* title */}
         <h5 className="text-black text-lg sm:text-xl 2xl:text-2xl font-bold leading-[130%] font-merriweather">
           Tags:

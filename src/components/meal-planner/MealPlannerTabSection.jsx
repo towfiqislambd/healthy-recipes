@@ -42,7 +42,7 @@ const MealPlannerTabSection = () => {
     recipeData = allRecipes;
   }
 
-  const filterClass = `text-base py-3 px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
+  const filterClass = `text-base py-2 lg:py-3 px-3 lg:px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
   // const getCountByType = (type) => {
   //   if (type === 'All Recipes') {
@@ -97,7 +97,7 @@ const MealPlannerTabSection = () => {
           <div className="flex flex-col lg:flex-row w-full lg:w-auto gap-3 lg:gap-0">
             {/* Age Filter */}
             <Select value={selectedAge} onValueChange={(age) => setAgeGroup(age)}>
-              <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[460px] 2xl:h-14 h-11 lg:rounded-l-full lg:px-6 px-3 text-base focus:ring-primary">
+              <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[460px] h-11 2xl:h-14 lg:rounded-l-full lg:px-6 px-3 text-base focus:ring-primary">
                 <SelectValue placeholder="Filter by age group" />
               </SelectTrigger>
               <SelectContent className="px-0 py-0">

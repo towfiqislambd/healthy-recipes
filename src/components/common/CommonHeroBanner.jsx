@@ -29,7 +29,7 @@ const CommonHeroBanner = ({ image, title }) => {
 
             {/* title */}
             <div>
-              <h3 className="mx-auto max-w-[490px] text-center text-[#2D6A4F] text-lg lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-4xl font-bold font-merriweather leading-[130%]">
+              <h3 className="mx-auto mt-2 max-w-[490px] text-center text-[#2D6A4F] text-lg lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-4xl font-bold font-merriweather leading-[130%]">
                 {title}
               </h3>
             </div>
@@ -39,7 +39,7 @@ const CommonHeroBanner = ({ image, title }) => {
 
       {/* image */}
       <div className="container w-full overflow-hidden -mt-[130px] lg:-mt-32 xl:-mt-28 xl:mb-10 2xl:mb-20">
-        <div className="h-[250px] lg:h-[320px] xl:h-[400px] 2xl:h-[520px] rounded-2xl lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
+        <div className="h-[220px] sm:h-[250px] lg:h-[320px] xl:h-[400px] 2xl:h-[520px] rounded-2xl lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
           <img
             className="w-full h-full object-cover rounded-2xl"
             src={image}

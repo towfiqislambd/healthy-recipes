@@ -146,7 +146,7 @@ const DashboardLayout = () => {
             <div className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} duration-500 transition-transform fixed top-0 z-[999] left-0 bg-white py-10 shadow-lg overflow-y-auto border-r max-h-screen min-h-screen w-[250px] xl:hidden`}>
 
                 {/* logo */}
-                <Link to="/">
+                <Link to="/" onClick={() => setOpen(false)}>
                     <figure className="w-[100px] mx-auto h-[80px]">
                         <img
                             className="object-cover w-full h-full mx-auto"

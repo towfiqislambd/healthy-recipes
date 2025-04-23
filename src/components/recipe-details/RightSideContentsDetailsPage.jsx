@@ -28,7 +28,7 @@ const RightSideContentsDetailsPage = ({ data }) => {
     setIsPlaying(false); // Set the state to 'paused'
   };
   return (
-    <div className="h-full min-h-[50vh]">
+    <div className="h-full sm:min-h-[50vh]">
       {/* Details */}
       <div className="">
         {/* video */}

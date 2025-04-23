@@ -20,7 +20,7 @@ const BlogDetails = () => {
 
 
   return (
-    <div className="mt-[104px]">
+    <div className="mt-[80px] sm:mt-[85px] xl:mt-[104px]">
       <div>
         <CommonHeroBanner
           image={`${import.meta.env.VITE_SITE_URL}/${blogDetail?.image}`}
