@@ -182,7 +182,6 @@ export const useResetPassword = () => {
       setLoading(true);
     },
     onSuccess: (data) => {
-      console.log(data)
       if (data) {
         setLoading(false);
         toast.success('Password reset successfully');

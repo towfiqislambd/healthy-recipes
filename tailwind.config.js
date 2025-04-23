@@ -27,7 +27,8 @@ export default {
 			 lg: "768px",
 			 xl: "1024px",
 			 "2xl": "1280px",
-			 "3xl": "1460px"
+			 "3xl": "1460px",
+			 "4xl": "1520px"
 		},
       colors: {
         background: 'hsl(var(--background))',

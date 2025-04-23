@@ -83,7 +83,7 @@ const ReviewLeftSection = ({ id, refetch }) => {
                 Email <span className="text-[#FF5630]">*</span>
               </label>
               <input
-                className={`px-3 lg:px-4 py-2 lg:py-4 border rounded-lg w-full focus:outline-none`}
+                className={`px-3 xl:px-4 py-2 xl:py-4 border rounded-lg w-full focus:outline-none`}
                 type="email"
                 placeholder={user ? '' : 'Join@gmail.com'}
                 defaultValue={user?.email}
@@ -98,7 +98,7 @@ const ReviewLeftSection = ({ id, refetch }) => {
                 Name <span className="text-[#FF5630]">*</span>
               </label>
               <input
-                className={`px-3 lg:px-4 py-2 lg:py-4 border rounded-lg w-full focus:outline-none}`}
+                className={`px-3 xl:px-4 py-2 xl:py-4 border rounded-lg w-full focus:outline-none}`}
                 type="text"
                 placeholder={user ? '' : 'Jon Doe'}
                 defaultValue={user?.name}
@@ -114,7 +114,7 @@ const ReviewLeftSection = ({ id, refetch }) => {
               </label>
               <textarea
                 rows={5}
-                className={`px-3 lg:px-4 py-2 lg:py-4 resize-none border rounded-lg w-full focus:outline-none ${errors.comment ? "border-red-500" : "border-[#8993A4]"} `}
+                className={`px-3 xl:px-4 py-2 xl:py-4 resize-none border rounded-lg w-full focus:outline-none ${errors.comment ? "border-red-500" : "border-[#8993A4]"} `}
                 placeholder="Share your thoughts here..."
                 id="comment"
                 {...register("comment", { required: "Review is required" })}
@@ -127,7 +127,7 @@ const ReviewLeftSection = ({ id, refetch }) => {
             {/* Submit button */}
             <div>
               <button
-                className="px-5 lg:px-8 py-2 lg:py-3 text-white font-medium bg-primary hover:bg-transparent transition-all duration-300 rounded-full hover:text-primary border border-primary"
+                className="px-3 xl:px-8 py-2 xl:py-3 text-white font-medium bg-primary hover:bg-transparent transition-all duration-300 rounded-full hover:text-primary border border-primary"
                 type="submit"
               >
                 Submit Review

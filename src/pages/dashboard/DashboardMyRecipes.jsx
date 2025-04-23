@@ -14,14 +14,14 @@ const DashboardSavedRecipes = () => {
     }
 
     return (
-        <section className="p-5">
-            <h3 className="mb-7 text-2xl text-[#E48E19] font-semibold font-merriweather">Your shared recipes</h3>
+        <section className="3xl:p-5">
+            <h3 className="3xl:mb-7 text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">Your shared recipes</h3>
 
             {/* Tabs */}
-            <div className="py-8 w-full flex flex-wrap items-center justify-center 2xl:justify-between gap-x-1 gap-y-2">
+            <div className="py-5 2xl:py-8 w-full flex flex-wrap items-center justify-center 2xl:justify-between gap-x-1 gap-y-2">
                 <button
                     onClick={() => setActiveTab({ id: 0, category_name: 'All Recipes' })}
-                    className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium ${activeTab?.category_name === 'All Recipes'
+                    className={`px-4 3xl:px-6 3xl:py-3 py-2 rounded-full font-medium ${activeTab?.category_name === 'All Recipes'
                         ? 'bg-[#3A3A3A] text-white'
                         : 'bg-transparent text-textColor'
                         }`}
@@ -33,7 +33,7 @@ const DashboardSavedRecipes = () => {
                     <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab)}
-                        className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium ${tab?.category_name === activeTab?.category_name
+                        className={`px-4 3xl:px-6 3xl:py-3 py-2 rounded-full font-medium ${tab?.category_name === activeTab?.category_name
                             ? 'bg-[#3A3A3A] text-white'
                             : 'bg-transparent text-textColor'
                             }`}
@@ -44,7 +44,7 @@ const DashboardSavedRecipes = () => {
             </div>
 
             {/* cards */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-5 2xl:px-0">
+            <div className="grid md:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4 gap-5 3xl:px-5 2xl:px-0">
                 {
                     myRecipes?.recipes?.data.length > 0 ?
                         myRecipes?.recipes?.data?.map((item, idx) => (

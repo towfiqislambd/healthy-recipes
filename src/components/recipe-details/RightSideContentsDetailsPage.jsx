@@ -61,14 +61,14 @@ const RightSideContentsDetailsPage = ({ data }) => {
         {/* instructions */}
         <div className="pt-5">
           {/* title */}
-          <h5 className="text-black text-xl lg:text-2xl font-bold leading-[130%] font-merriweather">
+          <h5 className="text-black text-xl 2xl:text-2xl font-bold leading-[130%] font-merriweather">
             Instructions:
           </h5>
 
           {/* steps */}
-          <div className="lg:mt-6 mt-4 space-y-5">
+          <div className="mt-4 2xl:mt-6 space-y-3 2xl:space-y-5">
             {
-              data?.instructions?.map((item, idx) => <p key={item.id} className="text-textColor xl:text-lg font-medium">
+              data?.instructions?.map((item, idx) => <p key={item.id} className="text-textColor 2xl:text-lg font-medium">
                 <span>Step-{idx + 1}: </span> {item?.step}
               </p>)
             }

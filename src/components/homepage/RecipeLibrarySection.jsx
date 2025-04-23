@@ -11,12 +11,12 @@ const RecipeLibrarySection = ({ data }) => {
           <SectionTitle title="Recipe Library" />
 
           {/* cards  section*/}
-          <div className="-mt-2 md:-mt-8">
+          <div className="mt-2 md:-mt-8">
             {/* see all button */}
             <div className="w-full flex items-center justify-center md:justify-end mt-5 sm:mt-0 px-2 sm:px-0">
               <Link
                 to="/recipe-library"
-                className="text-textColor font-merriweather sm:px-6 px-3 sm:py-3 py-1 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white"
+                className="text-textColor font-merriweather md:px-6 px-3 md:py-3 py-1 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white"
               >
                 See all
               </Link>

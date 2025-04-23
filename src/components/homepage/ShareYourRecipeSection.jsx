@@ -18,7 +18,7 @@ const ShareYourRecipeSection = ({ data }) => {
                 <img src={`${import.meta.env.VITE_SITE_URL}/${item?.image}`} alt="" />
               </div>
               <div className="max-w-[700px] font-inter lg:text-lg xl:text-xl 2xl:text-2xl font-medium leading-[150%] text-white">
-                {parse(item?.description)}
+                {typeof item?.description === 'string' ? parse(item?.description) : item?.description}
               </div>
             </div>
 
