@@ -11,8 +11,10 @@ import { useAddWishlist } from '@/hooks/cms.mutations';
 import { useState } from 'react';
 import Modal from '../modals/Modal';
 import AddMealModal from '../modals/AddMealModal';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
-const RecipeCard = ({ item, refetch, isPlanner }) => {
+const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
   const [recipeId, setRecipeId] = useState(null);
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
@@ -48,6 +50,21 @@ const RecipeCard = ({ item, refetch, isPlanner }) => {
       navigate('/auth/login')
     }
   };
+
+  if (loading) {
+    return (
+      <div className="bg-white rounded-2xl shadow-md p-3 space-y-3">
+        <Skeleton height={200} />
+        <Skeleton height={24} width="80%" />
+        <Skeleton count={2} />
+        <Skeleton width="60%" />
+        <div className="flex justify-between pt-2">
+          <Skeleton width={60} height={20} />
+          <Skeleton width={60} height={20} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

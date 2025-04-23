@@ -20,7 +20,7 @@ const Homepage = () => {
   const { data: blogs, isLoading: isBlogsLoading } = useBlogs();
   const { data: recipeLibrary, isLoading: isRecipeLibraryLoading } = useRecipeLibrary();
   const { data: trendingRecipes, isLoading: isTrendingRecipesLoading } = useTrendingRecipes();
-  const { data: trendingRecipesPrivate, refetch } = useTrendingRecipePrivate();
+  const { data: trendingRecipesPrivate, refetch, isLoading: trendingLoading } = useTrendingRecipePrivate();
 
   const isLoading =
     isHomepageBannerLoading ||
@@ -52,7 +52,7 @@ const Homepage = () => {
     <div className="mt-[80px] lg:mt-[104px]">
       <HomepageBanner data={homepageBanner} />
       <WhyChooseUs data={whyChooseUs} />
-      <TrendingDiet data={trendingData} refetch={refetch} />
+      <TrendingDiet data={trendingData} refetch={refetch} trendingLoading={trendingLoading}/>
       <RecipeLibrarySection data={recipeLibrary} />
       <OurMealPlanner data={ourMealPlanner} />
       <ShareYourRecipeSection data={shareYourRecipe} />
