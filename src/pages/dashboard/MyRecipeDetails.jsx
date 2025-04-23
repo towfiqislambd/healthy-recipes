@@ -19,7 +19,7 @@ const MyRecipeDetails = () => {
     }
 
     return (
-        <div className="mt-[104px]">
+        <div className="mt-[80px] lg:mt-[104px]">
             {/* banner */}
             <CommonHeroBanner
                 image={`${import.meta.env.VITE_SITE_URL}/${myRecipeData?.recipe_image}`}

@@ -63,7 +63,7 @@ const DashboardMealPlanner = () => {
 
                 <button
                     onClick={() => setActiveTab({ id: 0, category_name: 'All Recipes' })}
-                    className={`px-4 3xl:px-6 3xl:py-3 py-2 rounded-full font-medium ${activeTab?.category_name === 'All Recipes'
+                    className={`px-3 sm:px-4 3xl:px-6 py-[5px] text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium ${activeTab?.category_name === 'All Recipes'
                         ? 'bg-[#3A3A3A] text-white'
                         : 'bg-transparent text-textColor'
                         }`}
@@ -75,7 +75,7 @@ const DashboardMealPlanner = () => {
                     <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab)}
-                        className={`px-4 3xl:px-6 3xl:py-3 py-2 rounded-full font-medium ${tab?.category_name === activeTab?.category_name
+                        className={`px-3 sm:px-4 3xl:px-6 py-[5px] text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium ${tab?.category_name === activeTab?.category_name
                             ? 'bg-[#3A3A3A] text-white'
                             : 'bg-transparent text-textColor'
                             }`}
@@ -85,14 +85,14 @@ const DashboardMealPlanner = () => {
                 ))}
             </div>
 
+            {/* Table */}
             <div className="overflow-x-auto">
-                {/* Table */}
-                <table className="rounded px-5 bg-[#F6F7FB] w-full border-separate border-spacing-y-4">
+                <table className="rounded bg-[#F6F7FB] w-full border-separate border-spacing-y-3 sm:border-spacing-y-4">
                     <thead>
                         <tr className="text-[#5A5C5F] text-lg text-center font-merriweather text-nowrap">
-                            <th className="bg-[#FCBD66] w-[150px] py-2 4xl:px-3">
+                            <th className="bg-[#FCBD66] w-[150px] py-1 sm:py-2 4xl:px-3">
                                 <select
-                                    className="border border-[#FCBD66] rounded-[5px] px-3 py-3 bg-transparent outline-none block w-full"
+                                    className="border border-[#FCBD66] rounded-[5px] px-3 py-2 text-sm sm:text-base sm:py-3 bg-transparent outline-none block w-full"
                                     value={selectedMonth}
                                     onChange={(e) => setSelectedMonth(Number(e.target.value))}
                                 >
@@ -107,7 +107,7 @@ const DashboardMealPlanner = () => {
                             </th>
                             <th
                                 colSpan={7}
-                                className="bg-[#B7E4C7] py-2 w-[calc(100% - 150px)] font-medium"
+                                className="bg-[#B7E4C7] py-1 sm:py- w-[calc(100% - 150px)] font-medium"
                             >
                                 Food Menus
                             </th>
@@ -123,7 +123,7 @@ const DashboardMealPlanner = () => {
                                     ].slice(0, 7); // Ensure exactly 7 items
 
                                     return (
-                                        <tr key={data.id} className="text-[#5A5C5F] font-merriweather text-nowrap">
+                                        <tr key={data.id} className="text-[#5A5C5F] text-sm sm:text-base font-merriweather text-nowrap">
                                             <td className="bg-[#FCBD66] px-4 py-3 4xl:py-5 border border-[#FCBD66]">
                                                 {data.date}
                                             </td>
@@ -142,10 +142,10 @@ const DashboardMealPlanner = () => {
                                                             <PopoverTrigger>
                                                                 <ThreeDotSvg />
                                                             </PopoverTrigger>
-                                                            <PopoverContent className='w-28 border space-y-2'>
-                                                                <button><Link to='/meal-planner'>Add meal</Link></button>
-                                                                <button onClick={() => handleEditPlan(item?.id)}>Edit</button>
-                                                                <button onClick={() => handleDeletePlan(item?.meal_plan_id)} className='text-red-500'>Delete</button>
+                                                            <PopoverContent className='w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2'>
+                                                                <button className='block'><Link to='/meal-planner'>Add meal</Link></button>
+                                                                <button className='block' onClick={() => handleEditPlan(item?.id)}>Edit</button>
+                                                                <button onClick={() => handleDeletePlan(item?.meal_plan_id)} className='text-red-500 block'>Delete</button>
                                                             </PopoverContent>
                                                         </Popover>
                                                     </div>

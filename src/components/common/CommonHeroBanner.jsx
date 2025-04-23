@@ -10,7 +10,7 @@ const CommonHeroBanner = ({ image, title }) => {
   };
   return (
     <section>
-      <div className="bg-[#B7E4C7] pt-10 3xl:pt-16 pb-40 ">
+      <div className="bg-[#B7E4C7] pt-5 lg:pt-10 3xl:pt-16 pb-40 ">
         {/* contents */}
         <div className="container">
           <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
@@ -38,7 +38,7 @@ const CommonHeroBanner = ({ image, title }) => {
       </div>
 
       {/* image */}
-      <div className="container w-full overflow-hidden -mt-32 xl:-mt-28 xl:mb-10 2xl:mb-20">
+      <div className="container w-full overflow-hidden -mt-[130px] lg:-mt-32 xl:-mt-28 xl:mb-10 2xl:mb-20">
         <div className="h-[250px] lg:h-[320px] xl:h-[400px] 2xl:h-[520px] rounded-2xl lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
           <img
             className="w-full h-full object-cover rounded-2xl"

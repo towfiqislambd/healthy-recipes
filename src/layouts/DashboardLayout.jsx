@@ -44,7 +44,7 @@ const DashboardLayout = () => {
     return (
         <section className="min-h-screen max-h-screen flex flex-col">
             {/* Header */}
-            <header className="py-1 px-5 xl:px-20 border-b bg-[#F6F5F2] fixed h-[90px] w-full left-0 top-0 z-50 navbar">
+            <header className="py-1 px-5 xl:px-20 border-b bg-[#F6F5F2] fixed xl:h-[90px] w-full left-0 top-0 z-50 navbar">
                 <nav className="w-full flex justify-between items-center">
                     {/* Left */}
                     <div className="flex items-center xl:gap-5 2xl:gap-14">
@@ -70,8 +70,8 @@ const DashboardLayout = () => {
                     </div>
 
                     {/* Right */}
-                    <div className="flex items-center xl:gap-10 2xl:gap-20">
-                        <div className="hidden xl:flex xl:gap-5 2xl:gap-5">
+                    <div className="hidden xl:flex items-center xl:gap-10 2xl:gap-20">
+                        <div className="flex xl:gap-5 2xl:gap-5">
                             {navLinks.map((item) => (
                                 <NavLink
                                     to={item.path}
@@ -100,7 +100,7 @@ const DashboardLayout = () => {
                     {/* Mobile btns */}
                     <button
                         onClick={() => setOpen(!isOpen)}
-                        className="bg-primary xl:hidden text-white h-10 w-11 rounded grid place-items-center"
+                        className="bg-primary xl:hidden text-white h-9 md:h-10 w-10 md:w-11 rounded grid place-items-center"
                     >
                         <FaBars className="text-2xl" />
                     </button>
@@ -108,7 +108,7 @@ const DashboardLayout = () => {
             </header>
 
             {/* Layout Body */}
-            <div className="flex mt-[90px] h-[calc(100vh-90px)] bg-white">
+            <div className="flex mt-[75px] lg:mt-[90px] h-[calc(100vh-90px)] bg-white">
                 {/* Sidebar with map */}
                 <aside className="hidden xl:block xl:w-[210px] 2xl:w-[237px] bg-[#F6F7FB] overflow-y-auto pt-7 h-full">
                     <ul className="text-[#5A5C5F] font-medium space-y-1 2xl:space-y-3">
@@ -131,7 +131,7 @@ const DashboardLayout = () => {
                 </aside>
 
                 {/* Page Content */}
-                <main className={`flex-1 overflow-y-auto ${location !== '/dashboard/overview' ? 'p-5' : 'lg:p-5'}`}>
+                <main className={`flex-1 overflow-y-auto ${location !== '/dashboard/overview' ? 'p-4 sm:p-5' : 'lg:p-5'}`}>
                     <Outlet />
                 </main>
             </div>
