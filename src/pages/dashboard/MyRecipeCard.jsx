@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { StarSvg, FireSvg, LoveSvg, RecipeBookSvg } from '@/components/svg-container/SvgContainer';
 
 const MyRecipeCard = ({ item }) => {
-    // isMyRecipe (props)
+    // isMyRecipe (it is props)
     // const { user } = useAuth();
     // const navigate = useNavigate();
     // const { mutateAsync: wishlistMutation } = useAddWishlist(item?.id);
@@ -33,7 +33,7 @@ const MyRecipeCard = ({ item }) => {
             <div className="relative">
                 {/* image and overlay */}
                 <div className="block">
-                    <div className="h-[260px] lg:h-[330px] w-full relative rounded-sm overflow-hidden">
+                    <div className="h-[300px] lg:h-[320px] 2xl:h-[350px] w-full relative rounded-sm overflow-hidden">
                         <img
                             className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
                             src={`${import.meta.env.VITE_SITE_URL}/${item?.recipe_image}`}

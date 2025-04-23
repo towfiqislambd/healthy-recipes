@@ -41,10 +41,10 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
       <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
 
         {/* Tabs */}
-        <div className="py-8 w-full flex flex-wrap items-center justify-center 3xl:justify-between gap-x-1 gap-y-2">
+        <div className="py-5 sm:py-8 w-full flex flex-wrap items-center justify-center 3xl:justify-between gap-x-1 gap-y-2">
           <button
             onClick={() => setActiveTab({ id: 0, category_name: 'All Recipes' })}
-            className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium ${activeTab?.category_name === 'All Recipes'
+            className={`px-3 sm:px-4 2xl:px-6 2xl:py-3 py-2 text-sm sm:text-base rounded-full font-medium ${activeTab?.category_name === 'All Recipes'
               ? 'bg-[#3A3A3A] text-white'
               : 'bg-transparent text-textColor'
               }`}
@@ -56,7 +56,7 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium ${tab?.category_name === activeTab?.category_name
+              className={`px-3 sm:px-4 2xl:px-6 2xl:py-3 py-2 text-sm sm:text-base rounded-full font-medium ${tab?.category_name === activeTab?.category_name
                 ? 'bg-[#3A3A3A] text-white'
                 : 'bg-transparent text-textColor'
                 }`}
@@ -67,10 +67,10 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
         </div>
 
         {/* Filter */}
-        <div className="w-full flex flex-col md:flex-row items-center justify-center 2xl:justify-end gap-3 xl:gap-3 2xl:gap-5">
+        <div className="w-full flex flex-wrap items-center justify-center 2xl:justify-end gap-3 xl:gap-3 2xl:gap-5">
           <Select value={selectedAllergen} onValueChange={(tag) => setTag(tag)}>
-            <SelectTrigger className="w-[300px] md:w-[380px] 2xl:w-[450px] h-11 2xl:h-14 rounded-full px-3 2xl:px-6 text-base focus:ring-primary">
-              <SelectValue placeholder="Select for recipes by allergens..." />
+            <SelectTrigger className="w-[300px] md:w-[380px] 2xl:w-[450px] h-9 sm:h-11 2xl:h-14 rounded-full px-4 2xl:px-6 text-base focus:ring-primary">
+              <SelectValue placeholder="Select recipes by tags..." />
             </SelectTrigger>
             <SelectContent className="px-0 py-0">
               {
@@ -85,7 +85,7 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
 
           <button
             onClick={handleReset}
-            className="h-11 2xl:h-14 px-3 2xl:px-6 border border-primary rounded-full flex items-center gap-2 bg-primary text-white transition-all duration-300 hover:bg-transparent hover:text-primary"
+            className="h-9 sm:h-11 2xl:h-14 px-3 2xl:px-6 border border-primary rounded-full flex items-center gap-2 bg-primary text-white transition-all duration-300 hover:bg-transparent hover:text-primary"
           >
             <RiResetLeftFill />
             Reset

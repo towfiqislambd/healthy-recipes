@@ -44,16 +44,16 @@ const MealPlanner = ({ mealPlannerTableData, setSelectedMonth, selectedMonth }) 
 
     return (
         <div>
-            <h3 className="font-merriweather font-semibold text-[#141414] text-xl">Your customize meal planner</h3>
+            <h3 className="font-merriweather font-semibold text-[#141414] text-lg sm:text-xl">Your customize meal planner</h3>
 
+            {/* Table */}
             <div className="overflow-x-auto">
-                {/* Table */}
-                <table className="rounded bg-[#F6F7FB] w-full border-separate border-spacing-y-4">
+                <table className="rounded bg-[#F6F7FB] w-full border-separate border-spacing-y-3 sm:border-spacing-y-4">
                     <thead>
                         <tr className="text-[#5A5C5F] text-lg text-center font-merriweather text-nowrap">
-                            <th className="bg-[#FCBD66] w-[150px] py-2 4xl:px-3">
+                            <th className="bg-[#FCBD66] w-[150px] py-1 sm:py-2 4xl:px-3">
                                 <select
-                                    className="border border-[#FCBD66] rounded-[5px] px-3 py-3 bg-transparent outline-none block w-full"
+                                    className="border border-[#FCBD66] rounded-[5px] px-3 py-2 text-sm sm:text-base sm:py-3 bg-transparent outline-none block w-full"
                                     value={selectedMonth}
                                     onChange={(e) => setSelectedMonth(Number(e.target.value))}
                                 >
@@ -68,7 +68,7 @@ const MealPlanner = ({ mealPlannerTableData, setSelectedMonth, selectedMonth }) 
                             </th>
                             <th
                                 colSpan={7}
-                                className="bg-[#B7E4C7] py-2 w-[calc(100% - 150px)] font-medium"
+                                className="bg-[#B7E4C7] py-1 sm:py- w-[calc(100% - 150px)] font-medium"
                             >
                                 Food Menus
                             </th>
@@ -85,7 +85,7 @@ const MealPlanner = ({ mealPlannerTableData, setSelectedMonth, selectedMonth }) 
 
                                     return (
                                         <tr key={data.id} className="text-[#5A5C5F] font-merriweather text-nowrap">
-                                            <td className="bg-[#FCBD66] px-4 py-3 4xl:py-5 border border-[#FCBD66]">
+                                            <td className="bg-[#FCBD66] text-sm sm:text-base px-4 py-3 4xl:py-5 border border-[#FCBD66]">
                                                 {data.date}
                                             </td>
                                             {itemsWithPlaceholders.map((item, index) => (
@@ -103,10 +103,10 @@ const MealPlanner = ({ mealPlannerTableData, setSelectedMonth, selectedMonth }) 
                                                             <PopoverTrigger>
                                                                 <ThreeDotSvg />
                                                             </PopoverTrigger>
-                                                            <PopoverContent className='w-28 border space-y-2'>
-                                                                <button><Link to='/meal-planner'>Add meal</Link></button>
-                                                                <button onClick={() => handleEditPlan(item?.id)}>Edit</button>
-                                                                <button onClick={() => handleDeletePlan(item?.meal_plan_id)} className='text-red-500'>Delete</button>
+                                                            <PopoverContent className='w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2'>
+                                                                <button className='block'><Link to='/meal-planner'>Add meal</Link></button>
+                                                                <button className='block' onClick={() => handleEditPlan(item?.id)}>Edit</button>
+                                                                <button onClick={() => handleDeletePlan(item?.meal_plan_id)} className='text-red-500 block'>Delete</button>
                                                             </PopoverContent>
                                                         </Popover>
                                                     </div>

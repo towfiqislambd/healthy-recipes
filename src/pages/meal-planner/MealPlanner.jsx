@@ -23,7 +23,11 @@ const MealPlanner = () => {
     loadingBlogs
 
   if (isLoading) {
+    document.body.style.overflow = 'hidden';
     return <div className="h-screen flex justify-center items-center"><Loader /></div>;
+  }
+  else {
+    document.body.style.overflow = '';
   }
 
   return (
@@ -35,7 +39,7 @@ const MealPlanner = () => {
             <h1 className="text-xl md:text-2xl xl:text-3xl 3xl:text-5xl font-merriweather font-bold text-black">
               {item?.title}
             </h1>
-            <p className="pt-5 xl:pt-7 max-w-[912px] mx-auto leading-[150%] text-textColor">
+            <p className="pt-5 xl:pt-7 max-w-[912px] mx-auto sm:leading-[150%] text-[15px] sm:text-base text-textColor">
               {item?.description}
             </p>
           </div>
