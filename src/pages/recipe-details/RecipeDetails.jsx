@@ -10,7 +10,7 @@ import { Loader } from "@/components/loader/Loader";
 
 const RecipeDetails = () => {
   const { id } = useParams();
-  const fullLocation = `${window.location.origin}/${id}`;
+  const fullLocation = `${window.location.origin}/recipe-details/${id}`;
   const { data: shareYourRecipe, isLoading: shareRecipeLoading } = useShareYourRecipe();
   const { data: recipeData, isLoading: recipeDataLoading } = useRecipeDetails(id);
 

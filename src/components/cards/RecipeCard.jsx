@@ -58,7 +58,7 @@ const RecipeCard = ({ item, refetch, isPlanner }) => {
         <div className="relative">
           {/* image and overlay */}
           <div className="block">
-            <div className="h-[280px] lg:h-[330px] w-full relative rounded-sm overflow-hidden">
+            <div className="h-[300px] lg:h-[320px] 2xl:h-[350px] w-full relative rounded-sm overflow-hidden">
               <img
                 className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
                 src={`${import.meta.env.VITE_SITE_URL}/${item?.recipe_image}`}
@@ -84,8 +84,8 @@ const RecipeCard = ({ item, refetch, isPlanner }) => {
               <span>
                 {
                   `${item?.library_name || item?.recipe_library?.diet_name}
-                 | 
-                 ${item?.category_name || item?.category?.category_name}`
+                   | 
+                   ${item?.category_name || item?.category?.category_name}`
                 }
               </span>
             </p>
