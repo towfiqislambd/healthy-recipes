@@ -1,19 +1,57 @@
-import { AddMoreSvg, CameraSvg } from "@/components/svg-container/SvgContainer";
+import { Loader } from "@/components/loader/Loader";
+import { AddMoreSvg, BackArrowSvg, CameraSvg } from "@/components/svg-container/SvgContainer";
+import { useEditRecipe } from "@/hooks/cms.mutations";
+import { useAllCategories, useMyRecipeDetails, useRecipeLibrary } from "@/hooks/cms.queries";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
+const ageData = [
+    {
+        id: 1,
+        label: 'Teen (13–19 years)',
+        value: 'teen'
+    },
+    {
+        id: 2,
+        label: 'Adult (20–39 years)',
+        value: 'adult'
+    },
+    {
+        id: 3,
+        label: 'Middle adulthood (40–59 years)',
+        value: 'middle-adulthood'
+    },
+    {
+        id: 4,
+        label: 'Senior Adult (60+)',
+        value: 'senior-adult'
+    },
+]
 
 const EditRecipes = () => {
-    const [video, setVideo] = useState(null);
-    const [thumbnail, setThumbnail] = useState(null);
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const { data: recipeDetails, isLoading } = useMyRecipeDetails(id);
+    const { mutateAsync: editRecipeMutation } = useEditRecipe(id);
+    const { data: recipeCategory } = useAllCategories();
+    const { data: allLibrary } = useRecipeLibrary();
+    const [recipe_video, setRecipeVideo] = useState(null);
+    const [recipe_image, setRecipeImage] = useState(null);
     const [tags, setTags] = useState([]);
     const [inputValue, setInputValue] = useState("");
     const [instructions, setInstructions] = useState([{ id: Date.now(), value: "" }]);
     const [ingredients, setIngredients] = useState([{ id: Date.now(), value: "" }]);
     const [customErrors, setCustomErrors] = useState({});
 
+    const handleCancel = e => {
+        e.preventDefault();
+        navigate(-1)
+    }
+
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm();
 
@@ -25,35 +63,49 @@ const EditRecipes = () => {
         });
     };
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         const newErrors = {};
-
-        if (!video) newErrors.video = "Video is required.";
-        if (!thumbnail) newErrors.thumbnail = "Thumbnail is required.";
+        if (!recipe_video) newErrors.recipe_video = "Recipe video is required.";
+        if (!recipe_image) newErrors.recipe_image = "Thumbnail image is required.";
         if (tags.length === 0) newErrors.tags = "At least one tag is required.";
         if (ingredients.filter(i => i.value.trim()).length === 0)
             newErrors.ingredients = "Add at least one ingredient.";
         if (instructions.filter(i => i.value.trim()).length === 0)
             newErrors.instructions = "Add at least one instruction.";
-
         setCustomErrors(newErrors);
-
         if (Object.keys(newErrors).length > 0) return;
 
-        const formData = {
-            ...data,
-            video,
-            thumbnail,
-            tags,
-            ingredients: ingredients.map(i => i.value).filter(Boolean),
-            instructions: instructions.map(i => i.value).filter(Boolean),
-        };
+        const formData = new FormData();
 
-        console.log(formData);
+        // Append regular fields
+        formData.append("recipe_name", data.recipe_name);
+        formData.append("category_id", data.category_id);
+        formData.append("recipe_library_id", data.recipe_library_id);
+        formData.append("age_group", data.age_group);
+        formData.append("serving_number", data.serving_number);
+        formData.append("cooking_time", data.cooking_time);
+        formData.append("preparation_time", data.preparation_time);
+        formData.append("nutrition_info", data.nutrition_info);
+        formData.append("resource_link", data.resource_link);
+
+        // Append files
+        formData.append("recipe_video", recipe_video);
+        formData.append("recipe_image", recipe_image);
+
+        // Append array data
+        tags.forEach((tag, i) => formData.append(`tags[${i}]`, tag));
+        ingredients
+            .filter(i => i.value.trim())
+            .forEach((ing, i) => formData.append(`ingredients[${i}]`, ing.value));
+        instructions
+            .filter(i => i.value.trim())
+            .forEach((inst, i) => formData.append(`instructions[${i}]`, inst.value));
+
+        await editRecipeMutation(formData);
+        reset();
     };
 
     const handleInputChange = (e) => setInputValue(e.target.value);
-
     const handleKeyDown = (e) => {
         const value = inputValue.trim();
         if ((e.key === "Enter" || e.key === "," || e.key === " ") && value && tags.length < 10) {
@@ -66,13 +118,11 @@ const EditRecipes = () => {
             setInputValue("");
         }
     };
-
     const handleTagRemove = (tagToRemove) => {
         const updatedTags = tags.filter((tag) => tag !== tagToRemove);
         setTags(updatedTags);
         if (updatedTags.length > 0) updateCustomErrors("tags");
     };
-
     const handleIngredientChange = (e, id) => {
         const updated = ingredients.map((ingredient) =>
             ingredient.id === id ? { ...ingredient, value: e.target.value } : ingredient
@@ -97,36 +147,64 @@ const EditRecipes = () => {
         setInstructions([...instructions, { id: Date.now(), value: "" }]);
     };
 
-    return (
-        <div className="max-w-[752px] mx-auto py-10">
-            <h3 className="mb-7 text-2xl text-[#E48E19] font-semibold font-merriweather">Edit recipe</h3>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
 
-                {/* Title */}
+    if (isLoading) {
+        return <div className="flex justify-center items-center h-[85vh]"><Loader /></div>;
+    }
+
+    return (
+        <div className="max-w-[752px] mx-auto sm:py-3 2xl:py-8">
+            <div onClick={handleCancel} className="flex mb-3 items-center gap-2 text-[#373E85] group cursor-pointer">
+                <div className="group-hover:-translate-x-1 duration-300 transition-all">
+                    <BackArrowSvg />
+                </div>
+                <span> Back</span>
+            </div>
+            <h3 className="mb-3 sm:mb-5 3xl:mb-7 text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">Edit recipe</h3>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 lg:space-y-8">
+
+                {/* Recipe Name */}
                 <div>
-                    <label htmlFor="title" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Title</label>
+                    <label htmlFor="recipe_name" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Recipe Name</label>
                     <input
-                        {...register('title', { required: true })}
+                        {...register('recipe_name', { required: true })}
+                        defaultValue={recipeDetails?.recipe_name}
                         placeholder="Write recipe name"
-                        className="border rounded-[5px] px-4 py-3 outline-none block w-full"
+                        className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
                     />
                     <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Maximum 20 words</p>
-                    {errors.title && <span className="text-red-500 block mt-2 text-[15px]">Recipe name is required</span>}
+                    {errors.recipe_name && <span className="text-red-500 block mt-2 text-[15px]">Recipe name is required</span>}
                 </div>
 
-                {/* Content */}
+                {/* Recipe Image */}
                 <div>
-                    <label htmlFor="content" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Content</label>
-                    <textarea id="content" rows={5} className="border rounded-[5px] px-4 py-3 outline-none block w-full" placeholder="Write here...." {...register('content', { required: true })}></textarea>
-                    <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Maximum 1000 words</p>
-                    {errors.content && <span className="text-red-500 block mt-2 text-[15px]">Content is required</span>}
+                    <p className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Thumbnail</p>
+                    <label htmlFor="recipe_image">
+                        <p className="flex gap-2 w-fit cursor-pointer items-center text-white text-sm sm:text-base py-2 lg:py-[10px] px-3 lg:px-4 rounded sm:rounded-lg bg-[#8993A4]">Select Featured Image</p>
+                    </label>
+                    <input
+                        onChange={(e) => {
+                            const file = e.target.files?.[0] || null;
+                            setRecipeImage(file);
+                            if (file) updateCustomErrors("recipe_image");
+                        }}
+                        type="file"
+                        className="hidden"
+                        id="recipe_image"
+                    />
+                    {recipe_image && (
+                        <div className="h-[260px] mt-2 w-full">
+                            <img src={URL.createObjectURL(recipe_image)} className="w-full h-full rounded-lg object-cover" />
+                        </div>
+                    )}
+                    {customErrors.recipe_image && <p className="text-red-500 mt-2">{customErrors.recipe_image}</p>}
                 </div>
 
-                {/* Video */}
+                {/* Recipe Video */}
                 <div>
                     <p className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Upload a video</p>
-                    <label htmlFor="video">
-                        <p className="flex gap-2 w-fit cursor-pointer items-center text-white py-[10px] px-4 rounded-lg bg-primary">
+                    <label htmlFor="recipe_video">
+                        <p className="flex gap-1 sm:gap-2 w-fit text-sm sm:text-base cursor-pointer items-center text-white px-3 py-2 lg:py-[10px] lg:px-4 rounded sm:rounded-lg bg-primary">
                             <CameraSvg />
                             <span>Add Media</span>
                         </p>
@@ -134,70 +212,140 @@ const EditRecipes = () => {
                     <input
                         onChange={(e) => {
                             const file = e.target.files?.[0] || null;
-                            setVideo(file);
-                            if (file) updateCustomErrors("video");
+                            setRecipeVideo(file);
+                            if (file) updateCustomErrors("recipe_video");
                         }}
                         accept="video/mp4,video/x-m4v,video/*"
                         type="file"
                         className="hidden"
-                        id="video"
+                        id="recipe_video"
                     />
-                    {video && (
+                    {recipe_video && (
                         <div className="h-[260px] mt-2 w-full">
-                            <video controls src={URL.createObjectURL(video)} className="w-full h-full rounded-lg object-cover" />
+                            <video controls src={URL.createObjectURL(recipe_video)} className="w-full h-full rounded-lg object-cover" />
                         </div>
                     )}
-                    {customErrors.video && <p className="text-red-500 mt-2">{customErrors.video}</p>}
-                </div>
-
-                {/* Thumbnail */}
-                <div>
-                    <p className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Thumbnail</p>
-                    <label htmlFor="thumbnail">
-                        <p className="flex gap-2 w-fit cursor-pointer items-center text-white py-[10px] px-4 rounded-lg bg-[#8993A4]">Select Featured Image</p>
-                    </label>
-                    <input
-                        onChange={(e) => {
-                            const file = e.target.files?.[0] || null;
-                            setThumbnail(file);
-                            if (file) updateCustomErrors("thumbnail");
-                        }}
-                        type="file"
-                        className="hidden"
-                        id="thumbnail"
-                    />
-                    {thumbnail && (
-                        <div className="h-[260px] mt-2 w-full">
-                            <img src={URL.createObjectURL(thumbnail)} className="w-full h-full rounded-lg object-cover" />
-                        </div>
-                    )}
-                    {customErrors.thumbnail && <p className="text-red-500 mt-2">{customErrors.thumbnail}</p>}
+                    {customErrors.recipe_video && <p className="text-red-500 mt-2">{customErrors.recipe_video}</p>}
                 </div>
 
                 {/* Categories */}
                 <div>
                     <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Categories</label>
                     <select
-                        {...register('categories', { required: true })}
-                        className="border rounded-[5px] px-3 py-3 outline-none block w-full"
+                        {...register('category_id', { required: true })}
+                        className="border rounded-[5px] px-2 lg:px-3 py-2 lg:py-3 outline-none block w-full"
                     >
-                        <option value="Breakfast">Breakfast</option>
-                        <option value="Lunch">Lunch</option>
-                        <option value="Dinner">Dinner</option>
-                        <option value="Appetizer">Appetizer</option>
-                        <option value="Beverages">Beverages</option>
-                        <option value="Salad">Salad</option>
-                        <option value="Deserts">Deserts</option>
-                        <option value="Snacks">Snacks</option>
+                        {
+                            recipeCategory?.map((item, idx) => (
+                                <option
+                                    key={idx}
+                                    value={item?.id}
+                                    selected={item?.id === recipeDetails?.category?.id}
+                                >
+                                    {item?.category_name}
+                                </option>
+                            ))
+                        }
+
                     </select>
-                    {errors.categories && <span className="text-red-500 block mt-2 text-[15px]">Select a category</span>}
+                    {errors.category_id && <span className="text-red-500 block mt-2 text-[15px]">Select a category</span>}
+                </div>
+
+                {/* Library */}
+                <div>
+                    <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Select a library</label>
+                    <select
+                        {...register('recipe_library_id', { required: true })}
+                        className="border rounded-[5px] px-2 lg:px-3 py-2 lg:py-3 outline-none block w-full"
+                    >
+                        {
+                            allLibrary?.map((item, idx) => (
+                                <option
+                                    key={idx}
+                                    value={item?.id}
+                                    selected={item?.id === recipeDetails?.recipe_library?.id}
+                                >
+                                    {item?.diet_name}
+                                </option>
+                            ))
+                        }
+                    </select>
+                    {errors.recipe_library_id && <span className="text-red-500 block mt-2 text-[15px]">Select a library</span>}
+                </div>
+
+                {/* Age group */}
+                <div>
+                    <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Select age group</label>
+                    <select
+                        {...register('age_group', { required: true })}
+                        className="border rounded-[5px] px-2 lg:px-3 py-2 lg:py-3 outline-none block w-full"
+                    >
+                        {
+                            ageData?.map((item, idx) => (
+                                <option
+                                    key={idx}
+                                    value={item?.value}
+                                    selected={item?.value === recipeDetails?.age_group}
+                                >
+                                    {item?.label}
+                                </option>
+                            ))
+                        }
+                    </select>
+                    {errors.age_group && <span className="text-red-500 block mt-2 text-[15px]">Select age group</span>}
+                </div>
+
+                {/* Serving number */}
+                <div>
+                    <label htmlFor="serving_number" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Serving number</label>
+                    <input
+                        {...register('serving_number', { required: true })}
+                        defaultValue={recipeDetails?.serving_number}
+                        placeholder="4"
+                        className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
+                    />
+                    <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Numeric values e.g. 2, 3, 4, 5</p>
+                    {errors.serving_number && <span className="text-red-500 block mt-2 text-[15px]">Serving number is required</span>}
+                </div>
+
+                {/* Cooking time */}
+                <div>
+                    <label htmlFor="cooking_time" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Cooking time</label>
+                    <input
+                        {...register('cooking_time', { required: true })}
+                        defaultValue={recipeDetails?.cooking_time}
+                        placeholder="30 min"
+                        className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
+                    />
+                    <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Numeric values for time e.g. 20min, 30min, 40min</p>
+                    {errors.cooking_time && <span className="text-red-500 block mt-2 text-[15px]">Cooking time is required</span>}
+                </div>
+
+                {/* Preparation time */}
+                <div>
+                    <label htmlFor="preparation_time" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Preparation time</label>
+                    <input
+                        {...register('preparation_time', { required: true })}
+                        defaultValue={recipeDetails?.preparation_time}
+                        placeholder="40 min"
+                        className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
+                    />
+                    <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Numeric values for time e.g. 20min, 30min, 40min</p>
+                    {errors.preparation_time && <span className="text-red-500 block mt-2 text-[15px]">Preparation time is required</span>}
+                </div>
+                {/* Nutrition Info */}
+                <div>
+                    <label htmlFor="nutrition_info" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Nutrition Info</label>
+                    <textarea id="nutrition_info" rows={5} className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full" placeholder="Write here...." {...register('nutrition_info', { required: true })}></textarea>
+                    <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">Maximum 1000 words</p>
+                    {errors.nutrition_info && <span className="text-red-500 block mt-2 text-[15px]">Nutrition Info is required</span>}
                 </div>
 
                 {/* Tags */}
                 <div>
                     <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Tags</label>
                     <input
-                        className="border rounded-[5px] px-4 py-3 outline-none block w-full"
+                        className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
                         placeholder="Add tags (separate by commas or spaces)"
                         value={inputValue}
                         onChange={handleInputChange}
@@ -223,9 +371,14 @@ const EditRecipes = () => {
                         <div className="mt-5" key={ingredient.id}>
                             <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Ingredients ({index + 1})</label>
                             <input
-                                className="border rounded-[5px] px-4 py-3 outline-none block w-full"
+                                className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
                                 value={ingredient.value}
                                 onChange={(e) => handleIngredientChange(e, ingredient.id)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        e.preventDefault();
+                                    }
+                                }}
                             />
                             {index === 0 && (
                                 <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">e.g. "¼ teaspoon salt"</p>
@@ -238,7 +391,7 @@ const EditRecipes = () => {
                             e.preventDefault();
                             addIngredient();
                         }}
-                        className="flex mt-5 gap-2 w-fit cursor-pointer items-center text-white py-[10px] px-4 rounded-lg bg-primary"
+                        className="flex mt-5 gap-1 text-sm sm:text-base sm:gap-2 w-fit cursor-pointer items-center text-white py-2 lg:py-[10px] px-[10px] lg:px-4 rounded sm:rounded-lg bg-primary"
                     >
                         <AddMoreSvg />
                         <p>Add more ingredient</p>
@@ -252,7 +405,7 @@ const EditRecipes = () => {
                             <label className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Instructions (Step-{index + 1})</label>
                             <textarea
                                 rows={3}
-                                className="border rounded-[5px] px-4 py-3 outline-none block w-full"
+                                className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
                                 value={instruction.value}
                                 onChange={(e) => handleInstructionChange(e, instruction.id)}
                             />
@@ -267,7 +420,7 @@ const EditRecipes = () => {
                             e.preventDefault();
                             addInstruction();
                         }}
-                        className="flex mt-5 gap-2 w-fit cursor-pointer items-center text-white py-[10px] px-4 rounded-lg bg-primary"
+                        className="flex mt-5 gap-1 text-sm sm:text-base sm:gap-2 w-fit cursor-pointer items-center text-white py-2 lg:py-[10px] px-[10px] lg:px-4 rounded sm:rounded-lg bg-primary"
                     >
                         <AddMoreSvg />
                         <p>Add more instruction</p>
@@ -276,19 +429,18 @@ const EditRecipes = () => {
 
                 {/* Recipe source link */}
                 <div>
-                    <label htmlFor="source" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Recipe Source Link</label>
+                    <label htmlFor="resource_link" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Recipe Source Link</label>
                     <input
-                        {...register('source', { required: true })}
-                        className="border rounded-[5px] px-4 py-3 outline-none block w-full"
+                        {...register('resource_link')}
+                        className="border rounded-[5px] px-3 lg:px-4 py-2 lg:py-3 outline-none block w-full"
                     />
                     <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">e.g. https://example.com/easy-chicken-dinner-recipe</p>
-                    {errors.source && <span className="text-red-500 block mt-2 text-[15px]">Recipe source link is required</span>}
                 </div>
 
                 {/* Submit & Cancel */}
-                <div className="flex items-center gap-3">
-                    <button className="px-5 py-2 bg-[#3F3F3F] rounded-[6px] text-white border">Submit here</button>
-                    <button onClick={e => e.preventDefault()} className="px-5 py-2 border-[#3F3F3F] rounded-[6px] border">Cancel</button>
+                <div className="flex items-center gap-2 sm:gap-3">
+                    <button className="px-3 sm:px-5 py-[6px] sm:py-2 bg-[#3F3F3F] rounded-[6px] text-white border">Update recipe</button>
+                    <button onClick={handleCancel} className="px-3 sm:px-5 py-[6px] sm:py-2 border-[#3F3F3F] rounded-[6px] border">Cancel</button>
                 </div>
             </form>
         </div>

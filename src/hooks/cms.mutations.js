@@ -1,7 +1,7 @@
 import toast from 'react-hot-toast';
 import useAuth from './useAuth';
 import { useMutation } from '@tanstack/react-query';
-import { AddMealPlanner, AddRecipe, AddReview, AddWishlist, DeleteMealPlan, EditMealPlanner } from './cms.api';
+import { AddMealPlanner, AddRecipe, AddReview, AddWishlist, DeleteMealPlan, EditMealPlanner, EditRecipe } from './cms.api';
 import { useNavigate } from 'react-router-dom';
 
 // Add reviews
@@ -76,6 +76,31 @@ export const useAddRecipe = () => {
     },
   });
 };
+
+
+// Edit Recipe
+export const useEditRecipe = (recipe_id) => {
+  const navigate = useNavigate()
+  const { setLoading } = useAuth();
+  
+  return useMutation({
+    mutationKey: ['edit-recipe'],
+    mutationFn: (payload) => EditRecipe(recipe_id, payload),
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: () => {
+      setLoading(false);
+      toast.success('Recipe updated Successfully');
+      navigate('/dashboard/dashboard-my-recipes')
+    },
+    onError: (err) => {
+      setLoading(false);
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
 
 
 // Add Meal Planner
