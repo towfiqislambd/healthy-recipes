@@ -17,8 +17,6 @@ const MealPlannerTabSection = () => {
   const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
   const [ageGroup, setAgeGroup] = useState(null);
   const [library, setLibrary] = useState(null);
-  const [selectedAge, setSelectedAge] = useState('');
-  const [selectedDiet, setSelectedDiet] = useState('');
   const { data: allCategories, isLoading: isAllCategoryLoading } = useAllCategories();
   const { data: recipeLibrary, isLoading: isRecipeLibraryLoading } = useRecipeLibrary()
   const { data: allRecipes, isLoading: loadingAllRecipe } = useAllRecipes(activeTab?.id, library, ageGroup, null, search);
@@ -43,20 +41,18 @@ const MealPlannerTabSection = () => {
 
   const filterClass = `text-base py-2 lg:py-3 px-3 lg:px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
-  // const getCountByType = (type) => {
-  //   if (type === 'All Recipes') {
-  //     return recipeData?.length || 0;
-  //   } else {
-  //     return recipeData?.filter((recipe) => recipe?.category_name === type)?.length || 0;
-  //   }
-  // };
-
   const handleReset = () => {
-    setSelectedAge('');
-    setSelectedDiet('');
     setAgeGroup(null);
     setLibrary(null);
-    setActiveTab({ category_name: 'All Recipes' });
+    setActiveTab({ id: 0, category_name: 'All Recipes' });
+  };
+
+  const handleAgeChange = (value) => {
+    setAgeGroup(value === "all" ? null : value);
+  };
+
+  const handleDietChange = (value) => {
+    setLibrary(value === "all" ? null : value);
   };
 
   return (
@@ -73,7 +69,6 @@ const MealPlannerTabSection = () => {
               }`}
           >
             All Recipes
-            {/* <span>({getCountByType('All Recipes')})</span> */}
           </button>
 
           {allCategories?.map((tab) => (
@@ -86,7 +81,6 @@ const MealPlannerTabSection = () => {
                 }`}
             >
               {tab?.category_name}
-              {/* <span>({getCountByType(tab?.category_name)})</span> */}
             </button>
           ))}
         </div>
@@ -95,11 +89,15 @@ const MealPlannerTabSection = () => {
         <div className="my-2 w-full md:w-[400px] lg:w-auto mx-auto border lg:border-none p-5 rounded-lg lg:p-0 3xl:py-12 flex flex-col lg:flex-row items-center justify-center gap-3 2xl:gap-5">
           <div className="flex flex-col lg:flex-row w-full lg:w-auto gap-3 lg:gap-0">
             {/* Age Filter */}
-            <Select value={selectedAge} onValueChange={(age) => setAgeGroup(age)}>
+            <Select
+              value={ageGroup || "all"}
+              onValueChange={handleAgeChange}
+            >
               <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[460px] h-11 2xl:h-14 lg:rounded-l-full lg:px-6 px-3 text-base focus:ring-primary">
                 <SelectValue placeholder="Filter by age group" />
               </SelectTrigger>
               <SelectContent className="px-0 py-0">
+                <SelectItem value="all" className={filterClass}>Filter by age group</SelectItem>
                 <SelectItem value="teen" className={filterClass}>Teen (13–19 years)</SelectItem>
                 <SelectItem value="adult" className={filterClass}>Adult (20–39 years)</SelectItem>
                 <SelectItem value="middle-adulthood" className={filterClass}>Middle adulthood (40–59 years)</SelectItem>
@@ -108,11 +106,15 @@ const MealPlannerTabSection = () => {
             </Select>
 
             {/* Diet Filter */}
-            <Select value={selectedDiet} onValueChange={(lib) => setLibrary(lib)}>
+            <Select
+              value={library || "all"}
+              onValueChange={handleDietChange}
+            >
               <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[450px] 2xl:h-14 h-11 lg:rounded-r-full lg:border-l-0 px-3 lg:px-6 text-base focus:ring-primary">
-                <SelectValue placeholder="Filter by diet" />
+                <SelectValue placeholder="Filter by recipe library" />
               </SelectTrigger>
               <SelectContent className="px-0 py-0">
+                <SelectItem value="all" className={filterClass}>Filter by recipe library</SelectItem>
                 {recipeLibrary?.map((library) => (
                   <SelectItem key={library.id} value={library.id} className={filterClass}>
                     {library?.diet_name}
@@ -137,7 +139,7 @@ const MealPlannerTabSection = () => {
           {
             privateRecipesLoading ?
               Array.from({ length: 4 }).map((_, idx) => (
-                <RecipeCard idx={idx} loading={true} />
+                <RecipeCard key={idx} idx={idx} loading={true} />
               ))
               :
               recipeData?.length > 0 ?
