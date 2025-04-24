@@ -14,10 +14,10 @@ import { Loader } from "../loader/Loader";
 const AllRecipesTabs = ({ data, recipes, libraryId }) => {
   const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
   const [tag, setTag] = useState(null);
-  const [selectedAllergen, setSelectedAllergen] = useState("");
   const filterClass = `text-base py-2 xl:py-3 px-3 xl:px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
   const { data: allRecipes, isLoading } = useAllRecipes(activeTab?.id, libraryId, null, tag);
+
   if (isLoading) {
     return <div className="h-[50vh] flex justify-center items-center"><Loader /></div>;
   }
@@ -31,10 +31,19 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
   };
 
   const handleReset = () => {
-    setSelectedAllergen("");
     setTag(null);
     setActiveTab({ id: 0, category_name: 'All Recipes' });
   };
+
+  const handleTagChange = (value) => {
+    setTag(value === "all" ? null : value);
+  };
+
+  // Get unique tags from all recipes
+  const uniqueTags = Array.from(new Set(
+    recipes?.flatMap(recipe =>
+      recipe.tag_names?.map(tag => ({ id: tag.id, tag_name: tag.tag_name })) || []
+    )));
 
   return (
     <div className="container pb-7 xl:pb-10 2xl:pb-20">
@@ -68,18 +77,20 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
 
         {/* Filter */}
         <div className="w-full flex flex-wrap items-center justify-center 2xl:justify-end gap-3 xl:gap-3 2xl:gap-5">
-          <Select value={selectedAllergen} onValueChange={(tag) => setTag(tag)}>
+          <Select
+            value={tag || "all"}
+            onValueChange={handleTagChange}
+          >
             <SelectTrigger className="w-[300px] md:w-[380px] 2xl:w-[450px] h-9 sm:h-11 2xl:h-14 rounded-full px-4 2xl:px-6 text-base focus:ring-primary">
               <SelectValue placeholder="Select recipes by tags..." />
             </SelectTrigger>
             <SelectContent className="px-0 py-0">
-              {
-                recipes?.map(recipe => (
-                  recipe.tag_names?.map(tag => <SelectItem key={tag.id} value={tag?.id} className={filterClass}>
-                    {tag?.tag_name}
-                  </SelectItem>)
-                ))
-              }
+              <SelectItem value="all" className={filterClass}>Select recipes by tags</SelectItem>
+              {uniqueTags.map(tag => (
+                <SelectItem key={tag.id} value={tag.id} className={filterClass}>
+                  {tag.tag_name}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
 
@@ -94,14 +105,13 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
 
         {/* Cards */}
         <div className="mt-10 grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6">
-          {
-            allRecipes?.length > 0 ?
-              allRecipes?.map((item, idx) => (
-                <RecipeCard key={idx} item={item} isMyRecipe={true} />
-              ))
-              :
-              'No data found'
-          }
+          {allRecipes?.length > 0 ? (
+            allRecipes.map((item, idx) => (
+              <RecipeCard key={idx} item={item} isMyRecipe={true} />
+            ))
+          ) : (
+            'No data found'
+          )}
         </div>
       </div>
     </div>

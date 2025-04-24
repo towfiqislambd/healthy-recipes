@@ -212,6 +212,12 @@ export const AddRecipe = async (payload) => {
     return data?.data;
 };
 
+// Edit Recipe
+export const EditRecipe = async (recipe_id, payload) => {
+    const { data } = await axiosSecure.post(`api/recipe/update/${recipe_id}`, payload);
+    return data?.data;
+};
+
 // Add Meal Planner
 export const AddMealPlanner = async (recipe_id, payload) => {
     const { data } = await axiosSecure.post(`api/meal-plans/${recipe_id}`, payload);
