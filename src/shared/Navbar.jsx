@@ -8,6 +8,7 @@ import useAuth from '@/hooks/useAuth';
 import { useLogOut } from '@/hooks/auth.hook.';
 import { useFooterInfo } from '@/hooks/cms.queries';
 import { Loader } from '@/components/loader/Loader';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -73,7 +74,7 @@ const Navbar = () => {
             </Link>
 
             {/* search bar */}
-            <div className='px-3 3xl:px-4 py-3 hidden 2xl:flex items-center gap-1 3xl:gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white w-[300px] 3xl:w-[380px]'>
+            <div className='px-3 3xl:px-4 py-3 hidden 2xl:flex items-center gap-1 3xl:gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white w-[250px] 3xl:w-[380px]'>
               <SearchSvg />
               <input
                 className="focus:outline-none w-full placeholder:text-[15px] 3xl:placeholder:text-base"
@@ -115,9 +116,16 @@ const Navbar = () => {
               </Link>
               {
                 user ?
-                  <button onClick={handleLogout}>
-                    <ButtonTransparent title="Log Out" />
-                  </button>
+                  <div className="flex gap-3 items-center">
+                    <button onClick={handleLogout}>
+                      <ButtonTransparent title="Log Out" />
+                    </button>
+                    {
+                      user && <Avatar className="w-11 h-11 rounded-full">
+                        <AvatarFallback className='text-[22px] font-medium w-full h-full rounded-full'>{user?.name.slice(0, 1)}</AvatarFallback>
+                      </Avatar>
+                    }
+                  </div>
                   :
                   <ButtonTransparent path="/auth/register" title="Sign Up" />
               }
@@ -125,12 +133,19 @@ const Navbar = () => {
           </div>
 
           {/* Hamburger btn */}
-          <button
-            onClick={() => setOpen(!isOpen)}
-            className="bg-primary 2xl:hidden text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid place-items-center"
-          >
-            <FaBars className="text-[22px] sm:text-2xl" />
-          </button>
+          <div className="2xl:hidden flex gap-3 items-center">
+            {
+              user && <Avatar className="w-11 h-11 rounded-full">
+                <AvatarFallback className='text-[22px] font-medium w-full h-full rounded-full'>{user?.name.slice(0, 1)}</AvatarFallback>
+              </Avatar>
+            }
+            <button
+              onClick={() => setOpen(!isOpen)}
+              className="bg-primary text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid place-items-center"
+            >
+              <FaBars className="text-[22px] sm:text-2xl" />
+            </button>
+          </div>
         </div>
       </nav>
 

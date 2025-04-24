@@ -7,8 +7,14 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import useAuth from "@/hooks/useAuth";
 import { useFooterInfo } from "@/hooks/cms.queries";
 import { Loader } from "@/components/loader/Loader";
+import { useLogOut } from "@/hooks/auth.hook.";
 
 const DashboardLayout = () => {
+    const { mutate: logOutMutate } = useLogOut();
+    // Mutation
+    const handleLogout = () => {
+        logOutMutate()
+    }
     const { user } = useAuth();
     // const navigate = useNavigate()
     const location = useLocation()?.pathname;
@@ -128,6 +134,11 @@ const DashboardLayout = () => {
                             </li>
                         ))}
                     </ul>
+                    <button
+                        onClick={handleLogout}
+                        className="text-textColor font-merriweather px-5 py-2 border rounded-full border-primary mt-5 w-4/5 mx-auto block hover:bg-primary transition-all duration-300 hover:text-white">
+                        Log Out
+                    </button>
                 </aside>
 
                 {/* Page Content */}
@@ -174,6 +185,11 @@ const DashboardLayout = () => {
                         </li>
                     ))}
                 </ul>
+                <button
+                    onClick={handleLogout}
+                    className="text-textColor font-merriweather px-5 py-2 border rounded-full border-primary mt-3 w-4/5 mx-auto block hover:bg-primary transition-all duration-300 hover:text-white">
+                    Log Out
+                </button>
 
                 {/* Close btn */}
                 <button onClick={() => setOpen(false)} className="absolute top-3 right-3">
