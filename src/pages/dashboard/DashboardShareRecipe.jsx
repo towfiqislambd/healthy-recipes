@@ -55,7 +55,6 @@ const DashboardShareRecipe = () => {
 
     const onSubmit = async (data) => {
         const newErrors = {};
-        if (!recipe_video) newErrors.recipe_video = "Recipe video is required.";
         if (!recipe_image) newErrors.recipe_image = "Thumbnail image is required.";
         if (tags.length === 0) newErrors.tags = "At least one tag is required.";
         if (ingredients.filter(i => i.value.trim()).length === 0)
@@ -91,6 +90,7 @@ const DashboardShareRecipe = () => {
             .filter(i => i.value.trim())
             .forEach((inst, i) => formData.append(`instructions[${i}]`, inst.value));
 
+        console.log(formData)
         await recipeMutation(formData);
         reset();
     };
@@ -204,7 +204,6 @@ const DashboardShareRecipe = () => {
                             <video controls src={URL.createObjectURL(recipe_video)} className="w-full h-full rounded-lg object-cover" />
                         </div>
                     )}
-                    {customErrors.recipe_video && <p className="text-red-500 mt-2">{customErrors.recipe_video}</p>}
                 </div>
 
                 {/* Categories */}
