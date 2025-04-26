@@ -64,6 +64,7 @@ const DashboardMealPlanner = () => {
                                     {category?.category_name}
                                 </td>
 
+                                {/* Saturday */}
                                 <td className="border border-[#B3BAC5] px-2 py-5 space-y-2 text-[#4c4d4e] relative">
                                     {(() => {
                                         const meals = mealPlannerTableData?.saturday
@@ -72,32 +73,37 @@ const DashboardMealPlanner = () => {
 
                                         return (
                                             <>
-                                                {meals.length > 0 && (
-                                                    <div className="absolute right-3 top-3">
-                                                        <Popover>
-                                                            <PopoverTrigger>
-                                                                <ThreeDotSvg />
-                                                            </PopoverTrigger>
-                                                            <PopoverContent className="w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2">
-                                                                <button className="block" onClick={() => handleEditPlan()}>Edit</button>
-                                                                <button className="text-red-500 block" onClick={() => handleDeletePlan()}>Delete</button>
-                                                            </PopoverContent>
-                                                        </Popover>
-                                                    </div>
-                                                )}
+                                                {meals?.length > 0 ? (
+                                                    <>
+                                                        <div className="absolute right-3 top-3">
+                                                            <Popover>
+                                                                <PopoverTrigger>
+                                                                    <ThreeDotSvg />
+                                                                </PopoverTrigger>
+                                                                <PopoverContent className="w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2">
+                                                                    <button className="block" onClick={() => handleEditPlan()}>Edit</button>
+                                                                    <button className="text-red-500 block" onClick={() => handleDeletePlan()}>Delete</button>
+                                                                </PopoverContent>
+                                                            </Popover>
+                                                        </div>
 
-                                                <ul className="space-y-1">
-                                                    {meals.map((data, idx) => (
-                                                        <li key={idx} className="list-disc list-inside">
-                                                            {data?.recipe?.recipe_name}
-                                                        </li>
-                                                    ))}
-                                                </ul>
+                                                        <ul className="space-y-1">
+                                                            {meals?.map((data, idx) => (
+                                                                <li key={idx} className="list-disc list-inside">
+                                                                    {data?.recipe?.recipe_name}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </>
+                                                ) : (
+                                                    <span className="text-[#B3BAC5] px-3 text-center">Add Meal</span>
+                                                )}
                                             </>
                                         );
                                     })()}
                                 </td>
 
+                                {/* Sunday */}
                                 <td className="border border-[#B3BAC5] px-2 py-5 space-y-2 text-[#4c4d4e] relative">
                                     {(() => {
                                         const meals = mealPlannerTableData?.sunday
@@ -106,32 +112,37 @@ const DashboardMealPlanner = () => {
 
                                         return (
                                             <>
-                                                {meals.length > 0 && (
-                                                    <div className="absolute right-3 top-3">
-                                                        <Popover>
-                                                            <PopoverTrigger>
-                                                                <ThreeDotSvg />
-                                                            </PopoverTrigger>
-                                                            <PopoverContent className="w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2">
-                                                                <button className="block" onClick={() => handleEditPlan()}>Edit</button>
-                                                                <button className="text-red-500 block" onClick={() => handleDeletePlan()}>Delete</button>
-                                                            </PopoverContent>
-                                                        </Popover>
-                                                    </div>
-                                                )}
+                                                {meals?.length > 0 ? (
+                                                    <>
+                                                        <div className="absolute right-3 top-3">
+                                                            <Popover>
+                                                                <PopoverTrigger>
+                                                                    <ThreeDotSvg />
+                                                                </PopoverTrigger>
+                                                                <PopoverContent className="w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2">
+                                                                    <button className="block" onClick={() => handleEditPlan()}>Edit</button>
+                                                                    <button className="text-red-500 block" onClick={() => handleDeletePlan()}>Delete</button>
+                                                                </PopoverContent>
+                                                            </Popover>
+                                                        </div>
 
-                                                <ul className="space-y-1">
-                                                    {meals.map((data, idx) => (
-                                                        <li key={idx} className="list-disc list-inside">
-                                                            {data?.recipe?.recipe_name}
-                                                        </li>
-                                                    ))}
-                                                </ul>
+                                                        <ul className="space-y-1">
+                                                            {meals?.map((data, idx) => (
+                                                                <li key={idx} className="list-disc list-inside">
+                                                                    {data?.recipe?.recipe_name}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </>
+                                                ) : (
+                                                    <span className="text-[#B3BAC5] px-3 text-center">Add Meal</span>
+                                                )}
                                             </>
                                         );
                                     })()}
                                 </td>
 
+                                {/* Monday */}
                                 <td className="border border-[#B3BAC5] px-2 py-5 space-y-2 text-[#4c4d4e] relative">
                                     {(() => {
                                         const meals = mealPlannerTableData?.monday
@@ -140,131 +151,192 @@ const DashboardMealPlanner = () => {
 
                                         return (
                                             <>
-                                                {meals.length > 0 && (
-                                                    <div className="absolute right-3 top-3">
-                                                        <Popover>
-                                                            <PopoverTrigger>
-                                                                <ThreeDotSvg />
-                                                            </PopoverTrigger>
-                                                            <PopoverContent className="w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2">
-                                                                <button className="block" onClick={() => handleEditPlan()}>Edit</button>
-                                                                <button className="text-red-500 block" onClick={() => handleDeletePlan()}>Delete</button>
-                                                            </PopoverContent>
-                                                        </Popover>
-                                                    </div>
-                                                )}
+                                                {meals?.length > 0 ? (
+                                                    <>
+                                                        <div className="absolute right-3 top-3">
+                                                            <Popover>
+                                                                <PopoverTrigger>
+                                                                    <ThreeDotSvg />
+                                                                </PopoverTrigger>
+                                                                <PopoverContent className="w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2">
+                                                                    <button className="block" onClick={() => handleEditPlan()}>Edit</button>
+                                                                    <button className="text-red-500 block" onClick={() => handleDeletePlan()}>Delete</button>
+                                                                </PopoverContent>
+                                                            </Popover>
+                                                        </div>
 
-                                                <ul className="space-y-1">
-                                                    {meals.map((data, idx) => (
-                                                        <li key={idx} className="list-disc list-inside">
-                                                            {data?.recipe?.recipe_name}
-                                                        </li>
-                                                    ))}
-                                                </ul>
+                                                        <ul className="space-y-1">
+                                                            {meals?.map((data, idx) => (
+                                                                <li key={idx} className="list-disc list-inside">
+                                                                    {data?.recipe?.recipe_name}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </>
+                                                ) : (
+                                                    <span className="text-[#B3BAC5] px-3 text-center">Add Meal</span>
+                                                )}
                                             </>
                                         );
                                     })()}
                                 </td>
 
+                                {/* Tuesday */}
                                 <td className="border border-[#B3BAC5] px-2 py-5 space-y-2 text-[#4c4d4e] relative">
-                                    <div className='absolute right-3 top-3'>
-                                        <Popover>
-                                            <PopoverTrigger>
-                                                <ThreeDotSvg />
-                                            </PopoverTrigger>
-                                            <PopoverContent className='w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2'>
-                                                <button className='block' onClick={() => handleEditPlan()}>Edit</button>
-                                                <button onClick={() => handleDeletePlan()} className='text-red-500 block'>Delete</button>
-                                            </PopoverContent>
-                                        </Popover>
-                                    </div>
-
-                                    {
-                                        mealPlannerTableData?.tuesday
+                                    {(() => {
+                                        const meals = mealPlannerTableData?.tuesday
                                             ?.filter(item => item?.category?.category_name === category?.category_name)
-                                            ?.flatMap(item => item?.meals || [])
-                                            ?.map((data, idx) => (
-                                                <li key={idx}>
-                                                    {data?.recipe?.recipe_name}
-                                                </li>
-                                            ))
-                                    }
+                                            ?.flatMap(item => item?.meals || []);
+
+                                        return (
+                                            <>
+                                                {meals?.length > 0 ? (
+                                                    <>
+                                                        <div className="absolute right-3 top-3">
+                                                            <Popover>
+                                                                <PopoverTrigger>
+                                                                    <ThreeDotSvg />
+                                                                </PopoverTrigger>
+                                                                <PopoverContent className="w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2">
+                                                                    <button className="block" onClick={() => handleEditPlan()}>Edit</button>
+                                                                    <button className="text-red-500 block" onClick={() => handleDeletePlan()}>Delete</button>
+                                                                </PopoverContent>
+                                                            </Popover>
+                                                        </div>
+
+                                                        <ul className="space-y-1">
+                                                            {meals?.map((data, idx) => (
+                                                                <li key={idx} className="list-disc list-inside">
+                                                                    {data?.recipe?.recipe_name}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </>
+                                                ) : (
+                                                    <span className="text-[#B3BAC5] px-3 text-center">Add Meal</span>
+                                                )}
+                                            </>
+                                        );
+                                    })()}
                                 </td>
 
+                                {/* Wednesday */}
                                 <td className="border border-[#B3BAC5] px-2 py-5 space-y-2 text-[#4c4d4e] relative">
-                                    <div className='absolute right-3 top-3'>
-                                        <Popover>
-                                            <PopoverTrigger>
-                                                <ThreeDotSvg />
-                                            </PopoverTrigger>
-                                            <PopoverContent className='w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2'>
-                                                <button className='block' onClick={() => handleEditPlan()}>Edit</button>
-                                                <button onClick={() => handleDeletePlan()} className='text-red-500 block'>Delete</button>
-                                            </PopoverContent>
-                                        </Popover>
-                                    </div>
-
-                                    {
-                                        mealPlannerTableData?.wednesday
+                                    {(() => {
+                                        const meals = mealPlannerTableData?.wednesday
                                             ?.filter(item => item?.category?.category_name === category?.category_name)
-                                            ?.flatMap(item => item?.meals || [])
-                                            ?.map((data, idx) => (
-                                                <li key={idx}>
-                                                    {data?.recipe?.recipe_name}
-                                                </li>
-                                            ))
-                                    }
+                                            ?.flatMap(item => item?.meals || []);
+
+                                        return (
+                                            <>
+                                                {meals?.length > 0 ? (
+                                                    <>
+                                                        <div className="absolute right-3 top-3">
+                                                            <Popover>
+                                                                <PopoverTrigger>
+                                                                    <ThreeDotSvg />
+                                                                </PopoverTrigger>
+                                                                <PopoverContent className="w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2">
+                                                                    <button className="block" onClick={() => handleEditPlan()}>Edit</button>
+                                                                    <button className="text-red-500 block" onClick={() => handleDeletePlan()}>Delete</button>
+                                                                </PopoverContent>
+                                                            </Popover>
+                                                        </div>
+
+                                                        <ul className="space-y-1">
+                                                            {meals?.map((data, idx) => (
+                                                                <li key={idx} className="list-disc list-inside">
+                                                                    {data?.recipe?.recipe_name}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </>
+                                                ) : (
+                                                    <span className="text-[#B3BAC5] px-3 text-center">Add Meal</span>
+                                                )}
+                                            </>
+                                        );
+                                    })()}
                                 </td>
 
+                                {/* Thursday */}
                                 <td className="border border-[#B3BAC5] px-2 py-5 space-y-2 text-[#4c4d4e] relative">
-                                    <div className='absolute right-3 top-3'>
-                                        <Popover>
-                                            <PopoverTrigger>
-                                                <ThreeDotSvg />
-                                            </PopoverTrigger>
-                                            <PopoverContent className='w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2'>
-                                                <button className='block' onClick={() => handleEditPlan()}>Edit</button>
-                                                <button onClick={() => handleDeletePlan()} className='text-red-500 block'>Delete</button>
-                                            </PopoverContent>
-                                        </Popover>
-                                    </div>
-
-                                    {
-                                        mealPlannerTableData?.thursday
+                                    {(() => {
+                                        const meals = mealPlannerTableData?.thursday
                                             ?.filter(item => item?.category?.category_name === category?.category_name)
-                                            ?.flatMap(item => item?.meals || [])
-                                            ?.map((data, idx) => (
-                                                <li key={idx}>
-                                                    {data?.recipe?.recipe_name}
-                                                </li>
-                                            ))
-                                    }
+                                            ?.flatMap(item => item?.meals || []);
+
+                                        return (
+                                            <>
+                                                {meals?.length > 0 ? (
+                                                    <>
+                                                        <div className="absolute right-3 top-3">
+                                                            <Popover>
+                                                                <PopoverTrigger>
+                                                                    <ThreeDotSvg />
+                                                                </PopoverTrigger>
+                                                                <PopoverContent className="w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2">
+                                                                    <button className="block" onClick={() => handleEditPlan()}>Edit</button>
+                                                                    <button className="text-red-500 block" onClick={() => handleDeletePlan()}>Delete</button>
+                                                                </PopoverContent>
+                                                            </Popover>
+                                                        </div>
+
+                                                        <ul className="space-y-1">
+                                                            {meals?.map((data, idx) => (
+                                                                <li key={idx} className="list-disc list-inside">
+                                                                    {data?.recipe?.recipe_name}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </>
+                                                ) : (
+                                                    <span className="text-[#B3BAC5] px-3 text-center">Add Meal</span>
+                                                )}
+                                            </>
+                                        );
+                                    })()}
                                 </td>
 
+                                {/* Friday */}
                                 <td className="border border-[#B3BAC5] px-2 py-5 space-y-2 text-[#4c4d4e] relative">
-                                    <div className='absolute right-3 top-3'>
-                                        <Popover>
-                                            <PopoverTrigger>
-                                                <ThreeDotSvg />
-                                            </PopoverTrigger>
-                                            <PopoverContent className='w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2'>
-                                                <button className='block' onClick={() => handleEditPlan()}>Edit</button>
-                                                <button onClick={() => handleDeletePlan()} className='text-red-500 block'>Delete</button>
-                                            </PopoverContent>
-                                        </Popover>
-                                    </div>
-
-                                    {
-                                        mealPlannerTableData?.friday
+                                    {(() => {
+                                        const meals = mealPlannerTableData?.friday
                                             ?.filter(item => item?.category?.category_name === category?.category_name)
-                                            ?.flatMap(item => item?.meals || [])
-                                            ?.map((data, idx) => (
-                                                <li key={idx}>
-                                                    {data?.recipe?.recipe_name}
-                                                </li>
-                                            ))
-                                    }
+                                            ?.flatMap(item => item?.meals || []);
+
+                                        return (
+                                            <>
+                                                {meals?.length > 0 ? (
+                                                    <>
+                                                        <div className="absolute right-3 top-3">
+                                                            <Popover>
+                                                                <PopoverTrigger>
+                                                                    <ThreeDotSvg />
+                                                                </PopoverTrigger>
+                                                                <PopoverContent className="w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2">
+                                                                    <button className="block" onClick={() => handleEditPlan()}>Edit</button>
+                                                                    <button className="text-red-500 block" onClick={() => handleDeletePlan()}>Delete</button>
+                                                                </PopoverContent>
+                                                            </Popover>
+                                                        </div>
+
+                                                        <ul className="space-y-1">
+                                                            {meals?.map((data, idx) => (
+                                                                <li key={idx} className="list-disc list-inside">
+                                                                    {data?.recipe?.recipe_name}
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </>
+                                                ) : (
+                                                    <span className="text-[#B3BAC5] px-3 text-center">Add Meal</span>
+                                                )}
+                                            </>
+                                        );
+                                    })()}
                                 </td>
+
 
                             </tr>
                         ))}
