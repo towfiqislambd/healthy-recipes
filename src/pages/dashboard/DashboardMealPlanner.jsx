@@ -87,7 +87,7 @@ const DashboardMealPlanner = () => {
                                                             </Popover>
                                                         </div>
 
-                                                        <ul className="space-y-1">
+                                                        <ul className="space-y-1 pt-5">
                                                             {meals?.map((data, idx) => (
                                                                 <li key={idx} className="list-disc list-inside">
                                                                     {data?.recipe?.recipe_name}
@@ -126,7 +126,7 @@ const DashboardMealPlanner = () => {
                                                             </Popover>
                                                         </div>
 
-                                                        <ul className="space-y-1">
+                                                        <ul className="space-y-1 pt-5">
                                                             {meals?.map((data, idx) => (
                                                                 <li key={idx} className="list-disc list-inside">
                                                                     {data?.recipe?.recipe_name}
@@ -165,7 +165,7 @@ const DashboardMealPlanner = () => {
                                                             </Popover>
                                                         </div>
 
-                                                        <ul className="space-y-1">
+                                                        <ul className="space-y-1 pt-5">
                                                             {meals?.map((data, idx) => (
                                                                 <li key={idx} className="list-disc list-inside">
                                                                     {data?.recipe?.recipe_name}
@@ -204,7 +204,7 @@ const DashboardMealPlanner = () => {
                                                             </Popover>
                                                         </div>
 
-                                                        <ul className="space-y-1">
+                                                        <ul className="space-y-1 pt-5">
                                                             {meals?.map((data, idx) => (
                                                                 <li key={idx} className="list-disc list-inside">
                                                                     {data?.recipe?.recipe_name}
@@ -243,7 +243,7 @@ const DashboardMealPlanner = () => {
                                                             </Popover>
                                                         </div>
 
-                                                        <ul className="space-y-1">
+                                                        <ul className="space-y-1 pt-5">
                                                             {meals?.map((data, idx) => (
                                                                 <li key={idx} className="list-disc list-inside">
                                                                     {data?.recipe?.recipe_name}
@@ -282,7 +282,7 @@ const DashboardMealPlanner = () => {
                                                             </Popover>
                                                         </div>
 
-                                                        <ul className="space-y-1">
+                                                        <ul className="space-y-1 pt-5">
                                                             {meals?.map((data, idx) => (
                                                                 <li key={idx} className="list-disc list-inside">
                                                                     {data?.recipe?.recipe_name}
@@ -321,7 +321,7 @@ const DashboardMealPlanner = () => {
                                                             </Popover>
                                                         </div>
 
-                                                        <ul className="space-y-1">
+                                                        <ul className="space-y-1 pt-5">
                                                             {meals?.map((data, idx) => (
                                                                 <li key={idx} className="list-disc list-inside">
                                                                     {data?.recipe?.recipe_name}
@@ -336,7 +336,6 @@ const DashboardMealPlanner = () => {
                                         );
                                     })()}
                                 </td>
-
 
                             </tr>
                         ))}
