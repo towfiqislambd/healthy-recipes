@@ -115,7 +115,8 @@ export const useAddMealPlanner = (recipe_id) => {
       setLoading(true);
     },
     onSuccess: (data) => {
-      if(data?.data?.length > 0) {
+      console.log(data?.data)
+      if(data?.data?.meals?.length > 0) {
         setLoading(false);
         toast.success(data?.message);
         navigate('/dashboard/dashboard-meal-planner')

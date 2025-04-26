@@ -6,16 +6,18 @@ import { useDeleteMealPlan } from '@/hooks/cms.mutations';
 import { Loader } from '@/components/loader/Loader';
 import Modal from '@/components/modals/Modal';
 import EditMealModal from '@/components/modals/EditMealModal';
-import { useMealPlannerTable } from '@/hooks/cms.queries';
+import { useAllCategories, useMealPlannerTable } from '@/hooks/cms.queries';
+const days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
 const DashboardMealPlanner = () => {
     const [itemId, setItemId] = useState('')
     const [open, setOpen] = useState(false);
     const [mealPlannerId, setMealPlannerId] = useState('');
-    const { data: mealPlannerTableData, isLoading } = useMealPlannerTable();
+    const { data: mealPlannerTableData, isLoading: tableDataLoading } = useMealPlannerTable();
+    const { data: allCategory, isLoading: categoryLoading } = useAllCategories();
     const { mutateAsync: deleteMealPlan } = useDeleteMealPlan(mealPlannerId);
 
-    if (isLoading) {
+    if (tableDataLoading || categoryLoading) {
         return <div className="flex justify-center items-center h-[85vh]"><Loader /></div>;
     }
 
@@ -44,64 +46,228 @@ const DashboardMealPlanner = () => {
 
             {/* Table */}
             <div className="overflow-x-auto">
-                <table className="rounded bg-[#F6F7FB] w-full border-separate border-spacing-y-3 sm:border-spacing-y-4">
+                <table className="w-full border-collapse">
                     <thead>
-                        <tr className="text-[#5A5C5F] text-lg text-center font-merriweather text-nowrap">
-                            <th className="bg-[#FCBD66] w-[150px] py-1 sm:py-2 4xl:px-3">
-                                All
-                            </th>
-                            <th
-                                colSpan={7}
-                                className="bg-[#B7E4C7] py-1 sm:py- w-[calc(100% - 150px)] font-medium"
-                            >
-                                Food Menus
-                            </th>
+                        <tr className="bg-gray-100">
+                            <td className="border border-[#B3BAC5] bg-[#FAEEDD] px-2 py-6 text-center text-[#444] font-semibold">Days</td>
+
+                            {days.map((day) => (
+                                <td key={day} className="border border-[#B3BAC5] bg-[#DBF4E4] px-2 py-6 text-center text-[#5A5C5F] font-medium">{day}</td>
+                            ))}
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            mealPlannerTableData?.length > 0 ?
-                                mealPlannerTableData?.map((data) => {
-                                    const itemsWithPlaceholders = [
-                                        ...data.items,
-                                        ...Array(7 - data.items.length).fill({ item: 'No meal' })
-                                    ].slice(0, 7); // Ensure exactly 7 items
+                        {allCategory.map(category => (
+                            <tr key={category?.id}>
 
-                                    return (
-                                        <tr key={data.id} className="text-[#5A5C5F] text-sm sm:text-base font-merriweather text-nowrap">
-                                            <td className="bg-[#FCBD66] px-4 py-3 4xl:py-5 border border-[#FCBD66]">
-                                                {data.date}
-                                            </td>
-                                            {itemsWithPlaceholders.map((item, index) => (
-                                                <td
-                                                    key={index}
-                                                    className="border-r border-t border-b border-[#8993A4] px-3 py-3 4xl:py-5"
-                                                >
-                                                    <div className="flex items-center justify-between gap-2">
-                                                        <p>
-                                                            {
-                                                                item?.name ? item?.name : item?.item
-                                                            }
-                                                        </p>
+                                <td className="border py-7 border-[#B3BAC5] bg-[#FAEEDD] font-medium text-center">
+                                    {category?.category_name}
+                                </td>
+
+                                <td className="border border-[#B3BAC5] px-2 py-5 space-y-2 text-[#4c4d4e] relative">
+                                    {(() => {
+                                        const meals = mealPlannerTableData?.saturday
+                                            ?.filter(item => item?.category?.category_name === category?.category_name)
+                                            ?.flatMap(item => item?.meals || []);
+
+                                        return (
+                                            <>
+                                                {meals.length > 0 && (
+                                                    <div className="absolute right-3 top-3">
                                                         <Popover>
                                                             <PopoverTrigger>
                                                                 <ThreeDotSvg />
                                                             </PopoverTrigger>
-                                                            <PopoverContent className='w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2'>
-                                                                <button className='block'><Link to='/meal-planner'>Add meal</Link></button>
-                                                                <button className='block' onClick={() => handleEditPlan(item?.id)}>Edit</button>
-                                                                <button onClick={() => handleDeletePlan(item?.meal_plan_id)} className='text-red-500 block'>Delete</button>
+                                                            <PopoverContent className="w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2">
+                                                                <button className="block" onClick={() => handleEditPlan()}>Edit</button>
+                                                                <button className="text-red-500 block" onClick={() => handleDeletePlan()}>Delete</button>
                                                             </PopoverContent>
                                                         </Popover>
                                                     </div>
-                                                </td>
-                                            ))}
-                                        </tr>
-                                    );
-                                })
-                                :
-                                'No data found'
-                        }
+                                                )}
+
+                                                <ul className="space-y-1">
+                                                    {meals.map((data, idx) => (
+                                                        <li key={idx} className="list-disc list-inside">
+                                                            {data?.recipe?.recipe_name}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </>
+                                        );
+                                    })()}
+                                </td>
+
+                                <td className="border border-[#B3BAC5] px-2 py-5 space-y-2 text-[#4c4d4e] relative">
+                                    {(() => {
+                                        const meals = mealPlannerTableData?.sunday
+                                            ?.filter(item => item?.category?.category_name === category?.category_name)
+                                            ?.flatMap(item => item?.meals || []);
+
+                                        return (
+                                            <>
+                                                {meals.length > 0 && (
+                                                    <div className="absolute right-3 top-3">
+                                                        <Popover>
+                                                            <PopoverTrigger>
+                                                                <ThreeDotSvg />
+                                                            </PopoverTrigger>
+                                                            <PopoverContent className="w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2">
+                                                                <button className="block" onClick={() => handleEditPlan()}>Edit</button>
+                                                                <button className="text-red-500 block" onClick={() => handleDeletePlan()}>Delete</button>
+                                                            </PopoverContent>
+                                                        </Popover>
+                                                    </div>
+                                                )}
+
+                                                <ul className="space-y-1">
+                                                    {meals.map((data, idx) => (
+                                                        <li key={idx} className="list-disc list-inside">
+                                                            {data?.recipe?.recipe_name}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </>
+                                        );
+                                    })()}
+                                </td>
+
+                                <td className="border border-[#B3BAC5] px-2 py-5 space-y-2 text-[#4c4d4e] relative">
+                                    {(() => {
+                                        const meals = mealPlannerTableData?.monday
+                                            ?.filter(item => item?.category?.category_name === category?.category_name)
+                                            ?.flatMap(item => item?.meals || []);
+
+                                        return (
+                                            <>
+                                                {meals.length > 0 && (
+                                                    <div className="absolute right-3 top-3">
+                                                        <Popover>
+                                                            <PopoverTrigger>
+                                                                <ThreeDotSvg />
+                                                            </PopoverTrigger>
+                                                            <PopoverContent className="w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2">
+                                                                <button className="block" onClick={() => handleEditPlan()}>Edit</button>
+                                                                <button className="text-red-500 block" onClick={() => handleDeletePlan()}>Delete</button>
+                                                            </PopoverContent>
+                                                        </Popover>
+                                                    </div>
+                                                )}
+
+                                                <ul className="space-y-1">
+                                                    {meals.map((data, idx) => (
+                                                        <li key={idx} className="list-disc list-inside">
+                                                            {data?.recipe?.recipe_name}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </>
+                                        );
+                                    })()}
+                                </td>
+
+                                <td className="border border-[#B3BAC5] px-2 py-5 space-y-2 text-[#4c4d4e] relative">
+                                    <div className='absolute right-3 top-3'>
+                                        <Popover>
+                                            <PopoverTrigger>
+                                                <ThreeDotSvg />
+                                            </PopoverTrigger>
+                                            <PopoverContent className='w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2'>
+                                                <button className='block' onClick={() => handleEditPlan()}>Edit</button>
+                                                <button onClick={() => handleDeletePlan()} className='text-red-500 block'>Delete</button>
+                                            </PopoverContent>
+                                        </Popover>
+                                    </div>
+
+                                    {
+                                        mealPlannerTableData?.tuesday
+                                            ?.filter(item => item?.category?.category_name === category?.category_name)
+                                            ?.flatMap(item => item?.meals || [])
+                                            ?.map((data, idx) => (
+                                                <li key={idx}>
+                                                    {data?.recipe?.recipe_name}
+                                                </li>
+                                            ))
+                                    }
+                                </td>
+
+                                <td className="border border-[#B3BAC5] px-2 py-5 space-y-2 text-[#4c4d4e] relative">
+                                    <div className='absolute right-3 top-3'>
+                                        <Popover>
+                                            <PopoverTrigger>
+                                                <ThreeDotSvg />
+                                            </PopoverTrigger>
+                                            <PopoverContent className='w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2'>
+                                                <button className='block' onClick={() => handleEditPlan()}>Edit</button>
+                                                <button onClick={() => handleDeletePlan()} className='text-red-500 block'>Delete</button>
+                                            </PopoverContent>
+                                        </Popover>
+                                    </div>
+
+                                    {
+                                        mealPlannerTableData?.wednesday
+                                            ?.filter(item => item?.category?.category_name === category?.category_name)
+                                            ?.flatMap(item => item?.meals || [])
+                                            ?.map((data, idx) => (
+                                                <li key={idx}>
+                                                    {data?.recipe?.recipe_name}
+                                                </li>
+                                            ))
+                                    }
+                                </td>
+
+                                <td className="border border-[#B3BAC5] px-2 py-5 space-y-2 text-[#4c4d4e] relative">
+                                    <div className='absolute right-3 top-3'>
+                                        <Popover>
+                                            <PopoverTrigger>
+                                                <ThreeDotSvg />
+                                            </PopoverTrigger>
+                                            <PopoverContent className='w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2'>
+                                                <button className='block' onClick={() => handleEditPlan()}>Edit</button>
+                                                <button onClick={() => handleDeletePlan()} className='text-red-500 block'>Delete</button>
+                                            </PopoverContent>
+                                        </Popover>
+                                    </div>
+
+                                    {
+                                        mealPlannerTableData?.thursday
+                                            ?.filter(item => item?.category?.category_name === category?.category_name)
+                                            ?.flatMap(item => item?.meals || [])
+                                            ?.map((data, idx) => (
+                                                <li key={idx}>
+                                                    {data?.recipe?.recipe_name}
+                                                </li>
+                                            ))
+                                    }
+                                </td>
+
+                                <td className="border border-[#B3BAC5] px-2 py-5 space-y-2 text-[#4c4d4e] relative">
+                                    <div className='absolute right-3 top-3'>
+                                        <Popover>
+                                            <PopoverTrigger>
+                                                <ThreeDotSvg />
+                                            </PopoverTrigger>
+                                            <PopoverContent className='w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2'>
+                                                <button className='block' onClick={() => handleEditPlan()}>Edit</button>
+                                                <button onClick={() => handleDeletePlan()} className='text-red-500 block'>Delete</button>
+                                            </PopoverContent>
+                                        </Popover>
+                                    </div>
+
+                                    {
+                                        mealPlannerTableData?.friday
+                                            ?.filter(item => item?.category?.category_name === category?.category_name)
+                                            ?.flatMap(item => item?.meals || [])
+                                            ?.map((data, idx) => (
+                                                <li key={idx}>
+                                                    {data?.recipe?.recipe_name}
+                                                </li>
+                                            ))
+                                    }
+                                </td>
+
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
