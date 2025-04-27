@@ -186,9 +186,9 @@ export const useMyRecipeDetails = (id) => {
 };
 
 // Meal Planner Table
-export const useMealPlannerTable = (category_id, selectedMonth) => {
+export const useMealPlannerTable = () => {
   return useQuery({
-       queryKey: ['meal-planner-table',category_id, selectedMonth],
-       queryFn: () => MealPlannerTableData(category_id, selectedMonth),
+       queryKey: ['meal-planner-table'],
+       queryFn:  MealPlannerTableData,
      });
 };

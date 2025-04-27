@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAllCategories, useMyRecipes } from '@/hooks/cms.queries';
 import MyRecipeCard from './MyRecipeCard';
 import { Loader } from '@/components/loader/Loader';
+import deleteImg from "../../assets/images/delete.png"
 
 const DashboardSavedRecipes = () => {
     const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
@@ -56,7 +57,10 @@ const DashboardSavedRecipes = () => {
                             />
                         ))
                         :
-                        'No data found'
+                        <div className="text-center col-span-4 py-6 space-y-3">
+                            <img src={deleteImg} alt="logo" className="mx-auto size-16" />
+                            <p className="text-primary font-merriweather md:text-lg">No shared recipes found</p>
+                        </div>
                 }
             </div>
 

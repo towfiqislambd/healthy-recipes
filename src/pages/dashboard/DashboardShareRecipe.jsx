@@ -55,7 +55,6 @@ const DashboardShareRecipe = () => {
 
     const onSubmit = async (data) => {
         const newErrors = {};
-        if (!recipe_video) newErrors.recipe_video = "Recipe video is required.";
         if (!recipe_image) newErrors.recipe_image = "Thumbnail image is required.";
         if (tags.length === 0) newErrors.tags = "At least one tag is required.";
         if (ingredients.filter(i => i.value.trim()).length === 0)
@@ -78,9 +77,13 @@ const DashboardShareRecipe = () => {
         formData.append("nutrition_info", data.nutrition_info);
         formData.append("resource_link", data.resource_link);
 
-        // Append files
-        formData.append("recipe_video", recipe_video);
+        // Append required image
         formData.append("recipe_image", recipe_image);
+
+        // Append video only if it exists
+        if (recipe_video) {
+            formData.append("recipe_video", recipe_video);
+        }
 
         // Append array data
         tags.forEach((tag, i) => formData.append(`tags[${i}]`, tag));
@@ -91,6 +94,7 @@ const DashboardShareRecipe = () => {
             .filter(i => i.value.trim())
             .forEach((inst, i) => formData.append(`instructions[${i}]`, inst.value));
 
+        console.log(formData)
         await recipeMutation(formData);
         reset();
     };
@@ -181,7 +185,7 @@ const DashboardShareRecipe = () => {
 
                 {/* Recipe Video */}
                 <div>
-                    <p className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Upload a video</p>
+                    <p className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Upload a video (Optional)</p>
                     <label htmlFor="recipe_video">
                         <p className="flex gap-1 sm:gap-2 w-fit text-sm sm:text-base cursor-pointer items-center text-white px-3 py-2 lg:py-[10px] lg:px-4 rounded sm:rounded-lg bg-primary">
                             <CameraSvg />
@@ -192,7 +196,6 @@ const DashboardShareRecipe = () => {
                         onChange={(e) => {
                             const file = e.target.files?.[0] || null;
                             setRecipeVideo(file);
-                            if (file) updateCustomErrors("recipe_video");
                         }}
                         accept="video/mp4,video/x-m4v,video/*"
                         type="file"
@@ -204,7 +207,6 @@ const DashboardShareRecipe = () => {
                             <video controls src={URL.createObjectURL(recipe_video)} className="w-full h-full rounded-lg object-cover" />
                         </div>
                     )}
-                    {customErrors.recipe_video && <p className="text-red-500 mt-2">{customErrors.recipe_video}</p>}
                 </div>
 
                 {/* Categories */}
@@ -377,7 +379,7 @@ const DashboardShareRecipe = () => {
 
                 {/* Recipe source link */}
                 <div>
-                    <label htmlFor="resource_link" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Recipe Source Link</label>
+                    <label htmlFor="resource_link" className="mb-2 block font-poppins font-medium text-[#5A5C5F]">Recipe Source Link (Optional)</label>
                     <input
                         {...register('resource_link')}
                         className="border rounded-[5px] px-3 lg:px-4 py-2 lg:py-3 outline-none block w-full"

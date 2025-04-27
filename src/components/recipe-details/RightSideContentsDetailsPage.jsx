@@ -30,33 +30,35 @@ const RightSideContentsDetailsPage = ({ data }) => {
   return (
     <div className="h-full sm:min-h-[50vh]">
       {/* Details */}
-      <div className="">
+      <div>
         {/* video */}
-        <div className="w-full 2xl:h-[480px] h-[250px] md:h-[300px] relative group">
-          <video
-            ref={videoRef}
-            className="w-full h-full object-cover rounded-2xl"
-            src={`${import.meta.env.VITE_SITE_URL}/${data?.recipe_video}`}
-          ></video>
+        {
+          data?.recipe_video && <div className="w-full 2xl:h-[480px] h-[250px] md:h-[300px] relative group">
+            <video
+              ref={videoRef}
+              className="w-full h-full object-cover rounded-2xl"
+              src={`${import.meta.env.VITE_SITE_URL}/${data?.recipe_video}`}
+            ></video>
 
-          {/* play button */}
-          <div
-            onClick={handlePlay}
-            className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700 items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer ${!isPlaying ? "flex" : "hidden"
-              }`}
-          >
-            <PlayButtonSvg />
-          </div>
+            {/* play button */}
+            <div
+              onClick={handlePlay}
+              className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700 items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer ${!isPlaying ? "flex" : "hidden"
+                }`}
+            >
+              <PlayButtonSvg />
+            </div>
 
-          {/* pause button */}
-          <div
-            onClick={handlePause}
-            className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700  items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer   ${isPlaying ? "flex" : "hidden"
-              } `}
-          >
-            <PauseButtonSvg />
+            {/* pause button */}
+            <div
+              onClick={handlePause}
+              className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700  items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer   ${isPlaying ? "flex" : "hidden"
+                } `}
+            >
+              <PauseButtonSvg />
+            </div>
           </div>
-        </div>
+        }
 
         {/* instructions */}
         <div className="pt-5">

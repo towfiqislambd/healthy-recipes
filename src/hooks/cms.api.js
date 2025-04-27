@@ -180,15 +180,8 @@ export const RecipeReviews = async (recipe_id, page_id) => {
 };
 
 // Meal Planner Table
-export const MealPlannerTableData = async (category_id, selectedMonth) => {
-    let url = '/api/get-meal-plans?';
-    if (category_id) url += `category_id=${category_id}&`;
-    if (selectedMonth) url += `month=${selectedMonth}&`;
-
-    url = url.endsWith('&') ? url.slice(0, -1) : url;
-    url = url.endsWith('?') ? url.slice(0, -1) : url;
-
-    const { data } = await axiosSecure(url);
+export const MealPlannerTableData = async () => {
+    const { data } = await axiosSecure('/api/get-meal-plans');
     return data?.data;
 };
 

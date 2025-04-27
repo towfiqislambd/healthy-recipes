@@ -1,4 +1,5 @@
 import { useState } from "react";
+import deleteImg from "../../assets/images/delete.png";
 import { RiResetLeftFill } from "react-icons/ri";
 import {
   Select,
@@ -110,7 +111,10 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
               <RecipeCard key={idx} item={item} isMyRecipe={true} />
             ))
           ) : (
-            'No data found'
+            <div className="text-center col-span-4 py-5 space-y-4">
+              <img src={deleteImg} alt="logo" className="mx-auto size-16 xl:size-auto" />
+              <p className="text-primary font-merriweather text-lg lg:text-xl xl:text-2xl">No recipes found</p>
+            </div>
           )}
         </div>
       </div>
