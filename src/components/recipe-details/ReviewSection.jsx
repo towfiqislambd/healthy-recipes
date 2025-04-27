@@ -18,6 +18,7 @@ const ReviewSection = ({ id }) => {
           <ReviewLeftSection id={id} refetch={refetch} />
         </div>
 
+
         {/* right side contents */}
         <div className="space-y-5 xl:flex-1 w-full">
           {
