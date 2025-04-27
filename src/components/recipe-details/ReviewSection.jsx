@@ -18,6 +18,7 @@ const ReviewSection = ({ id }) => {
           <ReviewLeftSection id={id} refetch={refetch} />
         </div>
 
+
         {/* right side contents */}
         <div className="space-y-5 xl:flex-1 w-full">
           {
@@ -26,7 +27,7 @@ const ReviewSection = ({ id }) => {
                 <ReviewCard key={idx} data={item} />
               )
               :
-              <p>No review yet</p>
+              <p className="text-primary font-merriweather text-lg lg:text-xl">No review yet</p>
           }
 
           {/* Pagination */}
