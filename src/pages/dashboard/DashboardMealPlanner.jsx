@@ -90,7 +90,7 @@ const DashboardMealPlanner = () => {
                                         <ThreeDotSvg className="w-2 h-2 sm:w-4 sm:h-4" />
                                     </p>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-[90px] sm:w-[105px] md:w-28 text-xs sm:text-sm md:text-base border space-y-1 sm:space-y-2">
+                                <PopoverContent className="w-[105px] md:w-28 text-sm md:text-base border space-y-1 sm:space-y-2">
                                     <button
                                         className="block w-full text-left"
                                         onClick={handleEditPlan}
@@ -110,7 +110,12 @@ const DashboardMealPlanner = () => {
                         <ul className="space-y-1 sm:space-y-2 pt-5">
                             {meals?.map((data, idx) => (
                                 <li key={idx} className="flex items-center gap-1 group">
-                                    <span className="text-3xl sm:text-4xl leading-4 h-4 flex items-center">•</span>
+                                    <span
+                                        className="text-3xl sm:text-4xl leading-4 h-4 flex items-center"
+                                        style={{ color: categoryColors[allCategory.findIndex(cat => cat.category_name === category.category_name) % categoryColors.length] }}
+                                    >
+                                        •
+                                    </span>
                                     <span className="flex-1 text-xs sm:text-sm md:text-[15px]">
                                         {data?.name ? data?.name : data?.recipe?.recipe_name}
                                     </span>
@@ -151,16 +156,16 @@ const DashboardMealPlanner = () => {
             </div>
 
             {/* Table - Horizontal scroll for small devices */}
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto rounded-lg border border-[#B3BAC5]">
                 <table className="w-full border-collapse min-w-[600px] sm:min-w-0">
                     <thead>
-                        <tr className="bg-gray-100">
-                            <td className="border border-[#B3BAC5] bg-[#FAEEDD] w-0 px-0 py-4 sm:py-5 md:py-6 lg:py-7 text-center text-[#444] font-semibold">
+                        <tr className="bg-gray-100 ">
+                            <td className="border-b border-r border-[#B3BAC5] bg-[#FAEEDD] w-0 px-0 py-4 sm:py-5 md:py-6 lg:py-7 text-center text-[#444] font-semibold">
                                 <p className='-rotate-90 text-xs sm:text-sm md:text-base'>Days</p>
                             </td>
 
                             {days.map((day) => (
-                                <td key={day} className="border border-[#B3BAC5] bg-[#DBF4E4] px-1 sm:px-2 py-3 sm:py-4 md:py-5 lg:py-6 text-center text-xs sm:text-sm text-[#5A5C5F] font-medium">
+                                <td key={day} className="border-b border-r last:border-r-0 border-[#B3BAC5] bg-[#DBF4E4] px-1 sm:px-2 py-3 sm:py-4 md:py-5 lg:py-6 text-center text-xs sm:text-sm text-[#5A5C5F] font-medium">
                                     {day}
                                 </td>
                             ))}
@@ -170,7 +175,7 @@ const DashboardMealPlanner = () => {
                         {allCategory.map((category, idx) => (
                             <tr key={category?.id} className='text-nowrap'>
                                 <td
-                                    className="border w-0 px-0 py-8 md:py-10 lg:py-12 border-[#B3BAC5] bg-[#FAEEDD] font-medium text-center"
+                                    className="border-t border-r w-0 px-0 py-8 md:py-10 lg:py-12 border-[#B3BAC5] bg-[#FAEEDD] font-medium text-center"
                                     style={{ color: categoryColors[idx % categoryColors.length] }}
                                 >
                                     <p className='-rotate-90 text-xs sm:text-sm md:text-base whitespace-nowrap'>
@@ -180,7 +185,7 @@ const DashboardMealPlanner = () => {
 
                                 {/* Days cells */}
                                 {days.map(day => (
-                                    <td key={day} className="border border-[#B3BAC5] px-2 sm:px-3 md:px-4 py-2 sm:py-3 md:py-4 lg:py-5 space-y-1 sm:space-y-2 text-[#4c4d4e] relative text-xs sm:text-sm md:text-[15px]">
+                                    <td key={day} className="border-t border-r last:border-r-0 border-[#B3BAC5] px-2 sm:px-3 md:px-4 py-2 sm:py-3 md:py-4 lg:py-5 space-y-1 sm:space-y-2 text-[#4c4d4e] relative text-xs sm:text-sm md:text-[15px]">
                                         {renderDayCell(day, category)}
                                     </td>
                                 ))}
