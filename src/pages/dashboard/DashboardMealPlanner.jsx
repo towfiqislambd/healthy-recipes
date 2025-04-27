@@ -1,162 +1,196 @@
 import { ThreeDotSvg } from '@/components/svg-container/SvgContainer';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Link } from 'react-router-dom';
-import { useAllCategories, useMealPlannerTable } from '@/hooks/cms.queries';
 import { useDeleteMealPlan } from '@/hooks/cms.mutations';
 import { Loader } from '@/components/loader/Loader';
 import Modal from '@/components/modals/Modal';
 import EditMealModal from '@/components/modals/EditMealModal';
+import { useAllCategories, useMealPlannerTable } from '@/hooks/cms.queries';
+const days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+const categoryColors = ['#049361', '#3D76CC', '#813FA8', '#9D2A58', '#675FD4', '#CD33DB', '#933386', '#C0684D'];
+import { MdOutlineModeEditOutline } from "react-icons/md";
+import { RxCross2 } from "react-icons/rx";
 
 const DashboardMealPlanner = () => {
-    const [selectedMonth, setSelectedMonth] = useState('');
     const [itemId, setItemId] = useState('')
     const [open, setOpen] = useState(false);
     const [mealPlannerId, setMealPlannerId] = useState('');
-    const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
-    const { data: allCategories, isLoading: categoryLoading } = useAllCategories();
-    const { data: mealPlannerTableData, isLoading: mealPlannerLoading } = useMealPlannerTable(activeTab?.id, selectedMonth);
+    const { data: mealPlannerTableData, isLoading: tableDataLoading } = useMealPlannerTable();
+    const { data: allCategory, isLoading: categoryLoading } = useAllCategories();
     const { mutateAsync: deleteMealPlan } = useDeleteMealPlan(mealPlannerId);
 
-    if (categoryLoading || mealPlannerLoading) {
+    // Updated state to track active action with day and category
+    const [activeAction, setActiveAction] = useState({
+        day: null,
+        category: null,
+        action: null // 'edit', 'delete', or null
+    });
+
+    const popoverTriggerRef = useRef(null);
+
+    if (tableDataLoading || categoryLoading) {
         return <div className="flex justify-center items-center h-[85vh]"><Loader /></div>;
     }
 
-    const monthData = [
-        { id: 0, month: 'All' },
-        { id: 1, month: 'January' },
-        { id: 2, month: 'February' },
-        { id: 3, month: 'March' },
-        { id: 4, month: 'April' },
-        { id: 5, month: 'May' },
-        { id: 6, month: 'June' },
-        { id: 7, month: 'July' },
-        { id: 8, month: 'August' },
-        { id: 9, month: 'September' },
-        { id: 10, month: 'October' },
-        { id: 11, month: 'November' },
-        { id: 12, month: 'December' },
-    ];
-
-    // Delete Meal Plan
-    const handleDeletePlan = async (meal_plan_id) => {
+    const handleDeletePlans = async (meal_plan_id) => {
         if (meal_plan_id) {
             setMealPlannerId(meal_plan_id)
             await deleteMealPlan()
         }
     }
 
-    // Edit Meal Plan
-    const handleEditPlan = (item_id) => {
+    const handleEditPlans = (item_id) => {
         setOpen(true);
         setItemId(item_id)
     }
 
+    // Helper function to render each day's cell
+    const renderDayCell = (day, category) => {
+        const meals = mealPlannerTableData?.[day.toLowerCase()]
+            ?.filter(item => item?.category?.category_name === category?.category_name)
+            ?.flatMap(item => item?.meals || []);
+
+        const handleEditPlan = () => {
+            setActiveAction(prev => ({
+                day,
+                category: category?.category_name,
+                action: prev.action === 'edit' && prev.day === day && prev.category === category?.category_name
+                    ? null
+                    : 'edit'
+            }));
+            if (popoverTriggerRef.current) popoverTriggerRef.current.click();
+        };
+
+        const handleDeletePlan = () => {
+            setActiveAction(prev => ({
+                day,
+                category: category?.category_name,
+                action: prev.action === 'delete' && prev.day === day && prev.category === category?.category_name
+                    ? null
+                    : 'delete'
+            }));
+            if (popoverTriggerRef.current) popoverTriggerRef.current.click();
+        };
+
+        const isActive = (action) => (
+            activeAction.action === action &&
+            activeAction.day === day &&
+            activeAction.category === category?.category_name
+        );
+
+        return (
+            <>
+                {meals?.length > 0 ? (
+                    <>
+                        <div className="absolute right-1 top-1 sm:right-2 sm:top-2 md:right-3 md:top-3">
+                            <Popover>
+                                <PopoverTrigger ref={popoverTriggerRef}>
+                                    <p className="p-1">
+                                        <ThreeDotSvg className="w-2 h-2 sm:w-4 sm:h-4" />
+                                    </p>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-[105px] md:w-28 text-sm md:text-base border space-y-1 sm:space-y-2">
+                                    <button
+                                        className="block w-full text-left"
+                                        onClick={handleEditPlan}
+                                    >
+                                        {isActive('edit') ? 'Cancel' : 'Edit Meal'}
+                                    </button>
+                                    <button
+                                        className="text-red-500 block w-full text-left"
+                                        onClick={handleDeletePlan}
+                                    >
+                                        {isActive('delete') ? 'Cancel' : 'Delete'}
+                                    </button>
+                                </PopoverContent>
+                            </Popover>
+                        </div>
+
+                        <ul className="space-y-1 sm:space-y-2 pt-5">
+                            {meals?.map((data, idx) => (
+                                <li key={idx} className="flex items-center gap-1 group">
+                                    <span
+                                        className="text-3xl sm:text-4xl leading-4 h-4 flex items-center"
+                                        style={{ color: categoryColors[allCategory.findIndex(cat => cat.category_name === category.category_name) % categoryColors.length] }}
+                                    >
+                                        •
+                                    </span>
+                                    <span className="flex-1 text-xs sm:text-sm md:text-[15px]">
+                                        {data?.name ? data?.name : data?.recipe?.recipe_name}
+                                    </span>
+
+                                    {isActive('edit') && (
+                                        <button onClick={() => handleEditPlans(data?.id)} className="ml-1 flex-shrink-0">
+                                            <MdOutlineModeEditOutline className='text-lg sm:text-xl text-primary' />
+                                        </button>
+                                    )}
+
+                                    {isActive('delete') && (
+                                        <button onClick={() => handleDeletePlans(data?.meal_plan_id)} className="ml-1 flex-shrink-0">
+                                            <RxCross2 className='text-lg sm:text-xl text-red-500' />
+                                        </button>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    </>
+                ) : (
+                    <span className="text-[#B3BAC5] text-xs sm:text-sm text-nowrap px-1 sm:px-3 text-center">Add Meal</span>
+                )}
+            </>
+        );
+    };
+
     return (
-        <section className="3xl:p-5">
-            <h3 className="3xl:mb-7 text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">
-                Customize your meal plan
-            </h3>
-
-            {/* Tabs */}
-            <div className="py-5 2xl:py-8 w-full flex flex-wrap items-center justify-center 2xl:justify-between gap-x-1 gap-y-2">
-
-                <button
-                    onClick={() => setActiveTab({ id: 0, category_name: 'All Recipes' })}
-                    className={`px-3 sm:px-4 3xl:px-6 py-[5px] text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium ${activeTab?.category_name === 'All Recipes'
-                        ? 'bg-[#3A3A3A] text-white'
-                        : 'bg-transparent text-textColor'
-                        }`}
-                >
-                    All Recipes
-                </button>
-
-                {allCategories?.map((tab) => (
-                    <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab)}
-                        className={`px-3 sm:px-4 3xl:px-6 py-[5px] text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium ${tab?.category_name === activeTab?.category_name
-                            ? 'bg-[#3A3A3A] text-white'
-                            : 'bg-transparent text-textColor'
-                            }`}
-                    >
-                        {tab?.category_name}
+        <section className="p-2 sm:p-3 md:p-4 lg:p-5 3xl:p-5">
+            <div className="mb-4 sm:mb-5 md:mb-6 3xl:mb-7 flex flex-col xs:flex-row justify-between items-start xs:items-center gap-2 xs:gap-0">
+                <h3 className="text-lg sm:text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">
+                    Customize your meal plan
+                </h3>
+                <Link to='/meal-planner'>
+                    <button className='px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base text-[#5A5C5F] border border-primary rounded-lg'>
+                        Add meal
                     </button>
-                ))}
+                </Link>
             </div>
 
-            {/* Table */}
-            <div className="overflow-x-auto">
-                <table className="rounded bg-[#F6F7FB] w-full border-separate border-spacing-y-3 sm:border-spacing-y-4">
+            {/* Table - Horizontal scroll for small devices */}
+            <div className="overflow-x-auto rounded-lg border border-[#B3BAC5]">
+                <table className="w-full border-collapse min-w-[600px] sm:min-w-0">
                     <thead>
-                        <tr className="text-[#5A5C5F] text-lg text-center font-merriweather text-nowrap">
-                            <th className="bg-[#FCBD66] w-[150px] py-1 sm:py-2 4xl:px-3">
-                                <select
-                                    className="border border-[#FCBD66] rounded-[5px] px-3 py-2 text-sm sm:text-base sm:py-3 bg-transparent outline-none block w-full"
-                                    value={selectedMonth}
-                                    onChange={(e) => setSelectedMonth(Number(e.target.value))}
-                                >
-                                    {monthData?.map((item, idx) => (
-                                        <option key={idx} value={item?.id}>
-                                            {item?.month}
-                                        </option>
-                                    ))}
-                                </select>
+                        <tr className="bg-gray-100 ">
+                            <td className="border-b border-r border-[#B3BAC5] bg-[#FAEEDD] w-0 px-0 py-4 sm:py-5 md:py-6 lg:py-7 text-center text-[#444] font-semibold">
+                                <p className='-rotate-90 text-xs sm:text-sm md:text-base'>Days</p>
+                            </td>
 
-
-                            </th>
-                            <th
-                                colSpan={7}
-                                className="bg-[#B7E4C7] py-1 sm:py- w-[calc(100% - 150px)] font-medium"
-                            >
-                                Food Menus
-                            </th>
+                            {days.map((day) => (
+                                <td key={day} className="border-b border-r last:border-r-0 border-[#B3BAC5] bg-[#DBF4E4] px-1 sm:px-2 py-3 sm:py-4 md:py-5 lg:py-6 text-center text-xs sm:text-sm text-[#5A5C5F] font-medium">
+                                    {day}
+                                </td>
+                            ))}
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            mealPlannerTableData?.length > 0 ?
-                                mealPlannerTableData?.map((data) => {
-                                    const itemsWithPlaceholders = [
-                                        ...data.items,
-                                        ...Array(7 - data.items.length).fill({ item: 'No meal' })
-                                    ].slice(0, 7); // Ensure exactly 7 items
+                        {allCategory.map((category, idx) => (
+                            <tr key={category?.id} className='text-nowrap'>
+                                <td
+                                    className="border-t border-r w-0 px-0 py-8 md:py-10 lg:py-12 border-[#B3BAC5] bg-[#FAEEDD] font-medium text-center"
+                                    style={{ color: categoryColors[idx % categoryColors.length] }}
+                                >
+                                    <p className='-rotate-90 text-xs sm:text-sm md:text-base whitespace-nowrap'>
+                                        {category?.category_name}
+                                    </p>
+                                </td>
 
-                                    return (
-                                        <tr key={data.id} className="text-[#5A5C5F] text-sm sm:text-base font-merriweather text-nowrap">
-                                            <td className="bg-[#FCBD66] px-4 py-3 4xl:py-5 border border-[#FCBD66]">
-                                                {data.date}
-                                            </td>
-                                            {itemsWithPlaceholders.map((item, index) => (
-                                                <td
-                                                    key={index}
-                                                    className="border-r border-t border-b border-[#8993A4] px-3 py-3 4xl:py-5"
-                                                >
-                                                    <div className="flex items-center justify-between gap-2">
-                                                        <p>
-                                                            {
-                                                                item?.name ? item?.name : item?.item
-                                                            }
-                                                        </p>
-                                                        <Popover>
-                                                            <PopoverTrigger>
-                                                                <ThreeDotSvg />
-                                                            </PopoverTrigger>
-                                                            <PopoverContent className='w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2'>
-                                                                <button className='block'><Link to='/meal-planner'>Add meal</Link></button>
-                                                                <button className='block' onClick={() => handleEditPlan(item?.id)}>Edit</button>
-                                                                <button onClick={() => handleDeletePlan(item?.meal_plan_id)} className='text-red-500 block'>Delete</button>
-                                                            </PopoverContent>
-                                                        </Popover>
-                                                    </div>
-                                                </td>
-                                            ))}
-                                        </tr>
-                                    );
-                                })
-                                :
-                                'No data found'
-                        }
+                                {/* Days cells */}
+                                {days.map(day => (
+                                    <td key={day} className="border-t border-r last:border-r-0 border-[#B3BAC5] px-2 sm:px-3 md:px-4 py-2 sm:py-3 md:py-4 lg:py-5 space-y-1 sm:space-y-2 text-[#4c4d4e] relative text-xs sm:text-sm md:text-[15px]">
+                                        {renderDayCell(day, category)}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

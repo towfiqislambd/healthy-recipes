@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import MyRecipeCard from "@/pages/dashboard/MyRecipeCard";
+import deleteImg from "../../../assets/images/delete.png";
 
 const SharedRecipes = ({ myRecipes }) => {
     return (
@@ -21,7 +22,10 @@ const SharedRecipes = ({ myRecipes }) => {
                             />
                         ))
                         :
-                        'No data found'
+                        <div className="text-center col-span-4 py-6 space-y-3">
+                            <img src={deleteImg} alt="logo" className="mx-auto size-16" />
+                            <p className="text-primary font-merriweather md:text-lg lg:text-xl">No shared recipes found yet</p>
+                        </div>
                 }
             </div>
         </div>
