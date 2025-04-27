@@ -26,7 +26,7 @@ const ReviewSection = ({ id }) => {
                 <ReviewCard key={idx} data={item} />
               )
               :
-              <p>No review yet</p>
+              <p className="text-primary font-merriweather text-lg lg:text-xl">No review yet</p>
           }
 
           {/* Pagination */}
