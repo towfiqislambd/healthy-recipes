@@ -83,14 +83,14 @@ const DashboardMealPlanner = () => {
             <>
                 {meals?.length > 0 ? (
                     <>
-                        <div className="absolute right-3 top-3">
+                        <div className="absolute right-1 top-1 sm:right-2 sm:top-2 md:right-3 md:top-3">
                             <Popover>
                                 <PopoverTrigger ref={popoverTriggerRef}>
-                                    <button>
-                                        <ThreeDotSvg />
-                                    </button>
+                                    <p className="p-1">
+                                        <ThreeDotSvg className="w-2 h-2 sm:w-4 sm:h-4" />
+                                    </p>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-[105px] sm:w-28 text-sm sm:text-base border space-y-1 sm:space-y-2">
+                                <PopoverContent className="w-[90px] sm:w-[105px] md:w-28 text-xs sm:text-sm md:text-base border space-y-1 sm:space-y-2">
                                     <button
                                         className="block w-full text-left"
                                         onClick={handleEditPlan}
@@ -107,23 +107,23 @@ const DashboardMealPlanner = () => {
                             </Popover>
                         </div>
 
-                        <ul className="space-y-2 pt-3">
+                        <ul className="space-y-1 sm:space-y-2 pt-5">
                             {meals?.map((data, idx) => (
-                                <li key={idx} className="flex items-start gap-1 group">
-                                    <span className="text-4xl leading-4 h-4 flex items-center">•</span>
-                                    <span className="flex-1 -mt-1">
+                                <li key={idx} className="flex items-center gap-1 group">
+                                    <span className="text-3xl sm:text-4xl leading-4 h-4 flex items-center">•</span>
+                                    <span className="flex-1 text-xs sm:text-sm md:text-[15px]">
                                         {data?.name ? data?.name : data?.recipe?.recipe_name}
                                     </span>
 
                                     {isActive('edit') && (
-                                        <button onClick={() => handleEditPlans(data?.id)}>
-                                            <MdOutlineModeEditOutline className='text-xl text-primary' />
+                                        <button onClick={() => handleEditPlans(data?.id)} className="ml-1 flex-shrink-0">
+                                            <MdOutlineModeEditOutline className='text-lg sm:text-xl text-primary' />
                                         </button>
                                     )}
 
                                     {isActive('delete') && (
-                                        <button onClick={() => handleDeletePlans(data?.meal_plan_id)}>
-                                            <RxCross2 className='text-xl text-red-500' />
+                                        <button onClick={() => handleDeletePlans(data?.meal_plan_id)} className="ml-1 flex-shrink-0">
+                                            <RxCross2 className='text-lg sm:text-xl text-red-500' />
                                         </button>
                                     )}
                                 </li>
@@ -131,79 +131,59 @@ const DashboardMealPlanner = () => {
                         </ul>
                     </>
                 ) : (
-                    <span className="text-[#B3BAC5] text-nowrap px-3 text-center">Add Meal</span>
+                    <span className="text-[#B3BAC5] text-xs sm:text-sm text-nowrap px-1 sm:px-3 text-center">Add Meal</span>
                 )}
             </>
         );
     };
 
     return (
-        <section className="3xl:p-5">
-            <div className="3xl:mb-7 flex justify-between items-center">
-                <h3 className="text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">
+        <section className="p-2 sm:p-3 md:p-4 lg:p-5 3xl:p-5">
+            <div className="mb-4 sm:mb-5 md:mb-6 3xl:mb-7 flex flex-col xs:flex-row justify-between items-start xs:items-center gap-2 xs:gap-0">
+                <h3 className="text-lg sm:text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">
                     Customize your meal plan
                 </h3>
-                <Link to='/meal-planner'><button className='px-3 py-1.5 text-[#5A5C5F] border border-primary rounded-lg'>Add meal</button></Link>
+                <Link to='/meal-planner'>
+                    <button className='px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base text-[#5A5C5F] border border-primary rounded-lg'>
+                        Add meal
+                    </button>
+                </Link>
             </div>
 
-            {/* Table */}
+            {/* Table - Horizontal scroll for small devices */}
             <div className="overflow-x-auto">
-                <table className="w-full border-collapse">
+                <table className="w-full border-collapse min-w-[600px] sm:min-w-0">
                     <thead>
                         <tr className="bg-gray-100">
-                            <td className="border border-[#B3BAC5] bg-[#FAEEDD] w-0 px-0 py-7 text-center text-[#444] font-semibold">
-                                <p className='-rotate-90'>Days</p>
+                            <td className="border border-[#B3BAC5] bg-[#FAEEDD] w-0 px-0 py-4 sm:py-5 md:py-6 lg:py-7 text-center text-[#444] font-semibold">
+                                <p className='-rotate-90 text-xs sm:text-sm md:text-base'>Days</p>
                             </td>
 
                             {days.map((day) => (
-                                <td key={day} className="border border-[#B3BAC5] bg-[#DBF4E4] px-2 py-6 text-center text-[#5A5C5F] font-medium">{day}</td>
+                                <td key={day} className="border border-[#B3BAC5] bg-[#DBF4E4] px-1 sm:px-2 py-3 sm:py-4 md:py-5 lg:py-6 text-center text-xs sm:text-sm text-[#5A5C5F] font-medium">
+                                    {day}
+                                </td>
                             ))}
                         </tr>
                     </thead>
                     <tbody>
                         {allCategory.map((category, idx) => (
-                            <tr key={category?.id}>
+                            <tr key={category?.id} className='text-nowrap'>
                                 <td
-                                    className="border w-0 px-0 py-12 border-[#B3BAC5] bg-[#FAEEDD] font-medium text-center"
+                                    className="border w-0 px-0 py-8 md:py-10 lg:py-12 border-[#B3BAC5] bg-[#FAEEDD] font-medium text-center"
                                     style={{ color: categoryColors[idx % categoryColors.length] }}
                                 >
-                                    <p className='-rotate-90'>{category?.category_name}</p>
+                                    <p className='-rotate-90 text-xs sm:text-sm md:text-base whitespace-nowrap'>
+                                        {category?.category_name}
+                                    </p>
                                 </td>
 
-                                {/* Saturday */}
-                                <td className="border border-[#B3BAC5] px-4 py-5 space-y-2 text-[#4c4d4e] relative text-[15px]">
-                                    {renderDayCell('Saturday', category)}
-                                </td>
-
-                                {/* Sunday */}
-                                <td className="border border-[#B3BAC5] px-4 py-5 space-y-2 text-[#4c4d4e] relative text-[15px]">
-                                    {renderDayCell('Sunday', category)}
-                                </td>
-
-                                {/* Monday */}
-                                <td className="border border-[#B3BAC5] px-4 py-5 space-y-2 text-[#4c4d4e] relative text-[15px]">
-                                    {renderDayCell('Monday', category)}
-                                </td>
-
-                                {/* Tuesday */}
-                                <td className="border border-[#B3BAC5] px-4 py-5 space-y-2 text-[#4c4d4e] relative text-[15px]">
-                                    {renderDayCell('Tuesday', category)}
-                                </td>
-
-                                {/* Wednesday */}
-                                <td className="border border-[#B3BAC5] px-4 py-5 space-y-2 text-[#4c4d4e] relative text-[15px]">
-                                    {renderDayCell('Wednesday', category)}
-                                </td>
-
-                                {/* Thursday */}
-                                <td className="border border-[#B3BAC5] px-4 py-5 space-y-2 text-[#4c4d4e] relative text-[15px]">
-                                    {renderDayCell('Thursday', category)}
-                                </td>
-
-                                {/* Friday */}
-                                <td className="border border-[#B3BAC5] px-4 py-5 space-y-2 text-[#4c4d4e] relative text-[15px]">
-                                    {renderDayCell('Friday', category)}
-                                </td>
+                                {/* Days cells */}
+                                {days.map(day => (
+                                    <td key={day} className="border border-[#B3BAC5] px-2 sm:px-3 md:px-4 py-2 sm:py-3 md:py-4 lg:py-5 space-y-1 sm:space-y-2 text-[#4c4d4e] relative text-xs sm:text-sm md:text-[15px]">
+                                        {renderDayCell(day, category)}
+                                    </td>
+                                ))}
                             </tr>
                         ))}
                     </tbody>
