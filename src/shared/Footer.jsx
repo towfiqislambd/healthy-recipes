@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
 import {
   FacebookSvg,
   InstagramSvg,
   TwitterSvg,
 } from "@/components/svg-container/SvgContainer";
-import { useFooterInfo, useRecipeLibrary, useSocialInfo } from "@/hooks/cms.queries";
+import {
+  useFooterInfo,
+  useRecipeLibrary,
+  useSocialInfo,
+} from "@/hooks/cms.queries";
 
 const Footer = () => {
   const { data: footerInfo } = useFooterInfo();
@@ -45,17 +49,19 @@ const Footer = () => {
               <img
                 className="w-full h-full object-cover"
                 src={`${import.meta.env.VITE_SITE_URL}/${footerInfo?.logo}`}
-                alt="logo" />
+                alt="logo"
+              />
             </figure>
             <div className="max-w-[330px]">
-              {typeof footerInfo?.description === 'string' && parse(footerInfo.description)}
+              {typeof footerInfo?.description === "string" &&
+                parse(footerInfo.description)}
             </div>
           </div>
 
           <div className="">
             <h5 className="text-lg lg:font-medium">Explore</h5>
             <ul className="md:space-y-3 space-y-2 md:mt-4 mt-2">
-              {exploreData?.map((item) => (
+              {exploreData?.map(item => (
                 <li key={item?.title}>
                   <Link to={item?.path}>{item?.title}</Link>
                 </li>
@@ -64,13 +70,13 @@ const Footer = () => {
           </div>
 
           <div>
-            <h5 className="text-lg  lg:font-medium">
-              Recipe library
-            </h5>
+            <h5 className="text-lg  lg:font-medium">Recipe library</h5>
             <ul className="md:space-y-3 space-y-2 md:mt-4 mt-2">
-              {recipeLibrary?.map((item) => (
+              {recipeLibrary?.map(item => (
                 <li key={item?.id}>
-                  <Link to={`/recipes/recipe_library/${item?.id}`}>{item?.diet_name}</Link>
+                  <Link to={`/recipes/recipe_library/${item?.id}`}>
+                    {item?.diet_name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -84,15 +90,9 @@ const Footer = () => {
               {socialInfo?.map((item, idx) => (
                 <li key={idx}>
                   <a target="_blank" href={item?.profile_link}>
-                    {
-                      item?.social_media === 'facebook' && <FacebookSvg />
-                    }
-                    {
-                      item?.social_media === 'twitter' && <TwitterSvg />
-                    }
-                    {
-                      item?.social_media === 'instagram' && <InstagramSvg />
-                    }
+                    {item?.social_media === "facebook" && <FacebookSvg />}
+                    {item?.social_media === "twitter" && <TwitterSvg />}
+                    {item?.social_media === "instagram" && <InstagramSvg />}
                   </a>
                 </li>
               ))}
