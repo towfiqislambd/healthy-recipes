@@ -9,9 +9,9 @@ import {
   RegisterFunc,
   ResetPasswordFunc,
   VerifyEmailFunc,
-} from "./auth.api";
+} from "@/hooks/auth.api";
 import toast from "react-hot-toast";
-import useAuth from "./useAuth";
+import useAuth from "@/hooks/useAuth";
 
 // get user data:
 export const useGetUserData = token => {
@@ -23,7 +23,7 @@ export const useGetUserData = token => {
   });
 };
 
-// Register:
+// register:
 export const useRegister = () => {
   const { setLoading } = useAuth();
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ export const useRegister = () => {
   });
 };
 
-// Login:
+// login:
 export const useLogin = () => {
   const { setLoading, setToken } = useAuth();
   const navigate = useNavigate();

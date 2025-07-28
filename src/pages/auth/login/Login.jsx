@@ -63,7 +63,7 @@ const Login = () => {
               Email
             </label>
             {errors.email && (
-              <span className="text-red-500">Email is required</span>
+              <span className="text-red-500 text-sm">Email is required</span>
             )}
           </div>
           <input
@@ -88,7 +88,7 @@ const Login = () => {
               Password
             </label>
             {errors.password && (
-              <span className="text-red-500">Password is required</span>
+              <span className="text-red-500 text-sm">Password is required</span>
             )}
           </div>
           <div
@@ -117,7 +117,7 @@ const Login = () => {
         <div className="w-full flex items-center justify-end">
           <Link
             to="/auth/verify-email"
-            className="text-textColor underline font-semibold hover:no-underline transition-all duration-300"
+            className="text-textColor underline font-semibold text-sm lg:text-base hover:no-underline transition-all duration-300"
           >
             Forgot password?
           </Link>

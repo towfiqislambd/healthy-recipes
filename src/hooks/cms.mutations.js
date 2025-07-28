@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import useAuth from "./useAuth";
+import useAuth from "@/hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
 import {
   AddMealPlanner,
@@ -9,7 +9,7 @@ import {
   DeleteMealPlan,
   EditMealPlanner,
   EditRecipe,
-} from "./cms.api";
+} from "@/hooks/cms.api";
 import { useNavigate } from "react-router-dom";
 
 // Add reviews

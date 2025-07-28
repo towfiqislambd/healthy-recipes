@@ -1,3 +1,4 @@
+import useAuth from "@/hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import {
   AllCategories,
@@ -23,8 +24,7 @@ import {
   TrendingRecipes,
   TrendingRecipesPrivate,
   WhyChooseUs,
-} from "./cms.api";
-import useAuth from "./useAuth";
+} from "@/hooks/cms.api";
 
 // Homepage - Banner
 export const useHomepageBanner = () => {
@@ -103,6 +103,7 @@ export const useAllRecipes = (
     ],
     queryFn: () =>
       AllRecipes(category_id, recipe_library_id, age_group, tag_id, search),
+    retry: false,
   });
 };
 
@@ -133,6 +134,7 @@ export const useAllRecipesPrivate = (
         search
       ),
     enabled: !!user,
+    retry: false,
   });
 };
 
@@ -215,6 +217,7 @@ export const useRecipeReviews = (recipe_id, page_id) => {
   return useQuery({
     queryKey: ["recipe-reviews", recipe_id, page_id],
     queryFn: () => RecipeReviews(recipe_id, page_id),
+    retry: false,
   });
 };
 
@@ -223,6 +226,7 @@ export const useGetWishlist = (page_id, category_id) => {
   return useQuery({
     queryKey: ["get-wishlists", page_id, category_id],
     queryFn: () => GetWishlist(page_id, category_id),
+    retry: false,
   });
 };
 
@@ -231,6 +235,7 @@ export const useMyRecipes = (page_id, category_id) => {
   return useQuery({
     queryKey: ["my-recipes", page_id, category_id],
     queryFn: () => MyRecipes(page_id, category_id),
+    retry: false,
   });
 };
 

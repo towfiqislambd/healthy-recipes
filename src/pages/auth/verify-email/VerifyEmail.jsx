@@ -62,7 +62,7 @@ const VerifyEmail = () => {
             >
               Email
             </label>
-            {errors.email && <span className="text-red-500">Required</span>}
+            {errors.email && <span className="text-red-500 text-sm">Email is Required</span>}
           </div>
           <input
             {...register("email", { required: true })}

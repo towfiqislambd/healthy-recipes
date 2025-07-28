@@ -63,7 +63,7 @@ const Register = () => {
               Full Name
             </label>
             {errors.name && (
-              <span className="text-red-500">Name is required</span>
+              <span className="text-red-500 text-sm">Name is required</span>
             )}
           </div>
           <input
@@ -86,7 +86,7 @@ const Register = () => {
               Email
             </label>
             {errors.email && (
-              <span className="text-red-500">Email is required</span>
+              <span className="text-red-500 text-sm">Email is required</span>
             )}
           </div>
           <input
@@ -110,7 +110,7 @@ const Register = () => {
               Password
             </label>
             {errors.password && (
-              <span className="text-red-500">Password is required</span>
+              <span className="text-red-500 text-sm">Password is required</span>
             )}
           </div>
           <div
@@ -144,7 +144,7 @@ const Register = () => {
               Confirm Password
             </label>
             {errors.password_confirmation && (
-              <span className="text-red-500">
+              <span className="text-red-500 text-sm">
                 {errors.password_confirmation.message}
               </span>
             )}
@@ -158,7 +158,7 @@ const Register = () => {
           >
             <input
               {...register("password_confirmation", {
-                required: "Confirm Password is required",
+                required: "Confirm Pass is required",
                 validate: value =>
                   value === getValues("password") || "Passwords do not match",
               })}

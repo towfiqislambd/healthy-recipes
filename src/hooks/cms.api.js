@@ -1,5 +1,5 @@
-import { axiosPublic } from "./useAxiosPublic";
-import { axiosSecure } from "./useAxiosSecure";
+import { axiosPublic } from "@/hooks/useAxiosPublic";
+import { axiosSecure } from "@/hooks/useAxiosSecure";
 
 // Homepage - Banner
 export const HomepageBanner = async () => {
@@ -52,7 +52,6 @@ export const AllRecipes = async (
   search
 ) => {
   let url = "/api/guest/recipes?";
-
   if (category_id) url += `category_id=${category_id}&`;
   if (recipe_library_id) url += `recipe_library_id=${recipe_library_id}&`;
   if (age_group) url += `age_group=${age_group}&`;
@@ -138,7 +137,6 @@ export const BlogDetails = async slug => {
 // Get Wishlist
 export const GetWishlist = async (page_id, category_id) => {
   let url = "/api/wishlists?";
-
   if (page_id) url += `page=${page_id}&`;
   if (category_id) url += `category_id=${category_id}&`;
 
@@ -166,7 +164,6 @@ export const SocialInfo = async () => {
 // My Recipes
 export const MyRecipes = async (page_id, category_id) => {
   let url = "/api/my-recipes?";
-
   if (page_id) url += `page=${page_id}&`;
   if (category_id) url += `category_id=${category_id}&`;
 

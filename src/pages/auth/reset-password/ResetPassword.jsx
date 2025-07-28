@@ -78,7 +78,7 @@ const ResetPassword = () => {
               New Password
             </label>
             {errors.password && (
-              <span className="text-red-500">Password is required</span>
+              <span className="text-red-500 text-sm">Password is required</span>
             )}
           </div>
           <div
@@ -112,7 +112,7 @@ const ResetPassword = () => {
               Confirm New Password
             </label>
             {errors.password_confirmation && (
-              <span className="text-red-500">
+              <span className="text-red-500 text-sm">
                 {errors.password_confirmation.message}
               </span>
             )}
@@ -126,7 +126,7 @@ const ResetPassword = () => {
           >
             <input
               {...register("password_confirmation", {
-                required: "Confirm Password is required",
+                required: "Confirm Pass is required",
                 validate: value =>
                   value === getValues("password") || "Passwords do not match",
               })}

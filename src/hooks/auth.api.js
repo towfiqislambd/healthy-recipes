@@ -1,5 +1,5 @@
-import { axiosPublic } from "./useAxiosPublic";
-import { axiosSecure } from "./useAxiosSecure";
+import { axiosPublic } from "@/hooks/useAxiosPublic";
+import { axiosSecure } from "@/hooks/useAxiosSecure";
 
 // get user data:
 export const GetUserDataFunc = async () => {
