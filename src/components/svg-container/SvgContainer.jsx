@@ -625,6 +625,47 @@ export function StarSvg() {
   );
 }
 
+export function LoadingSvg() {
+  return (
+    <svg
+      className="animate-spin h-6 w-6 text-black"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      ></circle>
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+      ></path>
+    </svg>
+  );
+}
+
+export function StarSvg2() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-full h-full"
+      viewBox="0 0 18 17"
+      fill="none"
+    >
+      <path
+        d="M8.42937 1.25623C8.60898 0.703444 9.39102 0.703444 9.57063 1.25623L11.1104 5.99524C11.1908 6.24245 11.4211 6.40983 11.6811 6.40983H16.664C17.2452 6.40983 17.4869 7.1536 17.0166 7.49524L12.9854 10.4241C12.7751 10.5769 12.6871 10.8477 12.7674 11.0949L14.3072 15.8339C14.4868 16.3867 13.8541 16.8464 13.3839 16.5048L9.35267 13.5759C9.14238 13.4231 8.85762 13.4231 8.64733 13.5759L4.61609 16.5048C4.14586 16.8464 3.51317 16.3867 3.69278 15.8339L5.23258 11.0949C5.3129 10.8477 5.22491 10.5769 5.01462 10.4241L0.983374 7.49524C0.513146 7.1536 0.754811 6.40983 1.33605 6.40983H6.31893C6.57887 6.40983 6.80924 6.24245 6.88957 5.99524L8.42937 1.25623Z"
+        fill="#FFAB00"
+      />
+    </svg>
+  );
+}
+
 export function RecipeLogoSvg() {
   return (
     <svg
