@@ -2,18 +2,29 @@ import RecipeBlogs from "@/components/homepage/RecipeBlogs";
 import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection";
 import AllRecipeCardsSection from "@/components/recipe-library/AllRecipeCardsSection";
 import { Link } from "react-router-dom";
-import { useBlogs, useRecipeLibrary, useShareYourRecipe } from "@/hooks/cms.queries";
+import {
+  useBlogs,
+  useRecipeLibrary,
+  useShareYourRecipe,
+} from "@/hooks/cms.queries";
 import { Loader } from "@/components/loader/Loader";
 
 const RecipeLibrary = () => {
-  const { data: recipeLibrary, isLoading: isRecipeLibraryLoading } = useRecipeLibrary();
-  const { data: shareYourRecipe, isLoading: isShareYourRecipeLoading } = useShareYourRecipe();
+  const { data: recipeLibrary, isLoading: isRecipeLibraryLoading } =
+    useRecipeLibrary();
+  const { data: shareYourRecipe, isLoading: isShareYourRecipeLoading } =
+    useShareYourRecipe();
   const { data: blogs, isLoading: isBlogsLoading } = useBlogs();
 
-  const isLoading = isRecipeLibraryLoading || isShareYourRecipeLoading || isBlogsLoading;
+  const isLoading =
+    isRecipeLibraryLoading || isShareYourRecipeLoading || isBlogsLoading;
 
   if (isLoading) {
-    return <div className="h-screen flex justify-center items-center"><Loader /></div>;
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <Loader />
+      </div>
+    );
   }
 
   return (

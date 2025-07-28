@@ -1,17 +1,17 @@
-import ButtonTransparent from '@/components/buttons/ButtonTransparent';
-import { LoveSvg, SearchSvg } from '@/components/svg-container/SvgContainer';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
-import { RxCross2 } from 'react-icons/rx';
-import useAuth from '@/hooks/useAuth';
-import { useLogOut } from '@/hooks/auth.hook.';
-import { useFooterInfo } from '@/hooks/cms.queries';
-import { Loader } from '@/components/loader/Loader';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import useAuth from "@/hooks/useAuth";
+import { FaBars } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
+import { useEffect, useState } from "react";
+import { useLogOut } from "@/hooks/auth.hook.";
+import { useFooterInfo } from "@/hooks/cms.queries";
+import { Loader } from "@/components/loader/Loader";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import ButtonTransparent from "@/components/buttons/ButtonTransparent";
+import { LoveSvg, SearchSvg } from "@/components/svg-container/SvgContainer";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { user, setSearch } = useAuth();
   const { mutate: logOutMutate } = useLogOut();
   const [isOpen, setOpen] = useState(false);
@@ -19,16 +19,16 @@ const Navbar = () => {
 
   // Mutation
   const handleLogout = () => {
-    logOutMutate()
-  }
+    logOutMutate();
+  };
 
   const navLinks = [
-    { path: '/', title: 'Home' },
-    { path: '/recipe-library', title: 'Recipe library' },
-    { path: '/dashboard/overview', title: 'Dashboard' },
-    { path: '/dashboard/dashboard-share-recipes', title: 'Share recipe' },
-    { path: '/meal-planner', title: 'Meal planner' },
-    { path: '/blog', title: 'Blog' },
+    { path: "/", title: "Home" },
+    { path: "/recipe-library", title: "Recipe library" },
+    { path: "/dashboard/overview", title: "Dashboard" },
+    { path: "/dashboard/dashboard-share-recipes", title: "Share recipe" },
+    { path: "/meal-planner", title: "Meal planner" },
+    { path: "/blog", title: "Blog" },
   ];
 
   useEffect(() => {
@@ -37,7 +37,6 @@ const Navbar = () => {
     } else {
       document.body.classList.remove("overflow-hidden");
     }
-
     return () => {
       document.body.classList.remove("overflow-hidden");
     };
@@ -46,19 +45,22 @@ const Navbar = () => {
   const { data: siteSettings, isLoading } = useFooterInfo();
 
   if (isLoading) {
-    document.body.style.overflow = 'hidden';
-    return <div className="h-screen flex justify-center items-center"><Loader /></div>;
-  }
-  else {
-    document.body.style.overflow = '';
+    document.body.style.overflow = "hidden";
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <Loader />
+      </div>
+    );
+  } else {
+    document.body.style.overflow = "";
   }
 
   const handleSearch = () => {
-    navigate('/meal-planner')
-  }
+    navigate("/meal-planner");
+  };
 
   return (
-    <header className='py-1 lg:py-2 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] bg-[#F6F5F2] fixed w-full left-0 top-0 z-50 navbar'>
+    <header className="py-1 lg:py-2 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] bg-[#F6F5F2] fixed w-full left-0 top-0 z-50 navbar">
       <nav className="container w-full">
         <div className="flex justify-between items-center lg:px-3 xl:px-5 3xl:px-0">
           {/* Left side */}
@@ -69,12 +71,13 @@ const Navbar = () => {
                 <img
                   className="w-full h-full object-cover"
                   src={`${import.meta.env.VITE_SITE_URL}/${siteSettings?.logo}`}
-                  alt="logo" />
+                  alt="logo"
+                />
               </figure>
             </Link>
 
             {/* search bar */}
-            <div className='px-3 3xl:px-4 py-3 hidden 2xl:flex items-center gap-1 3xl:gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white w-[250px] 3xl:w-[380px]'>
+            <div className="px-3 3xl:px-4 py-3 hidden 2xl:flex items-center gap-1 3xl:gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white w-[250px] 3xl:w-[380px]">
               <SearchSvg />
               <input
                 className="focus:outline-none w-full placeholder:text-[15px] 3xl:placeholder:text-base"
@@ -83,7 +86,7 @@ const Navbar = () => {
                 name="search"
                 id="search"
                 onClick={handleSearch}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={e => setSearch(e.target.value)}
               />
             </div>
           </div>
@@ -92,15 +95,17 @@ const Navbar = () => {
           <div className="hidden 2xl:flex items-center gap-10">
             {/* nav links */}
             <div className="flex gap-5">
-              {navLinks.map((item) => (
+              {navLinks.map(item => (
                 <NavLink
                   to={item.path}
                   key={item.title}
                   className={({ isActive }) =>
-                    `${isActive ||
-                      (location?.startsWith('/recipe-details') && item.path === '/recipe-library')
-                      ? 'text-primary'
-                      : 'text-textColor'
+                    `${
+                      isActive ||
+                      (location?.startsWith("/recipe-details") &&
+                        item.path === "/recipe-library")
+                        ? "text-primary"
+                        : "text-textColor"
                     } hover:text-primary duration-300 transition-all text-[15px] 3xl:text-base`
                   }
                 >
@@ -111,34 +116,40 @@ const Navbar = () => {
 
             {/* cta section */}
             <div className="flex gap-5 items-center">
-              <Link to="/dashboard/dashboard-saved-recipes" className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center">
+              <Link
+                to="/dashboard/dashboard-saved-recipes"
+                className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center"
+              >
                 <LoveSvg />
               </Link>
-              {
-                user ?
-                  <div className="flex gap-3 items-center">
-                    <button onClick={handleLogout}>
-                      <ButtonTransparent title="Log Out" />
-                    </button>
-                    {
-                      user && <Avatar className="w-11 h-11 rounded-full">
-                        <AvatarFallback className='text-[22px] font-medium w-full h-full rounded-full'>{user?.name.slice(0, 1)}</AvatarFallback>
-                      </Avatar>
-                    }
-                  </div>
-                  :
-                  <ButtonTransparent path="/auth/register" title="Sign Up" />
-              }
+              {user ? (
+                <div className="flex gap-3 items-center">
+                  <button onClick={handleLogout}>
+                    <ButtonTransparent title="Log Out" />
+                  </button>
+                  {user && (
+                    <Avatar className="w-11 h-11 rounded-full">
+                      <AvatarFallback className="text-[22px] font-medium w-full h-full rounded-full">
+                        {user?.name.slice(0, 1)}
+                      </AvatarFallback>
+                    </Avatar>
+                  )}
+                </div>
+              ) : (
+                <ButtonTransparent path="/auth/register" title="Sign Up" />
+              )}
             </div>
           </div>
 
           {/* Hamburger btn */}
           <div className="2xl:hidden flex gap-3 items-center">
-            {
-              user && <Avatar className="w-11 h-11 rounded-full">
-                <AvatarFallback className='text-[22px] font-medium w-full h-full rounded-full'>{user?.name.slice(0, 1)}</AvatarFallback>
+            {user && (
+              <Avatar className="w-11 h-11 rounded-full">
+                <AvatarFallback className="text-[22px] font-medium w-full h-full rounded-full">
+                  {user?.name.slice(0, 1)}
+                </AvatarFallback>
               </Avatar>
-            }
+            )}
             <button
               onClick={() => setOpen(!isOpen)}
               className="bg-primary text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid place-items-center"
@@ -152,11 +163,16 @@ const Navbar = () => {
       {/* Blur Overlay */}
       <div
         onClick={() => setOpen(false)}
-        className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 2xl:hidden z-[999] ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-      </div>
+        className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 2xl:hidden z-[999] ${
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      ></div>
 
       {/* Mobile Sidebar */}
-      <div className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} duration-500 transition-transform fixed top-0 z-[999] left-0 bg-white p-5 lg:p-7 shadow-lg overflow-y-auto  border-r max-h-screen min-h-screen w-[250px] lg:w-[270px] 2xl:hidden`}
+      <div
+        className={`${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } duration-500 transition-transform fixed top-0 z-[999] left-0 bg-white p-5 lg:p-7 shadow-lg overflow-y-auto  border-r max-h-screen min-h-screen w-[250px] lg:w-[270px] 2xl:hidden`}
       >
         {/* logo */}
         <Link to="/" onClick={() => setOpen(false)}>
@@ -164,19 +180,21 @@ const Navbar = () => {
             <img
               className="object-cover w-full h-full mx-auto"
               src={`${import.meta.env.VITE_SITE_URL}/${siteSettings?.logo}`}
-              alt="logo" />
+              alt="logo"
+            />
           </figure>
         </Link>
 
         <div className="flex flex-col mt-7 gap-6">
           {/* tabs */}
           <div className="flex flex-col gap-5 xl:gap-6">
-            {navLinks?.map((item) => (
+            {navLinks?.map(item => (
               <NavLink
                 onClick={() => setOpen(false)}
                 to={item?.path}
                 className={({ isActive }) =>
-                  `${isActive ? 'text-primary' : 'text-textColor'
+                  `${
+                    isActive ? "text-primary" : "text-textColor"
                   } hover:text-primary duration-300 transition-all`
                 }
                 key={item?.title}
@@ -187,28 +205,29 @@ const Navbar = () => {
           </div>
           {/* cta */}
           <div className="flex gap-3 items-center lg:mt-2">
-            <Link to="/dashboard/dashboard-saved-recipes" className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center  ">
+            <Link
+              to="/dashboard/dashboard-saved-recipes"
+              className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center  "
+            >
               <LoveSvg />
             </Link>
 
             {/* Sign Up And Logout btns */}
-            {
-              user ?
-                <button
-                  onClick={handleLogout}
-                  className="text-textColor font-merriweather px-5 py-2 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white"
-                >
-                  Log Out
-                </button>
-                :
-                <Link
-                  to='/auth/register'
-                  className="text-textColor font-merriweather px-5 py-2 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white"
-                >
-                  Sign Up
-                </Link>
-            }
-
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="text-textColor font-merriweather px-5 py-2 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white"
+              >
+                Log Out
+              </button>
+            ) : (
+              <Link
+                to="/auth/register"
+                className="text-textColor font-merriweather px-5 py-2 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white"
+              >
+                Sign Up
+              </Link>
+            )}
           </div>
         </div>
 

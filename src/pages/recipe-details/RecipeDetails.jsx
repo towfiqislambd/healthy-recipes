@@ -11,11 +11,17 @@ import { Loader } from "@/components/loader/Loader";
 const RecipeDetails = () => {
   const { id } = useParams();
   const fullLocation = `${window.location.origin}/recipe-details/${id}`;
-  const { data: shareYourRecipe, isLoading: shareRecipeLoading } = useShareYourRecipe();
-  const { data: recipeData, isLoading: recipeDataLoading } = useRecipeDetails(id);
+  const { data: shareYourRecipe, isLoading: shareRecipeLoading } =
+    useShareYourRecipe();
+  const { data: recipeData, isLoading: recipeDataLoading } =
+    useRecipeDetails(id);
 
   if (shareRecipeLoading || recipeDataLoading) {
-    return <div className="h-screen flex justify-center items-center"><Loader /></div>;
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <Loader />
+      </div>
+    );
   }
 
   return (

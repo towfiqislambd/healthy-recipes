@@ -1,15 +1,15 @@
-import ButtonPrimary from "../buttons/ButtonPrimary";
-import banner1 from "../../assets/images/banner-1.jpg";
-import banner2 from "../../assets/images/banner-2.jpg";
-import banner3 from "../../assets/images/banner-3.jpg";
-import banner4 from "../../assets/images/banner-4.jpg";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
+import banner1 from "@/assets/images/banner-1.jpg";
+import banner2 from "@/assets/images/banner-2.jpg";
+import banner3 from "@/assets/images/banner-3.jpg";
+import banner4 from "@/assets/images/banner-4.jpg";
+import ButtonPrimary from "@/components/buttons/ButtonPrimary";
 
 const HomepageBanner = ({ data }) => {
   return (
     <section className="py-7 md:py-10 2xl:py-[68px] bg-[#F6F5F2]">
       {data?.map((data, idx) => (
-        <div key={idx} className="container" >
+        <div key={idx} className="container">
           <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0 flex flex-col xl:flex-row items-center      md:gap-10 gap-7 xl:gap-16">
             {/* left side */}
             <div className="space-y-5 lg:space-y-7 3xl:space-y-10  w-full flex-1">
@@ -22,12 +22,18 @@ const HomepageBanner = ({ data }) => {
                   thys */}
                 </h1>
                 <div className="text-textColor leading-[150%] max-w-[740px] ">
-                  {typeof data?.description === 'string' ? parse(data?.description) : data?.description}
+                  {typeof data?.description === "string"
+                    ? parse(data?.description)
+                    : data?.description}
                 </div>
               </div>
 
               {/* button */}
-              <ButtonPrimary path="/recipe-library" title={data?.btn_text} svg={true} />
+              <ButtonPrimary
+                path="/recipe-library"
+                title={data?.btn_text}
+                svg={true}
+              />
             </div>
 
             {/* right side */}
@@ -37,7 +43,11 @@ const HomepageBanner = ({ data }) => {
                 <div className="3xl:h-[320px] h-[230px] 3xl:w-[300px] w-full relative overflow-hidden rounded-lg">
                   <img
                     className="rounded-lg h-full w-full object-cover"
-                    src={`${data?.image ? `${import.meta.env.VITE_SITE_URL}/${data?.image}` : banner1}`}
+                    src={`${
+                      data?.image
+                        ? `${import.meta.env.VITE_SITE_URL}/${data?.image}`
+                        : banner1
+                    }`}
                     alt="banner"
                   />
 
@@ -48,7 +58,11 @@ const HomepageBanner = ({ data }) => {
                 <div className="3xl:h-[340px] h-[230px] 3xl:w-[320px] w-full overflow-hidden rounded-lg relative">
                   <img
                     className="rounded-lg h-full w-full object-cover"
-                    src={`${data?.image_one ? `${import.meta.env.VITE_SITE_URL}/${data?.image_one}` : banner2}`}
+                    src={`${
+                      data?.image_one
+                        ? `${import.meta.env.VITE_SITE_URL}/${data?.image_one}`
+                        : banner2
+                    }`}
                     alt=""
                   />
                   {/* Overlay with Linear Gradient */}
@@ -61,7 +75,11 @@ const HomepageBanner = ({ data }) => {
                 <div className="3xl:h-[390px] h-[230px] 3xl:w-[365px] w-full relative overflow-hidden rounded-lg">
                   <img
                     className="rounded-lg h-full w-full object-cover"
-                    src={`${data?.image_two ? `${import.meta.env.VITE_SITE_URL}/${data?.image_two}` : banner3}`}
+                    src={`${
+                      data?.image_two
+                        ? `${import.meta.env.VITE_SITE_URL}/${data?.image_two}`
+                        : banner3
+                    }`}
                     alt=""
                   />
                   {/* Overlay with Linear Gradient */}
@@ -70,7 +88,13 @@ const HomepageBanner = ({ data }) => {
                 <div className="3xl:h-[360px] h-[230px] 3xl:w-[340px] w-full relative rounded-lg overflow-hidden">
                   <img
                     className="rounded-lg h-full w-full object-cover"
-                    src={`${data?.image_three ? `${import.meta.env.VITE_SITE_URL}/${data?.image_three}` : banner4}`}
+                    src={`${
+                      data?.image_three
+                        ? `${import.meta.env.VITE_SITE_URL}/${
+                            data?.image_three
+                          }`
+                        : banner4
+                    }`}
                     alt=""
                   />
                   {/* Overlay with Linear Gradient */}
@@ -80,11 +104,8 @@ const HomepageBanner = ({ data }) => {
             </div>
           </div>
         </div>
-      ))
-
-      }
-
-    </section >
+      ))}
+    </section>
   );
 };
 

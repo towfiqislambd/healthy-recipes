@@ -3,13 +3,13 @@ import Navbar from "@/shared/Navbar";
 import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 
 const MainLayout = () => {
-  const location = useLocation()
+  const location = useLocation();
   return (
     <>
       <ScrollRestoration />
       <Navbar />
       <Outlet />
-      {location.pathname !== '/dashboard' && <Footer />}
+      {location.pathname !== "/dashboard" && <Footer />}
     </>
   );
 };

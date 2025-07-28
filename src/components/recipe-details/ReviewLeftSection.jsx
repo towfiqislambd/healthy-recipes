@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Rating from "react-rating";
-import { EmptyStarSvg, FullStarSvg } from "../svg-container/SvgContainer";
+import {
+  EmptyStarSvg,
+  FullStarSvg,
+} from "@/components/svg-container/SvgContainer";
 import useAuth from "@/hooks/useAuth";
 import { useAddReview } from "@/hooks/cms.mutations";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const ReviewLeftSection = ({ id, refetch }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [rating, setRating] = useState(0);
-  const [formSubmitted, setFormSubmitted] = useState(false);  // Track if form is submitted
+  const [formSubmitted, setFormSubmitted] = useState(false); // Track if form is submitted
   const { mutateAsync: reviewMutation } = useAddReview(id);
 
   const {
@@ -21,11 +24,11 @@ const ReviewLeftSection = ({ id, refetch }) => {
     reset,
   } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async data => {
     if (user) {
       if (id) {
         if (rating === 0) {
-          setFormSubmitted(true);  // Show rating error if submitted without rating
+          setFormSubmitted(true); // Show rating error if submitted without rating
           return;
         }
 
@@ -34,11 +37,11 @@ const ReviewLeftSection = ({ id, refetch }) => {
         reset();
         refetch();
         setRating(0);
-        setFormSubmitted(false);  // Reset the form submission status
+        setFormSubmitted(false); // Reset the form submission status
       }
     } else {
-      toast.error('Please login first')
-      navigate('/auth/login')
+      toast.error("Please login first");
+      navigate("/auth/login");
     }
   };
 
@@ -61,7 +64,7 @@ const ReviewLeftSection = ({ id, refetch }) => {
           <div className="mt-2 flex items-center gap-2">
             <Rating
               initialRating={rating}
-              onChange={(rate) => setRating(rate)}
+              onChange={rate => setRating(rate)}
               emptySymbol={<EmptyStarSvg />}
               fullSymbol={<FullStarSvg />}
               fractions={1}
@@ -76,7 +79,10 @@ const ReviewLeftSection = ({ id, refetch }) => {
           )}
 
           {/* form inputs */}
-          <form onSubmit={handleSubmit(onSubmit)} className="mt-5 space-y-5 w-full">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="mt-5 space-y-5 w-full"
+          >
             {/* Email */}
             <div className="flex flex-col gap-2 w-full">
               <label className="font-medium text-sm text-textColor">
@@ -85,7 +91,7 @@ const ReviewLeftSection = ({ id, refetch }) => {
               <input
                 className={`px-3 xl:px-4 py-2 xl:py-4 border rounded-lg w-full focus:outline-none`}
                 type="email"
-                placeholder={user ? '' : 'Join@gmail.com'}
+                placeholder={user ? "" : "Join@gmail.com"}
                 defaultValue={user?.email}
                 readOnly={user && true}
                 disabled={user && true}
@@ -100,7 +106,7 @@ const ReviewLeftSection = ({ id, refetch }) => {
               <input
                 className={`px-3 xl:px-4 py-2 xl:py-4 border rounded-lg w-full focus:outline-none}`}
                 type="text"
-                placeholder={user ? '' : 'Jon Doe'}
+                placeholder={user ? "" : "Jon Doe"}
                 defaultValue={user?.name}
                 readOnly={user && true}
                 disabled={user && true}
@@ -109,18 +115,25 @@ const ReviewLeftSection = ({ id, refetch }) => {
 
             {/* Review */}
             <div className="flex flex-col gap-2 w-full">
-              <label htmlFor="comment" className="font-medium text-sm text-textColor">
+              <label
+                htmlFor="comment"
+                className="font-medium text-sm text-textColor"
+              >
                 Write your review <span className="text-[#FF5630]">*</span>
               </label>
               <textarea
                 rows={5}
-                className={`px-3 xl:px-4 py-2 xl:py-4 resize-none border rounded-lg w-full focus:outline-none ${errors.comment ? "border-red-500" : "border-[#8993A4]"} `}
+                className={`px-3 xl:px-4 py-2 xl:py-4 resize-none border rounded-lg w-full focus:outline-none ${
+                  errors.comment ? "border-red-500" : "border-[#8993A4]"
+                } `}
                 placeholder="Share your thoughts here..."
                 id="comment"
                 {...register("comment", { required: "Review is required" })}
               ></textarea>
               {errors.comment && (
-                <span className="text-sm text-red-500">{errors.comment.message}</span>
+                <span className="text-sm text-red-500">
+                  {errors.comment.message}
+                </span>
               )}
             </div>
 

@@ -1,16 +1,19 @@
 import { useState } from "react";
-import TestimonialCard from "../cards/TestimonialCard";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
-import { SliderNextSvg, SliderPrevSvg } from "../svg-container/SvgContainer";
-import SectionTitle from "../common/SectionTitle";
+import TestimonialCard from "@/components/cards/TestimonialCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  SliderNextSvg,
+  SliderPrevSvg,
+} from "@/components/svg-container/SvgContainer";
+import SectionTitle from "@/components/common/SectionTitle";
 import { useTestimonial } from "@/hooks/cms.queries";
 
 const Testimonials = () => {
   const [swiperRef, setSwiperRef] = useState(null);
-  const { data: testimonial } = useTestimonial()
+  const { data: testimonial } = useTestimonial();
 
   return (
     <section className="py-7 lg:py-12 2xl:py-16 3xl:py-20 bg-[#FCFCFC] px-6 sm:px-0">

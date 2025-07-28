@@ -6,7 +6,7 @@ import {
 
 const RightSideContentsDetailsPage = ({ data }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const videoRef = useRef(null); // Create a ref for the video element
+  const videoRef = useRef(null);
 
   const handlePlay = () => {
     if (videoRef.current) {
@@ -32,8 +32,8 @@ const RightSideContentsDetailsPage = ({ data }) => {
       {/* Details */}
       <div>
         {/* video */}
-        {
-          data?.recipe_video && <div className="w-full 2xl:h-[480px] h-[250px] md:h-[300px] relative group">
+        {data?.recipe_video && (
+          <div className="w-full 2xl:h-[480px] h-[250px] md:h-[300px] relative group">
             <video
               ref={videoRef}
               className="w-full h-full object-cover rounded-2xl"
@@ -43,8 +43,9 @@ const RightSideContentsDetailsPage = ({ data }) => {
             {/* play button */}
             <div
               onClick={handlePlay}
-              className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700 items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer ${!isPlaying ? "flex" : "hidden"
-                }`}
+              className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700 items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer ${
+                !isPlaying ? "flex" : "hidden"
+              }`}
             >
               <PlayButtonSvg />
             </div>
@@ -52,13 +53,14 @@ const RightSideContentsDetailsPage = ({ data }) => {
             {/* pause button */}
             <div
               onClick={handlePause}
-              className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700  items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer   ${isPlaying ? "flex" : "hidden"
-                } `}
+              className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700  items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer   ${
+                isPlaying ? "flex" : "hidden"
+              } `}
             >
               <PauseButtonSvg />
             </div>
           </div>
-        }
+        )}
 
         {/* instructions */}
         <div className="pt-5">
@@ -69,11 +71,14 @@ const RightSideContentsDetailsPage = ({ data }) => {
 
           {/* steps */}
           <div className="mt-4 2xl:mt-6 space-y-3 2xl:space-y-5">
-            {
-              data?.instructions?.map((item, idx) => <p key={item.id} className="text-textColor 2xl:text-lg font-medium">
+            {data?.instructions?.map((item, idx) => (
+              <p
+                key={item.id}
+                className="text-textColor 2xl:text-lg font-medium"
+              >
                 <span>Step-{idx + 1}: </span> {item?.step}
-              </p>)
-            }
+              </p>
+            ))}
           </div>
         </div>
       </div>

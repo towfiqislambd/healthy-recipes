@@ -13,80 +13,104 @@ import { useAllRecipes } from "@/hooks/cms.queries";
 import { Loader } from "../loader/Loader";
 
 const AllRecipesTabs = ({ data, recipes, libraryId }) => {
-  const [activeTab, setActiveTab] = useState({ id: 0, category_name: 'All Recipes' });
+  const [activeTab, setActiveTab] = useState({
+    id: 0,
+    category_name: "All Recipes",
+  });
   const [tag, setTag] = useState(null);
   const filterClass = `text-base py-2 xl:py-3 px-3 xl:px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
-  const { data: allRecipes, isLoading } = useAllRecipes(activeTab?.id, libraryId, null, tag);
+  const { data: allRecipes, isLoading } = useAllRecipes(
+    activeTab?.id,
+    libraryId,
+    null,
+    tag
+  );
 
   if (isLoading) {
-    return <div className="h-[50vh] flex justify-center items-center"><Loader /></div>;
+    return (
+      <div className="h-[50vh] flex justify-center items-center">
+        <Loader />
+      </div>
+    );
   }
 
-  const getCountByType = (type) => {
-    if (type === 'All Recipes') {
+  const getCountByType = type => {
+    if (type === "All Recipes") {
       return recipes?.length || 0;
     } else {
-      return recipes?.filter((recipe) => recipe?.category_name === type)?.length || 0;
+      return (
+        recipes?.filter(recipe => recipe?.category_name === type)?.length || 0
+      );
     }
   };
 
   const handleReset = () => {
     setTag(null);
-    setActiveTab({ id: 0, category_name: 'All Recipes' });
+    setActiveTab({ id: 0, category_name: "All Recipes" });
   };
 
-  const handleTagChange = (value) => {
+  const handleTagChange = value => {
     setTag(value === "all" ? null : value);
   };
 
   // Get unique tags from all recipes
-  const uniqueTags = Array.from(new Set(
-    recipes?.flatMap(recipe =>
-      recipe.tag_names?.map(tag => ({ id: tag.id, tag_name: tag.tag_name })) || []
-    )));
+  const uniqueTags = Array.from(
+    new Set(
+      recipes?.flatMap(
+        recipe =>
+          recipe.tag_names?.map(tag => ({
+            id: tag.id,
+            tag_name: tag.tag_name,
+          })) || []
+      )
+    )
+  );
 
   return (
     <div className="container pb-7 xl:pb-10 2xl:pb-20">
       <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
-
         {/* Tabs */}
         <div className="py-5 sm:py-8 w-full flex flex-wrap items-center justify-center 3xl:justify-between gap-x-1 gap-y-2">
           <button
-            onClick={() => setActiveTab({ id: 0, category_name: 'All Recipes' })}
-            className={`px-3 sm:px-4 2xl:px-6 2xl:py-3 py-2 text-sm sm:text-base rounded-full font-medium ${activeTab?.category_name === 'All Recipes'
-              ? 'bg-[#3A3A3A] text-white'
-              : 'bg-transparent text-textColor'
-              }`}
+            onClick={() =>
+              setActiveTab({ id: 0, category_name: "All Recipes" })
+            }
+            className={`px-3 sm:px-4 2xl:px-6 2xl:py-3 py-2 text-sm sm:text-base rounded-full font-medium ${
+              activeTab?.category_name === "All Recipes"
+                ? "bg-[#3A3A3A] text-white"
+                : "bg-transparent text-textColor"
+            }`}
           >
-            All Recipes <span>({getCountByType('All Recipes')})</span>
+            All Recipes <span>({getCountByType("All Recipes")})</span>
           </button>
 
-          {data?.map((tab) => (
+          {data?.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab)}
-              className={`px-3 sm:px-4 2xl:px-6 2xl:py-3 py-2 text-sm sm:text-base rounded-full font-medium ${tab?.category_name === activeTab?.category_name
-                ? 'bg-[#3A3A3A] text-white'
-                : 'bg-transparent text-textColor'
-                }`}
+              className={`px-3 sm:px-4 2xl:px-6 2xl:py-3 py-2 text-sm sm:text-base rounded-full font-medium ${
+                tab?.category_name === activeTab?.category_name
+                  ? "bg-[#3A3A3A] text-white"
+                  : "bg-transparent text-textColor"
+              }`}
             >
-              {tab?.category_name} <span>({getCountByType(tab?.category_name)})</span>
+              {tab?.category_name}{" "}
+              <span>({getCountByType(tab?.category_name)})</span>
             </button>
           ))}
         </div>
 
         {/* Filter */}
         <div className="w-full flex flex-wrap items-center justify-center 2xl:justify-end gap-3 xl:gap-3 2xl:gap-5">
-          <Select
-            value={tag || "all"}
-            onValueChange={handleTagChange}
-          >
+          <Select value={tag || "all"} onValueChange={handleTagChange}>
             <SelectTrigger className="w-[300px] md:w-[380px] 2xl:w-[450px] h-9 sm:h-11 2xl:h-14 rounded-full px-4 2xl:px-6 text-base focus:ring-primary">
               <SelectValue placeholder="Select recipes by tags..." />
             </SelectTrigger>
             <SelectContent className="px-0 py-0">
-              <SelectItem value="all" className={filterClass}>Select recipes by tags</SelectItem>
+              <SelectItem value="all" className={filterClass}>
+                Select recipes by tags
+              </SelectItem>
               {uniqueTags.map(tag => (
                 <SelectItem key={tag.id} value={tag.id} className={filterClass}>
                   {tag.tag_name}
@@ -112,8 +136,14 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
             ))
           ) : (
             <div className="text-center col-span-4 py-5 space-y-4">
-              <img src={deleteImg} alt="logo" className="mx-auto size-16 xl:size-auto" />
-              <p className="text-primary font-merriweather text-lg lg:text-xl xl:text-2xl">No recipes found</p>
+              <img
+                src={deleteImg}
+                alt="logo"
+                className="mx-auto size-16 xl:size-auto"
+              />
+              <p className="text-primary font-merriweather text-lg lg:text-xl xl:text-2xl">
+                No recipes found
+              </p>
             </div>
           )}
         </div>

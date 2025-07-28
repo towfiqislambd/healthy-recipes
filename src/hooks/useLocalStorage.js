@@ -8,8 +8,8 @@ export default function useLocalStorage(key, initialValue) {
   });
 
   function handleDispatch(action) {
-    if (typeof action === 'function') {
-      setValue((prevState) => {
+    if (typeof action === "function") {
+      setValue(prevState => {
         const newValue = action(prevState);
         setItem(key, newValue);
         return newValue;
@@ -21,7 +21,7 @@ export default function useLocalStorage(key, initialValue) {
   }
 
   function clearState() {
-    setValue(null);  // Set value to null when clearing the state
+    setValue(null);
     removeItem(key);
   }
 

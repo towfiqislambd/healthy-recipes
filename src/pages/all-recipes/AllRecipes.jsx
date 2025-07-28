@@ -2,20 +2,38 @@ import AllRecipesTabs from "@/components/all-recipes/AllRecipesTabs";
 import RecipeBlogs from "@/components/homepage/RecipeBlogs";
 import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection";
 import { Loader } from "@/components/loader/Loader";
-import { useAllCategories, useAllRecipes, useBlogs, useShareYourRecipe } from "@/hooks/cms.queries";
+import {
+  useAllCategories,
+  useAllRecipes,
+  useBlogs,
+  useShareYourRecipe,
+} from "@/hooks/cms.queries";
 import { Link, useParams } from "react-router-dom";
 
 const AllRecipes = () => {
   const { id } = useParams();
-  const { data: allCategories, isLoading: isLoadingCategories } = useAllCategories();
-  const { data: shareYourRecipe, isLoading: isLoadingSharedRecipes } = useShareYourRecipe();
+  const { data: allCategories, isLoading: isLoadingCategories } =
+    useAllCategories();
+  const { data: shareYourRecipe, isLoading: isLoadingSharedRecipes } =
+    useShareYourRecipe();
   const { data: blogs, isLoading: isLoadingBlogs } = useBlogs();
-  const { data: allRecipes, isLoading: isLoadingRecipes } = useAllRecipes(null, id);
+  const { data: allRecipes, isLoading: isLoadingRecipes } = useAllRecipes(
+    null,
+    id
+  );
 
-  const isLoading = isLoadingCategories || isLoadingSharedRecipes || isLoadingBlogs || isLoadingRecipes;
+  const isLoading =
+    isLoadingCategories ||
+    isLoadingSharedRecipes ||
+    isLoadingBlogs ||
+    isLoadingRecipes;
 
   if (isLoading) {
-    return <div className="flex justify-center items-center h-screen"><Loader /></div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Loader />
+      </div>
+    );
   }
 
   return (
@@ -49,7 +67,11 @@ const AllRecipes = () => {
       </div>
 
       {/* tabs */}
-      <AllRecipesTabs libraryId={id} data={allCategories} recipes={allRecipes} />
+      <AllRecipesTabs
+        libraryId={id}
+        data={allCategories}
+        recipes={allRecipes}
+      />
 
       <ShareYourRecipeSection data={shareYourRecipe} />
       <RecipeBlogs data={blogs} />

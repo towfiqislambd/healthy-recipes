@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { CgSpinnerTwo } from 'react-icons/cg';
-import { useVerifyEmail } from '@/hooks/auth.hook.';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { CgSpinnerTwo } from "react-icons/cg";
+import { useVerifyEmail } from "@/hooks/auth.hook.";
 
 const VerifyEmail = () => {
   const [loading, setLoading] = useState(false);
@@ -12,7 +12,7 @@ const VerifyEmail = () => {
 
   // css:
   const inputClass =
-    'rounded-lg border-[0.5px]  shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-3 lg:px-5 py-2 lg:py-3';
+    "rounded-lg border-[0.5px]  shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-3 lg:px-5 py-2 lg:py-3";
 
   const {
     register,
@@ -22,17 +22,15 @@ const VerifyEmail = () => {
   } = useForm();
 
   // Form Data
-  const onSubmit = async (data) => {
-    setLoading(true); // ✅ Set loading to true before API call
+  const onSubmit = async data => {
+    setLoading(true);
     try {
       await verifyEmailMutation(data);
       reset();
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
-    }
-    finally {
-      setLoading(false); // ✅ Always reset loading after the attempt
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,7 +49,10 @@ const VerifyEmail = () => {
       </div>
 
       {/* form */}
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-5 lg:mt-8 space-y-3 lg:space-y-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mt-5 lg:mt-8 space-y-3 lg:space-y-6"
+      >
         {/* email */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
@@ -64,10 +65,11 @@ const VerifyEmail = () => {
             {errors.email && <span className="text-red-500">Required</span>}
           </div>
           <input
-            {...register('email', { required: true })}
+            {...register("email", { required: true })}
             placeholder="Enter your email"
-            className={`${inputClass} ${errors.email ? 'border-red-500' : 'border-[#9D9D9D]'
-              }`}
+            className={`${inputClass} ${
+              errors.email ? "border-red-500" : "border-[#9D9D9D]"
+            }`}
             type="email"
             name="email"
             id="email"
@@ -80,14 +82,14 @@ const VerifyEmail = () => {
             disabled={loading}
             type="submit"
             className={`leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary w-full border bg-primary rounded-full text-center py-3 hover:bg-transparent hover:text-primary  transition-all duration-300 h-[50px] flex items-center justify-center
-                ${loading ? 'cursor-not-allowed' : 'cursor-pointer'}
+                ${loading ? "cursor-not-allowed" : "cursor-pointer"}
                 `}
           >
             <span>
               {loading ? (
                 <CgSpinnerTwo className="animate-spin size-6" />
               ) : (
-                'Verify'
+                "Verify"
               )}
             </span>
           </button>

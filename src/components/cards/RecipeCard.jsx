@@ -1,18 +1,18 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import {
   FireSvg,
   LoveSvg,
   RecipeBookSvg,
   StarSvg,
-} from '../svg-container/SvgContainer';
-import useAuth from '@/hooks/useAuth';
-import toast from 'react-hot-toast';
-import { useAddWishlist } from '@/hooks/cms.mutations';
-import { useState } from 'react';
-import Modal from '../modals/Modal';
-import AddMealModal from '../modals/AddMealModal';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+} from "../svg-container/SvgContainer";
+import useAuth from "@/hooks/useAuth";
+import toast from "react-hot-toast";
+import { useAddWishlist } from "@/hooks/cms.mutations";
+import { useState } from "react";
+import Modal from "../modals/Modal";
+import AddMealModal from "../modals/AddMealModal";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
   const [recipeId, setRecipeId] = useState(null);
@@ -28,26 +28,24 @@ const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
 
     if (user) {
       setOpen(true);
-      setRecipeId(item?.id)
-    }
-    else {
-      toast.error('Please login first')
-      navigate('/auth/login')
+      setRecipeId(item?.id);
+    } else {
+      toast.error("Please login first");
+      navigate("/auth/login");
     }
   };
 
   // Function to handle wishlist button click
-  const handleWishlistClick = async (e) => {
+  const handleWishlistClick = async e => {
     e.stopPropagation(); // Prevents the click event from bubbling up
     e.preventDefault(); // Prevents the default link navigation
 
     if (user) {
       await wishlistMutation();
       refetch();
-    }
-    else {
-      toast.error('Please login first')
-      navigate('/auth/login')
+    } else {
+      toast.error("Please login first");
+      navigate("/auth/login");
     }
   };
 
@@ -89,8 +87,9 @@ const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
           {/* Wishlist */}
           <button
             onClick={handleWishlistClick}
-            className={`absolute size-9 4xl:size-10 z-20 flex items-center justify-center top-3 4xl:top-4 right-3 4xl:right-4 border border-[#CB4242] rounded-full cursor-pointer ${item?.is_wishlisted ? 'bg-[#CB4242]' : 'bg-[#FFE3E3]'
-              }`}
+            className={`absolute size-9 4xl:size-10 z-20 flex items-center justify-center top-3 4xl:top-4 right-3 4xl:right-4 border border-[#CB4242] rounded-full cursor-pointer ${
+              item?.is_wishlisted ? "bg-[#CB4242]" : "bg-[#FFE3E3]"
+            }`}
           >
             <LoveSvg isFavorite={item?.is_wishlisted} />
           </button>
@@ -99,11 +98,9 @@ const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
           <div className="absolute top-3 left-3">
             <p className="px-2 4xl:px-3 py-1 4xl:py-1.5 rounded-sm bg-white/50 text-black text-sm truncate">
               <span>
-                {
-                  `${item?.library_name || item?.recipe_library?.diet_name}
+                {`${item?.library_name || item?.recipe_library?.diet_name}
                    | 
-                   ${item?.category_name || item?.category?.category_name}`
-                }
+                   ${item?.category_name || item?.category?.category_name}`}
               </span>
             </p>
           </div>
@@ -120,7 +117,8 @@ const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
                 <RecipeBookSvg />
               </div>
               <p className="text-textColor text-[15px] xl:text-base font-medium">
-                {item?.serving_number} servings | {item?.preparation_time} min needed
+                {item?.serving_number} servings | {item?.preparation_time} min
+                needed
               </p>
             </div>
             <div>
@@ -130,9 +128,7 @@ const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
             </div>
             <div>
               <p className="text-textColor font-medium text-[15px] xl:text-base truncate">
-                {
-                  `${item?.total_ingredients} ingredients | ${item?.recipe_creator}`
-                }
+                {`${item?.total_ingredients} ingredients | ${item?.recipe_creator}`}
               </p>
             </div>
           </div>
@@ -143,7 +139,9 @@ const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
           {/* views */}
           <div className="flex items-center gap-1">
             <FireSvg />
-            <span className="text-textColor text-sm font-medium">{item?.views}</span>
+            <span className="text-textColor text-sm font-medium">
+              {item?.views}
+            </span>
           </div>
 
           {/* reviews */}
@@ -156,26 +154,20 @@ const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
         </div>
 
         {/* add meal button */}
-        {
-          isPlanner && (
-            <div className="px-5">
-              <button
-                onClick={(e) => handleAddToPlanner(e, item)}
-                className="hover:bg-primary border border-primary px-3 2xl:px-5 py-2 2xl:py-3 rounded-lg hover:text-white text-[#5A5C5F] duration-300 transition-all"
-              >
-                + Add to planner
-              </button>
-            </div>
-          )
-        }
-      </Link >
+        {isPlanner && (
+          <div className="px-5">
+            <button
+              onClick={e => handleAddToPlanner(e, item)}
+              className="hover:bg-primary border border-primary px-3 2xl:px-5 py-2 2xl:py-3 rounded-lg hover:text-white text-[#5A5C5F] duration-300 transition-all"
+            >
+              + Add to planner
+            </button>
+          </div>
+        )}
+      </Link>
       {/* Modal */}
       <Modal open={open} setOpen={setOpen}>
-        <AddMealModal
-          open={open}
-          setOpen={setOpen}
-          recipeId={recipeId}
-        />
+        <AddMealModal open={open} setOpen={setOpen} recipeId={recipeId} />
       </Modal>
     </>
   );

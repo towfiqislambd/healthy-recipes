@@ -1,4 +1,4 @@
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
 
 const LeftSideContentsDetailsPage = ({ data }) => {
   return (
@@ -12,11 +12,13 @@ const LeftSideContentsDetailsPage = ({ data }) => {
 
         {/* description */}
         <div className="mt-4 lg:mt-5 2xl:mt-8 space-y-3 2xl:space-y-5">
-          {
-            data?.ingredients.map(item => <li key={item.id} className="text-textColor leading-[130%]">
-              {typeof item?.ingredient_name === 'string' ? parse(item?.ingredient_name) : item?.ingredient_name}
-            </li>)
-          }
+          {data?.ingredients.map(item => (
+            <li key={item.id} className="text-textColor leading-[130%]">
+              {typeof item?.ingredient_name === "string"
+                ? parse(item?.ingredient_name)
+                : item?.ingredient_name}
+            </li>
+          ))}
         </div>
       </div>
 
@@ -45,12 +47,10 @@ const LeftSideContentsDetailsPage = ({ data }) => {
 
         {/* description */}
         <div className="mt-3 2xl:mt-8 space-y-3 2xl:space-y-5 text-textColor leading-7 2xl:leading-10">
-          {
-            typeof data?.nutritions === 'string' || typeof data?.nutrition_info === 'string'
-              ? parse(data.nutritions || data.nutrition_info)
-              :
-              data?.nutritions || data?.nutrition_info
-          }
+          {typeof data?.nutritions === "string" ||
+          typeof data?.nutrition_info === "string"
+            ? parse(data.nutritions || data.nutrition_info)
+            : data?.nutritions || data?.nutrition_info}
         </div>
       </div>
 
@@ -63,17 +63,23 @@ const LeftSideContentsDetailsPage = ({ data }) => {
 
         {/* description */}
         <div className="mt-5 2xl:mt-8 flex items-center flex-wrap gap-3">
-          {
-            data?.tag_names
-              ?
-              data?.tag_names?.map(item => <div key={item.id} className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor">
-                {item?.tag_name}
-              </div>)
-              :
-              data?.tags?.map(item => <div key={item.id} className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor">
-                {item?.tag_name}
-              </div>)
-          }
+          {data?.tag_names
+            ? data?.tag_names?.map(item => (
+                <div
+                  key={item.id}
+                  className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor"
+                >
+                  {item?.tag_name}
+                </div>
+              ))
+            : data?.tags?.map(item => (
+                <div
+                  key={item.id}
+                  className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor"
+                >
+                  {item?.tag_name}
+                </div>
+              ))}
         </div>
       </div>
     </div>

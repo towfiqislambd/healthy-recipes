@@ -1,102 +1,112 @@
-import AuthLayout from '@/layouts/AuthLayout';
-import DashboardLayout from '@/layouts/DashboardLayout';
-import MainLayout from '@/layouts/MainLayout';
-import AllRecipes from '@/pages/all-recipes/AllRecipes';
-import Login from '@/pages/auth/login/Login';
-import Register from '@/pages/auth/register/Register';
-import ResetPassword from '@/pages/auth/reset-password/ResetPassword';
-import VerifyEmail from '@/pages/auth/verify-email/VerifyEmail';
-import VerifyOtp from '@/pages/auth/verify-otp/VerifyOtp';
-import BlogDetails from '@/pages/blog-details/BlogDetails';
-import Blog from '@/pages/blog/Blog';
-import DashboardMealPlanner from '@/pages/dashboard/DashboardMealPlanner';
-import DashboardMyRecipes from '@/pages/dashboard/DashboardMyRecipes';
-import DashboardOverview from '@/pages/dashboard/DashboardOverview';
-import DashboardSavedRecipes from '@/pages/dashboard/DashboardSavedRecipes';
-import DashboardShareRecipe from '@/pages/dashboard/DashboardShareRecipe';
-import EditRecipes from '@/pages/dashboard/EditRecipes';
-import ErrorPage from '@/pages/error/ErrorPage';
-import Homepage from '@/pages/homepage/Homepage';
-import MealPlanner from '@/pages/meal-planner/MealPlanner';
-import RecipeDetails from '@/pages/recipe-details/RecipeDetails';
-import RecipeLibrary from '@/pages/recipe-library/RecipeLibrary';
-import { createBrowserRouter } from 'react-router-dom';
-import PrivateRoute from './PrivateRoute';
-import MyRecipeDetails from '@/pages/dashboard/MyRecipeDetails';
+import AuthLayout from "@/layouts/AuthLayout";
+import DashboardLayout from "@/layouts/DashboardLayout";
+import MainLayout from "@/layouts/MainLayout";
+import AllRecipes from "@/pages/all-recipes/AllRecipes";
+import Login from "@/pages/auth/login/Login";
+import Register from "@/pages/auth/register/Register";
+import ResetPassword from "@/pages/auth/reset-password/ResetPassword";
+import VerifyEmail from "@/pages/auth/verify-email/VerifyEmail";
+import VerifyOtp from "@/pages/auth/verify-otp/VerifyOtp";
+import BlogDetails from "@/pages/blog-details/BlogDetails";
+import Blog from "@/pages/blog/Blog";
+import DashboardMealPlanner from "@/pages/dashboard/DashboardMealPlanner";
+import DashboardMyRecipes from "@/pages/dashboard/DashboardMyRecipes";
+import DashboardOverview from "@/pages/dashboard/DashboardOverview";
+import DashboardSavedRecipes from "@/pages/dashboard/DashboardSavedRecipes";
+import DashboardShareRecipe from "@/pages/dashboard/DashboardShareRecipe";
+import EditRecipes from "@/pages/dashboard/EditRecipes";
+import ErrorPage from "@/pages/error/ErrorPage";
+import Homepage from "@/pages/homepage/Homepage";
+import MealPlanner from "@/pages/meal-planner/MealPlanner";
+import RecipeDetails from "@/pages/recipe-details/RecipeDetails";
+import RecipeLibrary from "@/pages/recipe-library/RecipeLibrary";
+import { createBrowserRouter } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
+import MyRecipeDetails from "@/pages/dashboard/MyRecipeDetails";
 
 export const router = createBrowserRouter([
   // Main Layout
   {
-    path: '/',
+    path: "/",
     element: <MainLayout />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Homepage />,
       },
       {
-        path: '/recipe-library',
+        path: "/recipe-library",
         element: <RecipeLibrary />,
       },
       {
-        path: '/recipes/recipe_library/:id',
+        path: "/recipes/recipe_library/:id",
         element: <AllRecipes />,
       },
       {
-        path: '/recipe-details/:id',
+        path: "/recipe-details/:id",
         element: <RecipeDetails />,
       },
       {
-        path: '/meal-planner',
+        path: "/meal-planner",
         element: <MealPlanner />,
       },
       {
-        path: '/blog',
+        path: "/blog",
         element: <Blog />,
       },
       {
-        path: '/blog/:slug',
+        path: "/blog/:slug",
         element: <BlogDetails />,
       },
       {
-        path: '/my-recipe-details/:id',
-        element: <PrivateRoute><MyRecipeDetails /></PrivateRoute>,
+        path: "/my-recipe-details/:id",
+        element: (
+          <PrivateRoute>
+            <MyRecipeDetails />
+          </PrivateRoute>
+        ),
       },
     ],
   },
+
   // Auth Layout
   {
-    path: '/auth',
+    path: "/auth",
     element: <AuthLayout />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'login',
+        path: "login",
         element: <Login />,
       },
       {
-        path: 'register',
+        path: "register",
         element: <Register />,
       },
       {
-        path: 'verify-email',
+        path: "verify-email",
         element: <VerifyEmail />,
       },
       {
-        path: 'verify-otp',
+        path: "verify-otp",
         element: <VerifyOtp />,
       },
       {
-        path: 'reset-password',
+        path: "reset-password",
         element: <ResetPassword />,
       },
     ],
   },
+
   // Dashboard Layout
   {
-    path: '/dashboard',
-    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
@@ -104,25 +114,25 @@ export const router = createBrowserRouter([
         element: <DashboardOverview />,
       },
       {
-        path: 'dashboard-meal-planner',
+        path: "dashboard-meal-planner",
         element: <DashboardMealPlanner />,
       },
       {
-        path: 'dashboard-share-recipes',
+        path: "dashboard-share-recipes",
         element: <DashboardShareRecipe />,
       },
       {
-        path: 'dashboard-my-recipes',
+        path: "dashboard-my-recipes",
         element: <DashboardMyRecipes />,
       },
       {
-        path: 'dashboard-saved-recipes',
+        path: "dashboard-saved-recipes",
         element: <DashboardSavedRecipes />,
       },
       {
-        path: 'edit-recipe/:id',
+        path: "edit-recipe/:id",
         element: <EditRecipes />,
       },
-    ]
-  }
+    ],
+  },
 ]);

@@ -24,23 +24,21 @@ const VerifyOtp = () => {
   const { mutateAsync: resendOtpMutation } = useResendOtp();
 
   // Catch OTP here..
-  const onSubmit = async (data) => {
-    setLoading(true); // ✅ Set loading to true before API call
+  const onSubmit = async data => {
+    setLoading(true);
     try {
       const updatedData = { email, otp: data.otp };
       await verifyOtpMutation(updatedData);
       reset();
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
-    }
-    finally {
-      setLoading(false); // ✅ Always reset loading after the attempt
+    } finally {
+      setLoading(false);
     }
   };
 
   //   handle resend:
-  const handleResendCode = (e) => {
+  const handleResendCode = e => {
     e.preventDefault();
     if (email) {
       resendOtpMutation({ email: email });
@@ -54,7 +52,7 @@ const VerifyOtp = () => {
     let interval;
 
     if (timer > 0 && !isReset) {
-      interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
+      interval = setInterval(() => setTimer(prev => prev - 1), 1000);
     } else if (timer === 0) {
       setActiveResendButton(true);
     }
@@ -92,7 +90,7 @@ const VerifyOtp = () => {
                 onChange={field.onChange}
                 numInputs={4}
                 renderSeparator={false}
-                renderInput={(props) => <input {...props} />}
+                renderInput={props => <input {...props} />}
               />
             )}
           />
@@ -114,11 +112,12 @@ const VerifyOtp = () => {
                 onClick={handleResendCode}
                 // disabled={!activeResendButton}
                 type="button"
-                className={`font-semibold ${activeResendButton
-                  ? "text-secondary cursor-pointer"
-                  : "text-textColor"
+                className={`font-semibold ${
+                  activeResendButton
+                    ? "text-secondary cursor-pointer"
+                    : "text-textColor"
                   // cursor-not-allowed
-                  }`}
+                }`}
               >
                 Resend
               </button>

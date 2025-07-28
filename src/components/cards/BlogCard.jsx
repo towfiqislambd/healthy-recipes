@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import { ArrowTopRightSvg } from '../svg-container/SvgContainer';
-import parse from 'html-react-parser';
+import { Link } from "react-router-dom";
+import { ArrowTopRightSvg } from "../svg-container/SvgContainer";
+import parse from "html-react-parser";
 
 const BlogCard = ({ item }) => {
   return (
@@ -34,7 +34,9 @@ const BlogCard = ({ item }) => {
             {item?.title}
           </h4>
           <div className="text-textColor 2xl:leading-[150%] ">
-            {typeof item?.description === 'string' ? parse(item?.description.slice(0, 80)) : item?.description}
+            {typeof item?.description === "string"
+              ? parse(item?.description.slice(0, 80))
+              : item?.description}
           </div>
         </div>
 
@@ -52,7 +54,9 @@ const BlogCard = ({ item }) => {
               <h5 className="text-black font-medium leading-[140%] text-sm">
                 {item?.author_name}
               </h5>
-              <p className="text-textColor text-sm leading-[140%]">{item?.created_date}</p>
+              <p className="text-textColor text-sm leading-[140%]">
+                {item?.created_date}
+              </p>
             </div>
           </div>
 

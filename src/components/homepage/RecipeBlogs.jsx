@@ -1,10 +1,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useState } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { SliderNextSvg, SliderPrevSvg } from "../svg-container/SvgContainer";
-import { useState } from "react";
-import BlogCard from "../cards/BlogCard";
 import { Navigation } from "swiper/modules";
+import {
+  SliderNextSvg,
+  SliderPrevSvg,
+} from "@/components/svg-container/SvgContainer";
+import BlogCard from "@/components/cards/BlogCard";
 
 const RecipeBlogs = ({ data }) => {
   const [swiperRef, setSwiperRef] = useState(null);

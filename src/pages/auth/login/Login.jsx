@@ -20,7 +20,7 @@ const Login = () => {
   // Mutation:
   const { mutateAsync: loginMutation } = useLogin();
 
-  // Hook Form 
+  // Hook Form
   const {
     register,
     handleSubmit,
@@ -29,17 +29,15 @@ const Login = () => {
   } = useForm();
 
   // All Form Data
-  const onSubmit = async (data) => {
-    setLoading(true); // ✅ Set loading to true before API call
+  const onSubmit = async data => {
+    setLoading(true);
     try {
       await loginMutation(data);
       reset();
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
-    }
-    finally {
-      setLoading(false); // ✅ Always reset loading after the attempt
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,7 +49,10 @@ const Login = () => {
       </h4>
 
       {/* form */}
-      <form onSubmit={handleSubmit(onSubmit)} className="lg:mt-8 space-y-4 lg:space-y-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="lg:mt-8 space-y-4 lg:space-y-6"
+      >
         {/* email */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
@@ -61,13 +62,16 @@ const Login = () => {
             >
               Email
             </label>
-            {errors.email && <span className="text-red-500">Email is required</span>}
+            {errors.email && (
+              <span className="text-red-500">Email is required</span>
+            )}
           </div>
           <input
             {...register("email", { required: true })}
             placeholder="Enter your email"
-            className={`${inputClass} ${errors.email ? "border-red-500" : "border-[#9D9D9D]"
-              }`}
+            className={`${inputClass} ${
+              errors.email ? "border-red-500" : "border-[#9D9D9D]"
+            }`}
             type="email"
             name="email"
             id="email"
@@ -83,11 +87,14 @@ const Login = () => {
             >
               Password
             </label>
-            {errors.password && <span className="text-red-500">Password is required</span>}
+            {errors.password && (
+              <span className="text-red-500">Password is required</span>
+            )}
           </div>
           <div
-            className={`w-full ${inputClass} relative ${errors.password ? "border-red-500" : "border-[#9D9D9D]"
-              }`}
+            className={`w-full ${inputClass} relative ${
+              errors.password ? "border-red-500" : "border-[#9D9D9D]"
+            }`}
           >
             <input
               {...register("password", { required: true })}
@@ -98,7 +105,7 @@ const Login = () => {
               id="password"
             />
             <div
-              onClick={() => setShowPassword((prev) => !prev)}
+              onClick={() => setShowPassword(prev => !prev)}
               className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
             >
               {showPassword ? <ShowPassSvg /> : <HidePassSvg />}

@@ -1,14 +1,23 @@
-import ReviewLeftSection from "./ReviewLeftSection";
-import ReviewCard from "../cards/ReviewCard";
+import ReviewLeftSection from "@/components/recipe-details/ReviewLeftSection";
+import ReviewCard from "@/components/cards/ReviewCard";
 import { useState } from "react";
 import { useRecipeReviews } from "@/hooks/cms.queries";
-import { Loader } from "../loader/Loader";
+import { Loader } from "@/components/loader/Loader";
 
 const ReviewSection = ({ id }) => {
   const [activePage, setActivePage] = useState(1);
-  const { data: allReviews, isLoading, refetch } = useRecipeReviews(id, activePage);
+  const {
+    data: allReviews,
+    isLoading,
+    refetch,
+  } = useRecipeReviews(id, activePage);
 
-  if (isLoading) return <div className="h-[50vh] flex justify-center items-center"><Loader /></div>;
+  if (isLoading)
+    return (
+      <div className="h-[50vh] flex justify-center items-center">
+        <Loader />
+      </div>
+    );
 
   return (
     <section className="container py-8 xl:py-10 2xl:py-16 3xl:py-24">
@@ -18,27 +27,29 @@ const ReviewSection = ({ id }) => {
           <ReviewLeftSection id={id} refetch={refetch} />
         </div>
 
-
         {/* right side contents */}
         <div className="space-y-5 xl:flex-1 w-full">
-          {
-            allReviews.data?.length > 0 ?
-              allReviews?.data?.map((item, idx) =>
-                <ReviewCard key={idx} data={item} />
-              )
-              :
-              <p className="text-primary font-merriweather text-lg lg:text-xl">No review yet</p>
-          }
+          {allReviews.data?.length > 0 ? (
+            allReviews?.data?.map((item, idx) => (
+              <ReviewCard key={idx} data={item} />
+            ))
+          ) : (
+            <p className="text-primary font-merriweather text-lg lg:text-xl">
+              No review yet
+            </p>
+          )}
 
           {/* Pagination */}
           <div className="mt-10 flex justify-center items-center gap-2 flex-wrap">
             {allReviews?.links.map((item, idx) => (
               <button
                 key={idx}
-                onClick={() => item.url && setActivePage(item.url.split('=')[1])}
+                onClick={() =>
+                  item.url && setActivePage(item.url.split("=")[1])
+                }
                 className={`px-3 py-1 rounded border transition-all duration-150 
-        ${item.active ? 'bg-primary text-white' : 'bg-white text-gray-700'} 
-        ${!item.url ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'}`}
+        ${item.active ? "bg-primary text-white" : "bg-white text-gray-700"} 
+        ${!item.url ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"}`}
                 disabled={!item.url}
                 dangerouslySetInnerHTML={{ __html: item.label }}
               />

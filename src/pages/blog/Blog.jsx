@@ -6,7 +6,11 @@ const Blog = () => {
   const { data: blogs, isLoading } = useBlogs();
 
   if (isLoading) {
-    return <div className="flex justify-center items-center h-svh"><Loader /></div>;
+    return (
+      <div className="flex justify-center items-center h-svh">
+        <Loader />
+      </div>
+    );
   }
 
   return (
@@ -19,9 +23,9 @@ const Blog = () => {
               Recipe Blogs & Tips
             </h2>
             <p className="xl:mt-8 mt-4 text-textColor leading-[150%] lg:max-w-[912px] mx-auto text-sm lg:text-base">
-              A revolutionary approach to meal planning. Cutting-edge organization
-              tools crafted to save time and tailor your weekly menu to your dietary
-              preferences and habits.
+              A revolutionary approach to meal planning. Cutting-edge
+              organization tools crafted to save time and tailor your weekly
+              menu to your dietary preferences and habits.
             </p>
           </div>
 

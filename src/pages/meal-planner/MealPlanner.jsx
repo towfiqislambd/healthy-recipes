@@ -1,33 +1,41 @@
-import MealPlannerStatsCard from '@/components/cards/MealPlannerStatsCard';
-import RecipeBlogs from '@/components/homepage/RecipeBlogs';
-import ShareYourRecipeSection from '@/components/homepage/ShareYourRecipeSection';
-import { Loader } from '@/components/loader/Loader';
-import MealPlannerTabSection from '@/components/meal-planner/MealPlannerTabSection';
+import MealPlannerStatsCard from "@/components/cards/MealPlannerStatsCard";
+import RecipeBlogs from "@/components/homepage/RecipeBlogs";
+import ShareYourRecipeSection from "@/components/homepage/ShareYourRecipeSection";
+import { Loader } from "@/components/loader/Loader";
+import MealPlannerTabSection from "@/components/meal-planner/MealPlannerTabSection";
 import {
   useBlogs,
   useMealPlannerCard,
   useMealPlannerTitleAndDesc,
   useShareYourRecipe,
-} from '@/hooks/cms.queries';
+} from "@/hooks/cms.queries";
 
 const MealPlanner = () => {
-  const { data: shareYourRecipe, isLoading: loadingShareYourRecipe } = useShareYourRecipe();
-  const { data: mealPlannerTitleAndDesc, isLoading: loadingMealPlannerTitleAndDesc } = useMealPlannerTitleAndDesc();
-  const { data: mealPlannerCard, isLoading: loadingMealPlannerCard } = useMealPlannerCard();
+  const { data: shareYourRecipe, isLoading: loadingShareYourRecipe } =
+    useShareYourRecipe();
+  const {
+    data: mealPlannerTitleAndDesc,
+    isLoading: loadingMealPlannerTitleAndDesc,
+  } = useMealPlannerTitleAndDesc();
+  const { data: mealPlannerCard, isLoading: loadingMealPlannerCard } =
+    useMealPlannerCard();
   const { data: blogs, isLoading: loadingBlogs } = useBlogs();
 
   const isLoading =
     loadingShareYourRecipe ||
     loadingMealPlannerTitleAndDesc ||
     loadingMealPlannerCard ||
-    loadingBlogs
+    loadingBlogs;
 
   if (isLoading) {
-    document.body.style.overflow = 'hidden';
-    return <div className="h-screen flex justify-center items-center"><Loader /></div>;
-  }
-  else {
-    document.body.style.overflow = '';
+    document.body.style.overflow = "hidden";
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <Loader />
+      </div>
+    );
+  } else {
+    document.body.style.overflow = "";
   }
 
   return (

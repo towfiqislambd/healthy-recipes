@@ -1,14 +1,12 @@
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 import {
   CopyLinkSvg,
   FacebookShareSvg,
   InstagramShareSvg,
   TwitterShareSvg,
-} from "../svg-container/SvgContainer";
-import toast from "react-hot-toast";
+} from "@/components/svg-container/SvgContainer";
 
 const ShareRecipeSection = ({ fullLocation }) => {
-
   // For Twitter
   const handleTwitterRedirect = () => {
     const text = "Follow me on Gift a coffee!";

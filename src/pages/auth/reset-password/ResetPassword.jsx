@@ -32,8 +32,8 @@ const ResetPassword = () => {
   } = useForm();
 
   // Form Data
-  const onSubmit = async (data) => {
-    setLoading(true); // ✅ Set loading to true before API call
+  const onSubmit = async data => {
+    setLoading(true);
     try {
       const updatedData = {
         email,
@@ -43,12 +43,10 @@ const ResetPassword = () => {
       };
       await resetPasswordMutation(updatedData);
       reset();
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
-    }
-    finally {
-      setLoading(false); // ✅ Always reset loading after the attempt
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -73,14 +71,20 @@ const ResetPassword = () => {
         {/* Password */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
-            <label htmlFor="password" className="text-black leading-[175%] tracking-[-0.064px]">
+            <label
+              htmlFor="password"
+              className="text-black leading-[175%] tracking-[-0.064px]"
+            >
               New Password
             </label>
-            {errors.password && <span className="text-red-500">Password is required</span>}
+            {errors.password && (
+              <span className="text-red-500">Password is required</span>
+            )}
           </div>
           <div
-            className={`w-full ${inputClass} relative ${errors.password ? "border-red-500" : "border-[#9D9D9D]"
-              }`}
+            className={`w-full ${inputClass} relative ${
+              errors.password ? "border-red-500" : "border-[#9D9D9D]"
+            }`}
           >
             <input
               {...register("password", { required: true })}
@@ -90,7 +94,7 @@ const ResetPassword = () => {
               id="password"
             />
             <div
-              onClick={() => setShowPassword((prev) => !prev)}
+              onClick={() => setShowPassword(prev => !prev)}
               className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
             >
               {showPassword ? <ShowPassSvg /> : <HidePassSvg />}
@@ -101,18 +105,29 @@ const ResetPassword = () => {
         {/* Confirm Password */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
-            <label htmlFor="password_confirmation" className="text-black leading-[175%] tracking-[-0.064px]">
+            <label
+              htmlFor="password_confirmation"
+              className="text-black leading-[175%] tracking-[-0.064px]"
+            >
               Confirm New Password
             </label>
             {errors.password_confirmation && (
-              <span className="text-red-500">{errors.password_confirmation.message}</span>
+              <span className="text-red-500">
+                {errors.password_confirmation.message}
+              </span>
             )}
           </div>
-          <div className={`w-full ${inputClass} relative ${errors.password_confirmation ? "border-red-500" : "border-[#9D9D9D]"}`}>
+          <div
+            className={`w-full ${inputClass} relative ${
+              errors.password_confirmation
+                ? "border-red-500"
+                : "border-[#9D9D9D]"
+            }`}
+          >
             <input
               {...register("password_confirmation", {
                 required: "Confirm Password is required",
-                validate: (value) =>
+                validate: value =>
                   value === getValues("password") || "Passwords do not match",
               })}
               placeholder="Enter password again"
@@ -121,7 +136,7 @@ const ResetPassword = () => {
               id="confirmPassword"
             />
             <div
-              onClick={() => setConfirmPassword((prev) => !prev)}
+              onClick={() => setConfirmPassword(prev => !prev)}
               className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
             >
               {confirmPassword ? <ShowPassSvg /> : <HidePassSvg />}

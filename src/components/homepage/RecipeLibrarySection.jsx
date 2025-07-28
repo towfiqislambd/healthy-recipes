@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import SectionTitle from "../common/SectionTitle";
-import RecipeCategoryCard from "../cards/RecipeCategoryCard";
+import SectionTitle from "@/components/common/SectionTitle";
+import RecipeCategoryCard from "@/components/cards/RecipeCategoryCard";
 
 const RecipeLibrarySection = ({ data }) => {
-
   return (
     <section className="bg-[#FCFCFC] py-7 md:py-10 2xl:py-16 3xl:py-24">
       <div className="container">
