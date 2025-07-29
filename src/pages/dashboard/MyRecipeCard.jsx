@@ -5,8 +5,9 @@ import {
   FireSvg,
   RecipeBookSvg,
 } from "@/components/svg-container/SvgContainer";
+import Skeleton from "react-loading-skeleton";
 
-const MyRecipeCard = ({ item }) => {
+const MyRecipeCard = ({ item, loading }) => {
   // const navigate = useNavigate()
 
   // Function to handle edit btn
@@ -16,6 +17,23 @@ const MyRecipeCard = ({ item }) => {
   //     navigate(`/dashboard/edit-recipe/${item?.id}`)
   // };
 
+  // Fallback Skeleton
+  if (loading) {
+    return (
+      <div className="bg-white rounded-2xl shadow-md p-3 space-y-3">
+        <Skeleton height={200} />
+        <Skeleton height={24} width="80%" />
+        <Skeleton count={2} />
+        <Skeleton width="60%" />
+        <div className="flex justify-between pt-2">
+          <Skeleton width={60} height={20} />
+          <Skeleton width={60} height={20} />
+        </div>
+      </div>
+    );
+  }
+
+  // Main Content
   return (
     <Link
       to={`/my-recipe-details/${item.id}`}

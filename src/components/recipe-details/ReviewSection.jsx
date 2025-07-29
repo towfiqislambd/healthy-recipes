@@ -2,7 +2,6 @@ import ReviewLeftSection from "@/components/recipe-details/ReviewLeftSection";
 import ReviewCard from "@/components/cards/ReviewCard";
 import { useState } from "react";
 import { useRecipeReviews } from "@/hooks/cms.queries";
-import { Loader } from "@/components/loader/Loader";
 
 const ReviewSection = ({ id }) => {
   const [activePage, setActivePage] = useState(1);
@@ -23,16 +22,16 @@ const ReviewSection = ({ id }) => {
         {/* right side contents */}
         <div className="space-y-5 xl:flex-1 w-full">
           {isLoading ? (
-            <div className="w-fit mx-auto">
-              <Loader />
-            </div>
+            [1, 2, 3].map((item, idx) => (
+              <ReviewCard key={idx} data={item} loading={true} />
+            ))
           ) : allReviews.data?.length > 0 ? (
             allReviews?.data?.map((item, idx) => (
               <ReviewCard key={idx} data={item} />
             ))
           ) : (
-            <p className="text-primary font-merriweather text-lg lg:text-xl">
-              No review yet
+            <p className="text-primary font-merriweather text-center text-lg lg:text-xl">
+              No reviews found yet
             </p>
           )}
 

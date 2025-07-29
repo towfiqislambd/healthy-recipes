@@ -2,10 +2,31 @@ import React from "react";
 import { FullStarSvg } from "../svg-container/SvgContainer";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
-const ReviewCard = ({ data }) => {
+const ReviewCard = ({ data, loading = false }) => {
+  // Fallback Skeleton
+  if (loading) {
+    return (
+      <div className="border border-gray-200 rounded-2xl px-4 2xl:px-5 3xl:px-7 py-4 lg:py-5 w-full animate-pulse">
+        <div className="w-full flex items-center justify-between">
+          <div className="flex items-center gap-2 3xl:gap-3">
+            <div className="size-12 2xl:size-16 rounded-full bg-gray-300" />
+            <div className="space-y-2">
+              <div className="h-4 bg-gray-300 rounded w-32" />
+              <div className="h-3 bg-gray-200 rounded w-20" />
+            </div>
+          </div>
+        </div>
+        <div className="mt-3 3xl:mt-5 space-y-2">
+          <div className="h-3 bg-gray-200 rounded w-full" />
+          <div className="h-3 bg-gray-200 rounded w-5/6" />
+        </div>
+      </div>
+    );
+  }
+
+  // Main Content
   return (
-    <div className="border border-[#8993A4] rounded-2xl 3xl:px-12 px-4 2xl:px-5 py-4 lg:py-5 w-full">
-      {/* top contents */}
+    <div className="border border-gray-200 rounded-2xl px-4 2xl:px-5 3xl:px-7 py-4 lg:py-5 w-full">
       <div className="w-full flex items-center justify-between ">
         {/* left side content */}
         <div className="flex items-center gap-2 3xl:gap-3">
@@ -17,7 +38,7 @@ const ReviewCard = ({ data }) => {
               alt="profile"
             />
             <AvatarFallback className="text-2xl font-medium">
-              {data?.user?.name.slice(0, 1)}
+              {data?.user?.name?.slice(0, 1)}
             </AvatarFallback>
           </Avatar>
 

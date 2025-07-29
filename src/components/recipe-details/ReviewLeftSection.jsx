@@ -125,7 +125,7 @@ const ReviewLeftSection = ({ id, refetch }) => {
               <textarea
                 rows={5}
                 className={`px-3 xl:px-4 py-2 xl:py-4 resize-none border rounded-lg w-full focus:outline-none ${
-                  errors.comment ? "border-red-500" : "border-[#8993A4]"
+                  errors.comment ? "border-red-500" : "border-gray-300"
                 } `}
                 placeholder="Share your thoughts here..."
                 id="comment"

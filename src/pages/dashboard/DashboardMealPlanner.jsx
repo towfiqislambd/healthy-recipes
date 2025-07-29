@@ -42,7 +42,6 @@ const DashboardMealPlanner = () => {
   const { data: allCategory, isLoading: categoryLoading } = useAllCategories();
   const { mutateAsync: deleteMealPlan } = useDeleteMealPlan(mealPlannerId);
 
-  // Updated state to track active action with day and category
   const [activeAction, setActiveAction] = useState({
     day: null,
     category: null,
@@ -71,7 +70,6 @@ const DashboardMealPlanner = () => {
     setItemId(item_id);
   };
 
-  // Helper function to render each day's cell
   const renderDayCell = (day, category) => {
     const meals = mealPlannerTableData?.[day.toLowerCase()]
       ?.filter(
@@ -203,7 +201,7 @@ const DashboardMealPlanner = () => {
         </Link>
       </div>
 
-      {/* Table - Horizontal scroll for small devices */}
+      {/* Table */}
       <div className="overflow-x-auto rounded-lg border border-[#B3BAC5]">
         <table className="w-full border-collapse min-w-[600px] sm:min-w-0">
           <thead>

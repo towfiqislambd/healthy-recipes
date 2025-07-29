@@ -16,7 +16,6 @@ import {
   useRecipeLibrary,
 } from "@/hooks/cms.queries";
 import useAuth from "@/hooks/useAuth";
-import { Loader } from "@/components/loader/Loader";
 
 const MealPlannerTabSection = () => {
   const { user, search } = useAuth();
@@ -183,7 +182,7 @@ const MealPlannerTabSection = () => {
                 alt="logo"
                 className="mx-auto size-16 xl:size-auto"
               />
-              <p className="text-primary font-merriweather text-lg lg:text-xl xl:text-2xl">
+              <p className="text-primary font-merriweather text-lg lg:text-xl">
                 No recipes found
               </p>
             </div>

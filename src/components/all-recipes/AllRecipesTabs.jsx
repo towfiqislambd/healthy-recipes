@@ -27,14 +27,6 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
     tag
   );
 
-  if (isLoading) {
-    return (
-      <div className="h-[50vh] flex justify-center items-center">
-        <Loader />
-      </div>
-    );
-  }
-
   const getCountByType = type => {
     if (type === "All Recipes") {
       return recipes?.length || 0;
@@ -130,7 +122,11 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
 
         {/* Cards */}
         <div className="mt-10 grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6">
-          {allRecipes?.length > 0 ? (
+          {isLoading ? (
+            Array.from({ length: 4 }).map((_, idx) => (
+              <RecipeCard key={idx} idx={idx} loading={true} />
+            ))
+          ) : allRecipes?.length > 0 ? (
             allRecipes.map((item, idx) => (
               <RecipeCard key={idx} item={item} isMyRecipe={true} />
             ))
@@ -141,7 +137,7 @@ const AllRecipesTabs = ({ data, recipes, libraryId }) => {
                 alt="logo"
                 className="mx-auto size-16 xl:size-auto"
               />
-              <p className="text-primary font-merriweather text-lg lg:text-xl xl:text-2xl">
+              <p className="text-primary font-merriweather text-lg lg:text-xl">
                 No recipes found
               </p>
             </div>

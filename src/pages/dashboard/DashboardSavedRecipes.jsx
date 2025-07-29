@@ -17,7 +17,7 @@ const DashboardSavedRecipes = () => {
     activeTab?.id
   );
 
-  if (categoryLoading || recipeLoading) {
+  if (categoryLoading) {
     return (
       <div className="flex justify-center items-center h-[85vh]">
         <Loader />
@@ -61,7 +61,11 @@ const DashboardSavedRecipes = () => {
 
       {/* cards */}
       <div className="grid md:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4 gap-5 3xl:px-5 2xl:px-0">
-        {savedRecipes?.wishlist?.data.length > 0 ? (
+        {recipeLoading ? (
+          Array.from({ length: 4 }).map((_, idx) => (
+            <RecipeCard key={idx} idx={idx} loading={true} />
+          ))
+        ) : savedRecipes?.wishlist?.data.length > 0 ? (
           savedRecipes?.wishlist?.data?.map((item, idx) => (
             <RecipeCard
               isSavedRecipe={true}
