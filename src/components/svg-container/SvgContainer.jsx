@@ -1473,8 +1473,7 @@ export function FullStarSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
+      className="w-4 lg:w-5 h-4 lg:h-5"
       viewBox="0 0 20 20"
       fill="none"
     >

@@ -26,25 +26,25 @@ const ReviewCard = ({ data, loading = false }) => {
 
   // Main Content
   return (
-    <div className="border border-gray-200 rounded-2xl px-4 2xl:px-5 3xl:px-7 py-4 lg:py-5 w-full">
+    <div className="border border-gray-200 rounded-2xl px-3 md:px-4 2xl:px-5 3xl:px-7 py-3.5 lg:py-5 w-full">
       <div className="w-full flex items-center justify-between ">
         {/* left side content */}
         <div className="flex items-center gap-2 3xl:gap-3">
           {/* avatar */}
-          <Avatar className="size-12 2xl:size-16">
+          <Avatar className="size-10 lg:size-12 2xl:size-16">
             <AvatarImage
               className="h-full w-full rounded-full object-cover"
               src={data?.avatar?.avatar}
               alt="profile"
             />
-            <AvatarFallback className="text-2xl font-medium">
+            <AvatarFallback className="text-lg lg:text-2xl font-medium">
               {data?.user?.name?.slice(0, 1)}
             </AvatarFallback>
           </Avatar>
 
           {/* user info */}
           <div>
-            <h6 className="text-black font-medium text-lg 3xl:text-xl">
+            <h6 className="text-black font-medium text-sm md:text-base lg:text-lg 3xl:text-xl">
               {data?.user?.name}
             </h6>
             <p className="text-textColor text-sm">{data?.created_date}</p>
@@ -52,7 +52,7 @@ const ReviewCard = ({ data, loading = false }) => {
         </div>
 
         {/* right side stars */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 shrink-0">
           {[...Array(data?.rating || 0)].map((_, i) => (
             <FullStarSvg key={i} />
           ))}

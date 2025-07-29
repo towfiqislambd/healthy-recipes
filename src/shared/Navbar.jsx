@@ -196,7 +196,7 @@ const Navbar = () => {
                     <ButtonTransparent title="Log Out" />
                   </button>
                   {user && (
-                    <Avatar className="w-3 md:w-8 lg:w-11 h-3 md:h-8 lg:h-11 rounded-full">
+                    <Avatar className="size-11 rounded-full">
                       <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
                         {user?.name.slice(0, 1)}
                       </AvatarFallback>

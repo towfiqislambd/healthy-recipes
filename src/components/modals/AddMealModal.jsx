@@ -13,7 +13,7 @@ import {
 import { CgSpinnerTwo } from "react-icons/cg";
 
 const AddMealModal = ({ recipeId, setOpen }) => {
-  const filterClass = `text-base py-2  px-3 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
+  const filterClass = `text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
   const { mutateAsync: addMealPlanner, isPending } =
     useAddMealPlanner(recipeId);
   const { data: recipeCategory } = useAllCategories();

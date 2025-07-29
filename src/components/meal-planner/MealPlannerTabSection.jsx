@@ -52,7 +52,7 @@ const MealPlannerTabSection = () => {
     recipeData = allRecipes;
   }
 
-  const filterClass = `text-base py-2 lg:py-3 px-3 lg:px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
+  const filterClass = `ttext-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 lg:px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
   const handleReset = () => {
     setAgeGroup(null);

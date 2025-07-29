@@ -18,7 +18,7 @@ const FavoriteRecipes = ({ savedRecipes }) => {
           </Link>
         </button>
       </div>
-      <div className="grid md:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4 gap-5 3xl:px-5">
+      <div className="grid md:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4 gap-5">
         {savedRecipes?.wishlist?.data?.length > 0 ? (
           savedRecipes?.wishlist?.data
             ?.slice(0, 4)

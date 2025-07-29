@@ -60,7 +60,7 @@ const DashboardSavedRecipes = () => {
       </div>
 
       {/* cards */}
-      <div className="grid md:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4 gap-5 3xl:px-5 2xl:px-0">
+      <div className="grid md:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4 gap-5">
         {myRecipeLoading ? (
           Array.from({ length: 4 }).map((_, idx) => (
             <MyRecipeCard key={idx} idx={idx} loading={true} />

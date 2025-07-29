@@ -194,8 +194,8 @@ const DashboardMealPlanner = () => {
 
   return (
     <section className="p-2 sm:p-3 md:p-4 lg:p-5 3xl:p-5">
-      <div className="mb-4 sm:mb-5 md:mb-6 3xl:mb-7 flex flex-col xs:flex-row justify-between items-start xs:items-center gap-2 xs:gap-0">
-        <h3 className="text-lg sm:text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">
+      <div className="mb-4 sm:mb-5 md:mb-6 3xl:mb-7 flex flex-col xs:flex-row justify-between items-start xs:items-center gap-1 sm:gap-0">
+        <h3 className="sm:text-lg md:text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">
           Customize your meal plan
         </h3>
         <Link to="/meal-planner">

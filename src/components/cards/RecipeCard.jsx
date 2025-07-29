@@ -74,7 +74,7 @@ const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
         <div className="relative">
           {/* image and overlay */}
           <div className="block">
-            <div className="h-[300px] lg:h-[320px] 2xl:h-[350px] w-full relative rounded-sm overflow-hidden">
+            <div className="h-[300px] lg:h-[320px] 3xl:h-[350px] w-full relative rounded-sm overflow-hidden">
               <img
                 className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
                 src={`${import.meta.env.VITE_SITE_URL}/${item?.recipe_image}`}
@@ -112,7 +112,7 @@ const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
         </div>
 
         {/* description */}
-        <div className="py-3 4xl:py-4 px-3 text-wrap border-b border-dashed border-black">
+        <div className="py-4 px-3 text-wrap border-b border-dashed border-black">
           <h5 className="text-lg 4xl:text-xl font-bold font-merriweather text-black truncate">
             {item?.recipe_name}
           </h5>
@@ -160,7 +160,7 @@ const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
 
         {/* add meal button */}
         {isPlanner && (
-          <div className="px-5">
+          <div className="px-5 mb-3">
             <button
               onClick={e => handleAddToPlanner(e, item)}
               className="hover:bg-primary border border-primary px-3 2xl:px-5 py-2 2xl:py-3 rounded-lg hover:text-white text-[#5A5C5F] duration-300 transition-all"
