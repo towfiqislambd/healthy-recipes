@@ -46,14 +46,6 @@ const MealPlannerTabSection = () => {
   const isLoading =
     isAllCategoryLoading || isRecipeLibraryLoading || loadingAllRecipe;
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-[50vh]">
-        <Loader />
-      </div>
-    );
-  }
-
   let recipeData = null;
   if (user) {
     recipeData = recipesPrivate;
@@ -169,7 +161,7 @@ const MealPlannerTabSection = () => {
 
         {/* Recipe Cards */}
         <div className="mt-10 grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6">
-          {privateRecipesLoading ? (
+          {privateRecipesLoading || isLoading ? (
             Array.from({ length: 4 }).map((_, idx) => (
               <RecipeCard key={idx} idx={idx} loading={true} />
             ))

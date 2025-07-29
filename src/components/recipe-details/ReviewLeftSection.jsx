@@ -9,13 +9,14 @@ import useAuth from "@/hooks/useAuth";
 import { useAddReview } from "@/hooks/cms.mutations";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { CgSpinnerTwo } from "react-icons/cg";
 
 const ReviewLeftSection = ({ id, refetch }) => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [rating, setRating] = useState(0);
   const [formSubmitted, setFormSubmitted] = useState(false); // Track if form is submitted
-  const { mutateAsync: reviewMutation } = useAddReview(id);
+  const { mutateAsync: reviewMutation, isPending } = useAddReview(id);
 
   const {
     register,
@@ -143,7 +144,11 @@ const ReviewLeftSection = ({ id, refetch }) => {
                 className="px-3 xl:px-8 py-2 xl:py-3 text-white font-medium bg-primary hover:bg-transparent transition-all duration-300 rounded-full hover:text-primary border border-primary"
                 type="submit"
               >
-                Submit Review
+                {isPending ? (
+                  <CgSpinnerTwo className="animate-spin size-6" />
+                ) : (
+                  "Submit Review"
+                )}
               </button>
             </div>
           </form>

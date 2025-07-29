@@ -10,10 +10,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { CgSpinnerTwo } from "react-icons/cg";
 
 const AddMealModal = ({ recipeId, setOpen }) => {
   const filterClass = `text-base py-2  px-3 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
-  const { mutateAsync: addMealPlanner } = useAddMealPlanner(recipeId);
+  const { mutateAsync: addMealPlanner, isPending } =
+    useAddMealPlanner(recipeId);
   const { data: recipeCategory } = useAllCategories();
   const [category_id, setCategoryId] = useState("");
   const [day, setDay] = useState("");
@@ -101,7 +103,11 @@ const AddMealModal = ({ recipeId, setOpen }) => {
               onClick={handleAddPlan}
               className="px-5 py-2.5 border border-primary bg-primary text-white rounded-md"
             >
-              Add to planner
+              {isPending ? (
+                <CgSpinnerTwo className="animate-spin size-6" />
+              ) : (
+                "Add to planner"
+              )}
             </button>
 
             <button

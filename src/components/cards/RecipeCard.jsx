@@ -13,13 +13,14 @@ import Modal from "../modals/Modal";
 import AddMealModal from "../modals/AddMealModal";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { CgSpinnerTwo } from "react-icons/cg";
 
 const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
   const [recipeId, setRecipeId] = useState(null);
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { mutateAsync: wishlistMutation } = useAddWishlist(item?.id);
+  const { mutateAsync: wishlistMutation, isPending } = useAddWishlist(item?.id);
 
   // Function to handle Add to planner button click
   const handleAddToPlanner = (e, item) => {
@@ -91,7 +92,11 @@ const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
               item?.is_wishlisted ? "bg-[#CB4242]" : "bg-[#FFE3E3]"
             }`}
           >
-            <LoveSvg isFavorite={item?.is_wishlisted} />
+            {isPending ? (
+              <CgSpinnerTwo className="animate-spin text-red-400 size-6" />
+            ) : (
+              <LoveSvg isFavorite={item?.is_wishlisted} />
+            )}
           </button>
 
           {/* type */}

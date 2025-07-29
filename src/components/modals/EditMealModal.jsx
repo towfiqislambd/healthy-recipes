@@ -2,10 +2,11 @@ import { useState } from "react";
 import { DialogContent, DialogHeader } from "../ui/dialog";
 import { useEditMealPlanner } from "@/hooks/cms.mutations";
 import toast from "react-hot-toast";
+import { CgSpinnerTwo } from "react-icons/cg";
 
 const EditMealModal = ({ itemId, setOpen }) => {
   const [recipeRename, setRecipeRename] = useState("");
-  const { mutateAsync: editMealPlan } = useEditMealPlanner(itemId);
+  const { mutateAsync: editMealPlan, isPending } = useEditMealPlanner(itemId);
 
   const handleEditRecipe = () => {
     if (!recipeRename) {
@@ -39,7 +40,11 @@ const EditMealModal = ({ itemId, setOpen }) => {
               onClick={handleEditRecipe}
               className="px-3 sm:px-5 py-2 sm:py-2.5 border border-primary bg-primary text-white rounded-md"
             >
-              Update recipe
+              {isPending ? (
+                <CgSpinnerTwo className="animate-spin size-6" />
+              ) : (
+                "Update recipe"
+              )}
             </button>
 
             <button

@@ -3,6 +3,7 @@ import { useAddRecipe } from "@/hooks/cms.mutations";
 import { useAllCategories, useRecipeLibrary } from "@/hooks/cms.queries";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { CgSpinnerTwo } from "react-icons/cg";
 const ageData = [
   {
     id: 1,
@@ -17,17 +18,17 @@ const ageData = [
   {
     id: 3,
     label: "Middle adulthood (40–59 years)",
-    value: "middle-adulthood",
+    value: "middle",
   },
   {
     id: 4,
     label: "Senior Adult (60+)",
-    value: "senior-adult",
+    value: "senior",
   },
 ];
 
 const DashboardShareRecipe = () => {
-  const { mutateAsync: recipeMutation } = useAddRecipe();
+  const { mutateAsync: recipeMutation, isPending } = useAddRecipe();
   const { data: recipeCategory } = useAllCategories();
   const { data: allLibrary } = useRecipeLibrary();
   const [recipe_video, setRecipeVideo] = useState(null);
@@ -98,7 +99,6 @@ const DashboardShareRecipe = () => {
       .filter(i => i.value.trim())
       .forEach((inst, i) => formData.append(`instructions[${i}]`, inst.value));
 
-    console.log(formData);
     await recipeMutation(formData);
     reset();
   };
@@ -325,6 +325,7 @@ const DashboardShareRecipe = () => {
             Serving number
           </label>
           <input
+            type="number"
             {...register("serving_number", { required: true })}
             placeholder="4"
             className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
@@ -348,6 +349,7 @@ const DashboardShareRecipe = () => {
             Cooking time
           </label>
           <input
+            type="number"
             {...register("cooking_time", { required: true })}
             placeholder="30 min"
             className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
@@ -371,6 +373,7 @@ const DashboardShareRecipe = () => {
             Preparation time
           </label>
           <input
+            type="number"
             {...register("preparation_time", { required: true })}
             placeholder="40 min"
             className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
@@ -529,6 +532,7 @@ const DashboardShareRecipe = () => {
             Recipe Source Link (Optional)
           </label>
           <input
+            type="url"
             {...register("resource_link")}
             className="border rounded-[5px] px-3 lg:px-4 py-2 lg:py-3 outline-none block w-full"
           />
@@ -537,14 +541,32 @@ const DashboardShareRecipe = () => {
           </p>
         </div>
 
-        {/* Submit & Cancel */}
         <div className="flex items-center gap-2 sm:gap-3">
-          <button className="px-3 sm:px-5 py-[6px] sm:py-2 bg-[#3F3F3F] rounded-[6px] text-white border">
-            Submit here
-          </button>
+          {/* Submit btn */}
           <button
-            onClick={e => e.preventDefault()}
-            className="px-3 sm:px-5 py-[6px] sm:py-2 border-[#3F3F3F] rounded-[6px] border"
+            type="submit"
+            className="px-3 text-center sm:px-5 py-[6px] sm:py-2 bg-[#3F3F3F] rounded-[6px] text-white border"
+          >
+            {isPending ? (
+              <CgSpinnerTwo className="animate-spin size-6" />
+            ) : (
+              "Submit here"
+            )}
+          </button>
+
+          {/* Cancel btn */}
+          <button
+            onClick={e => {
+              e.preventDefault();
+              reset();
+              setRecipeImage("");
+              setRecipeVideo("");
+              setTags([]);
+              setInputValue("");
+              setInstructions([{ id: Date.now(), value: "" }]);
+              setIngredients([{ id: Date.now(), value: "" }]);
+            }}
+            className="px-3 sm:px-5 py-[6px] sm:py-2 border-[#3F3F3F] hover:bg-gray-100 duration-300 transition-all rounded-[6px] border"
           >
             Cancel
           </button>
