@@ -215,8 +215,8 @@ const Navbar = () => {
               <SearchSvg />
             </button>
             {user && (
-              <Avatar className="w-11 h-11 rounded-full">
-                <AvatarFallback className="text-[22px] font-medium w-full h-full rounded-full">
+              <Avatar className="size-10 lg:size-11 rounded-full">
+                <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
                   {user?.name.slice(0, 1)}
                 </AvatarFallback>
               </Avatar>
@@ -329,7 +329,7 @@ const Navbar = () => {
                 setSearchModalOpen(false);
                 setSearchInput("");
               }}
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 cursor-pointer"
+              className="absolute top-1.5 md:top-2 right-1.5 md:right-2 text-gray-500 hover:text-gray-700 cursor-pointer"
             >
               <RxCross2 />
             </button>
@@ -337,7 +337,7 @@ const Navbar = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="w-full border border-gray-300 rounded px-4 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full border border-gray-300 rounded px-3 md:px-4 py-1.5 md:py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-primary"
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
