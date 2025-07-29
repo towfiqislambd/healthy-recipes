@@ -35,6 +35,7 @@ import { RxCross2 } from "react-icons/rx";
 
 const DashboardMealPlanner = () => {
   const [itemId, setItemId] = useState("");
+  const [recipe, setRecipe] = useState(null);
   const [open, setOpen] = useState(false);
   const [mealPlannerId, setMealPlannerId] = useState("");
   const { data: mealPlannerTableData, isLoading: tableDataLoading } =
@@ -160,7 +161,10 @@ const DashboardMealPlanner = () => {
 
                   {isActive("edit") && (
                     <button
-                      onClick={() => handleEditPlans(data?.id)}
+                      onClick={() => {
+                        handleEditPlans(data?.id);
+                        setRecipe(data);
+                      }}
                       className="ml-1 flex-shrink-0"
                     >
                       <MdOutlineModeEditOutline className="text-lg sm:text-xl text-primary" />
@@ -226,7 +230,7 @@ const DashboardMealPlanner = () => {
             {allCategory.map((category, idx) => (
               <tr key={category?.id} className="text-nowrap">
                 <td
-                  className="border-t border-r w-0 px-0 py-8 md:py-10 lg:py-12 border-[#B3BAC5] bg-[#FAEEDD] font-medium text-center"
+                  className="border-t border-r w-0 px-0 py-8 md:py-10 border-[#B3BAC5] bg-[#FAEEDD] font-medium text-center"
                   style={{ color: categoryColors[idx % categoryColors.length] }}
                 >
                   <p className="-rotate-90 text-xs sm:text-sm md:text-base whitespace-nowrap">
@@ -238,7 +242,7 @@ const DashboardMealPlanner = () => {
                 {days.map(day => (
                   <td
                     key={day}
-                    className="border-t border-r last:border-r-0 border-[#B3BAC5] px-2 sm:px-3 md:px-4 py-2 sm:py-3 md:py-4 lg:py-5 space-y-1 sm:space-y-2 text-[#4c4d4e] relative text-xs sm:text-sm md:text-[15px]"
+                    className="border-t border-r last:border-r-0 border-[#B3BAC5] px-2 sm:px-3 md:px-3 py-2 sm:py-3 md:py-4 lg:py-4 space-y-1 sm:space-y-2 text-[#4c4d4e] relative text-xs sm:text-sm md:text-[15px]"
                   >
                     {renderDayCell(day, category)}
                   </td>
@@ -251,7 +255,12 @@ const DashboardMealPlanner = () => {
 
       {/* Modal */}
       <Modal open={open} setOpen={setOpen}>
-        <EditMealModal open={open} setOpen={setOpen} itemId={itemId} />
+        <EditMealModal
+          open={open}
+          setOpen={setOpen}
+          itemId={itemId}
+          recipe={recipe}
+        />
       </Modal>
     </section>
   );

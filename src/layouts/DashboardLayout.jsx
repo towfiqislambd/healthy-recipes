@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
-import { LoveSvg, SearchSvg } from "@/components/svg-container/SvgContainer";
+import { LoveSvg } from "@/components/svg-container/SvgContainer";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import useAuth from "@/hooks/useAuth";
 import { useFooterInfo } from "@/hooks/cms.queries";
@@ -16,7 +16,6 @@ const DashboardLayout = () => {
     logOutMutate();
   };
   const { user } = useAuth();
-  // const navigate = useNavigate()
   const location = useLocation()?.pathname;
   const [isOpen, setOpen] = useState(false);
 
@@ -35,10 +34,6 @@ const DashboardLayout = () => {
     { path: "/dashboard/dashboard-my-recipes", label: "My recipes" },
     { path: "/dashboard/dashboard-saved-recipes", label: "Favorite recipes" },
   ];
-
-  // const handleSearch = () => {
-  //     navigate('/meal-planner')
-  // }
 
   const { data: siteSettings, isLoading } = useFooterInfo();
 
@@ -66,17 +61,6 @@ const DashboardLayout = () => {
                 />
               </figure>
             </Link>
-            {/* <div className="px-3 py-[10px] hidden xl:flex items-center gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white 2xl:min-w-[420px]">
-                            <SearchSvg />
-                            <input
-                                className="focus:outline-none w-full"
-                                placeholder="Search for recipes name..."
-                                type="text"
-                                name="search"
-                                id="search"
-                                onClick={handleSearch}
-                            />
-                        </div> */}
           </div>
 
           {/* Right */}

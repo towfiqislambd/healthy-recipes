@@ -92,7 +92,7 @@ export const useAddMealPlanner = recipe_id => {
     onSuccess: data => {
       if (data?.data?.meals?.length > 0) {
         toast.success(data?.message);
-        queryClient.invalidateQueries("meal-planner-table");
+        queryClient.invalidateQueries(["meal-planner-table"]);
         navigate("/dashboard/dashboard-meal-planner");
       } else {
         toast.error(data?.message);
@@ -112,7 +112,7 @@ export const useDeleteMealPlan = meal_plan_id => {
     mutationFn: () => DeleteMealPlan(meal_plan_id),
     onSuccess: data => {
       toast.success(data?.message);
-      queryClient.invalidateQueries("meal-planner-table");
+      queryClient.invalidateQueries(["meal-planner-table"]);
     },
     onError: err => {
       toast.error(err?.response?.data?.message);
@@ -129,7 +129,7 @@ export const useEditMealPlanner = item_id => {
     mutationFn: payload => EditMealPlanner(item_id, payload),
     onSuccess: () => {
       toast.success("Recipe name changed successfully");
-      queryClient.invalidateQueries("meal-planner-table");
+      queryClient.invalidateQueries(["meal-planner-table"]);
     },
     onError: err => {
       toast.error(err?.response?.data?.message);
