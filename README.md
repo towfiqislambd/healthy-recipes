@@ -1,4 +1,4 @@
-# Healthy Recipes
+# Project Name : Healthy Recipes
 
 ## 1. Descriptions:
 
@@ -14,7 +14,7 @@ secure Admin Dashboard for managing the platform.
 - React JS v19
 - Tailwind CSS
 - JavaScript
-- Shadcn UI as Component Library
+- ShadCN UI as Component Library
 - React Router v6
 
 ## 3. Main Features:
@@ -74,13 +74,12 @@ secure Admin Dashboard for managing the platform.
 - tailwind-merge : ^3.0.2
 - tailwindcss-animate : ^1.0.7
 
-
 ## 5. Live Website : https://health-recipes-frontend.netlify.app
 
 ## 6. Installation:
 
 Run `npm install` to install project dependencies.
 
-## 9. Usage:
+## 7. Usage:
 
 Run `npm run dev` to run the project locally.
