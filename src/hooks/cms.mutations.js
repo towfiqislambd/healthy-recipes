@@ -30,10 +30,13 @@ export const useAddReview = id => {
 
 // Add or Remove wishlist
 export const useAddWishlist = id => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ["add-wishlist"],
     mutationFn: () => AddWishlist(id),
     onSuccess: data => {
+      queryClient.invalidateQueries(["get-wishlists"]);
       if (data.length === 0) {
         toast.success("Removed from favorites");
       } else {
@@ -128,8 +131,8 @@ export const useEditMealPlanner = item_id => {
     mutationKey: ["edit-meal-planner"],
     mutationFn: payload => EditMealPlanner(item_id, payload),
     onSuccess: () => {
-      toast.success("Recipe name changed successfully");
       queryClient.invalidateQueries(["meal-planner-table"]);
+      toast.success("Recipe name changed successfully");
     },
     onError: err => {
       toast.error(err?.response?.data?.message);

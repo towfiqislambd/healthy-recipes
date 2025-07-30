@@ -12,7 +12,7 @@ const DashboardSavedRecipes = () => {
   const [activePage, setActivePage] = useState(1);
   const { data: allCategories, isLoading: categoryLoading } =
     useAllCategories();
-  const { data: savedRecipes, isLoading: recipeLoading } = useGetWishlist(
+  const { data: savedRecipes, isLoading: recipeLoading, refetch } = useGetWishlist(
     activePage,
     activeTab?.id
   );
@@ -72,6 +72,7 @@ const DashboardSavedRecipes = () => {
               isMyRecipe={true}
               key={idx}
               item={item}
+              refetch={refetch}
             />
           ))
         ) : (
