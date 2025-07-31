@@ -192,16 +192,19 @@ const Navbar = () => {
               </Link>
               {user ? (
                 <div className="flex gap-2 3xl:gap-3 items-center">
+                  {/* Logout btn */}
                   <button onClick={handleLogout}>
                     <ButtonTransparent title="Log Out" />
                   </button>
-                  {user && (
-                    <Avatar className="size-11 rounded-full">
+
+                  {/* Avatar */}
+                  <Link to="/dashboard/settings">
+                    <Avatar className="size-11 rounded-full cursor-pointer">
                       <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
                         {user?.name.slice(0, 1)}
                       </AvatarFallback>
                     </Avatar>
-                  )}
+                  </Link>
                 </div>
               ) : (
                 <ButtonTransparent path="/auth/register" title="Sign Up" />

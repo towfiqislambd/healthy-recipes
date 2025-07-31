@@ -23,6 +23,7 @@ import RecipeLibrary from "@/pages/recipe-library/RecipeLibrary";
 import { createBrowserRouter } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import MyRecipeDetails from "@/pages/dashboard/MyRecipeDetails";
+import Settings from "@/pages/dashboard/Settings";
 
 export const router = createBrowserRouter([
   // Main Layout
@@ -132,6 +133,10 @@ export const router = createBrowserRouter([
       {
         path: "edit-recipe/:id",
         element: <EditRecipes />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
       },
     ],
   },

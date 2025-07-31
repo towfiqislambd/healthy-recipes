@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   GetUserDataFunc,
@@ -8,6 +8,8 @@ import {
   OtpVerifyFunc,
   RegisterFunc,
   ResetPasswordFunc,
+  UpdatePasswordDashboardFunc,
+  UpdateUserFunc,
   VerifyEmailFunc,
 } from "@/hooks/auth.api";
 import toast from "react-hot-toast";
@@ -176,24 +178,47 @@ export const useResendOtp = () => {
 
 // reset password:
 export const useResetPassword = () => {
-  const { setLoading } = useAuth();
   const navigate = useNavigate();
 
   return useMutation({
     mutationKey: ["reset-password"],
     mutationFn: payload => ResetPasswordFunc(payload),
-    onMutate: () => {
-      setLoading(true);
-    },
-    onSuccess: data => {
-      if (data) {
-        setLoading(false);
-        toast.success("Password reset successfully");
-        navigate("/auth/login");
-      }
+    onSuccess: () => {
+      toast.success("Password reset successfully");
+      navigate("/auth/login");
     },
     onError: err => {
-      setLoading(false);
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// update user mutation:
+export const useUpdateUser = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["update-user"],
+    mutationFn: payload => UpdateUserFunc(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["user"]);
+      toast.success("User Updated Successfully");
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// update password dashboard::
+export const useUserPasswordUpdate = () => {
+  return useMutation({
+    mutationKey: ["update-password"],
+    mutationFn: payload => UpdatePasswordDashboardFunc(payload),
+    onSuccess: () => {
+      toast.success("Password Updated Successfully");
+    },
+    onError: err => {
       toast.error(err?.response?.data?.message);
     },
   });

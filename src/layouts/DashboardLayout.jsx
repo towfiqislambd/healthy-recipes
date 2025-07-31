@@ -33,6 +33,7 @@ const DashboardLayout = () => {
     { path: "/dashboard/dashboard-share-recipes", label: "Share recipes" },
     { path: "/dashboard/dashboard-my-recipes", label: "My recipes" },
     { path: "/dashboard/dashboard-saved-recipes", label: "Favorite recipes" },
+    { path: "/dashboard/settings", label: "Settings" },
   ];
 
   const { data: siteSettings, isLoading } = useFooterInfo();
@@ -91,11 +92,15 @@ const DashboardLayout = () => {
               >
                 <LoveSvg />
               </Link>
-              <Avatar className="w-12 h-12 rounded-full">
-                <AvatarFallback className="text-[22px] font-medium w-full h-full rounded-full">
-                  {user?.name.slice(0, 1)}
-                </AvatarFallback>
-              </Avatar>
+
+              {/* Avatar */}
+              <Link to="/dashboard/settings">
+                <Avatar className="size-11 rounded-full cursor-pointer">
+                  <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
+                    {user?.name.slice(0, 1)}
+                  </AvatarFallback>
+                </Avatar>
+              </Link>
             </div>
           </div>
 

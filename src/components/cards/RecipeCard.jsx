@@ -13,14 +13,14 @@ import Modal from "../modals/Modal";
 import AddMealModal from "../modals/AddMealModal";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { CgSpinnerTwo } from "react-icons/cg";
+import { LuLoaderPinwheel } from "react-icons/lu";
 
-const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
+const RecipeCard = ({ item, isPlanner, loading }) => {
   const [recipeId, setRecipeId] = useState(null);
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { mutateAsync: wishlistMutation, isPending } = useAddWishlist(item?.id);
+  const { mutate: wishlistMutation, isPending } = useAddWishlist(item?.id);
 
   // Function to handle Add to planner button click
   const handleAddToPlanner = (e, item) => {
@@ -37,13 +37,12 @@ const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
   };
 
   // Function to handle wishlist button click
-  const handleWishlistClick = async e => {
-    e.stopPropagation(); // Prevents the click event from bubbling up
-    e.preventDefault(); // Prevents the default link navigation
+  const handleWishlistClick = e => {
+    e.stopPropagation();
+    e.preventDefault();
 
     if (user) {
-      await wishlistMutation();
-      refetch();
+      wishlistMutation();
     } else {
       toast.error("Please login first");
       navigate("/auth/login");
@@ -93,7 +92,7 @@ const RecipeCard = ({ item, refetch, isPlanner, loading }) => {
             }`}
           >
             {isPending ? (
-              <CgSpinnerTwo className="animate-spin text-red-400 size-6" />
+              <LuLoaderPinwheel className="animate-spin text-red-400 size-6" />
             ) : (
               <LoveSvg isFavorite={item?.is_wishlisted} />
             )}
