@@ -43,7 +43,7 @@ const UpdatePasswordModal = ({ setOpen }) => {
   return (
     <DialogContent className="sm:max-w-[425px]">
       <DialogHeader>
-        <DialogTitle className="text-2xl text-headingTextColor font-semibold">
+        <DialogTitle className="text-xl lg:text-2xl text-headingTextColor font-semibold">
           Change Password
         </DialogTitle>
       </DialogHeader>
