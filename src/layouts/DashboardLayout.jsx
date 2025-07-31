@@ -22,17 +22,17 @@ const DashboardLayout = () => {
   const navLinks = [
     { path: "/", title: "Home" },
     { path: "/recipe-library", title: "Recipe library" },
-    { path: "/dashboard/dashboard-share-recipes", title: "Share recipe" },
+    { path: "/dashboard/share-recipes", title: "Share recipe" },
     { path: "/meal-planner", title: "Meal planner" },
     { path: "/blog", title: "Blog" },
   ];
 
   const sidebarLinks = [
     { path: "/dashboard/overview", label: "Overview" },
-    { path: "/dashboard/dashboard-meal-planner", label: "Meal planner" },
-    { path: "/dashboard/dashboard-share-recipes", label: "Share recipes" },
-    { path: "/dashboard/dashboard-my-recipes", label: "My recipes" },
-    { path: "/dashboard/dashboard-saved-recipes", label: "Favorite recipes" },
+    { path: "/dashboard/meal-planner", label: "Meal planner" },
+    { path: "/dashboard/share-recipes", label: "Share recipes" },
+    { path: "/dashboard/my-recipes", label: "My recipes" },
+    { path: "/dashboard/saved-recipes", label: "Favorite recipes" },
     { path: "/dashboard/settings", label: "Settings" },
   ];
 

@@ -68,7 +68,9 @@ export const useLogin = () => {
       if (data?.success) {
         if (data?.data?.token) {
           setToken(data?.data?.token);
-          navigate((location?.state && location.state) || "/");
+          navigate(
+            (location?.state && location.state) || "/dashboard/overview"
+          );
         }
       }
     },

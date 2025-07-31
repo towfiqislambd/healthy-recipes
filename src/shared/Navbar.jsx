@@ -20,7 +20,7 @@ const navLinks = [
   { path: "/", title: "Home" },
   { path: "/recipe-library", title: "Recipe library" },
   { path: "/dashboard/overview", title: "Dashboard" },
-  { path: "/dashboard/dashboard-share-recipes", title: "Share recipe" },
+  { path: "/dashboard/share-recipes", title: "Share recipe" },
   { path: "/meal-planner", title: "Meal planner" },
   { path: "/blog", title: "Blog" },
 ];
@@ -185,7 +185,7 @@ const Navbar = () => {
             {/* cta section */}
             <div className="flex gap-3 3xl:gap-5 items-center">
               <Link
-                to="/dashboard/dashboard-saved-recipes"
+                to="/dashboard/saved-recipes"
                 className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center"
               >
                 <LoveSvg />
@@ -217,12 +217,15 @@ const Navbar = () => {
             <button onClick={() => setSearchModalOpen(true)}>
               <SearchSvg />
             </button>
+
             {user && (
-              <Avatar className="size-10 lg:size-11 rounded-full">
-                <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
-                  {user?.name.slice(0, 1)}
-                </AvatarFallback>
-              </Avatar>
+              <Link to="/dashboard/settings">
+                <Avatar className="size-10 lg:size-11 rounded-full cursor-pointer">
+                  <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
+                    {user?.name.slice(0, 1)}
+                  </AvatarFallback>
+                </Avatar>
+              </Link>
             )}
             <button
               onClick={() => setOpen(!isOpen)}
@@ -280,7 +283,7 @@ const Navbar = () => {
           {/* cta */}
           <div className="flex gap-3 items-center lg:mt-2">
             <Link
-              to="/dashboard/dashboard-saved-recipes"
+              to="/dashboard/saved-recipes"
               className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center  "
             >
               <LoveSvg />

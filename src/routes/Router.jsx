@@ -115,19 +115,19 @@ export const router = createBrowserRouter([
         element: <DashboardOverview />,
       },
       {
-        path: "dashboard-meal-planner",
+        path: "meal-planner",
         element: <DashboardMealPlanner />,
       },
       {
-        path: "dashboard-share-recipes",
+        path: "share-recipes",
         element: <DashboardShareRecipe />,
       },
       {
-        path: "dashboard-my-recipes",
+        path: "my-recipes",
         element: <DashboardMyRecipes />,
       },
       {
-        path: "dashboard-saved-recipes",
+        path: "saved-recipes",
         element: <DashboardSavedRecipes />,
       },
       {
