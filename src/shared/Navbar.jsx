@@ -28,6 +28,7 @@ const navLinks = [
 const Navbar = () => {
   const { user } = useAuth();
   const [search, setSearch] = useState("");
+  const [openPopup, setOpenPopup] = useState(false);
   const { mutate: logOutMutate } = useLogOut();
   const [isOpen, setOpen] = useState(false);
   const [searchModalOpen, setSearchModalOpen] = useState(false);
@@ -70,7 +71,7 @@ const Navbar = () => {
 
   return (
     <header className="py-1 lg:py-2 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] bg-[#F6F5F2] fixed w-full left-0 top-0 z-50 navbar">
-      <nav className="container w-full">
+      <nav className="container w-full relative">
         <div className="flex justify-between items-center lg:px-3 xl:px-5 3xl:px-0">
           {/* Left side */}
           <div className="flex items-center gap-7">
@@ -160,9 +161,9 @@ const Navbar = () => {
           </div>
 
           {/* Right side */}
-          <div className="hidden 2xl:flex items-center gap-10">
+          <div className="flex items-center gap-10">
             {/* nav links */}
-            <div className="flex gap-4 3xl:gap-5">
+            <div className="hidden 2xl:flex gap-4 3xl:gap-5">
               {navLinks.map(item => (
                 <NavLink
                   to={item.path}
@@ -184,57 +185,85 @@ const Navbar = () => {
 
             {/* cta section */}
             <div className="flex gap-3 3xl:gap-5 items-center">
+              <button
+                className="2xl:hidden"
+                onClick={() => setSearchModalOpen(true)}
+              >
+                <SearchSvg />
+              </button>
+
               <Link
                 to="/dashboard/saved-recipes"
-                className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center"
+                className="size-10 rounded-full bg-[#FDE0B8] hidden 2xl:inline-flex items-center justify-center"
               >
                 <LoveSvg />
               </Link>
+
               {user ? (
                 <div className="flex gap-2 3xl:gap-3 items-center">
-                  {/* Logout btn */}
-                  <button onClick={handleLogout}>
-                    <ButtonTransparent title="Log Out" />
-                  </button>
-
                   {/* Avatar */}
-                  <Link to="/dashboard/settings">
-                    <Avatar className="size-11 rounded-full cursor-pointer">
+                  <button onClick={() => setOpenPopup(!openPopup)}>
+                    <Avatar className="size-10 lg:size-11 rounded-full cursor-pointer">
                       <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
                         {user?.name.slice(0, 1)}
                       </AvatarFallback>
                     </Avatar>
-                  </Link>
+                  </button>
                 </div>
               ) : (
-                <ButtonTransparent path="/auth/register" title="Sign Up" />
+                <ButtonTransparent
+                  path="/auth/register"
+                  title="Sign Up"
+                  className="!py-1.5 lg:!py-2 2xl:!py-2.5 3xl:!py-3 !px-4 lg:!px-5 3xl:!px-8"
+                />
               )}
+
+              <button
+                onClick={() => setOpen(!isOpen)}
+                className="bg-primary text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid 2xl:hidden place-items-center"
+              >
+                <FaBars className="text-[22px] sm:text-2xl" />
+              </button>
             </div>
           </div>
-
-          {/* Hamburger btn */}
-          <div className="2xl:hidden flex gap-3 items-center">
-            <button onClick={() => setSearchModalOpen(true)}>
-              <SearchSvg />
-            </button>
-
-            {user && (
-              <Link to="/dashboard/settings">
-                <Avatar className="size-10 lg:size-11 rounded-full cursor-pointer">
-                  <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
-                    {user?.name.slice(0, 1)}
-                  </AvatarFallback>
-                </Avatar>
-              </Link>
-            )}
-            <button
-              onClick={() => setOpen(!isOpen)}
-              className="bg-primary text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid place-items-center"
-            >
-              <FaBars className="text-[22px] sm:text-2xl" />
-            </button>
-          </div>
         </div>
+
+        {openPopup && (
+          <div
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+            className="bg-white z-50 rounded-xl w-64 lg:w-72 absolute right-3 lg:right-5 top-[88px] lg:top-28 shadow-[0_8px_24px_rgba(0,0,0,0.1)] p-4 md:p-5"
+          >
+            <div className="flex gap-3 md:gap-4 items-center mb-4 lg:mb-5">
+              <Avatar className="size-12 rounded-full cursor-pointer">
+                <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
+                  {user?.name.slice(0, 1)}
+                </AvatarFallback>
+              </Avatar>
+
+              <div>
+                <h3 className="font-semibold truncate">{user?.name}</h3>
+                <p className="text-gray-500 text-sm truncate">{user?.email}</p>
+              </div>
+            </div>
+
+            <hr />
+
+            <div className="mt-4 lg:mt-5 font-medium flex gap-2.5 lg:gap-4 flex-col text-gray-700 text-sm lg:text-base">
+              <Link
+                onClick={() => setOpenPopup(false)}
+                to="/dashboard/settings"
+              >
+                My Profile
+              </Link>
+              <button onClick={handleLogout} className="text-left text-red-500">
+                Sign Out
+              </button>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Blur Overlay */}
@@ -280,6 +309,7 @@ const Navbar = () => {
               </NavLink>
             ))}
           </div>
+
           {/* cta */}
           <div className="flex gap-3 items-center lg:mt-2">
             <Link
@@ -288,23 +318,6 @@ const Navbar = () => {
             >
               <LoveSvg />
             </Link>
-
-            {/* Sign Up And Logout btns */}
-            {user ? (
-              <button
-                onClick={handleLogout}
-                className="text-textColor font-merriweather px-5 py-2 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white"
-              >
-                Log Out
-              </button>
-            ) : (
-              <Link
-                to="/auth/register"
-                className="text-textColor font-merriweather px-5 py-2 border rounded-full border-primary hover:bg-primary transition-all duration-300 hover:text-white"
-              >
-                Sign Up
-              </Link>
-            )}
           </div>
         </div>
 

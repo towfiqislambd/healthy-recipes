@@ -18,6 +18,7 @@ const DashboardLayout = () => {
   const { user } = useAuth();
   const location = useLocation()?.pathname;
   const [isOpen, setOpen] = useState(false);
+  const [openPopup, setOpenPopup] = useState(false);
 
   const navLinks = [
     { path: "/", title: "Home" },
@@ -49,7 +50,7 @@ const DashboardLayout = () => {
   return (
     <section className="min-h-screen max-h-screen flex flex-col">
       {/* Header */}
-      <header className="py-1 px-5 xl:px-20 border-b bg-[#F6F5F2] fixed xl:h-[90px] w-full left-0 top-0 z-50 navbar">
+      <header className="py-1 px-5 3xl:px-20 border-b bg-[#F6F5F2] fixed xl:h-[90px] w-full left-0 top-0 z-50 navbar">
         <nav className="w-full flex justify-between items-center">
           {/* Left */}
           <div className="flex items-center xl:gap-5 2xl:gap-14">
@@ -65,8 +66,8 @@ const DashboardLayout = () => {
           </div>
 
           {/* Right */}
-          <div className="hidden xl:flex items-center xl:gap-10 2xl:gap-20">
-            <div className="flex xl:gap-5 2xl:gap-5">
+          <div className="flex items-center gap-5 xl:gap-10 2xl:gap-20">
+            <div className="hidden xl:flex xl:gap-5">
               {navLinks.map(item => (
                 <NavLink
                   to={item.path}
@@ -85,40 +86,81 @@ const DashboardLayout = () => {
                 </NavLink>
               ))}
             </div>
-            <div className="hidden xl:flex xl:gap-2 2xl:gap-5 items-center">
+            <div className="flex gap-3 2xl:gap-5 items-center">
               <Link
                 to="/dashboard/dashboard-saved-recipes"
-                className="size-10 rounded-full bg-[#FDE0B8] inline-flex items-center justify-center"
+                className="size-10 rounded-full bg-[#FDE0B8] hidden xl:inline-flex items-center justify-center"
               >
                 <LoveSvg />
               </Link>
 
               {/* Avatar */}
-              <Link to="/dashboard/settings">
-                <Avatar className="size-11 rounded-full cursor-pointer">
+              <button onClick={() => setOpenPopup(!openPopup)}>
+                <Avatar className="size-10 lg:size-11 rounded-full cursor-pointer">
                   <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
                     {user?.name.slice(0, 1)}
                   </AvatarFallback>
                 </Avatar>
-              </Link>
+              </button>
+
+              {/* Mobile btns */}
+              <button
+                onClick={() => setOpen(!isOpen)}
+                className="bg-primary xl:hidden text-white h-9 md:h-10 w-10 md:w-11 rounded grid place-items-center"
+              >
+                <FaBars className="text-2xl" />
+              </button>
             </div>
           </div>
-
-          {/* Mobile btns */}
-          <button
-            onClick={() => setOpen(!isOpen)}
-            className="bg-primary xl:hidden text-white h-9 md:h-10 w-10 md:w-11 rounded grid place-items-center"
-          >
-            <FaBars className="text-2xl" />
-          </button>
         </nav>
       </header>
 
       {/* Layout Body */}
-      <div className="flex mt-[75px] lg:mt-[90px] h-[calc(100vh-90px)] bg-white">
-        {/* Sidebar with map */}
+      <div
+        onClick={() => setOpenPopup(false)}
+        className="flex mt-[75px] lg:mt-[90px] h-[calc(100vh-90px)] bg-white relative"
+      >
+        {/* Profile Popup */}
+        {openPopup && (
+          <div
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+            className="bg-white z-50 rounded-xl w-64 lg:w-72 absolute right-3 md:right-5 top-4 md:top-5 shadow-[0_8px_24px_rgba(0,0,0,0.1)] p-4 md:p-5"
+          >
+            <div className="flex gap-3 md:gap-4 items-center mb-4 lg:mb-5">
+              <Avatar className="size-12 rounded-full cursor-pointer">
+                <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
+                  {user?.name.slice(0, 1)}
+                </AvatarFallback>
+              </Avatar>
+
+              <div>
+                <h3 className="font-semibold truncate">{user?.name}</h3>
+                <p className="text-gray-500 text-sm truncate">{user?.email}</p>
+              </div>
+            </div>
+
+            <hr />
+
+            <div className="mt-4 lg:mt-5 font-medium flex text-sm lg:text-base gap-3 lg:gap-4 flex-col text-gray-700">
+              <Link
+                onClick={() => setOpenPopup(false)}
+                to="/dashboard/settings"
+              >
+                My Profile
+              </Link>
+              <button onClick={handleLogout} className="text-left text-red-500">
+                Sign Out
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Sidebar */}
         <aside className="hidden xl:block xl:w-[210px] 2xl:w-[237px] bg-[#F6F7FB] overflow-y-auto pt-7 h-full">
-          <ul className="text-[#5A5C5F] font-medium space-y-1 2xl:space-y-3">
+          <ul className="text-[#5A5C5F] font-medium space-y-2 2xl:space-y-3">
             {sidebarLinks.map(({ path, label }) => (
               <li key={path}>
                 <NavLink
@@ -136,12 +178,6 @@ const DashboardLayout = () => {
               </li>
             ))}
           </ul>
-          <button
-            onClick={handleLogout}
-            className="text-textColor font-merriweather px-5 py-2 border rounded-full border-primary mt-5 w-4/5 mx-auto block hover:bg-primary transition-all duration-300 hover:text-white"
-          >
-            Log Out
-          </button>
         </aside>
 
         {/* Page Content */}
@@ -199,12 +235,6 @@ const DashboardLayout = () => {
             </li>
           ))}
         </ul>
-        <button
-          onClick={handleLogout}
-          className="text-textColor font-merriweather px-5 py-2 border rounded-full border-primary mt-3 w-4/5 mx-auto block hover:bg-primary transition-all duration-300 hover:text-white"
-        >
-          Log Out
-        </button>
 
         {/* Close btn */}
         <button
