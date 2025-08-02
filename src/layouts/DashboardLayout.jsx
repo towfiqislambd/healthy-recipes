@@ -106,9 +106,9 @@ const DashboardLayout = () => {
               {/* Mobile btns */}
               <button
                 onClick={() => setOpen(!isOpen)}
-                className="bg-primary xl:hidden text-white h-9 md:h-10 w-10 md:w-11 rounded grid place-items-center"
+                className="bg-primary text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid 2xl:hidden place-items-center"
               >
-                <FaBars className="text-2xl" />
+                <FaBars className="text-[22px] sm:text-2xl" />
               </button>
             </div>
           </div>
