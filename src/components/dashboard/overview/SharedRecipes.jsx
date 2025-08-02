@@ -11,7 +11,7 @@ const SharedRecipes = ({ myRecipes }) => {
         </h3>
         <button>
           <Link
-            to="/dashboard/dashboard-my-recipes"
+            to="/dashboard/my-recipes"
             className="text-primary font-poppins font-medium text-sm sm:text-base"
           >
             View all

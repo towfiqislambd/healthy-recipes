@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useLogOut } from "@/hooks/auth.hook.";
 import { useAllRecipes, useFooterInfo } from "@/hooks/cms.queries";
 import { Loader } from "@/components/loader/Loader";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ButtonTransparent from "@/components/buttons/ButtonTransparent";
 
 import {
@@ -204,6 +204,9 @@ const Navbar = () => {
                   {/* Avatar */}
                   <button onClick={() => setOpenPopup(!openPopup)}>
                     <Avatar className="size-10 lg:size-11 rounded-full cursor-pointer">
+                      <AvatarImage
+                        src={`${import.meta.env.VITE_SITE_URL}/${user?.avatar}`}
+                      />
                       <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
                         {user?.name.slice(0, 1)}
                       </AvatarFallback>
@@ -237,7 +240,10 @@ const Navbar = () => {
             className="bg-white z-50 rounded-xl w-64 lg:w-72 absolute right-3 lg:right-5 top-[88px] lg:top-28 shadow-[0_8px_24px_rgba(0,0,0,0.1)] p-4 md:p-5"
           >
             <div className="flex gap-3 md:gap-4 items-center mb-4 lg:mb-5">
-              <Avatar className="size-12 rounded-full cursor-pointer">
+              <Avatar className="size-12 rounded-full">
+                <AvatarImage
+                  src={`${import.meta.env.VITE_SITE_URL}/${user?.avatar}`}
+                />
                 <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
                   {user?.name.slice(0, 1)}
                 </AvatarFallback>
@@ -272,7 +278,7 @@ const Navbar = () => {
         className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 2xl:hidden z-[999] ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
-      ></div>
+      />
 
       {/* Mobile Sidebar */}
       <div

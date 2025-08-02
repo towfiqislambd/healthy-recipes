@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { LoveSvg } from "@/components/svg-container/SvgContainer";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useAuth from "@/hooks/useAuth";
 import { useFooterInfo } from "@/hooks/cms.queries";
 import { Loader } from "@/components/loader/Loader";
@@ -97,6 +97,9 @@ const DashboardLayout = () => {
               {/* Avatar */}
               <button onClick={() => setOpenPopup(!openPopup)}>
                 <Avatar className="size-10 lg:size-11 rounded-full cursor-pointer">
+                  <AvatarImage
+                    src={`${import.meta.env.VITE_SITE_URL}/${user?.avatar}`}
+                  />
                   <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
                     {user?.name.slice(0, 1)}
                   </AvatarFallback>
@@ -130,7 +133,10 @@ const DashboardLayout = () => {
             className="bg-white z-50 rounded-xl w-64 lg:w-72 absolute right-3 md:right-5 top-4 md:top-5 shadow-[0_8px_24px_rgba(0,0,0,0.1)] p-4 md:p-5"
           >
             <div className="flex gap-3 md:gap-4 items-center mb-4 lg:mb-5">
-              <Avatar className="size-12 rounded-full cursor-pointer">
+              <Avatar className="size-12 rounded-full">
+                <AvatarImage
+                  src={`${import.meta.env.VITE_SITE_URL}/${user?.avatar}`}
+                />
                 <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
                   {user?.name.slice(0, 1)}
                 </AvatarFallback>

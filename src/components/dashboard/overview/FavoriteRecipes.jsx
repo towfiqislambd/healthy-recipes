@@ -11,7 +11,7 @@ const FavoriteRecipes = ({ savedRecipes }) => {
         </h3>
         <button>
           <Link
-            to="/dashboard/dashboard-saved-recipes"
+            to="/dashboard/saved-recipes"
             className="text-primary text-sm sm:text-base font-poppins font-medium"
           >
             View all
