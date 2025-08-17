@@ -326,7 +326,13 @@ const DashboardShareRecipe = () => {
           </label>
           <input
             type="number"
-            {...register("serving_number", { required: true })}
+            {...register("serving_number", {
+              required: "Serving Number is required",
+              min: {
+                value: 1,
+                message: "Serving Number must be a positive number",
+              },
+            })}
             placeholder="4"
             className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
           />
@@ -335,7 +341,7 @@ const DashboardShareRecipe = () => {
           </p>
           {errors.serving_number && (
             <span className="text-red-500 block mt-2 text-[15px]">
-              Serving number is required
+              {errors.serving_number.message}
             </span>
           )}
         </div>
@@ -350,7 +356,13 @@ const DashboardShareRecipe = () => {
           </label>
           <input
             type="number"
-            {...register("cooking_time", { required: true })}
+            {...register("cooking_time", {
+              required: "Cooking time is required",
+              min: {
+                value: 1,
+                message: "Cooking time must be a positive number",
+              },
+            })}
             placeholder="30 min"
             className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
           />
@@ -359,7 +371,7 @@ const DashboardShareRecipe = () => {
           </p>
           {errors.cooking_time && (
             <span className="text-red-500 block mt-2 text-[15px]">
-              Cooking time is required
+              {errors.cooking_time.message}
             </span>
           )}
         </div>
@@ -374,7 +386,13 @@ const DashboardShareRecipe = () => {
           </label>
           <input
             type="number"
-            {...register("preparation_time", { required: true })}
+            {...register("preparation_time", {
+              required: "Preparation time is required",
+              min: {
+                value: 1,
+                message: "Preparation time must be a positive number",
+              },
+            })}
             placeholder="40 min"
             className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
           />
@@ -383,7 +401,7 @@ const DashboardShareRecipe = () => {
           </p>
           {errors.preparation_time && (
             <span className="text-red-500 block mt-2 text-[15px]">
-              Preparation time is required
+              {errors.preparation_time.message}
             </span>
           )}
         </div>

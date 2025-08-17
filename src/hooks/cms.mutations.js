@@ -96,7 +96,7 @@ export const useAddMealPlanner = recipe_id => {
       if (data?.data?.meals?.length > 0) {
         toast.success(data?.message);
         queryClient.invalidateQueries(["meal-planner-table"]);
-        navigate("/dashboard/dashboard-meal-planner");
+        navigate("/dashboard/meal-planner");
       } else {
         toast.error(data?.message);
       }

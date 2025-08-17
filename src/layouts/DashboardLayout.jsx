@@ -88,7 +88,7 @@ const DashboardLayout = () => {
             </div>
             <div className="flex gap-3 2xl:gap-5 items-center">
               <Link
-                to="/dashboard/dashboard-saved-recipes"
+                to="/dashboard/saved-recipes"
                 className="size-10 rounded-full bg-[#FDE0B8] hidden xl:inline-flex items-center justify-center"
               >
                 <LoveSvg />
