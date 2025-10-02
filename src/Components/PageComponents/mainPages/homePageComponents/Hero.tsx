@@ -50,12 +50,7 @@ const Hero = ({ data }: heroBannerProps) => {
                   </div>
 
                   {/* button */}
-                  <Button text={btn_text} />
-                  {/* <ButtonPrimary
-                path="/recipe-library"
-                title={data?.btn_text}
-                svg={true}
-              /> */}
+                  <Button path="/recipe-library" text={btn_text} icon={true} />
                 </div>
 
                 {/* right side */}

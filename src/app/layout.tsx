@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
-import { Poppins, Inter, Merriweather } from "next/font/google";
+import { Poppins, Inter, Merriweather_Sans } from "next/font/google";
 import AosProvider from "@/Provider/AosProvider/AosProvider";
 import AuthProvider from "@/Provider/AuthProvider/AuthProvider";
 import QueryProvider from "@/Provider/QueryProvider/QueryProvider";
@@ -21,10 +21,10 @@ const inter = Inter({
   display: "swap",
 });
 
-const merriweather = Merriweather({
+const merriweather = Merriweather_Sans({
   variable: "--font-merriweather",
   subsets: ["latin"],
-  weight: ["300", "400", "700", "900"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -39,7 +39,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
       <body
