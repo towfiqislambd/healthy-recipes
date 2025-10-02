@@ -10,7 +10,7 @@ import { useServerApi } from "@/Hooks/useServerApi";
 //  SSR (Server Side Rendering)
 // =======================================================
 
-// Site Settings
-export async function getSiteSettings() {
-  return useServerApi("/api/site-settings", 3600);
+// Hero Data
+export async function getHeroData() {
+  return useServerApi("/api/cms/home-banner", 3600);
 }

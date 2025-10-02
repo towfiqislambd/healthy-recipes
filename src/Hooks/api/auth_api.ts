@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import useAuth from "@/Hooks/useAuth";
 import { useRouter } from "next/navigation";
 import useClientApi from "@/Hooks/useClientApi";
+import { axiosPublic } from "../useAxiosPublic";
 
 // Get User Data
 export const useGetUserData = (token: any) => {
@@ -57,4 +58,8 @@ export const useLogin = () => {
       toast.error(err?.response?.data?.message);
     },
   });
+};
+export const HomepageBanner = async () => {
+  const { data } = await axiosPublic("/api/cms/home-banner");
+  return data?.data;
 };
