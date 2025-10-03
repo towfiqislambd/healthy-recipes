@@ -1,7 +1,7 @@
 import Button from "@/Components/Common/Button";
 import Container from "@/Components/Common/Container";
 import Heading from "@/Components/Common/Heading";
-import RecipeLibraryCard from "@/Components/Common/RecipeLibraryCard";
+import RecipeLibraryCard from "@/Components/Cards/RecipeLibraryCard";
 import React from "react";
 
 type recipeLibraryItem = {

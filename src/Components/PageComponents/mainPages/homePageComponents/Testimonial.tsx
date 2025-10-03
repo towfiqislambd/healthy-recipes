@@ -6,7 +6,7 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperClass } from "swiper";
 import { SliderNextSvg, SliderPrevSvg } from "@/Components/Svg/SvgContainer";
-import TestimonialCard from "@/Components/Common/TestimonialCard";
+import TestimonialCard from "@/Components/Cards/TestimonialCard";
 import Heading from "@/Components/Common/Heading";
 import Container from "@/Components/Common/Container";
 

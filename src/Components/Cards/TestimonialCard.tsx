@@ -1,5 +1,5 @@
 import React from "react";
-import { AppleSvg } from "../Svg/SvgContainer";
+import { AppleSvg } from "@/Components/Svg/SvgContainer";
 
 type testimonialItem = {
   title: string;

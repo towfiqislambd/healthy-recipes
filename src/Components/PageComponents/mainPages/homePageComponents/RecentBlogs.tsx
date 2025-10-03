@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 import { SliderNextSvg, SliderPrevSvg } from "@/Components/Svg/SvgContainer";
-import BlogCard from "@/Components/Common/BlogCard";
+import BlogCard from "@/Components/Cards/BlogCard";
 import Container from "@/Components/Common/Container";
 
 type blogItem = {
