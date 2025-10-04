@@ -9,10 +9,10 @@ import { useQueryClient } from "@tanstack/react-query";
 
 // Get All Recipes Public
 export const getAllRecipesPublic = (
-  category_id: number,
+  category_id?: number,
   recipe_library_id?: number,
-  age_group?: number,
-  tag_id?: number,
+  age_group?: number | any,
+  tag_id?: number | any,
   search?: string
 ) => {
   return useClientApi({
@@ -107,4 +107,14 @@ export async function getRecentBLogs() {
 // Trending Recipes (Public)
 export async function getTrendingRecipesPublic() {
   return useServerApi("/api/guest/trending-recipes", 3600);
+}
+
+// Recipe Library
+export async function getRecipeLibrary() {
+  return useServerApi("/api/recipe-libraries", 3600);
+}
+
+// All Categories
+export async function getAllCategories() {
+  return useServerApi("/api/categories", 3600);
 }
