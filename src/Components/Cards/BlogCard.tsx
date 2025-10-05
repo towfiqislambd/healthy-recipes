@@ -21,7 +21,7 @@ type blogProps = {
 const BlogCard = ({ item }: blogProps) => {
   return (
     <Link
-      href={`/blog/${item?.slug}`}
+      href={`/blog-details/${item?.slug}`}
       className="bg-white block rounded-lg shadow-[0px_0px_8px_0px_rgba(0,0,0,0.06)] px-3 pt-3 pb-8 group"
     >
       {/* image */}
