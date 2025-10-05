@@ -58,3 +58,26 @@ export const useLogin = () => {
     },
   });
 };
+
+// Logout
+export const useLogout = () => {
+  const router = useRouter();
+  const { clearToken } = useAuth();
+
+  return useClientApi({
+    method: "post",
+    key: ["logout"],
+    isPrivate: true,
+    endpoint: "/api/users/logout",
+    onSuccess: (data: any) => {
+      if (data?.success) {
+        clearToken();
+        toast.success(data?.message);
+        router.replace("/auth/login");
+      }
+    },
+    onError: (err: any) => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
