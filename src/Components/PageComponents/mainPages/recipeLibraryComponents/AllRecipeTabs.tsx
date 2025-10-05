@@ -60,7 +60,7 @@ const AllRecipeTabs = ({ data, recipes, library_id }: any) => {
   );
 
   return (
-    <div className="container pb-7 xl:pb-10 2xl:pb-20">
+    <div className="pb-7 xl:pb-10 2xl:pb-20">
       {/* Tabs */}
       <div className="py-5 sm:py-8 w-full flex flex-wrap items-center justify-center 3xl:justify-between gap-x-1 gap-y-2">
         <button

@@ -33,6 +33,32 @@ export const getAllRecipesPublic = (
   });
 };
 
+export const getAllRecipesPrivate = (
+  category_id?: number,
+  recipe_library_id?: number,
+  age_group?: number | any,
+  tag_id?: number | any,
+  search?: string
+) => {
+  return useClientApi({
+    method: "get",
+    isPrivate: true,
+    key: [
+      "all-recipes-public",
+      category_id,
+      recipe_library_id,
+      age_group,
+      tag_id,
+      search,
+    ],
+    endpoint: "/api/auth/recipes",
+    params: { category_id, recipe_library_id, age_group, tag_id, search },
+    queryOptions: {
+      retry: false,
+    },
+  });
+};
+
 // Add-Remove Wishlist
 export const useWishlist = (id: number) => {
   const queryClient = useQueryClient();
@@ -48,6 +74,24 @@ export const useWishlist = (id: number) => {
       } else {
         toast.success("Added to favorites");
       }
+    },
+    onError: (err: any) => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// Add Review
+export const useAddReview = (id: number) => {
+  const queryClient = useQueryClient();
+  return useClientApi({
+    method: "post",
+    key: ["add-review", id],
+    isPrivate: true,
+    endpoint: `/api/review/${id}`,
+    onSuccess: (data: any) => {
+      // queryClient.invalidateQueries(["get-wishlists"]);
+      toast.success(data?.message);
     },
     onError: (err: any) => {
       toast.error(err?.response?.data?.message);
@@ -114,11 +158,70 @@ export async function getRecipeLibrary() {
   return useServerApi("/api/recipe-libraries", 3600);
 }
 
+// Recipe Library
+export const getRecipeLibraryClient = () => {
+  return useClientApi({
+    method: "get",
+    key: ["recipe-library"],
+    endpoint: "/api/recipe-libraries",
+  });
+};
+
 // All Categories
 export const getAllCategories = () => {
   return useClientApi({
     method: "get",
     key: ["categories"],
     endpoint: "/api/categories",
+  });
+};
+
+// Recipe Details
+export const getRecipeDetails = (id: any) => {
+  return useClientApi({
+    method: "get",
+    enabled: !!id,
+    key: ["recipe-details", id],
+    endpoint: `/api/single-recipe/${id}`,
+  });
+};
+
+// Recipe Review
+export const getRecipeReview = (recipe_id: number, page_id: number) => {
+  return useClientApi({
+    method: "get",
+    key: ["recipe-reviews", recipe_id, page_id],
+    endpoint: `/api/reviews-by-pagination/${recipe_id}?page=${page_id}`,
+    queryOptions: {
+      retry: false,
+    },
+  });
+};
+
+// Meal Planner Info
+export const getMealPlannerInfo = () => {
+  return useClientApi({
+    method: "get",
+    key: ["meal-planner-info"],
+    endpoint: "api/cms/meal-planning-by-age-group",
+  });
+};
+
+// Meal Planner Card
+export const getMealPlannerCard = () => {
+  return useClientApi({
+    method: "get",
+    key: ["meal-planner-card"],
+    endpoint: "api/cms/meal-planner-card",
+  });
+};
+
+// Recent Blogs
+export const getBlogDetails = (slug: string) => {
+  return useClientApi({
+    method: "get",
+    enabled: !!slug,
+    key: ["blog-details", slug],
+    endpoint: `/api/blog/${slug}`,
   });
 };

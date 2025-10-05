@@ -26,7 +26,7 @@
 }
 
 body {
-  @apply font-poppins;
+  @apply font-poppins bg-[#FCFCFC];
 }
 
 @media (max-width: 639px) {
@@ -34,7 +34,6 @@ body {
     @apply !h-12 !w-16;
   }
 }
-
 
 #otp_container div {
   @apply flex items-center justify-center sm:gap-5 gap-2;
