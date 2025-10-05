@@ -55,6 +55,24 @@ export const useWishlist = (id: number) => {
   });
 };
 
+// Add Review
+export const useAddReview = (id: number) => {
+  const queryClient = useQueryClient();
+  return useClientApi({
+    method: "post",
+    key: ["add-review", id],
+    isPrivate: true,
+    endpoint: `/api/review/${id}`,
+    onSuccess: (data: any) => {
+      // queryClient.invalidateQueries(["get-wishlists"]);
+      toast.success(data?.message);
+    },
+    onError: (err: any) => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
 // =======================================================
 //  SSR (Server Side Rendering)
 // =======================================================
@@ -120,5 +138,27 @@ export const getAllCategories = () => {
     method: "get",
     key: ["categories"],
     endpoint: "/api/categories",
+  });
+};
+
+// Recipe Details
+export const getRecipeDetails = (id: any) => {
+  return useClientApi({
+    method: "get",
+    enabled: !!id,
+    key: ["recipe-details", id],
+    endpoint: `/api/single-recipe/${id}`,
+  });
+};
+
+// Recipe Review
+export const getRecipeReview = (recipe_id: number, page_id: number) => {
+  return useClientApi({
+    method: "get",
+    key: ["recipe-reviews", recipe_id, page_id],
+    endpoint: `/api/reviews-by-pagination/${recipe_id}?page=${page_id}`,
+    queryOptions: {
+      retry: false,
+    },
   });
 };

@@ -19,7 +19,7 @@ interface Props {
 
 const page = ({ params }: Props) => {
   const { id } = use(params);
-  const { data: recipeCategory, isLoading } = getAllCategories();
+  const { data: recipeCategory } = getAllCategories();
   const { data: allRecipes, isLoading: isLoadingRecipes } = getAllRecipesPublic(
     null as any,
     id as any
@@ -54,12 +54,13 @@ const page = ({ params }: Props) => {
               {recipeTitle}
             </Link> */}
         </div>
+
+        <AllRecipeTabs
+          library_id={id}
+          data={recipeCategory}
+          recipes={allRecipes?.data}
+        />
       </Container>
-      <AllRecipeTabs
-        library_id={id}
-        data={recipeCategory}
-        recipes={allRecipes?.data}
-      />
       {/* <ShareYourMeal data={shareRecipeData?.data} /> */}
       {/* <RecentBlogs data={blogData?.data} /> */}
     </div>

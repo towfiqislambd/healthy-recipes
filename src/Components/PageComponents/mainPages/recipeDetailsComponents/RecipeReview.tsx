@@ -1,0 +1,209 @@
+"use client";
+import ReviewCard from "@/Components/Cards/ReviewCard";
+import { getRecipeReview, useAddReview } from "@/Hooks/api/cms_api";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import Rating from "react-rating";
+import toast from "react-hot-toast";
+import { CgSpinnerTwo } from "react-icons/cg";
+import useAuth from "@/Hooks/useAuth";
+import { EmptyStarSvg, FullStarSvg } from "@/Components/Svg/SvgContainer";
+import { useRouter } from "next/navigation";
+import Container from "@/Components/Common/Container";
+const AnyRating: any = Rating;
+const RecipeReview = ({ id }: any) => {
+  const router = useRouter();
+  const { user } = useAuth();
+  const [rating, setRating] = useState<number>(0);
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false); // Track if form is submitted
+  const [activePage, setActivePage] = useState<number>(1);
+  const { data: allReviews, isLoading } = getRecipeReview(id, activePage);
+  const { mutateAsync: reviewMutation, isPending } = useAddReview(id);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
+  const onSubmit = async (data: any) => {
+    if (user) {
+      if (id) {
+        if (rating === 0) {
+          setFormSubmitted(true); // Show rating error if submitted without rating
+          return;
+        }
+
+        const formData = { ...data, rating };
+        await reviewMutation(formData);
+        reset();
+        // refetch();
+        setRating(0);
+        setFormSubmitted(false); // Reset the form submission status
+      }
+    } else {
+      toast.error("Please login first");
+      router.push("/auth/login");
+    }
+  };
+
+  return (
+    <Container>
+      <section className="py-8 xl:py-10 2xl:py-16 3xl:py-24">
+        <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0 flex flex-col xl:flex-row items-center gap-5 xl:gap-10 3xl:gap-12">
+          {/* left side contents */}
+          <div className="w-full xl:flex-1">
+            <div className="w-full">
+              {/* title */}
+              <h5 className="text-xl lg:text-2xl font-semibold text-black">
+                Submit your review
+              </h5>
+
+              {/* form */}
+              <div className="py-2 lg:py-4 xl:py-8 w-full">
+                {/* rating */}
+                <div className="w-full">
+                  <p className="text-textColor text-sm font-medium">
+                    Add your rating <span className="text-[#FF5630]">*</span>
+                  </p>
+
+                  {/* interactive stars */}
+                  <div className="mt-2 flex items-center gap-2">
+                    <AnyRating
+                      initialRating={rating}
+                      onChange={(rate: any) => setRating(rate)}
+                      emptySymbol={<EmptyStarSvg />}
+                      fullSymbol={<FullStarSvg />}
+                      fractions={1}
+                    />
+                  </div>
+
+                  {/* Show rating validation message after form submission */}
+                  {formSubmitted && rating === 0 && (
+                    <p className="text-sm text-red-500 mt-2">
+                      Please add a rating before submitting your review.
+                    </p>
+                  )}
+
+                  {/* form inputs */}
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="mt-5 space-y-5 w-full"
+                  >
+                    {/* Email */}
+                    <div className="flex flex-col gap-2 w-full">
+                      <label className="font-medium text-sm text-textColor">
+                        Email <span className="text-[#FF5630]">*</span>
+                      </label>
+                      <input
+                        className={`px-3 xl:px-4 py-2 xl:py-4 border rounded-lg w-full focus:outline-none`}
+                        type="email"
+                        placeholder={user ? "" : "Join@gmail.com"}
+                        defaultValue={user?.email}
+                        readOnly={user && true}
+                        disabled={user && true}
+                      />
+                    </div>
+
+                    {/* Name */}
+                    <div className="flex flex-col gap-2 w-full">
+                      <label className="font-medium text-sm text-textColor">
+                        Name <span className="text-[#FF5630]">*</span>
+                      </label>
+                      <input
+                        className={`px-3 xl:px-4 py-2 xl:py-4 border rounded-lg w-full focus:outline-none}`}
+                        type="text"
+                        placeholder={user ? "" : "Jon Doe"}
+                        defaultValue={user?.name}
+                        readOnly={user && true}
+                        disabled={user && true}
+                      />
+                    </div>
+
+                    {/* Review */}
+                    <div className="flex flex-col gap-2 w-full">
+                      <label
+                        htmlFor="comment"
+                        className="font-medium text-sm text-textColor"
+                      >
+                        Write your review{" "}
+                        <span className="text-[#FF5630]">*</span>
+                      </label>
+                      <textarea
+                        rows={5}
+                        className={`px-3 xl:px-4 py-2 xl:py-4 resize-none border rounded-lg w-full focus:outline-none ${
+                          errors.comment ? "border-red-500" : "border-gray-300"
+                        } `}
+                        placeholder="Share your thoughts here..."
+                        id="comment"
+                        {...register("comment", {
+                          required: "Review is required",
+                        })}
+                      ></textarea>
+                      {errors.comment && (
+                        <span className="text-sm text-red-500">
+                          {errors.comment.message as string}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Submit button */}
+                    <div>
+                      <button
+                        className="px-3 xl:px-8 py-2 xl:py-3 text-white font-medium bg-primary hover:bg-transparent transition-all duration-300 rounded-full hover:text-primary border border-primary"
+                        type="submit"
+                      >
+                        {isPending ? (
+                          <CgSpinnerTwo className="animate-spin size-6" />
+                        ) : (
+                          "Submit Review"
+                        )}
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* right side contents */}
+          <div className="space-y-5 xl:flex-1 w-full">
+            {isLoading ? (
+              "Loading"
+            ) : allReviews.data?.length > 0 ? (
+              allReviews?.data?.map((item: any, idx: number) => (
+                <ReviewCard key={idx} data={item} />
+              ))
+            ) : (
+              <p className="text-primary font-merriweather text-center text-lg lg:text-xl">
+                No reviews found yet
+              </p>
+            )}
+
+            {/* Pagination */}
+            <div className="mt-10 flex justify-center items-center gap-2 flex-wrap">
+              {allReviews?.data?.links.map((item: any, idx: number) => (
+                <button
+                  key={idx}
+                  onClick={() =>
+                    item.url && setActivePage(item.url.split("=")[1])
+                  }
+                  className={`px-3 py-1 rounded border transition-all duration-150 
+            ${item.active ? "bg-primary text-white" : "bg-white text-gray-700"} 
+            ${
+              !item.url ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"
+            }`}
+                  disabled={!item.url}
+                  dangerouslySetInnerHTML={{ __html: item.label }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </Container>
+  );
+};
+
+export default RecipeReview;
