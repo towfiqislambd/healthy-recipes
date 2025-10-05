@@ -115,6 +115,10 @@ export async function getRecipeLibrary() {
 }
 
 // All Categories
-export async function getAllCategories() {
-  return useServerApi("/api/categories", 3600);
-}
+export const getAllCategories = () => {
+  return useClientApi({
+    method: "get",
+    key: ["categories"],
+    endpoint: "/api/categories",
+  });
+};
