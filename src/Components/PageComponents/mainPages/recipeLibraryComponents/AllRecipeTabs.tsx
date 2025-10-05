@@ -1,12 +1,146 @@
 "use client";
-import { getAllRecipesPublic } from "@/Hooks/api/cms_api";
 import React from "react";
+import { useState } from "react";
+import deleteImg from "@/Assets/images/delete.png";
+import { RiResetLeftFill } from "react-icons/ri";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/Components/ui/select";
+import RecipeCard from "@/Components/Cards/RecipeCard";
+import { getAllRecipesPublic } from "@/Hooks/api/cms_api";
+import Image from "next/image";
 
-const AllRecipeTabs = () => {
-  const { data: allRecipes, isLoading } = getAllRecipesPublic();
-  console.log(allRecipes);
+const AllRecipeTabs = ({ data, recipes, library_id }: any) => {
+  const [activeTab, setActiveTab] = useState({
+    id: 0,
+    category_name: "All Recipes",
+  });
+  const [tag, setTag] = useState(null);
+  const filterClass = `text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 xl:px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
-  return <div></div>;
+  const { data: allRecipes, isLoading } = getAllRecipesPublic(
+    activeTab?.id,
+    library_id,
+    null,
+    tag
+  );
+
+  const getCountByType = (type: string) => {
+    if (!recipes) return 0; // ✅ Safely return 0 if recipes is undefined
+
+    return type === "All Recipes"
+      ? recipes.length
+      : recipes.filter((r: any) => r?.category_name === type)?.length || 0;
+  };
+
+  const handleReset = () => {
+    setTag(null);
+    setActiveTab({ id: 0, category_name: "All Recipes" });
+  };
+
+  const handleTagChange = (value: any) => {
+    setTag(value === "all" ? null : value);
+  };
+
+  // Get unique tags from all recipes
+  const uniqueTags = Array.from(
+    new Set(
+      recipes?.flatMap(
+        (recipe: any) =>
+          recipe.tag_names?.map((tag: any) => ({
+            id: tag.id,
+            tag_name: tag.tag_name,
+          })) || []
+      )
+    )
+  );
+
+  return (
+    <div className="container pb-7 xl:pb-10 2xl:pb-20">
+      {/* Tabs */}
+      <div className="py-5 sm:py-8 w-full flex flex-wrap items-center justify-center 3xl:justify-between gap-x-1 gap-y-2">
+        <button
+          onClick={() => setActiveTab({ id: 0, category_name: "All Recipes" })}
+          className={`px-3 sm:px-4 2xl:px-6 2xl:py-3 py-2 text-sm sm:text-base rounded-full font-medium ${
+            activeTab?.category_name === "All Recipes"
+              ? "bg-[#3A3A3A] text-white"
+              : "bg-transparent text-textColor"
+          }`}
+        >
+          All Recipes <span>({getCountByType("All Recipes")})</span>
+        </button>
+
+        {data?.data?.map((tab: any) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab)}
+            className={`px-3 sm:px-4 3xl:px-5 2xl:py-3 py-2 text-sm sm:text-base rounded-full font-medium ${
+              tab?.category_name === activeTab?.category_name
+                ? "bg-[#3A3A3A] text-white"
+                : "bg-transparent text-textColor"
+            }`}
+          >
+            {tab?.category_name}{" "}
+            <span>({getCountByType(tab?.category_name)})</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Filter */}
+      <div className="w-full flex flex-wrap items-center justify-center 2xl:justify-end gap-3 xl:gap-3 2xl:gap-5">
+        <Select value={tag || "all"} onValueChange={handleTagChange}>
+          <SelectTrigger className="w-[300px] md:w-[380px] 2xl:w-[450px] h-9 sm:h-11 2xl:h-14 rounded-full px-4 2xl:px-6 text-base focus:ring-primary">
+            <SelectValue placeholder="Select recipes by tags..." />
+          </SelectTrigger>
+          <SelectContent className="px-0 py-0">
+            <SelectItem value="all" className={filterClass}>
+              Select recipes by tags
+            </SelectItem>
+            {uniqueTags.map((tag: any) => (
+              <SelectItem key={tag.id} value={tag.id} className={filterClass}>
+                {tag.tag_name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <button
+          onClick={handleReset}
+          className="h-9 sm:h-11 2xl:h-14 px-3 2xl:px-6 border border-primary rounded-full flex items-center gap-2 bg-primary text-white transition-all duration-300 hover:bg-transparent hover:text-primary"
+        >
+          <RiResetLeftFill />
+          Reset
+        </button>
+      </div>
+
+      {/* Cards */}
+      <div className="mt-10 grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6">
+        {isLoading ? (
+          "Loading"
+        ) : allRecipes?.data?.length > 0 ? (
+          allRecipes?.data?.map((item: any, idx: number) => (
+            <RecipeCard key={idx} item={item} isMyRecipe={true} />
+          ))
+        ) : (
+          <div className="text-center col-span-4 py-5 space-y-4 relative">
+            <Image
+              src={deleteImg}
+              fill
+              alt="logo"
+              className="mx-auto size-16 xl:size-auto"
+            />
+            <p className="text-primary font-merriweather text-lg lg:text-xl">
+              No recipes found
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default AllRecipeTabs;
