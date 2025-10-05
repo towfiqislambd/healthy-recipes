@@ -1,8 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
-import { Poppins } from "next/font/google";
-import { getSiteSettings } from "@/Hooks/api/cms_api";
+import { Poppins, Inter, Merriweather_Sans } from "next/font/google";
 import AosProvider from "@/Provider/AosProvider/AosProvider";
 import AuthProvider from "@/Provider/AuthProvider/AuthProvider";
 import QueryProvider from "@/Provider/QueryProvider/QueryProvider";
@@ -12,6 +11,20 @@ const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+const merriweather = Merriweather_Sans({
+  variable: "--font-merriweather",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -26,25 +39,17 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let faviconUrl = "/favicon.svg";
-  const siteSettings = await getSiteSettings();
-  if (siteSettings?.data?.favicon) {
-    faviconUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/${siteSettings.data.favicon}`;
-  }
-
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href={faviconUrl} />
-      </head>
-      <body className={`${poppins.variable} antialiased`}>
+      <body
+        className={`${poppins.variable} ${inter.variable} ${merriweather.variable} antialiased`}
+      >
         <QueryProvider>
           <AuthProvider>
             <AosProvider>
               <Toaster />
               {children}
             </AosProvider>
-            <Toaster />
           </AuthProvider>
         </QueryProvider>
       </body>
