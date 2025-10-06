@@ -33,6 +33,7 @@ export const getAllRecipesPublic = (
   });
 };
 
+// Get All Recipes Private
 export const getAllRecipesPrivate = (
   category_id?: number,
   recipe_library_id?: number,
@@ -89,6 +90,61 @@ export const useAddReview = (id: number) => {
     key: ["add-review", id],
     isPrivate: true,
     endpoint: `/api/review/${id}`,
+    onSuccess: (data: any) => {
+      // queryClient.invalidateQueries(["get-wishlists"]);
+      toast.success(data?.message);
+    },
+    onError: (err: any) => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// Delete Meal Planner
+export const useDeleteMealPlanner = (meal_plan_id: number | null) => {
+  const queryClient = useQueryClient();
+  return useClientApi({
+    method: "post",
+    enabled: !!meal_plan_id,
+    key: ["delete-meal-planner", meal_plan_id],
+    isPrivate: true,
+    endpoint: `/api/meal/${meal_plan_id}`,
+    onSuccess: (data: any) => {
+      // queryClient.invalidateQueries(["get-wishlists"]);
+      toast.success(data?.message);
+    },
+    onError: (err: any) => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// Edit Meal Planner
+export const useEditMealPlanner = (meal_plan_id: number | null) => {
+  const queryClient = useQueryClient();
+  return useClientApi({
+    method: "post",
+    enabled: !!meal_plan_id,
+    key: ["edit-meal-planner", meal_plan_id],
+    isPrivate: true,
+    endpoint: `/api/meal-update/${meal_plan_id}`,
+    onSuccess: (data: any) => {
+      // queryClient.invalidateQueries(["get-wishlists"]);
+      toast.success(data?.message);
+    },
+    onError: (err: any) => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// Add New Recipe
+export const useAddNewRecipe = () => {
+  return useClientApi({
+    method: "post",
+    key: ["add-new-recipe"],
+    isPrivate: true,
+    endpoint: "/api/recipe/store",
     onSuccess: (data: any) => {
       // queryClient.invalidateQueries(["get-wishlists"]);
       toast.success(data?.message);
@@ -176,6 +232,15 @@ export const getAllCategories = () => {
   });
 };
 
+// All Library
+export const getAllLibrary = () => {
+  return useClientApi({
+    method: "get",
+    key: ["library"],
+    endpoint: "/api/recipe-libraries",
+  });
+};
+
 // Recipe Details
 export const getRecipeDetails = (id: any) => {
   return useClientApi({
@@ -223,5 +288,52 @@ export const getBlogDetails = (slug: string) => {
     enabled: !!slug,
     key: ["blog-details", slug],
     endpoint: `/api/blog/${slug}`,
+  });
+};
+
+// Site Settings (Client)
+export const getSiteSettingsClient = () => {
+  return useClientApi({
+    method: "get",
+    key: ["get-site-settings"],
+    endpoint: `/api/site-settings`,
+  });
+};
+
+// Get Wishlist
+export const getWishlist = (page_id?: number, category_id?: number) => {
+  return useClientApi({
+    method: "get",
+    key: ["get-wishlist", page_id, category_id],
+    endpoint: "/api/wishlists",
+    isPrivate: true,
+    params: { page_id, category_id },
+    queryOptions: {
+      retry: false,
+    },
+  });
+};
+
+// Get My Recipes
+export const getMyRecipes = (page_id?: number, category_id?: number) => {
+  return useClientApi({
+    method: "get",
+    key: ["get-wishlist", page_id, category_id],
+    endpoint: "/api/my-recipes",
+    isPrivate: true,
+    params: { page_id, category_id },
+    queryOptions: {
+      retry: false,
+    },
+  });
+};
+
+// Meal Planner Table
+export const getMealPlannerTableData = () => {
+  return useClientApi({
+    method: "get",
+    isPrivate: true,
+    key: ["meal-planner-data"],
+    endpoint: `/api/get-meal-plans`,
   });
 };
