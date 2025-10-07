@@ -1,9 +1,9 @@
-import { AddLightSvg } from "@/Components/Svg/SvgContainer";
-import banner from "@/Assets/images/share-recipe-bg.png";
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 import Container from "@/Components/Common/Container";
+import banner from "@/Assets/images/share-recipe-bg.png";
+import { AddLightSvg } from "@/Components/Svg/SvgContainer";
 
 type shareMealItem = {
   description: string;
@@ -36,21 +36,22 @@ const ShareYourMeal = ({ data }: shareMealProps) => {
                     alt="share image"
                   />
                 </figure>
+
                 <div
                   dangerouslySetInnerHTML={{ __html: description }}
                   className="max-w-[700px] font-inter lg:text-lg xl:text-xl 2xl:text-2xl font-medium leading-[150%] text-white"
-                ></div>
+                />
               </div>
 
-              {/* share recipe button */}
+              {/* Share Recipe button */}
               <Link
                 href="/dashboard/dashboard-share-recipes"
                 className="px-6 py-3 rounded-full text-white border border-white relative mt-5 flex-shrink-0"
               >
                 {btn_text}
-                <div className="absolute -top-2.5 left-[6px]">
+                <span className="absolute -top-2.5 left-[6px]">
                   <AddLightSvg />
-                </div>
+                </span>
               </Link>
             </div>
           </Container>

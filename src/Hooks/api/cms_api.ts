@@ -1,20 +1,120 @@
-import { useServerApi } from "@/Hooks/useServerApi";
-import useClientApi from "@/Hooks/useClientApi";
 import toast from "react-hot-toast";
+import useClientApi from "@/Hooks/useClientApi";
+import { useServerApi } from "@/Hooks/useServerApi";
 import { useQueryClient } from "@tanstack/react-query";
+
+// ================================================
+//  ISR (Incremental Static Regeneration)
+// ================================================
+
+// Site Settings
+export async function getSiteSettings() {
+  return useServerApi({
+    mode: "ISR",
+    revalidate: 86400,
+    endpoint: "/api/site-settings",
+  });
+}
+
+// Social Links
+export async function getSocialLinks() {
+  return useServerApi({
+    mode: "ISR",
+    revalidate: 86400,
+    endpoint: "/api/social-links",
+  });
+}
+
+// ================================================
+//  SSR (Server Side Rendering)
+// ================================================
+
+// Trending Recipes (Public)
+export async function getTrendingRecipesPublic() {
+  return useServerApi({
+    mode: "SSR",
+    endpoint: "/api/guest/trending-recipes",
+  });
+}
+
+// ================================================
+//  SSG (Static Site Generation)
+// ================================================
+
+// Hero Data
+export async function getHeroData() {
+  return useServerApi({
+    mode: "SSG",
+    endpoint: "/api/cms/home-banner",
+  });
+}
+
+// Why Choose Data
+export async function getWhyChooseData() {
+  return useServerApi({
+    mode: "SSG",
+    endpoint: "/api/cms/why-choose-us",
+  });
+}
+
+// Recipe Library
+export async function getRecipeLibraryData() {
+  return useServerApi({
+    mode: "SSG",
+    endpoint: "/api/recipe-libraries",
+  });
+}
+
+// Meal Planner Data
+export async function getMealPlannerData() {
+  return useServerApi({
+    mode: "SSG",
+    endpoint: "/api/cms/meal-planner",
+  });
+}
+
+// Share Recipes Data
+export async function getShareRecipesData() {
+  return useServerApi({
+    mode: "SSG",
+    endpoint: "/api/cms/share-your-recipe",
+  });
+}
+
+// Testimonial Data
+export async function getTestimonialData() {
+  return useServerApi({
+    mode: "SSG",
+    endpoint: "/api/cms/testimonial",
+  });
+}
+
+// Recent Blogs
+export async function getRecentBLogs() {
+  return useServerApi({
+    mode: "SSG",
+    endpoint: "/api/blogs",
+  });
+}
 
 // =======================================================
 //  CSR (Client Side Rendering)
 // =======================================================
 
 // Get All Recipes Public
-export const getAllRecipesPublic = (
-  category_id?: number,
-  recipe_library_id?: number,
-  age_group?: number | any,
-  tag_id?: number | any,
-  search?: string
-) => {
+export const getAllRecipesPublic = ({
+  category_id,
+  recipe_library_id,
+  age_group,
+  tag_id,
+  search,
+}: {
+  category_id?: number;
+  recipe_library_id?: number;
+  age_group?: string;
+  tag_id?: number;
+  search?: string;
+}) => {
   return useClientApi({
     method: "get",
     key: [
@@ -100,6 +200,24 @@ export const useAddReview = (id: number) => {
   });
 };
 
+// Add Meal Planner
+export const useAddMealPlanner = (recipe_id: number | null) => {
+  const queryClient = useQueryClient();
+  return useClientApi({
+    method: "post",
+    key: ["add-meal-planner", recipe_id],
+    isPrivate: true,
+    endpoint: `api/meal-plans/${recipe_id}`,
+    onSuccess: (data: any) => {
+      // queryClient.invalidateQueries(["meal-planner-table"]);
+      // navigate("/dashboard/meal-planner");
+    },
+    onError: (err: any) => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
 // Delete Meal Planner
 export const useDeleteMealPlanner = (meal_plan_id: number | null) => {
   const queryClient = useQueryClient();
@@ -154,65 +272,6 @@ export const useAddNewRecipe = () => {
     },
   });
 };
-
-// =======================================================
-//  SSR (Server Side Rendering)
-// =======================================================
-
-// Site Settings
-export async function getSiteSettings() {
-  return useServerApi("/api/site-settings", 3600);
-}
-
-// Social Links
-export async function getSocialLinks() {
-  return useServerApi("/api/social-links", 3600);
-}
-
-// Hero Data
-export async function getHeroData() {
-  return useServerApi("/api/cms/home-banner", 3600);
-}
-
-// Why Choose Data
-export async function getWhyChooseData() {
-  return useServerApi("/api/cms/why-choose-us", 3600);
-}
-
-// Meal Planner Data
-export async function getMealPlannerData() {
-  return useServerApi("/api/cms/meal-planner", 3600);
-}
-
-// Share Recipes Data
-export async function getShareRecipesData() {
-  return useServerApi("/api/cms/share-your-recipe", 3600);
-}
-
-// Testimonial Data
-export async function getTestimonialData() {
-  return useServerApi("/api/cms/testimonial", 3600);
-}
-
-// Recipe Library
-export async function getRecipeLibraryData() {
-  return useServerApi("/api/recipe-libraries", 3600);
-}
-
-// Recent Blogs
-export async function getRecentBLogs() {
-  return useServerApi("/api/blogs", 3600);
-}
-
-// Trending Recipes (Public)
-export async function getTrendingRecipesPublic() {
-  return useServerApi("/api/guest/trending-recipes", 3600);
-}
-
-// Recipe Library
-export async function getRecipeLibrary() {
-  return useServerApi("/api/recipe-libraries", 3600);
-}
 
 // Recipe Library
 export const getRecipeLibraryClient = () => {

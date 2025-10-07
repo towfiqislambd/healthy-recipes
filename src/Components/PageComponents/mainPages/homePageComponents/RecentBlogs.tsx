@@ -1,13 +1,13 @@
 "use client";
-import React, { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
+import React, { useState } from "react";
 import { Navigation } from "swiper/modules";
-import { SliderNextSvg, SliderPrevSvg } from "@/Components/Svg/SvgContainer";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperClass } from "swiper";
 import BlogCard from "@/Components/Cards/BlogCard";
 import Container from "@/Components/Common/Container";
+import { SliderNextSvg, SliderPrevSvg } from "@/Components/Svg/SvgContainer";
 
 type blogItem = {
   slug: string;
@@ -32,16 +32,14 @@ const RecentBlogs = ({ data }: blogProps) => {
     <section className="py-10 2xl:py-16 3xl:py-20 bg-[#F8FCF9]">
       <Container>
         <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
-          {/* title */}
-          <div>
-            <h2 className="font-merriweather text-[22px] md:text-[24px] lg:text-[28px] 2xl:text-[32px] leading-[140%] font-bold">
-              Recipe Blogs & Tips
-            </h2>
-          </div>
+          {/* Title */}
+          <h2 className="font-merriweather text-[22px] md:text-[24px] lg:text-[28px] 2xl:text-[32px] leading-[140%] font-bold">
+            Recipe Blogs & Tips
+          </h2>
 
-          {/* sliders */}
+          {/* Slider */}
           <div className="w-full">
-            {/* nav buttons */}
+            {/* Nav buttons */}
             <div className="w-full flex items-center justify-end gap-3">
               <button
                 onClick={() => swiperRef?.slidePrev()}
@@ -49,6 +47,7 @@ const RecentBlogs = ({ data }: blogProps) => {
               >
                 <SliderPrevSvg />
               </button>
+
               <button
                 onClick={() => swiperRef?.slideNext()}
                 className="size-10 lg:size-12 flex items-center justify-center border border-primary rounded-full hover:bg-primary transition-all duration-300 group"

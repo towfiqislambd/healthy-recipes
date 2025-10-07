@@ -1,17 +1,30 @@
 "use client";
-import React from "react";
-import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
+import React from "react";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { useState } from "react";
 import { Navigation } from "swiper/modules";
-import { SliderNextSvg, SliderPrevSvg } from "@/Components/Svg/SvgContainer";
-import RecipeCard from "@/Components/Cards/RecipeCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperClass } from "swiper";
 import Container from "@/Components/Common/Container";
+import RecipeCard from "@/Components/Cards/RecipeCard";
+import { SliderNextSvg, SliderPrevSvg } from "@/Components/Svg/SvgContainer";
 
-const TrendingDiet = ({ data }: any) => {
+type trendingItem = {
+  id: 1;
+  recipe_name: string;
+  recipe_image: string;
+  age_group: string;
+  serving_number: number;
+  preparation_time: number;
+};
+
+interface trendingProps {
+  data: trendingItem[];
+}
+
+const TrendingDiet = ({ data }: trendingProps) => {
   const [swiperRef, setSwiperRef] = useState<SwiperClass | null>(null);
 
   return (
@@ -33,6 +46,7 @@ const TrendingDiet = ({ data }: any) => {
             >
               <SliderPrevSvg />
             </button>
+
             <button
               onClick={() => swiperRef?.slideNext()}
               className="size-10 lg:size-12 flex items-center justify-center border border-primary rounded-full hover:bg-primary transition-all duration-300 group"
@@ -59,14 +73,9 @@ const TrendingDiet = ({ data }: any) => {
                 1460: { slidesPerView: 4, spaceBetween: 20 },
               }}
             >
-              {data?.map((item: any, idx: number) => (
+              {data?.map((item, idx) => (
                 <SwiperSlide key={idx}>
-                  <RecipeCard
-                    item={item}
-                    down={idx % 2 !== 0}
-                    isMyRecipe={true}
-                    loading={false}
-                  />
+                  <RecipeCard item={item} />
                 </SwiperSlide>
               ))}
             </Swiper>
