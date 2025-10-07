@@ -1,54 +1,49 @@
 "use client";
-import { FaBars } from "react-icons/fa";
-import { RxCross2 } from "react-icons/rx";
-import { useEffect, useState } from "react";
-
 import {
   LoadingSvg,
   LoveSvg,
   SearchSvg,
   StarSvg2,
 } from "@/Components/Svg/SvgContainer";
+import Link from "next/link";
 import Image from "next/image";
 import useAuth from "@/Hooks/useAuth";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { getAllRecipesPublic, getSiteSettings } from "@/Hooks/api/cms_api";
+import { FaBars } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
+import { useEffect, useState } from "react";
+import logo from "@/Assets/images/logo.png";
 import Button from "@/Components/Common/Button";
 import { useLogout } from "@/Hooks/api/auth_api";
-import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
+import { usePathname } from "next/navigation";
 import Container from "@/Components/Common/Container";
+import { getAllRecipesPublic } from "@/Hooks/api/cms_api";
+import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
 
 const navLinks = [
-  { path: "/", title: "Home" },
-  { path: "/recipe-library", title: "Recipe library" },
-  { path: "/dashboard/overview", title: "Dashboard" },
-  { path: "/dashboard/share-recipes", title: "Share recipe" },
-  { path: "/meal-planner", title: "Meal planner" },
-  { path: "/blog", title: "Blog" },
+  { id: 1, path: "/", title: "Home" },
+  { id: 2, path: "/recipe-library", title: "Recipe library" },
+  { id: 3, path: "/dashboard/overview", title: "Dashboard" },
+  { id: 4, path: "/dashboard/share-recipes", title: "Share recipe" },
+  { id: 5, path: "/meal-planner", title: "Meal planner" },
+  { id: 6, path: "/blog", title: "Blog" },
 ];
 
 const Navbar = () => {
+  // Hook
   const { user } = useAuth();
-  const [search, setSearch] = useState("");
-  const [openPopup, setOpenPopup] = useState(false);
-  const { mutate: logOutMutate } = useLogout();
-  const [isOpen, setOpen] = useState(false);
-  const [searchModalOpen, setSearchModalOpen] = useState(false);
-  const location = usePathname();
-  // const siteSettings = await getSiteSettings();
-  const { data: results, isLoading: resultLoading } = getAllRecipesPublic(
-    0,
-    0,
-    0,
-    0,
-    search
-  );
+  const pathname = usePathname();
 
-  // Mutation
-  const handleLogout = () => {
-    logOutMutate();
-  };
+  // States
+  const [search, setSearch] = useState<string>("");
+  const [openPopup, setOpenPopup] = useState<boolean>(false);
+  const [isOpen, setOpen] = useState<boolean>(false);
+  const [searchModalOpen, setSearchModalOpen] = useState<boolean>(false);
+
+  // Mutation & Query
+  const { mutate: logOutMutate, isPending } = useLogout();
+  const { data: results, isLoading: resultLoading } = getAllRecipesPublic({
+    search,
+  });
 
   useEffect(() => {
     if (isOpen) {
@@ -62,25 +57,24 @@ const Navbar = () => {
   }, [isOpen]);
 
   return (
-    <header className="py-1 lg:py-2 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] bg-[#F6F5F2] fixed w-full left-0 top-0 z-50 navbar">
+    <header className="py-1 lg:py-2 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] bg-[#F6F5F2] sticky w-full left-0 top-0 z-50">
       <Container>
         <nav className="w-full relative">
           <div className="flex justify-between items-center lg:px-3 xl:px-5 3xl:px-0">
-            {/* Left side */}
+            {/* Left - Logo + Search Bar */}
             <div className="flex items-center gap-7">
-              {/* logo */}
               <Link href="/">
                 <figure className="w-[80px] h-[70px] lg:w-[100px] lg:h-[87px] relative">
-                  {/* <Image
-                  fill
-                  className="w-full h-full object-cover"
-                  src={`${process.env.NEXT_PUBLIC_SITE_URL}/${siteSettings?.logo}`}
-                  alt="logo"
-                /> */}
+                  <Image
+                    fill
+                    className="w-full h-full object-cover"
+                    src={logo}
+                    alt="logo"
+                  />
                 </figure>
               </Link>
 
-              {/* desktop search bar */}
+              {/* Search Bar */}
               <div className="px-3 3xl:px-4 py-3 hidden 2xl:flex items-center gap-1 3xl:gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white w-[250px] 3xl:w-[380px]">
                 <SearchSvg />
                 <form className="w-full relative">
@@ -109,18 +103,19 @@ const Navbar = () => {
                       </p>
                     ) : (
                       <ul className="space-y-4">
-                        {results?.data?.map((item: any, idx: any) => (
+                        {results?.data?.map((item: any, idx: number) => (
                           <Link
-                            href={`recipe-details/${item?.id}`}
-                            target="_blank"
                             key={idx}
+                            href={`/recipe-details/${item?.id}`}
+                            target="_blank"
                             className="flex justify-between items-center border-b pb-3 cursor-pointer"
                           >
-                            {/* Left Side */}
                             <div className="flex justify-center gap-2 items-center">
-                              <figure className="w-16 rounded h-12 overflow-hidden">
-                                <img
+                              <figure className="w-16 rounded h-12 overflow-hidden relative">
+                                <Image
                                   className="w-full h-full object-cover rounded"
+                                  fill
+                                  alt="image"
                                   src={`${process.env.NEXT_PUBLIC_SITE_URL}/${item?.recipe_image}`}
                                 />
                               </figure>
@@ -130,13 +125,13 @@ const Navbar = () => {
                                     ? item.recipe_name.slice(0, 40) + "..."
                                     : item?.recipe_name}
                                 </p>
+
                                 <p className="text-sm text-gray-500">
                                   Category: {item?.category_name || "N/A"}
                                 </p>
                               </div>
                             </div>
 
-                            {/* Right Side */}
                             <p className="text-sm flex gap-1 items-center font-semibold text-[#000]">
                               <span className="w-4 h-4">
                                 <StarSvg2 />
@@ -152,30 +147,27 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Right side */}
+            {/* Right - Nav Links */}
             <div className="flex items-center gap-10">
-              {/* nav links */}
               <div className="hidden 2xl:flex gap-4 3xl:gap-5">
-                {navLinks.map(item => (
-                  <Link
-                    href={item.path}
-                    key={item.title}
-                    // className={({ isActive }) =>
-                    //   `${
-                    //     isActive ||
-                    //     (location?.startsWith("/recipe-details") &&
-                    //       item.path === "/recipe-library")
-                    //       ? "text-primary"
-                    //       : "text-textColor"
-                    //   } hover:text-primary duration-300 transition-all text-[15px] 3xl:text-base`
-                    // }
-                  >
-                    {item.title}
-                  </Link>
-                ))}
+                {navLinks?.map(link => {
+                  const isActive = pathname === link.path;
+
+                  return (
+                    <Link
+                      key={link?.id}
+                      href={link?.path}
+                      className={`hover:text-primary duration-300 transition-all text-[15px] 3xl:text-base ${
+                        isActive ? "text-primary-orange" : "text-textColor"
+                      }`}
+                    >
+                      {link?.title}
+                    </Link>
+                  );
+                })}
               </div>
 
-              {/* cta section */}
+              {/* Cta section */}
               <div className="flex gap-3 3xl:gap-5 items-center">
                 <button
                   className="2xl:hidden"
@@ -195,7 +187,7 @@ const Navbar = () => {
                   <div className="flex gap-2 3xl:gap-3 items-center">
                     {/* Avatar */}
                     <button onClick={() => setOpenPopup(!openPopup)}>
-                      <Avatar className="size-10 lg:size-11 rounded-full cursor-pointer">
+                      <Avatar className="size-10 lg:size-11 rounded-full cursor-pointer relative">
                         <AvatarImage
                           src={`${process.env.NEXT_PUBLIC_SITE_URL}/${user?.avatar}`}
                         />
@@ -232,7 +224,7 @@ const Navbar = () => {
               className="bg-white z-50 rounded-xl w-64 lg:w-72 absolute right-3 lg:right-5 top-[88px] lg:top-28 shadow-[0_8px_24px_rgba(0,0,0,0.1)] p-4 md:p-5"
             >
               <div className="flex gap-3 md:gap-4 items-center mb-4 lg:mb-5">
-                <Avatar className="size-12 rounded-full">
+                <Avatar className="size-12 rounded-full relative">
                   <AvatarImage
                     src={`${process.env.NEXT_PUBLIC_SITE_URL}/${user?.avatar}`}
                   />
@@ -259,7 +251,7 @@ const Navbar = () => {
                   My Profile
                 </Link>
                 <button
-                  onClick={handleLogout}
+                  onClick={() => logOutMutate()}
                   className="text-left text-red-500"
                 >
                   Sign Out
@@ -284,37 +276,39 @@ const Navbar = () => {
           isOpen ? "translate-x-0" : "-translate-x-full"
         } duration-500 transition-transform fixed top-0 z-[999] left-0 bg-white p-5 lg:p-7 shadow-lg overflow-y-auto  border-r max-h-screen min-h-screen w-[250px] lg:w-[270px] 2xl:hidden`}
       >
-        {/* logo */}
+        {/* Logo */}
         <Link href="/" onClick={() => setOpen(false)}>
-          {/* <figure className="w-[100px] h-[90px]">
-            <img
+          <figure className="w-[100px] h-[90px] relative">
+            <Image
               className="object-cover w-full h-full mx-auto"
-              src={`${process.env.NEXT_PUBLIC_SITE_URL}/${siteSettings?.logo}`}
+              src={`${process.env.NEXT_PUBLIC_SITE_URL}/${logo}`}
               alt="logo"
+              fill
             />
-          </figure> */}
+          </figure>
         </Link>
 
         <div className="flex flex-col mt-7 gap-6">
-          {/* tabs */}
           <div className="flex flex-col gap-5 xl:gap-6">
-            {navLinks?.map(item => (
-              <Link
-                onClick={() => setOpen(false)}
-                href={item?.path}
-                // className={({ isActive }) =>
-                //   `${
-                //     isActive ? "text-primary" : "text-textColor"
-                //   } hover:text-primary duration-300 transition-all`
-                // }
-                key={item?.title}
-              >
-                {item?.title}
-              </Link>
-            ))}
+            {navLinks?.map(link => {
+              const isActive = pathname === link?.path;
+
+              return (
+                <Link
+                  key={link?.id}
+                  onClick={() => setOpen(false)}
+                  href={link?.path}
+                  className={`hover:text-primary duration-300 transition-all text-[15px] 3xl:text-base ${
+                    isActive ? "text-primary-orange" : "text-textColor"
+                  }`}
+                >
+                  {link?.title}
+                </Link>
+              );
+            })}
           </div>
 
-          {/* cta */}
+          {/* Cta */}
           <div className="flex gap-3 items-center lg:mt-2">
             <Link
               href="/dashboard/saved-recipes"
@@ -377,15 +371,17 @@ const Navbar = () => {
                   <ul className="space-y-4">
                     {results?.data?.map((item: any, idx: any) => (
                       <Link
+                        key={idx}
                         href={`recipe-details/${item?.id}`}
                         target="_blank"
-                        key={idx}
                         className="flex justify-between items-center gap-3 border-b pb-3 cursor-pointer"
                       >
                         {/* Left Side */}
                         <div className="flex justify-center gap-2 items-center">
-                          <figure className="w-14 shrink-0 rounded h-12 overflow-hidden">
-                            <img
+                          <figure className="w-14 shrink-0 rounded h-12 overflow-hidden relative">
+                            <Image
+                              fill
+                              alt="recipe image"
                               className="w-full h-full object-cover rounded"
                               src={`${process.env.NEXT_PUBLIC_SITE_URL}/${item?.recipe_image}`}
                             />

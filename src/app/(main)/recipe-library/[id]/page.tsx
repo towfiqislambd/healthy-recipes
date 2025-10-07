@@ -14,17 +14,15 @@ import Link from "next/link";
 import React, { use } from "react";
 
 interface Props {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: number }>;
 }
 
 const page = ({ params }: Props) => {
   const { id } = use(params);
   const { data: recipeCategory } = getAllCategories();
   const { data: allRecipes, isLoading: isLoadingRecipes } = getAllRecipesPublic(
-    null as any,
-    id as any
+    { recipe_library_id: id }
   );
-  console.log(allRecipes);
   // const categoriesData = await getAllCategories();
   // const shareRecipeData = await getShareRecipesData();
   // const blogData = await getRecentBLogs();

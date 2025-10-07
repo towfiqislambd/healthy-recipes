@@ -70,7 +70,7 @@ const page = () => {
             savedRecipes?.data?.wishlist?.data
               ?.slice(0, 4)
               ?.map((item: any, idx: number) => (
-                <RecipeCard isMyRecipe={true} key={idx} item={item} />
+                <RecipeCard key={idx} item={item} />
               ))
           ) : (
             <div className="text-center col-span-4 py-6 space-y-3">

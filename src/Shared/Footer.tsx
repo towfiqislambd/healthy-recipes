@@ -1,14 +1,15 @@
 import Link from "next/link";
-import {
-  FacebookSvg,
-  InstagramSvg,
-  TwitterSvg,
-} from "@/Components/Svg/SvgContainer";
+import Image from "next/image";
 import {
   getRecipeLibraryData,
   getSiteSettings,
   getSocialLinks,
 } from "@/Hooks/api/cms_api";
+import {
+  FacebookSvg,
+  InstagramSvg,
+  TwitterSvg,
+} from "@/Components/Svg/SvgContainer";
 import Container from "@/Components/Common/Container";
 
 type libraryItem = {
@@ -25,7 +26,6 @@ const Footer = async () => {
   const footerInfo = await getSiteSettings();
   const recipeLibrary = await getRecipeLibraryData();
   const socialInfo = await getSocialLinks();
-
   const exploreData = [
     {
       title: "Home",
@@ -51,18 +51,19 @@ const Footer = async () => {
 
   return (
     <footer className="bg-[#3A3A3A] pt-5 lg:pt-10 xl:pt-20">
-      {/* top section */}
       <Container>
         <section className="text-white w-full pb-10">
           <div className="flex flex-col gap-5 xl:flex-row justify-between lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
             <div className="space-y-3">
-              <figure className="w-[110px] h-[85px]">
-                <img
+              <figure className="w-[110px] h-[85px] relative">
+                <Image
                   className="w-full h-full object-cover"
-                  src={`${process.env.NEXT_PUBLIC_SITE_URL}/${footerInfo?.data?.logo}`}
+                  fill
                   alt="logo"
+                  src={`${process.env.NEXT_PUBLIC_SITE_URL}/${footerInfo?.data?.logo}`}
                 />
               </figure>
+
               <div
                 dangerouslySetInnerHTML={{
                   __html: footerInfo?.data?.description,
@@ -71,8 +72,9 @@ const Footer = async () => {
               />
             </div>
 
-            <div className="">
+            <div>
               <h5 className="text-lg lg:font-medium">Explore</h5>
+
               <ul className="md:space-y-3 space-y-2 md:mt-4 mt-2">
                 {exploreData?.map(item => (
                   <li key={item?.title}>
@@ -84,6 +86,7 @@ const Footer = async () => {
 
             <div>
               <h5 className="text-lg  lg:font-medium">Recipe library</h5>
+
               <ul className="md:space-y-3 space-y-2 md:mt-4 mt-2">
                 {recipeLibrary?.data?.map((item: libraryItem) => (
                   <li key={item?.id}>
@@ -98,7 +101,7 @@ const Footer = async () => {
             <div>
               <h5 className="text-lg font-medium">Contact here</h5>
 
-              {/* links */}
+              {/* Social links */}
               <ul className="mt-4 flex items-center gap-4">
                 {socialInfo?.data?.map((item: socialItem, idx: number) => (
                   <li key={idx}>
@@ -115,12 +118,10 @@ const Footer = async () => {
         </section>
       </Container>
 
-      {/* bottom section */}
-      <section>
-        <p className="text-[#D0D0D0] text-center py-5 border-t border-primary">
-          {footerInfo?.copyright_text}
-        </p>
-      </section>
+      {/* Copyright Section */}
+      <p className="text-[#D0D0D0] text-center py-5 border-t border-primary">
+        {footerInfo?.copyright_text}
+      </p>
     </footer>
   );
 };

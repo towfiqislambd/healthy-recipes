@@ -5,10 +5,10 @@ import React, { useState } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperClass } from "swiper";
-import { SliderNextSvg, SliderPrevSvg } from "@/Components/Svg/SvgContainer";
-import TestimonialCard from "@/Components/Cards/TestimonialCard";
 import Heading from "@/Components/Common/Heading";
 import Container from "@/Components/Common/Container";
+import { SliderNextSvg, SliderPrevSvg } from "@/Components/Svg/SvgContainer";
+import TestimonialCard from "@/Components/Cards/TestimonialCard";
 
 type testimonialItem = {
   title: string;
@@ -30,7 +30,6 @@ const Testimonial = ({ data }: testimonialProps) => {
         <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
           <Heading text="Testimonials about us" />
 
-          {/* Sliders */}
           <div className="w-full -mt-8">
             {/* Navigation buttons */}
             <div className="w-full flex items-center justify-end gap-3 mt-10 sm:mt-0">
@@ -40,6 +39,7 @@ const Testimonial = ({ data }: testimonialProps) => {
               >
                 <SliderPrevSvg />
               </button>
+              
               <button
                 onClick={() => swiperRef?.slideNext()}
                 className="sm:size-12 size-8 flex items-center justify-center border border-primary rounded-full hover:bg-primary transition-all duration-300 group"
