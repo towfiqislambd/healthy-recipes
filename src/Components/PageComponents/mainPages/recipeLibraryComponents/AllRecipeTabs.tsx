@@ -19,15 +19,14 @@ const AllRecipeTabs = ({ data, recipes, library_id }: any) => {
     id: 0,
     category_name: "All Recipes",
   });
-  const [tag, setTag] = useState(null);
+  const [tag, setTag] = useState<any>(null);
   const filterClass = `text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 xl:px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
-  const { data: allRecipes, isLoading } = getAllRecipesPublic(
-    activeTab?.id,
-    library_id,
-    null,
-    tag
-  );
+  const { data: allRecipes, isLoading } = getAllRecipesPublic({
+    category_id: activeTab?.id,
+    recipe_library_id: library_id,
+    tag_id: tag,
+  });
 
   const getCountByType = (type: string) => {
     if (!recipes) return 0; // ✅ Safely return 0 if recipes is undefined
@@ -123,7 +122,7 @@ const AllRecipeTabs = ({ data, recipes, library_id }: any) => {
           "Loading"
         ) : allRecipes?.data?.length > 0 ? (
           allRecipes?.data?.map((item: any, idx: number) => (
-            <RecipeCard key={idx} item={item} isMyRecipe={true} />
+            <RecipeCard key={idx} item={item} />
           ))
         ) : (
           <div className="text-center col-span-4 py-5 space-y-4 relative">

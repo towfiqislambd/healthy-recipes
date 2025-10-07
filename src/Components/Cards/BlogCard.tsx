@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
 import { ArrowTopRightSvg } from "@/Components/Svg/SvgContainer";
 
 type blogItem = {
@@ -24,31 +25,36 @@ const BlogCard = ({ item }: blogProps) => {
       href={`/blog-details/${item?.slug}`}
       className="bg-white block rounded-lg shadow-[0px_0px_8px_0px_rgba(0,0,0,0.06)] px-3 pt-3 pb-8 group"
     >
-      {/* image */}
-      <div>
-        <div className="w-full h-[230px] md:h-[300px] lg:h-[250px] overflow-hidden rounded-lg">
-          <img
-            className="w-full h-full object-cover rounded-sm group-hover:scale-110 transition-all duration-300"
-            src={`${process.env.NEXT_PUBLIC_SITE_URL}/${item?.image}`}
-            alt=""
-          />
-        </div>
-      </div>
-      {/* contents */}
+      {/* Blog Image */}
+      <figure className="w-full h-[230px] md:h-[300px] lg:h-[250px] overflow-hidden rounded-lg relative">
+        <Image
+          className="w-full h-full object-cover rounded-sm group-hover:scale-110 transition-all duration-300"
+          fill
+          src={`${process.env.NEXT_PUBLIC_SITE_URL}/${item?.image}`}
+          alt="blog image"
+        />
+      </figure>
+
       <div className="mt-6">
         <div className="w-full flex items-center justify-between">
+          {/* Blog Category */}
           <h5 className="sm:leading-[20px] font-medium text-sm text-primary">
             {item?.category?.category_name} | {item?.time_ago}.
           </h5>
+
+          {/* Created Date */}
           <p className="leading-[20px] font-medium text-sm text-primary">
             {item?.created_date}
           </p>
         </div>
-        {/* title */}
+
         <div className="space-y-2 mt-1">
+          {/* Blog Title */}
           <h4 className="text-lg 2xl:text-xl font-bold sm:leading-[160%] font-merriweather text-black sm:truncate">
             {item?.title}
           </h4>
+
+          {/* Blog Description */}
           <div
             dangerouslySetInnerHTML={{
               __html: item?.description?.slice(0, 80),
@@ -57,20 +63,25 @@ const BlogCard = ({ item }: blogProps) => {
           />
         </div>
 
-        {/* user info */}
         <div className="mt-3 w-full flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="size-10">
-              <img
+            {/* Author Image */}
+            <figure className="size-10">
+              <Image
                 className="h-full w-full object-cover rounded-full"
                 src={`${process.env.NEXT_PUBLIC_SITE_URL}/${item?.author_image}`}
                 alt="author"
+                fill
               />
-            </div>
+            </figure>
+
             <div>
+              {/* Author Name */}
               <h5 className="text-black font-medium leading-[140%] text-sm">
                 {item?.author_name}
               </h5>
+
+              {/* Created Date */}
               <p className="text-textColor text-sm leading-[140%]">
                 {item?.created_date}
               </p>

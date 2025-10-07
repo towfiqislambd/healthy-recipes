@@ -4,14 +4,14 @@ import RecentBlogs from "@/Components/PageComponents/mainPages/homePageComponent
 import ShareYourMeal from "@/Components/PageComponents/mainPages/homePageComponents/ShareYourMeal";
 import {
   getRecentBLogs,
-  getRecipeLibrary,
+  getRecipeLibraryData,
   getShareRecipesData,
 } from "@/Hooks/api/cms_api";
 import Link from "next/link";
 import React from "react";
 
 const page = async () => {
-  const recipeLibrary = await getRecipeLibrary();
+  const recipeLibrary = await getRecipeLibraryData();
   const shareRecipeData = await getShareRecipesData();
   const blogData = await getRecentBLogs();
 

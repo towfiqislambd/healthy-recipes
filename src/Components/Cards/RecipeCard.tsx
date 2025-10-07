@@ -5,24 +5,60 @@ import {
   RecipeBookSvg,
   StarSvg,
 } from "@/Components/Svg/SvgContainer";
+import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { LuLoaderPinwheel } from "react-icons/lu";
-import Link from "next/link";
 import useAuth from "@/Hooks/useAuth";
 import { useRouter } from "next/navigation";
+import Modal from "@/Components/Common/Modal";
+import { LuLoaderPinwheel } from "react-icons/lu";
 import { useWishlist } from "@/Hooks/api/cms_api";
-import Modal from "../Common/Modal";
+import AddMealModal from "../Modals/AddMealModal";
 
-const RecipeCard = ({ item, isPlanner }: any) => {
+type recipeItem = {
+  id: number;
+  recipe_name: string;
+  recipe_image: string;
+  age_group: string;
+  serving_number?: number;
+  preparation_time?: number;
+  cooking_time?: number;
+  recipe_creator?: string;
+  library_name?: string;
+  tag_names?: any;
+  total_ingredients?: number;
+  views?: number;
+  is_wishlisted?: boolean;
+  average_rating?: string;
+  reviews_avg?: string;
+  category_name?: string;
+  category?: {
+    category_name: string;
+  };
+  recipe_library?: {
+    diet_name: string;
+  };
+};
+
+interface recipeProps {
+  item: recipeItem;
+  isPlanner?: boolean;
+}
+
+const RecipeCard = ({ item, isPlanner }: recipeProps) => {
+  // Hooks
   const { user } = useAuth();
   const router = useRouter();
-  const [recipeId, setRecipeId] = useState(null);
+
+  // States
   const [open, setOpen] = useState<boolean>(false);
+  const [recipeId, setRecipeId] = useState<number | null>(null);
+
+  // Mutation
   const { mutate: wishlistMutation, isPending } = useWishlist(item?.id);
 
-  // Function to handle Add to planner button click
-  const handleAddToPlanner = (e: any, item: any) => {
+  // Func for add to planner
+  const handleAddToPlanner = (e: React.MouseEvent, item: any) => {
     e.stopPropagation();
     e.preventDefault();
 
@@ -55,7 +91,7 @@ const RecipeCard = ({ item, isPlanner }: any) => {
         className={`bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] pb-1 4xl:pb-5 flex flex-col justify-between group rounded-2xl`}
       >
         <div className="relative">
-          {/* image and overlay */}
+          {/* Recipe Image */}
           <div className="block">
             <div className="h-[300px] lg:h-[320px] 3xl:h-[350px] w-full relative rounded-sm overflow-hidden">
               <img
@@ -63,12 +99,13 @@ const RecipeCard = ({ item, isPlanner }: any) => {
                 src={`${process.env.NEXT_PUBLIC_SITE_URL}/${item?.recipe_image}`}
                 alt=""
               />
-              {/* Overlay with Linear Gradient */}
-              <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30"></div>
+
+              {/* Black Overlay  */}
+              <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30" />
             </div>
           </div>
 
-          {/* Wishlist */}
+          {/* Wishlist Btn */}
           <button
             onClick={handleWishlistClick}
             className={`absolute size-9 4xl:size-10 z-20 flex items-center justify-center top-3 4xl:top-4 right-3 4xl:right-4 border border-[#CB4242] rounded-full cursor-pointer ${
@@ -82,7 +119,7 @@ const RecipeCard = ({ item, isPlanner }: any) => {
             )}
           </button>
 
-          {/* type */}
+          {/* Type */}
           <div className="absolute top-3 left-3">
             <p className="px-2 4xl:px-3 py-1 4xl:py-1.5 rounded-sm bg-white/50 text-black text-sm truncate">
               <span>
@@ -94,37 +131,35 @@ const RecipeCard = ({ item, isPlanner }: any) => {
           </div>
         </div>
 
-        {/* description */}
         <div className="py-4 px-3 text-wrap border-b border-dashed border-black">
           <h5 className="text-lg 4xl:text-xl font-bold font-merriweather text-black truncate">
             {item?.recipe_name}
           </h5>
+
           <div className="mt-2 4xl:mt-4 space-y-1 4xl:space-y-2">
             <div className="flex flex-wrap gap-2 truncate">
               <div className="flex-shrink-0">
                 <RecipeBookSvg />
               </div>
+
               <p className="text-textColor text-[15px] xl:text-base font-medium">
                 {item?.serving_number} servings | {item?.preparation_time} min
                 needed
               </p>
             </div>
-            <div>
-              <p className="text-textColor font-medium text-[15px] xl:text-base">
-                For: <span className="capitalize"> {item?.age_group}</span>
-              </p>
-            </div>
-            <div>
-              <p className="text-textColor font-medium text-[15px] xl:text-base truncate">
-                {`${item?.total_ingredients} ingredients | ${item?.recipe_creator}`}
-              </p>
-            </div>
+
+            <p className="text-textColor font-medium text-[15px] xl:text-base">
+              For: <span className="capitalize"> {item?.age_group}</span>
+            </p>
+
+            <p className="text-textColor font-medium text-[15px] xl:text-base truncate">
+              {`${item?.total_ingredients} ingredients | ${item?.recipe_creator}`}
+            </p>
           </div>
         </div>
 
-        {/* stats */}
         <div className="px-5 py-3 4xl:py-5 w-full flex items-center justify-between">
-          {/* views */}
+          {/* Views */}
           <div className="flex items-center gap-1">
             <FireSvg />
             <span className="text-textColor text-sm font-medium">
@@ -132,7 +167,7 @@ const RecipeCard = ({ item, isPlanner }: any) => {
             </span>
           </div>
 
-          {/* reviews */}
+          {/* Reviews */}
           <div className="flex items-center gap-1">
             <StarSvg />
             <span className="text-textColor text-sm font-medium">
@@ -141,7 +176,7 @@ const RecipeCard = ({ item, isPlanner }: any) => {
           </div>
         </div>
 
-        {/* add meal button */}
+        {/* Add Meal Btn */}
         {isPlanner && (
           <div className="px-5 mb-3">
             <button
@@ -153,9 +188,10 @@ const RecipeCard = ({ item, isPlanner }: any) => {
           </div>
         )}
       </Link>
+
       {/* Modal */}
       <Modal open={open} onClose={() => setOpen(false)}>
-        {/* <AddMealModal open={open} setOpen={setOpen} recipeId={recipeId} /> */}
+        <AddMealModal setOpen={setOpen} recipeId={recipeId} />
         Modal
       </Modal>
     </>

@@ -27,18 +27,19 @@ const MealPlannerTabSection = () => {
     id: 0,
     category_name: "All Recipes",
   });
-  const [ageGroup, setAgeGroup] = useState(null);
-  const [library, setLibrary] = useState(null);
+  const [ageGroup, setAgeGroup] = useState<any>(null);
+  const [library, setLibrary] = useState<any>(null);
   const { data: allCategories, isLoading: isAllCategoryLoading } =
     getAllCategories();
   const { data: recipeLibrary, isLoading: isRecipeLibraryLoading } =
     getRecipeLibraryClient();
   const { data: allRecipes, isLoading: loadingAllRecipe } = getAllRecipesPublic(
-    activeTab?.id,
-    library as any,
-    ageGroup,
-    null,
-    search
+    {
+      category_id: activeTab?.id,
+      recipe_library_id: library,
+      age_group: ageGroup,
+      search,
+    }
   );
   const { data: recipesPrivate, isLoading: privateRecipesLoading } =
     getAllRecipesPrivate(activeTab?.id, library as any, ageGroup, null, search);
