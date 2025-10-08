@@ -1,5 +1,4 @@
 "use client";
-import Container from "@/Components/Common/Container";
 import {
   CopyLinkSvg,
   FacebookShareSvg,
@@ -8,8 +7,13 @@ import {
 } from "@/Components/Svg/SvgContainer";
 import React from "react";
 import toast from "react-hot-toast";
+import Container from "@/Components/Common/Container";
 
-const ShareRecipeSocialMedia = ({ fullLocation }: any) => {
+type Props = {
+  fullLocation: string;
+};
+
+const ShareRecipeSocialMedia = ({ fullLocation }: Props) => {
   // For Twitter
   const handleTwitterRedirect = () => {
     const text = "Follow me on Gift a coffee!";
@@ -43,12 +47,11 @@ const ShareRecipeSocialMedia = ({ fullLocation }: any) => {
     <Container>
       <section className="w-full flex items-center lg:justify-center mt-5 sm:mt-8">
         <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
-          {/* title */}
           <h5 className="font-merriweather text-xl lg:text-2xl text-black font-bold">
             Share
           </h5>
 
-          {/* social Links */}
+          {/* Social Links */}
           <div className="flex items-center gap-4 mt-3 xl:mt-4">
             <button onClick={handleFacebookRedirect}>
               <FacebookShareSvg />
@@ -61,7 +64,7 @@ const ShareRecipeSocialMedia = ({ fullLocation }: any) => {
             </button>
           </div>
 
-          {/* share input */}
+          {/* Share input */}
           <div className="mt-5 xl:mt-8 rounded-sm bg-white shadow-[0px_0px_4px_0px_rgba(2,0,57,0.08)] py-3 xl:py-4 px-3 w-full flex items-center md:min-w-[440px] md:gap-9 gap-2">
             <p className="text-textColor text-sm md:text-base">
               Want to share a link instead?

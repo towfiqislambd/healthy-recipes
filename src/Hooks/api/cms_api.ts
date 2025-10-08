@@ -65,6 +65,14 @@ export async function getRecipeLibraryData() {
   });
 }
 
+// Recipe Categories
+export async function getRecipeCategories() {
+  return useServerApi({
+    mode: "SSG",
+    endpoint: "/api/categories",
+  });
+}
+
 // Meal Planner Data
 export async function getMealPlannerData() {
   return useServerApi({
@@ -94,6 +102,22 @@ export async function getRecentBLogs() {
   return useServerApi({
     mode: "SSG",
     endpoint: "/api/blogs",
+  });
+}
+
+// Meal Planner Info
+export async function getMealPlannerInfo() {
+  return useServerApi({
+    mode: "SSG",
+    endpoint: "/api/cms/meal-planning-by-age-group",
+  });
+}
+
+// Meal Planner Card
+export async function getMealPlannerCard() {
+  return useServerApi({
+    mode: "SSG",
+    endpoint: "/api/cms/meal-planner-card",
   });
 }
 
@@ -300,6 +324,15 @@ export const getAllLibrary = () => {
   });
 };
 
+// Share Recipe
+export const getShareRecipe = () => {
+  return useClientApi({
+    method: "get",
+    key: ["share-recipe"],
+    endpoint: "/api/cms/share-your-recipe",
+  });
+};
+
 // Recipe Details
 export const getRecipeDetails = (id: any) => {
   return useClientApi({
@@ -319,24 +352,6 @@ export const getRecipeReview = (recipe_id: number, page_id: number) => {
     queryOptions: {
       retry: false,
     },
-  });
-};
-
-// Meal Planner Info
-export const getMealPlannerInfo = () => {
-  return useClientApi({
-    method: "get",
-    key: ["meal-planner-info"],
-    endpoint: "api/cms/meal-planning-by-age-group",
-  });
-};
-
-// Meal Planner Card
-export const getMealPlannerCard = () => {
-  return useClientApi({
-    method: "get",
-    key: ["meal-planner-card"],
-    endpoint: "api/cms/meal-planner-card",
   });
 };
 
