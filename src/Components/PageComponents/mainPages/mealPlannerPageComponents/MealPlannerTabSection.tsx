@@ -1,7 +1,4 @@
 "use client";
-import React from "react";
-import { useState } from "react";
-import deleteImg from "@/Assets/images/delete.png";
 import {
   Select,
   SelectContent,
@@ -9,16 +6,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/Components/ui/select";
-import { RiResetLeftFill } from "react-icons/ri";
-import RecipeCard from "@/Components/Cards/RecipeCard";
-import Image from "next/image";
-import useAuth from "@/Hooks/useAuth";
 import {
   getAllCategories,
   getAllRecipesPrivate,
   getAllRecipesPublic,
   getRecipeLibraryClient,
 } from "@/Hooks/api/cms_api";
+import React from "react";
+import { useState } from "react";
+import Image from "next/image";
+import useAuth from "@/Hooks/useAuth";
+import deleteImg from "@/Assets/images/delete.png";
+import { RiResetLeftFill } from "react-icons/ri";
+import RecipeCard from "@/Components/Cards/RecipeCard";
 import Container from "@/Components/Common/Container";
 
 const MealPlannerTabSection = () => {
@@ -53,8 +53,6 @@ const MealPlannerTabSection = () => {
   } else {
     recipeData = allRecipes;
   }
-
-  const filterClass = `ttext-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 lg:px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
 
   const handleReset = () => {
     setAgeGroup(null);
@@ -111,19 +109,19 @@ const MealPlannerTabSection = () => {
                   <SelectValue placeholder="Filter by age group" />
                 </SelectTrigger>
                 <SelectContent className="px-0 py-0">
-                  <SelectItem value="all" className={filterClass}>
+                  <SelectItem value="all" className="filterClass">
                     Filter by age group
                   </SelectItem>
-                  <SelectItem value="teen" className={filterClass}>
+                  <SelectItem value="teen" className="filterClass">
                     Teen (13–19 years)
                   </SelectItem>
-                  <SelectItem value="adult" className={filterClass}>
+                  <SelectItem value="adult" className="filterClass">
                     Adult (20–39 years)
                   </SelectItem>
-                  <SelectItem value="middle-adulthood" className={filterClass}>
+                  <SelectItem value="middle-adulthood" className="filterClass">
                     Middle adulthood (40–59 years)
                   </SelectItem>
-                  <SelectItem value="senior-adult" className={filterClass}>
+                  <SelectItem value="senior-adult" className="filterClass">
                     Senior Adult (60+)
                   </SelectItem>
                 </SelectContent>
@@ -135,14 +133,14 @@ const MealPlannerTabSection = () => {
                   <SelectValue placeholder="Filter by recipe library" />
                 </SelectTrigger>
                 <SelectContent className="px-0 py-0">
-                  <SelectItem value="all" className={filterClass}>
+                  <SelectItem value="all" className="filterClass">
                     Filter by recipe library
                   </SelectItem>
                   {recipeLibrary?.data?.map((library: any) => (
                     <SelectItem
                       key={library.id}
                       value={library.id}
-                      className={filterClass}
+                      className="filterClass"
                     >
                       {library?.diet_name}
                     </SelectItem>
