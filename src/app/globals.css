@@ -47,6 +47,10 @@ body {
   @apply outline-2 outline-secondary;
 }
 
+.filterClass {
+  @apply text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 lg:px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer;
+}
+
 /* Custom CSS */
 
 .section_title {
