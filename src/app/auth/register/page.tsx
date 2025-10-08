@@ -1,21 +1,25 @@
 "use client";
-import React, { useState } from "react";
 import Link from "next/link";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRegister } from "@/Hooks/api/auth_api";
 import { CgSpinnerTwo } from "react-icons/cg";
+import { useRegister } from "@/Hooks/api/auth_api";
 import { HidePassSvg, ShowPassSvg } from "@/Components/Svg/SvgContainer";
 
+type formData = {
+  name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+};
+
 const Register = () => {
+  // Mutation
   const { mutateAsync: registerMutation, isPending } = useRegister();
 
-  // State:
+  // States
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [confirmPassword, setConfirmPassword] = useState<boolean>(false);
-
-  // CSS:
-  const inputClass =
-    "rounded-lg border-[0.5px] bg-none shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-3 lg:px-5 py-2 lg:py-3";
 
   // Hook Form
   const {
@@ -24,15 +28,17 @@ const Register = () => {
     reset,
     getValues,
     formState: { errors },
-  } = useForm();
+  } = useForm<formData>();
 
-  // All Form Data
-  const onSubmit = async (data: any) => {
+  // Form Data
+  const onSubmit = async (data: formData) => {
     await registerMutation(data);
     reset();
   };
+
   return (
-    <section>
+    <>
+      {/* Title */}
       <h4 className="text-black text-center font-merriweather text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
         New account
       </h4>
@@ -41,77 +47,77 @@ const Register = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="lg:mt-8 space-y-4 lg:space-y-6"
       >
-        {/* Name */}
+        {/* Full Name */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
-            <label
-              htmlFor="name"
-              className="text-black leading-[175%] tracking-[-0.064px]"
-            >
+            <label htmlFor="name" className="auth_label">
               Full Name
             </label>
-            {errors.name && (
-              <span className="text-red-500 text-sm">Name is required</span>
+            {errors?.name?.message && (
+              <span className="text-red-500 text-sm">
+                {errors?.name?.message}
+              </span>
             )}
           </div>
           <input
-            {...register("name", { required: true })}
+            id="name"
+            type="text"
+            {...register("name", {
+              required: "Name is required",
+            })}
             placeholder="Enter your Full Name"
-            className={`${inputClass} ${
+            className={`auth_input ${
               errors.name ? "border-red-500" : "border-[#9D9D9D]"
             }`}
-            type="text"
           />
         </div>
 
         {/* Email */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
-            <label
-              htmlFor="email"
-              className="text-black leading-[175%] tracking-[-0.064px]"
-            >
+            <label htmlFor="email" className="auth_label">
               Email
             </label>
-            {errors.email && (
-              <span className="text-red-500 text-sm">Email is required</span>
+            {errors?.email?.message && (
+              <span className="text-red-500 text-sm">
+                {errors?.email?.message}
+              </span>
             )}
           </div>
           <input
-            {...register("email", { required: true })}
+            id="email"
+            type="email"
+            {...register("email", { required: "Email is required" })}
             placeholder="Enter your email"
-            className={`${inputClass} ${
+            className={`auth_input ${
               errors.email ? "border-red-500" : "border-[#9D9D9D]"
             }`}
-            type="email"
-            id="email"
           />
         </div>
 
         {/* Password */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
-            <label
-              htmlFor="password"
-              className="text-black leading-[175%] tracking-[-0.064px]"
-            >
+            <label htmlFor="password" className="auth_label">
               Password
             </label>
-            {errors.password && (
-              <span className="text-red-500 text-sm">Password is required</span>
+            {errors?.password?.message && (
+              <span className="text-red-500 text-sm">
+                {errors?.password?.message}
+              </span>
             )}
           </div>
           <div
-            className={`w-full ${inputClass} relative ${
+            className={`w-full auth_input relative ${
               errors.password ? "border-red-500" : "border-[#9D9D9D]"
             }`}
           >
             <input
-              {...register("password", { required: true })}
+              id="password"
+              type={!showPassword ? "password" : "text"}
+              {...register("password", { required: "Password is required" })}
               placeholder="Enter password"
               className="focus:outline-none w-full bg-transparent"
-              type={!showPassword ? "password" : "text"}
-              id="password"
             />
             <div
               onClick={() => setShowPassword(prev => !prev)}
@@ -125,26 +131,25 @@ const Register = () => {
         {/* Confirm Password */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
-            <label
-              htmlFor="password_confirmation"
-              className="text-black leading-[175%] tracking-[-0.064px]"
-            >
+            <label htmlFor="password_confirmation" className="auth_label">
               Confirm Password
             </label>
-            {errors.password_confirmation && (
+            {errors.password_confirmation?.message && (
               <span className="text-red-500 text-sm">
-                {errors.password_confirmation.message as string}
+                {errors.password_confirmation?.message}
               </span>
             )}
           </div>
           <div
-            className={`w-full ${inputClass} relative ${
+            className={`w-full auth_input relative ${
               errors.password_confirmation
                 ? "border-red-500"
                 : "border-[#9D9D9D]"
             }`}
           >
             <input
+              id="confirmPassword"
+              type={!confirmPassword ? "password" : "text"}
               {...register("password_confirmation", {
                 required: "Confirm Pass is required",
                 validate: value =>
@@ -152,8 +157,6 @@ const Register = () => {
               })}
               placeholder="Enter password again"
               className="focus:outline-none w-full bg-transparent"
-              type={!confirmPassword ? "password" : "text"}
-              id="confirmPassword"
             />
             <div
               onClick={() => setConfirmPassword(prev => !prev)}
@@ -164,27 +167,25 @@ const Register = () => {
           </div>
         </div>
 
-        {/* Submit */}
+        {/* Submit Btn */}
         <div className="w-full pt-2">
           <button
-            disabled={isPending}
             type="submit"
+            disabled={isPending}
             className={`leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary w-full border bg-primary rounded-full text-center py-3 hover:bg-transparent hover:text-primary transition-all duration-300 h-[50px] flex items-center justify-center
                  ${isPending ? "cursor-not-allowed" : "cursor-pointer"}
                `}
           >
-            <span>
-              {isPending ? (
-                <CgSpinnerTwo className="animate-spin size-6" />
-              ) : (
-                "Create account"
-              )}
-            </span>
+            {isPending ? (
+              <CgSpinnerTwo className="animate-spin size-6" />
+            ) : (
+              "Create account"
+            )}
           </button>
         </div>
       </form>
 
-      {/* Toggle link */}
+      {/* Already have account */}
       <div className="lg:mt-10 mt-5 text-center">
         <h6 className="leading-[38.375px] text-[#333]">
           Already have an account?
@@ -197,13 +198,13 @@ const Register = () => {
         </h6>
       </div>
 
-      {/* Home link */}
+      {/* Back to home */}
       <div className="lg:pt-10 pt-3 text-center">
         <Link href="/" className="text-primary underline">
           Go to home
         </Link>
       </div>
-    </section>
+    </>
   );
 };
 

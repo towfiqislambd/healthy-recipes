@@ -51,6 +51,14 @@ body {
   @apply text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 lg:px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer;
 }
 
+.auth_input {
+  @apply rounded-lg border-[0.5px] bg-none shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-3 lg:px-5 py-2 lg:py-3;
+}
+
+.auth_label {
+  @apply text-black leading-[175%] tracking-[-0.064px];
+}
+
 /* Custom CSS */
 
 .section_title {

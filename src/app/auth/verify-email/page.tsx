@@ -1,50 +1,52 @@
 "use client";
-import { useVerifyEmail } from "@/Hooks/api/auth_api";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { CgSpinnerTwo } from "react-icons/cg";
+import { useVerifyEmail } from "@/Hooks/api/auth_api";
+
+type formData = {
+  email: string;
+};
 
 const page = () => {
   //   mutation::
   const { mutateAsync: verifyEmailMutation, isPending } = useVerifyEmail();
 
-  // css:
-  const inputClass =
-    "rounded-lg border-[0.5px]  shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-3 lg:px-5 py-2 lg:py-3";
-
+  // Hook Form
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm<formData>();
 
   // Form Data
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: formData) => {
     await verifyEmailMutation(data);
     reset();
   };
+
   return (
-    <section>
-      {/* top section */}
+    <>
       <div>
-        {/* title */}
+        {/* Title */}
         <h4 className="text-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
           Verify account
         </h4>
+
+        {/* Description */}
         <p className="text-center lg:mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto">
           Lost your password? Please enter your email address. You will receive
           mail with link to set new password.
         </p>
       </div>
 
-      {/* form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mt-5 lg:mt-8 space-y-3 lg:space-y-6"
       >
-        {/* email */}
+        {/* Email */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
             <label
@@ -53,23 +55,24 @@ const page = () => {
             >
               Email
             </label>
-            {errors.email && (
-              <span className="text-red-500 text-sm">Email is Required</span>
+            {errors.email?.message && (
+              <span className="text-red-500 text-sm">
+                {errors.email?.message}
+              </span>
             )}
           </div>
           <input
-            {...register("email", { required: true })}
+            id="email"
+            type="email"
+            {...register("email", { required: "Email is required" })}
             placeholder="Enter your email"
-            className={`${inputClass} ${
+            className={`auth_input ${
               errors.email ? "border-red-500" : "border-[#9D9D9D]"
             }`}
-            type="email"
-            name="email"
-            id="email"
           />
         </div>
 
-        {/* submit button */}
+        {/* Submit button */}
         <div className="w-full pt-2">
           <button
             disabled={isPending}
@@ -78,18 +81,16 @@ const page = () => {
                   ${isPending ? "cursor-not-allowed" : "cursor-pointer"}
                   `}
           >
-            <span>
-              {isPending ? (
-                <CgSpinnerTwo className="animate-spin size-6" />
-              ) : (
-                "Verify"
-              )}
-            </span>
+            {isPending ? (
+              <CgSpinnerTwo className="animate-spin size-6" />
+            ) : (
+              "Verify"
+            )}
           </button>
         </div>
       </form>
 
-      {/* toggle link */}
+      {/* Back to login */}
       <div className="lg:mt-10 mt-5 text-center">
         <Link
           href="/auth/login"
@@ -98,7 +99,7 @@ const page = () => {
           Back to login
         </Link>
       </div>
-    </section>
+    </>
   );
 };
 

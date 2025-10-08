@@ -1,34 +1,43 @@
 "use client";
-import { useResendOTP, useVerifyOTP } from "@/Hooks/api/auth_api";
 import Link from "next/link";
+import OTPInput from "react-otp-input";
+import { CgSpinnerTwo } from "react-icons/cg";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { CgSpinnerTwo } from "react-icons/cg";
-import OTPInput from "react-otp-input";
+import { useResendOTP, useVerifyOTP } from "@/Hooks/api/auth_api";
+
+type formData = {
+  otp: string;
+};
 
 const page = ({ params }: any) => {
+  // Hook
   const { email } = params;
-  const [activeResendButton, setActiveResendButton] = useState(false);
-  const [timer, setTimer] = useState(60);
-  const [isReset, setIsReset] = useState(false);
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  // States
+  const [timer, setTimer] = useState<number>(60);
+  const [isReset, setIsReset] = useState<boolean>(false);
+  const [activeResendButton, setActiveResendButton] = useState<boolean>(false);
 
-  // mutation:
+  // Mutations
   const { mutateAsync: verifyOtpMutation, isPending } = useVerifyOTP();
   const { mutateAsync: resendOtpMutation, isPending: isSending } =
     useResendOTP();
 
-  const onSubmit = async (data: any) => {
+  // Hook Form
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<formData>();
+
+  // Form Data
+  const onSubmit = async (data: formData) => {
     const payload = { email: decodeURIComponent(email), ...data };
     await verifyOtpMutation(payload);
   };
 
-  //   handle resend:
+  // Func for resend otp
   const handleResendCode = (e: any) => {
     e.preventDefault();
     if (email) {
@@ -51,21 +60,21 @@ const page = ({ params }: any) => {
   }, [isReset, timer]);
 
   return (
-    <section>
-      {/* top section */}
+    <>
       <div>
-        {/* title */}
+        {/* Title */}
         <h4 className="text-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
           Verify account
         </h4>
+
+        {/* Description */}
         <p className="text-center lg:mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto">
           Enter 4 digit code
         </p>
       </div>
 
-      {/* form */}
       <form onSubmit={handleSubmit(onSubmit)} className="lg:mt-8 space-y-6">
-        {/* Otp */}
+        {/* OTP */}
         <div id="otp_container" className="sm:mt-10 mt-6 mb-7">
           <Controller
             name="otp"
@@ -87,39 +96,33 @@ const page = ({ params }: any) => {
           />
           {errors.otp && (
             <p className="text-red-500 text-center text-sm mt-3">
-              {errors.otp.message as string}
+              {errors.otp.message}
             </p>
           )}
         </div>
 
-        {/* resend otp */}
         <div className="flex flex-col items-center text-textColor gap-3">
           <p>Didn’t Receive Code?</p>
 
-          {/* counter */}
-          <div>
-            <p>
-              <button
-                onClick={handleResendCode}
-                // disabled={!activeResendButton}
-                type="button"
-                className={`font-semibold ${
-                  activeResendButton
-                    ? "text-secondary cursor-pointer"
-                    : "text-textColor"
-                  // cursor-not-allowed
-                }`}
-              >
-                Resend
-              </button>
-              <span className="pl-2">
-                code in <span>00:{timer < 10 ? `0${timer}` : timer}</span>
-              </span>
-            </p>
-          </div>
+          <p>
+            <button
+              onClick={handleResendCode}
+              type="button"
+              className={`font-semibold ${
+                activeResendButton
+                  ? "text-secondary cursor-pointer"
+                  : "text-textColor"
+              }`}
+            >
+              Resend
+            </button>
+            <span className="pl-2">
+              code in <span>00:{timer < 10 ? `0${timer}` : timer}</span>
+            </span>
+          </p>
         </div>
 
-        {/* submit button */}
+        {/* Submit button */}
         <div className="w-full pt-2">
           <button
             disabled={isPending}
@@ -128,18 +131,16 @@ const page = ({ params }: any) => {
                     ${isPending ? "cursor-not-allowed" : "cursor-pointer"}
                     `}
           >
-            <span>
-              {isPending ? (
-                <CgSpinnerTwo className="animate-spin size-6" />
-              ) : (
-                "Verify"
-              )}
-            </span>
+            {isPending ? (
+              <CgSpinnerTwo className="animate-spin size-6" />
+            ) : (
+              "Verify"
+            )}
           </button>
         </div>
       </form>
 
-      {/* toggle link */}
+      {/* Back to login */}
       <div className="sm:mt-12 mt-3 text-center">
         <Link
           href="/auth/login"
@@ -148,7 +149,7 @@ const page = ({ params }: any) => {
           Back to login
         </Link>
       </div>
-    </section>
+    </>
   );
 };
 
