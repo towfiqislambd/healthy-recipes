@@ -1,16 +1,16 @@
 "use client";
-import Modal from "@/Components/Common/Modal";
-import UpdatePasswordModal from "@/Components/Modals/UpdatePasswordModal";
 import React from "react";
+import Image from "next/image";
 import { useState } from "react";
-import editPassword from "@/Assets/images/edit.png";
-import { useForm } from "react-hook-form";
 import useAuth from "@/Hooks/useAuth";
 import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
 import { ImSpinner9 } from "react-icons/im";
+import Modal from "@/Components/Common/Modal";
+import editPassword from "@/Assets/images/edit.png";
 import { MdOutlineCameraAlt } from "react-icons/md";
 import { useUpdateUser } from "@/Hooks/api/auth_api";
-import Image from "next/image";
+import UpdatePasswordModal from "@/Components/Modals/UpdatePasswordModal";
 
 const page = () => {
   const { user } = useAuth();

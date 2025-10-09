@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { useLogin } from "@/Hooks/api/auth_api";
 import { HidePassSvg, ShowPassSvg } from "@/Components/Svg/SvgContainer";
+import { BiLoaderCircle } from "react-icons/bi";
 
 type formData = {
   email: string;
@@ -119,7 +120,7 @@ const page = () => {
                     `}
           >
             {isPending ? (
-              <CgSpinnerTwo className="animate-spin size-6" />
+              <BiLoaderCircle className="animate-spin size-6" />
             ) : (
               "Login"
             )}

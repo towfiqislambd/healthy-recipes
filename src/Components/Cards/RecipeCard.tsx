@@ -15,7 +15,7 @@ import { LuLoaderPinwheel } from "react-icons/lu";
 import { useWishlist } from "@/Hooks/api/cms_api";
 import AddMealModal from "../Modals/AddMealModal";
 
-type recipeItem = {
+export type recipeItem = {
   id: number;
   recipe_name: string;
   recipe_image: string;

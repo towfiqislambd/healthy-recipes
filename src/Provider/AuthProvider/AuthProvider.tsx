@@ -32,7 +32,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false);
     }
 
-    if (userData?.status) {
+    if (userData?.success) {
       setUser(userData?.data);
     } else {
       setUser(null);
