@@ -1,9 +1,10 @@
 "use client";
+import Image from "next/image";
 import React, { useState } from "react";
 import deleteImg from "@/Assets/images/delete.png";
-import { getAllCategories, getMyRecipes } from "@/Hooks/api/cms_api";
 import RecipeCard from "@/Components/Cards/RecipeCard";
-import Image from "next/image";
+import { getAllCategories, getMyRecipes } from "@/Hooks/api/cms_api";
+import { RecipeCardSkeleton } from "@/Components/Loader/Loader";
 
 const page = () => {
   const [activeTab, setActiveTab] = useState({
@@ -52,10 +53,12 @@ const page = () => {
         ))}
       </div>
 
-      {/* cards */}
+      {/* Recipe Cards */}
       <div className="grid md:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4 gap-5">
         {myRecipeLoading ? (
-          "Loading.."
+          Array.from({ length: 4 }).map((_, index) => (
+            <RecipeCardSkeleton key={index} />
+          ))
         ) : myRecipes?.data?.recipes?.data?.length > 0 ? (
           myRecipes?.data?.recipes?.data?.map((item: any, idx: number) => (
             <RecipeCard key={idx} item={item} />

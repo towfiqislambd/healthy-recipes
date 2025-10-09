@@ -1,15 +1,15 @@
 "use client";
-import RecipeCard from "@/Components/Cards/RecipeCard";
-import { getMyRecipes, getWishlist } from "@/Hooks/api/cms_api";
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 import deleteImg from "@/Assets/images/delete.png";
+import RecipeCard, { recipeItem } from "@/Components/Cards/RecipeCard";
+import { getMyRecipes, getWishlist } from "@/Hooks/api/cms_api";
+import { RecipeCardSkeleton } from "@/Components/Loader/Loader";
 
 const page = () => {
-  const { data: savedRecipes, isLoading: isLoadingSavedRecipes } =
-    getWishlist();
-  const { data: myRecipes, isLoading: isLoadingMyRecipes } = getMyRecipes();
+  const { data: myRecipes, isLoading: loadingMyRecipes } = getMyRecipes();
+  const { data: savedRecipes, isLoading: LoadingSavedRecipes } = getWishlist();
 
   return (
     <section className="p-4 sm:p-5">
@@ -23,20 +23,24 @@ const page = () => {
           <h3 className="font-merriweather font-semibold text-[#141414] text-lg sm:text-xl">
             Your shared recipes
           </h3>
-          <button>
-            <Link
-              href="/dashboard/my-recipes"
-              className="text-primary font-poppins font-medium text-sm sm:text-base"
-            >
-              View all
-            </Link>
-          </button>
+
+          <Link
+            href="/dashboard/my-recipes"
+            className="text-primary font-poppins cursor-pointer font-medium text-sm sm:text-base"
+          >
+            View all
+          </Link>
         </div>
+
         <div className="grid md:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4 gap-5">
-          {myRecipes?.data?.recipes?.data?.length > 0 ? (
+          {loadingMyRecipes ? (
+            Array.from({ length: 4 }).map((_, index) => (
+              <RecipeCardSkeleton key={index} />
+            ))
+          ) : myRecipes?.data?.recipes?.data?.length > 0 ? (
             myRecipes?.data?.recipes?.data
               ?.slice(0, 4)
-              ?.map((item: any, idx: any) => (
+              ?.map((item: recipeItem, idx: number) => (
                 <RecipeCard key={idx} item={item} />
               ))
           ) : (
@@ -56,20 +60,23 @@ const page = () => {
           <h3 className="font-merriweather font-semibold text-[#141414] text-lg sm:text-xl">
             Your favorite recipes
           </h3>
-          <button>
-            <Link
-              href="/dashboard/saved-recipes"
-              className="text-primary text-sm sm:text-base font-poppins font-medium"
-            >
-              View all
-            </Link>
-          </button>
+          <Link
+            href="/dashboard/saved-recipes"
+            className="text-primary cursor-pointer text-sm sm:text-base font-poppins font-medium"
+          >
+            View all
+          </Link>
         </div>
+
         <div className="grid md:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4 gap-5">
-          {savedRecipes?.data?.wishlist?.data?.length > 0 ? (
+          {loadingMyRecipes ? (
+            Array.from({ length: 4 }).map((_, index) => (
+              <RecipeCardSkeleton key={index} />
+            ))
+          ) : savedRecipes?.data?.wishlist?.data?.length > 0 ? (
             savedRecipes?.data?.wishlist?.data
               ?.slice(0, 4)
-              ?.map((item: any, idx: number) => (
+              ?.map((item: recipeItem, idx: number) => (
                 <RecipeCard key={idx} item={item} />
               ))
           ) : (

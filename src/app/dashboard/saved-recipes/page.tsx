@@ -1,9 +1,10 @@
 "use client";
-import RecipeCard from "@/Components/Cards/RecipeCard";
 import Image from "next/image";
 import React, { useState } from "react";
 import deleteImg from "@/Assets/images/delete.png";
+import RecipeCard from "@/Components/Cards/RecipeCard";
 import { getAllCategories, getWishlist } from "@/Hooks/api/cms_api";
+import { RecipeCardSkeleton } from "@/Components/Loader/Loader";
 
 const page = () => {
   const [activeTab, setActiveTab] = useState({
@@ -52,20 +53,15 @@ const page = () => {
         ))}
       </div>
 
-      {/* cards */}
+      {/* Recipe Cards */}
       <div className="grid md:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4 gap-5">
         {recipeLoading ? (
-          "Loading..."
+          Array.from({ length: 4 }).map((_, index) => (
+            <RecipeCardSkeleton key={index} />
+          ))
         ) : savedRecipes?.data?.wishlist?.data.length > 0 ? (
           savedRecipes?.data?.wishlist?.data?.map(
-            (item: any, index: number) => (
-              <RecipeCard
-                // isSavedRecipe={true}
-                // isMyRecipe={true}
-                key={index}
-                item={item}
-              />
-            )
+            (item: any, index: number) => <RecipeCard key={index} item={item} />
           )
         ) : (
           <div className="text-center col-span-4 py-6 space-y-3">
