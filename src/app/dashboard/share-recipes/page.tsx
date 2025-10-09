@@ -1,5 +1,4 @@
 "use client";
-import { AddMoreSvg, CameraSvg } from "@/Components/Svg/SvgContainer";
 import {
   getAllCategories,
   getAllLibrary,
@@ -8,6 +7,7 @@ import {
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { CgSpinnerTwo } from "react-icons/cg";
+import { AddMoreSvg, CameraSvg } from "@/Components/Svg/SvgContainer";
 const ageData = [
   {
     id: 1,
@@ -32,9 +32,12 @@ const ageData = [
 ];
 
 const page = () => {
+  // Mutation & Queries
   const { mutateAsync: recipeMutation, isPending } = useAddNewRecipe();
   const { data: recipeCategory } = getAllCategories();
   const { data: allLibrary } = getAllLibrary();
+
+  // States
   const [recipe_video, setRecipeVideo] = useState<any>(null);
   const [recipe_image, setRecipeImage] = useState<any>(null);
   const [tags, setTags] = useState<any>([]);
@@ -112,6 +115,7 @@ const page = () => {
   };
 
   const handleInputChange = (e: any) => setInputValue(e.target.value);
+
   const handleKeyDown = (e: any) => {
     const value = inputValue.trim();
     if (
@@ -128,11 +132,13 @@ const page = () => {
       setInputValue("");
     }
   };
+
   const handleTagRemove = (tagToRemove: any) => {
     const updatedTags = tags.filter((tag: any) => tag !== tagToRemove);
     setTags(updatedTags);
     if (updatedTags.length > 0) updateCustomErrors("tags");
   };
+
   const handleIngredientChange = (e: any, id: any) => {
     const updated = ingredients.map((ingredient: any) =>
       ingredient.id === id

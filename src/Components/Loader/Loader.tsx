@@ -1,3 +1,35 @@
+"use client";
+import { useEffect, useState } from "react";
+import { RotatingLines } from "react-loader-spinner";
+
+export function Spinner() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return (
+    <RotatingLines
+      visible={true}
+      height={isMobile ? "50" : "70"}
+      width={isMobile ? "50" : "70"}
+      color="grey"
+      strokeWidth="5"
+      strokeColor="orange"
+      animationDuration="0.75"
+      ariaLabel="rotating-lines-loading"
+      wrapperStyle={{}}
+      wrapperClass=""
+    />
+  );
+}
+
 export const RecipeCardSkeleton = () => {
   return (
     <div className="bg-gray-200 shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] pb-1 4xl:pb-5 flex flex-col justify-between group rounded-2xl animate-pulse">

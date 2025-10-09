@@ -16,6 +16,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/Components/ui/popover";
+import { Spinner } from "@/Components/Loader/Loader";
 const days = [
   "Saturday",
   "Sunday",
@@ -48,7 +49,7 @@ const page = () => {
   const [activeAction, setActiveAction] = useState<any>({
     day: null,
     category: null,
-    action: null, // 'edit', 'delete', or null
+    action: null,
   });
 
   const popoverTriggerRef = useRef<any>(null);
@@ -56,7 +57,7 @@ const page = () => {
   if (tableDataLoading || categoryLoading) {
     return (
       <div className="flex justify-center items-center h-[85vh]">
-        Loading...
+        <Spinner />
       </div>
     );
   }
@@ -200,10 +201,12 @@ const page = () => {
         <h3 className="sm:text-lg md:text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">
           Customize your meal plan
         </h3>
-        <Link href="/meal-planner">
-          <button className="px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base text-[#5A5C5F] border border-primary rounded-lg">
-            Add meal
-          </button>
+
+        <Link
+          href="/meal-planner"
+          className="px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base text-[#5A5C5F] border border-primary rounded-lg"
+        >
+          Add meal
         </Link>
       </div>
 
