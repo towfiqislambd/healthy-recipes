@@ -9,9 +9,9 @@ import { useRouter } from "next/navigation";
 import React, { use, useEffect, useRef, useState } from "react";
 import { getRecipeDetails, getShareRecipe } from "@/Hooks/api/cms_api";
 import Container from "@/Components/Common/Container";
-import ShareRecipeSocialMedia from "@/Components/PageComponents/mainPages/recipeDetailsComponents/ShareRecipeSocialMedia";
 import RecipeReview from "@/Components/PageComponents/mainPages/recipeDetailsComponents/RecipeReview";
 import ShareYourMeal from "@/Components/PageComponents/mainPages/homePageComponents/ShareYourMeal";
+import ShareRecipeSocialMedia from "@/Components/PageComponents/mainPages/recipeDetailsComponents/ShareRecipeSocialMedia";
 
 interface Props {
   params: Promise<{ id: number }>;
