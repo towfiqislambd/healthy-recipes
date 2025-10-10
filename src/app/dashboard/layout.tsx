@@ -5,12 +5,12 @@ import React, { useState } from "react";
 import useAuth from "@/Hooks/useAuth";
 import { RxCross2 } from "react-icons/rx";
 import { usePathname } from "next/navigation";
-import PrivateLayout from "@/Private/PrivateLayout";
 import { useLogout } from "@/Hooks/api/auth_api";
 import { BiLoaderCircle } from "react-icons/bi";
+import PrivateLayout from "@/Private/PrivateLayout";
+import DashboardHeader from "@/Shared/DashboardHeader";
 import { getSiteSettingsClient } from "@/Hooks/api/cms_api";
 import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
-import DashboardHeader from "@/Shared/DashboardHeader";
 
 export default function DashboardLayout({
   children,

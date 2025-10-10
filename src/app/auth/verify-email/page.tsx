@@ -34,22 +34,19 @@ const page = () => {
 
   return (
     <>
-      <div>
-        {/* Title */}
-        <h4 className="text-primary-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
-          Verify account
-        </h4>
+      {/* Title */}
+      <h4 className="auth_heading">Verify account</h4>
 
-        {/* Description */}
-        <p className="text-center lg:mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto">
-          Lost your password? Please enter your email address. You will receive
-          mail with link to set new password.
-        </p>
-      </div>
+      {/* Description */}
+      <p className="text-center tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto">
+        Lost your password? Please enter your email address. You will receive
+        mail with link to set new password.
+      </p>
 
+      {/* From */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-5 lg:mt-8 space-y-3 lg:space-y-6"
+        className="mt-5 lg:mt-7 space-y-4 lg:space-y-5.5"
       >
         {/* Dynamic Error Message */}
         {errorMessage && (
@@ -105,17 +102,17 @@ const page = () => {
             )}
           </button>
         </div>
-      </form>
 
-      {/* Back to login */}
-      <div className="lg:mt-10 mt-5 text-center">
-        <Link
-          href="/auth/login"
-          className="font-semibold leading-[38.375px] text-[#333] pl-1 underline hover:no-underline transition-all duration-300"
-        >
-          Back to login
-        </Link>
-      </div>
+        {/* Back to login */}
+        <div className="text-center">
+          <Link
+            href="/auth/login"
+            className="font-semibold leading-[38.375px] text-[#333] pl-1 underline hover:no-underline transition-all duration-300"
+          >
+            Back to login
+          </Link>
+        </div>
+      </form>
     </>
   );
 };

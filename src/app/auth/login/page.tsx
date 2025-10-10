@@ -38,13 +38,12 @@ const page = () => {
   return (
     <>
       {/* Title */}
-      <h4 className="text-primary-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
-        Login
-      </h4>
+      <h4 className="auth_heading">Log In</h4>
 
+      {/* Form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="lg:mt-8 space-y-4 lg:space-y-6"
+        className="space-y-4 lg:space-y-5.5"
       >
         {/* Dynamic Error Message */}
         {errorMessage && (
@@ -140,11 +139,9 @@ const page = () => {
             )}
           </button>
         </div>
-      </form>
 
-      {/* Don’t have an account */}
-      <div className="lg:mt-12 mt-5 text-center text-sm lg:text-base">
-        <h6 className="leading-[38.375px]  text-[#333]">
+        {/* Don’t have an account */}
+        <div className="text-center text-sm lg:text-base leading-[38.375px]  text-[#333]">
           Don’t have an account?
           <Link
             href="/auth/register"
@@ -152,15 +149,15 @@ const page = () => {
           >
             Create an account
           </Link>
-        </h6>
-      </div>
+        </div>
 
-      {/* Back to home */}
-      <div className="pt-2 lg:pt-12 text-center">
-        <Link href="/" className="text-primary-orange underline">
-          Go to home
-        </Link>
-      </div>
+        {/* Back to home */}
+        <div className="text-center">
+          <Link href="/" className="text-primary-orange underline">
+            Go to home
+          </Link>
+        </div>
+      </form>
     </>
   );
 };

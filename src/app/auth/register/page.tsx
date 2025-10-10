@@ -42,13 +42,12 @@ const Register = () => {
   return (
     <>
       {/* Title */}
-      <h4 className="text-primary-black text-center font-merriweather text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
-        New account
-      </h4>
+      <h4 className="auth_heading">New Account</h4>
 
+      {/* Form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="lg:mt-8 space-y-4 lg:space-y-6"
+        className="space-y-4 lg:space-y-5.5"
       >
         {/* Dynamic Error Message */}
         {errorMessage && (
@@ -198,27 +197,25 @@ const Register = () => {
             )}
           </button>
         </div>
-      </form>
 
-      {/* Already have account */}
-      <div className="lg:mt-10 mt-5 text-center">
-        <h6 className="leading-[38.375px] text-[#333]">
+        {/* Already have account */}
+        <div className="text-center leading-[38.375px] text-[#333]">
           Already have an account?
           <Link
             href="/auth/login"
-            className="font-semibold pl-1 underline hover:no-underline transition-all duration-300"
+            className="font-medium pl-1 underline hover:no-underline transition-all duration-300"
           >
             Log in
           </Link>
-        </h6>
-      </div>
+        </div>
 
-      {/* Back to home */}
-      <div className="lg:pt-10 pt-3 text-center">
-        <Link href="/" className="text-primary-orange underline">
-          Go to home
-        </Link>
-      </div>
+        {/* Back to home */}
+        <div className="text-center">
+          <Link href="/" className="text-primary-orange underline">
+            Go to home
+          </Link>
+        </div>
+      </form>
     </>
   );
 };

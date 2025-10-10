@@ -45,6 +45,9 @@ body {
   @apply text-primary-black leading-[175%] tracking-[-0.064px];
 }
 
+.auth_heading {
+  @apply text-primary-black text-center font-merriweather text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px] mb-3;
+}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

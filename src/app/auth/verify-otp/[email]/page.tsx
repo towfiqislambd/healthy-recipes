@@ -22,7 +22,7 @@ const page = ({ params }: any) => {
 
   // Mutations
   const { mutateAsync: verifyOtpMutation, isPending } = useVerifyOTP();
-  const { mutateAsync: resendOtpMutation, isPending: isSending } =
+  const { mutateAsync: resendOtpMutation, isPending: isReSending } =
     useResendOTP();
 
   // Hook Form
@@ -67,16 +67,17 @@ const page = ({ params }: any) => {
   return (
     <>
       {/* Title */}
-      <h4 className="text-primary-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
-        Verify account
-      </h4>
+      <h4 className="auth_heading">Verify account</h4>
 
       {/* Description */}
-      <p className="text-center lg:mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto">
+      <p className="-mt-2 text-center tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto">
         Enter 4 digit code
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="lg:mt-8 space-y-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="lg:mt-5 space-y-4 lg:space-y-5.5"
+      >
         {/* Dynamic Error Message */}
         {errorMessage && (
           <div className="mb-4 p-3 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-sm">
@@ -121,13 +122,13 @@ const page = ({ params }: any) => {
             <button
               type="button"
               onClick={handleResendCode}
-              className={`font-semibold ${
+              className={`font-semibold cursor-pointer ${
                 activeResendButton
                   ? "text-secondary-blue cursor-pointer"
                   : "text-accent-gray"
               }`}
             >
-              Resend
+              {isReSending ? "Resending" : "Resend"}
             </button>
 
             <span className="pl-2">
@@ -157,17 +158,17 @@ const page = ({ params }: any) => {
             )}
           </button>
         </div>
-      </form>
 
-      {/* Back to login */}
-      <div className="sm:mt-12 mt-3 text-center">
-        <Link
-          href="/auth/login"
-          className="font-semibold leading-[38.375px] text-[#333] pl-1 underline hover:no-underline transition-all duration-300"
-        >
-          Back to login
-        </Link>
-      </div>
+        {/* Back to login */}
+        <div className="text-center">
+          <Link
+            href="/auth/login"
+            className="font-semibold leading-[38.375px] text-[#333] pl-1 underline hover:no-underline transition-all duration-300"
+          >
+            Back to login
+          </Link>
+        </div>
+      </form>
     </>
   );
 };
