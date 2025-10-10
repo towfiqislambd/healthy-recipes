@@ -192,7 +192,6 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
       {/* Modal */}
       <Modal open={open} onClose={() => setOpen(false)}>
         <AddMealModal setOpen={setOpen} recipeId={recipeId} />
-        Modal
       </Modal>
     </>
   );

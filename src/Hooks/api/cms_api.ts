@@ -233,6 +233,9 @@ export const useAddMealPlanner = (recipe_id: number | null) => {
     isPrivate: true,
     endpoint: `api/meal-plans/${recipe_id}`,
     onSuccess: (data: any) => {
+      if (data?.success) {
+        toast.success(data?.message);
+      }
       // queryClient.invalidateQueries(["meal-planner-table"]);
       // navigate("/dashboard/meal-planner");
     },

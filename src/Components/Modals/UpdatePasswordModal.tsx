@@ -1,9 +1,9 @@
 "use client";
-import { useChangePassword } from "@/Hooks/api/auth_api";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { ImSpinner9 } from "react-icons/im";
+import { useChangePassword } from "@/Hooks/api/auth_api";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 const UpdatePasswordModal = ({ setOpen }: any) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -33,8 +33,8 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
   };
 
   return (
-    <div>
-      <h3 className="text-xl lg:text-2xl text-headingaccent-gray font-semibold">
+    <>
+      <h3 className="text-xl lg:text-2xl text-accent-gray font-semibold">
         Change Password
       </h3>
 
@@ -164,7 +164,7 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
           )}
         </button>
       </form>
-    </div>
+    </>
   );
 };
 

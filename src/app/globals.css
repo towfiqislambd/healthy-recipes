@@ -8,6 +8,7 @@
   --color-secondary-blue: #055ad9;
   --color-primary-black: #141414;
   --color-accent-gray: #5a5c5f;
+  --color-accent-white: #f6f5f2;
 
   /* Font Family */
   --font-poppins: var(--font-poppins);

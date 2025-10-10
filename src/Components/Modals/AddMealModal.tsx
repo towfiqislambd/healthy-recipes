@@ -8,7 +8,7 @@ import {
 } from "@/Components/ui/select";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { CgSpinnerTwo } from "react-icons/cg";
+import { BiLoaderCircle } from "react-icons/bi";
 import { getAllCategories, useAddMealPlanner } from "@/Hooks/api/cms_api";
 
 type categoryItem = {
@@ -18,7 +18,7 @@ type categoryItem = {
 
 interface addMealProps {
   recipeId: null | number;
-  setOpen: any;
+  setOpen: (open: boolean) => void;
 }
 
 const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
@@ -26,21 +26,23 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
   const [category_id, setCategoryId] = useState<number | null>(null);
   const [day, setDay] = useState<string>("");
 
+  // Static day options
+  const days = [
+    "saturday",
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+  ];
+
   // Queries & Mutation
   const { data: recipeCategory } = getAllCategories();
   const { mutateAsync: addMealPlanner, isPending } =
     useAddMealPlanner(recipeId);
 
-  const filterClass = `text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 focus:bg-primary-orange font-poppins text-accent-gray focus:text-white cursor-pointer`;
-
-  const handleDayChange = (value: string) => {
-    setDay(value);
-  };
-
-  const handleCategoryChange = (value: any) => {
-    setCategoryId(value);
-  };
-
+  // Handlers
   const handleAddPlan = async () => {
     if (!category_id || !day) {
       return toast.error("Please select at least a day and a category");
@@ -53,66 +55,60 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
   };
 
   return (
-    <div className="w-full">
+    <>
       {/* Title */}
-      <h5 className=" font-newBaskerville font-semibold text-center text-[#5A5C5F] leading-[132%] text-lg mt-5 md:text-xl">
+      <h5 className="font-newBaskerville font-semibold text-center text-[#5A5C5F] leading-[132%] text-lg mt-5 md:text-xl">
         Plan for a meal
       </h5>
 
-      {/* Day */}
-      <div className="mt-5 md:mt-7 mb-5">
-        <Select onValueChange={handleDayChange}>
-          <SelectTrigger className="w-full h-11 rounded-[6px] px-4 text-base focus:ring-primary-orange">
+      {/* Day Select */}
+      <div className="mt-5 md:mt-7 mb-5 z-[99999]">
+        <Select onValueChange={setDay}>
+          <SelectTrigger className="w-full py-5 rounded-[6px] px-4 text-base focus:ring-primary-orange">
             <SelectValue placeholder="Select a day..." />
           </SelectTrigger>
-          <SelectContent className="px-0 py-0">
-            <SelectItem value="saturday" className={filterClass}>
-              Saturday
-            </SelectItem>
-            <SelectItem value="sunday" className={filterClass}>
-              Sunday
-            </SelectItem>
-            <SelectItem value="monday" className={filterClass}>
-              Monday
-            </SelectItem>
-            <SelectItem value="tuesday" className={filterClass}>
-              Tuesday
-            </SelectItem>
-            <SelectItem value="wednesday" className={filterClass}>
-              Wednesday
-            </SelectItem>
-            <SelectItem value="thursday" className={filterClass}>
-              Thursday
-            </SelectItem>
-            <SelectItem value="friday" className={filterClass}>
-              Friday
-            </SelectItem>
+          <SelectContent className="px-0 py-0 border-transparent">
+            {days?.map(dayItem => (
+              <SelectItem
+                key={dayItem}
+                value={dayItem}
+                className="filterClass capitalize"
+              >
+                {dayItem}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
 
-      {/* Categories */}
-      <Select onValueChange={handleCategoryChange}>
-        <SelectTrigger className="w-full h-11 rounded-[6px] px-4 text-base focus:ring-primary-orange">
+      {/* Category Select */}
+      <Select onValueChange={value => setCategoryId(Number(value))}>
+        <SelectTrigger className="w-full py-5 rounded-[6px] px-4 text-base focus:ring-primary-orange">
           <SelectValue placeholder="Select a category..." />
         </SelectTrigger>
-        <SelectContent className="px-0 py-0">
-          {recipeCategory?.map((item: categoryItem, idx: number) => (
-            <SelectItem key={idx} value={item?.id} className={filterClass}>
-              {item?.category_name}
+        <SelectContent className="px-0 py-0 border-transparent">
+          {recipeCategory?.data?.map((item: categoryItem) => (
+            <SelectItem key={item.id} value={item.id} className="filterClass">
+              {item.category_name}
             </SelectItem>
           ))}
         </SelectContent>
       </Select>
 
-      {/* buttons */}
+      {/* Buttons */}
       <div className="pt-6 pb-3 flex items-center justify-center gap-3">
         <button
+          disabled={isPending}
           onClick={handleAddPlan}
-          className="px-5 py-2.5 border border-primary-orange bg-primary-orange text-white rounded-md"
+          className={`px-5 py-2.5 border border-primary-orange bg-primary-orange text-white rounded-md ${
+            isPending ? "cursor-not-allowed opacity-90" : "cursor-pointer"
+          }`}
         >
           {isPending ? (
-            <CgSpinnerTwo className="animate-spin size-6" />
+            <span className="flex gap-2 items-center">
+              <BiLoaderCircle className="animate-spin text-xl" />
+              Please wait....
+            </span>
           ) : (
             "Add to planner"
           )}
@@ -120,12 +116,12 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
 
         <button
           onClick={() => setOpen(false)}
-          className="px-8 py-2.5 border border-primary-orange text-primary-orange rounded-md"
+          className="px-8 py-2.5 cursor-pointer border border-primary-orange text-primary-orange rounded-md"
         >
           Cancel
         </button>
       </div>
-    </div>
+    </>
   );
 };
 
