@@ -115,7 +115,7 @@ const page = () => {
           <button
             disabled={isPending}
             type="submit"
-            className={`leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary w-full border bg-primary rounded-full text-center py-3 hover:bg-transparent hover:text-primary  transition-all duration-300 h-[50px] flex items-center justify-center
+            className={`leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary-orange w-full border bg-primary-orange rounded-full text-center py-3 hover:bg-transparent hover:text-primary-orange  transition-all duration-300 h-[50px] flex items-center justify-center
                     ${isPending ? "cursor-not-allowed" : "cursor-pointer"}
                     `}
           >
@@ -143,7 +143,7 @@ const page = () => {
 
       {/* Back to home */}
       <div className="pt-2 lg:pt-12 text-center">
-        <Link href="/" className="text-primary underline">
+        <Link href="/" className="text-primary-orange underline">
           Go to home
         </Link>
       </div>

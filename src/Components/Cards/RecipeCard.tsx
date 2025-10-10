@@ -181,7 +181,7 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
           <div className="px-5 mb-3">
             <button
               onClick={e => handleAddToPlanner(e, item)}
-              className="hover:bg-primary border border-primary px-3 2xl:px-5 py-2 2xl:py-3 rounded-lg hover:text-white text-[#5A5C5F] duration-300 transition-all"
+              className="hover:bg-primary-orange border border-primary-orange px-3 2xl:px-5 py-2 2xl:py-3 rounded-lg hover:text-white text-[#5A5C5F] duration-300 transition-all"
             >
               + Add to planner
             </button>

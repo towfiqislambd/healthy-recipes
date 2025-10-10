@@ -166,7 +166,7 @@ const RecipeReview = ({ id }: Props) => {
                   {/* Submit button */}
                   <div>
                     <button
-                      className="px-3 xl:px-8 py-2 xl:py-3 text-white font-medium bg-primary hover:bg-transparent transition-all duration-300 rounded-full hover:text-primary border border-primary"
+                      className="px-3 xl:px-8 py-2 xl:py-3 text-white font-medium bg-primary-orange hover:bg-transparent transition-all duration-300 rounded-full hover:text-primary-orange border border-primary-orange"
                       type="submit"
                     >
                       {isPending ? (
@@ -192,7 +192,7 @@ const RecipeReview = ({ id }: Props) => {
                 <ReviewCard key={idx} item={item} />
               ))
             ) : (
-              <p className="text-primary font-merriweather text-center text-lg lg:text-xl">
+              <p className="text-primary-orange font-merriweather text-center text-lg lg:text-xl">
                 No reviews found yet
               </p>
             )}
@@ -206,7 +206,11 @@ const RecipeReview = ({ id }: Props) => {
                     item.url && setActivePage(item.url.split("=")[1])
                   }
                   className={`px-3 py-1 rounded border transition-all duration-150 
-            ${item.active ? "bg-primary text-white" : "bg-white text-gray-700"} 
+            ${
+              item.active
+                ? "bg-primary-orange text-white"
+                : "bg-white text-gray-700"
+            } 
             ${
               !item.url ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"
             }`}

@@ -31,7 +31,7 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
   const { mutateAsync: addMealPlanner, isPending } =
     useAddMealPlanner(recipeId);
 
-  const filterClass = `text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer`;
+  const filterClass = `text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 focus:bg-primary-orange font-poppins text-textColor focus:text-white cursor-pointer`;
 
   const handleDayChange = (value: string) => {
     setDay(value);
@@ -62,7 +62,7 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
       {/* Day */}
       <div className="mt-5 md:mt-7 mb-5">
         <Select onValueChange={handleDayChange}>
-          <SelectTrigger className="w-full h-11 rounded-[6px] px-4 text-base focus:ring-primary">
+          <SelectTrigger className="w-full h-11 rounded-[6px] px-4 text-base focus:ring-primary-orange">
             <SelectValue placeholder="Select a day..." />
           </SelectTrigger>
           <SelectContent className="px-0 py-0">
@@ -93,7 +93,7 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
 
       {/* Categories */}
       <Select onValueChange={handleCategoryChange}>
-        <SelectTrigger className="w-full h-11 rounded-[6px] px-4 text-base focus:ring-primary">
+        <SelectTrigger className="w-full h-11 rounded-[6px] px-4 text-base focus:ring-primary-orange">
           <SelectValue placeholder="Select a category..." />
         </SelectTrigger>
         <SelectContent className="px-0 py-0">
@@ -109,7 +109,7 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
       <div className="pt-6 pb-3 flex items-center justify-center gap-3">
         <button
           onClick={handleAddPlan}
-          className="px-5 py-2.5 border border-primary bg-primary text-white rounded-md"
+          className="px-5 py-2.5 border border-primary-orange bg-primary-orange text-white rounded-md"
         >
           {isPending ? (
             <CgSpinnerTwo className="animate-spin size-6" />
@@ -120,7 +120,7 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
 
         <button
           onClick={() => setOpen(false)}
-          className="px-8 py-2.5 border border-primary text-primary rounded-md"
+          className="px-8 py-2.5 border border-primary-orange text-primary-orange rounded-md"
         >
           Cancel
         </button>

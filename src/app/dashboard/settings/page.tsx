@@ -84,7 +84,7 @@ const page = () => {
 
             {/* Change Profile Picture */}
             <label htmlFor="fileUpload" className="cursor-pointer">
-              <p className="size-8 rounded-full bg-primary absolute right-0 bottom-0 grid place-items-center">
+              <p className="size-8 rounded-full bg-primary-orange absolute right-0 bottom-0 grid place-items-center">
                 <MdOutlineCameraAlt className="text-white" />
               </p>
             </label>
@@ -108,7 +108,7 @@ const page = () => {
               {...register("name", { required: true })}
               id="name"
               type="text"
-              className="border border-[#D0D5DD] bg-[#F9FAFB] outline-none text-primaryTextColor rounded px-3 py-2 block w-full"
+              className="border border-[#D0D5DD] bg-[#F9FAFB] outline-none text-textColor rounded px-3 py-2 block w-full"
             />
           </div>
         </div>
@@ -123,7 +123,7 @@ const page = () => {
             id="email"
             {...register("email", { required: true })}
             type="email"
-            className="border border-[#D0D5DD] bg-[#F9FAFB] outline-none text-primaryTextColor rounded px-3 py-2 block w-full opacity-70"
+            className="border border-[#D0D5DD] bg-[#F9FAFB] outline-none text-textColor rounded px-3 py-2 block w-full opacity-70"
           />
         </div>
 
@@ -131,7 +131,7 @@ const page = () => {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="rounded-[7px] font-medium px-3 py-2 inline-flex items-center gap-2 border border-[#D0D5DD] text-[15px] lg:text-base text-primaryTextColor"
+          className="rounded-[7px] font-medium px-3 py-2 inline-flex items-center gap-2 border border-[#D0D5DD] text-[15px] lg:text-base text-textColor"
         >
           <Image src={editPassword} alt="edit" className="" />
           <span>Change Password</span>
@@ -141,7 +141,7 @@ const page = () => {
         <div className="mt-6">
           <button
             type="submit"
-            className={`px-9 group duration-300 transition-all hover:text-primary sm:px-10 font-medium py-2 sm:py-3 rounded-lg bg-primary border border-primary text-white border-primaryBgColor h-12 ${
+            className={`px-9 group duration-300 transition-all hover:text-primary-orange sm:px-10 font-medium py-2 sm:py-3 rounded-lg bg-primary-orange border border-primary-orange text-white h-12 ${
               isPending ? "cursor-not-allowed" : "hover:bg-transparent"
             }`}
             disabled={isPending}

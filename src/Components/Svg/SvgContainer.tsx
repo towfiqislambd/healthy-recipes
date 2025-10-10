@@ -8,7 +8,7 @@ export function ButtonArrowSvg() {
       fill="none"
     >
       <path
-        className="group-hover:stroke-primary duration-300 transition-all"
+        className="group-hover:stroke-primary-orange duration-300 transition-all"
         d="M13.5591 11.8479L22.0794 10.8024L23.125 19.3228"
         stroke="white"
         strokeWidth="1.5"
@@ -17,7 +17,7 @@ export function ButtonArrowSvg() {
         strokeLinejoin="round"
       />
       <path
-        className="group-hover:stroke-primary duration-300 transition-all"
+        className="group-hover:stroke-primary-orange duration-300 transition-all"
         d="M11.6172 24.1978L21.9797 10.9363"
         stroke="white"
         strokeWidth="1.5"

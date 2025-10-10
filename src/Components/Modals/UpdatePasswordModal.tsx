@@ -153,7 +153,7 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
         <button
           type="submit"
           disabled={isPending}
-          className={`flex justify-center w-full group duration-300 mx-auto transition-all hover:text-primary font-medium py-3 rounded-lg bg-primary border text-center border-primary text-white border-primaryBgColor ${
+          className={`flex justify-center w-full group duration-300 mx-auto transition-all hover:text-primary-orange font-medium py-3 rounded-lg bg-primary-orange border text-center border-primary-orange text-white ${
             isPending ? "cursor-not-allowed" : "hover:bg-transparent"
           }`}
         >

@@ -66,7 +66,7 @@ const page = () => {
         ) : (
           <div className="text-center col-span-4 py-6 space-y-3">
             <Image src={deleteImg} alt="logo" className="mx-auto size-16" />
-            <p className="text-primary font-merriweather md:text-lg">
+            <p className="text-primary-orange font-merriweather md:text-lg">
               No favorite recipes found
             </p>
           </div>
@@ -80,7 +80,11 @@ const page = () => {
             key={index}
             onClick={() => item.url && setActivePage(item.url.split("=")[1])}
             className={`px-3 py-1 rounded border transition-all duration-150 
-            ${item.active ? "bg-primary text-white" : "bg-white text-gray-700"} 
+            ${
+              item.active
+                ? "bg-primary-orange text-white"
+                : "bg-white text-gray-700"
+            } 
             ${
               !item.url ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"
             }`}

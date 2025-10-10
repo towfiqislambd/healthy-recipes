@@ -26,7 +26,7 @@ const page = () => {
 
           <Link
             href="/dashboard/my-recipes"
-            className="text-primary font-poppins cursor-pointer font-medium text-sm sm:text-base"
+            className="text-primary-orange font-poppins cursor-pointer font-medium text-sm sm:text-base"
           >
             View all
           </Link>
@@ -46,7 +46,7 @@ const page = () => {
           ) : (
             <div className="text-center col-span-4 py-6 space-y-3">
               <Image src={deleteImg} alt="logo" className="mx-auto size-16" />
-              <p className="text-primary font-merriweather md:text-lg lg:text-xl">
+              <p className="text-primary-orange font-merriweather md:text-lg lg:text-xl">
                 No shared recipes found yet
               </p>
             </div>
@@ -62,7 +62,7 @@ const page = () => {
           </h3>
           <Link
             href="/dashboard/saved-recipes"
-            className="text-primary cursor-pointer text-sm sm:text-base font-poppins font-medium"
+            className="text-primary-orange cursor-pointer text-sm sm:text-base font-poppins font-medium"
           >
             View all
           </Link>
@@ -82,7 +82,7 @@ const page = () => {
           ) : (
             <div className="text-center col-span-4 py-6 space-y-3">
               <Image src={deleteImg} alt="logo" className="mx-auto size-16" />
-              <p className="text-primary font-merriweather md:text-lg lg:text-xl">
+              <p className="text-primary-orange font-merriweather md:text-lg lg:text-xl">
                 No favorite recipes found
               </p>
             </div>

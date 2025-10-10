@@ -44,7 +44,7 @@ const DashboardHeader = ({ setOpen, setOpenPopup, openPopup, isOpen }: any) => {
               <Link
                 href={link?.path}
                 key={link?.title}
-                className="hover:text-primary duration-300 transition-all text-textColor"
+                className="hover:text-primary-orange duration-300 transition-all text-textColor"
               >
                 {link?.title}
               </Link>
@@ -76,7 +76,7 @@ const DashboardHeader = ({ setOpen, setOpenPopup, openPopup, isOpen }: any) => {
             {/* Mobile btns */}
             <button
               onClick={() => setOpen(!isOpen)}
-              className="bg-primary text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid 2xl:hidden place-items-center"
+              className="bg-primary-orange text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid 2xl:hidden place-items-center"
             >
               <FaBars className="text-[22px] sm:text-2xl" />
             </button>

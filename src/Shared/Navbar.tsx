@@ -157,7 +157,7 @@ const Navbar = () => {
                     <Link
                       key={link?.id}
                       href={link?.path}
-                      className={`hover:text-primary duration-300 transition-all text-[15px] 3xl:text-base ${
+                      className={`hover:text-primary-orange duration-300 transition-all text-[15px] 3xl:text-base ${
                         isActive ? "text-primary-orange" : "text-textColor"
                       }`}
                     >
@@ -207,7 +207,7 @@ const Navbar = () => {
 
                 <button
                   onClick={() => setOpen(!isOpen)}
-                  className="bg-primary text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid 2xl:hidden place-items-center"
+                  className="bg-primary-orange text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid 2xl:hidden place-items-center"
                 >
                   <FaBars className="text-[22px] sm:text-2xl" />
                 </button>
@@ -298,7 +298,7 @@ const Navbar = () => {
                   key={link?.id}
                   onClick={() => setOpen(false)}
                   href={link?.path}
-                  className={`hover:text-primary duration-300 transition-all text-[15px] 3xl:text-base ${
+                  className={`hover:text-primary-orange duration-300 transition-all text-[15px] 3xl:text-base ${
                     isActive ? "text-primary-orange" : "text-textColor"
                   }`}
                 >
@@ -354,7 +354,7 @@ const Navbar = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="w-full border border-gray-300 rounded px-3 md:px-4 py-1.5 md:py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full border border-gray-300 rounded px-3 md:px-4 py-1.5 md:py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-primary-orange"
               value={search}
               onChange={e => setSearch(e.target.value)}
             />

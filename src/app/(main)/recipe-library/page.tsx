@@ -31,7 +31,7 @@ const page = async () => {
           <div className="flex items-center space-x-2">
             <Link
               href="/"
-              className="text-[#8993A4] hover:text-primary leading-[130%] transition-all divide-blue-300"
+              className="text-[#8993A4] hover:text-primary-orange leading-[130%] transition-all divide-blue-300"
             >
               Home
             </Link>
@@ -39,7 +39,7 @@ const page = async () => {
             <span className="text-gray-500"> {">"} </span>
             <Link
               href="/recipe-library"
-              className="text-textColor hover:text-primary leading-[130%] transition-all divide-blue-300"
+              className="text-textColor hover:text-primary-orange leading-[130%] transition-all divide-blue-300"
             >
               Recipe Library
             </Link>

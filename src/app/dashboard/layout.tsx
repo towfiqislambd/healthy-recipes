@@ -114,7 +114,7 @@ export default function DashboardLayout({
                   <Link
                     key={link?.path}
                     href={link?.path}
-                    className={`px-6 2xl:px-7 py-[11px] 2xl:py-3 block w-full duration-300 transition-all hover:bg-primary hover:text-white text-[#5A5C5F] ${
+                    className={`px-6 2xl:px-7 py-[11px] 2xl:py-3 block w-full duration-300 transition-all hover:bg-primary-orange hover:text-white text-[#5A5C5F] ${
                       isActive
                         ? "bg-primary-orange text-white"
                         : "hover:bg-primary-orange hover:text-white text-[#5A5C5F]"

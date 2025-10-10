@@ -45,7 +45,7 @@ const EditMealModal = ({ recipe, itemId, setOpen }: any) => {
       <div className="pt-3 sm:pt-6 pb-3 flex items-center justify-center gap-3">
         <button
           onClick={handleEditRecipe}
-          className="px-3 sm:px-5 py-2 sm:py-2.5 border border-primary bg-primary text-white rounded-md"
+          className="px-3 sm:px-5 py-2 sm:py-2.5 border border-primary-orange bg-primary-orange text-white rounded-md"
         >
           {isPending ? (
             <CgSpinnerTwo className="animate-spin size-6" />
@@ -56,7 +56,7 @@ const EditMealModal = ({ recipe, itemId, setOpen }: any) => {
 
         <button
           onClick={() => setOpen(false)}
-          className="px-4 sm:px-8 py-2 sm:py-2.5 border border-primary text-primary rounded-md"
+          className="px-4 sm:px-8 py-2 sm:py-2.5 border border-primary-orange text-primary-orange rounded-md"
         >
           Cancel
         </button>

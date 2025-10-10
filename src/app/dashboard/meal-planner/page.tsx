@@ -171,7 +171,7 @@ const page = () => {
                       }}
                       className="ml-1 flex-shrink-0"
                     >
-                      <MdOutlineModeEditOutline className="text-lg sm:text-xl text-primary" />
+                      <MdOutlineModeEditOutline className="text-lg sm:text-xl text-primary-orange" />
                     </button>
                   )}
 
@@ -204,7 +204,7 @@ const page = () => {
 
         <Link
           href="/meal-planner"
-          className="px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base text-[#5A5C5F] border border-primary rounded-lg"
+          className="px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base text-[#5A5C5F] border border-primary-orange rounded-lg"
         >
           Add meal
         </Link>

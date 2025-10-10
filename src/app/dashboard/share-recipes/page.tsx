@@ -240,7 +240,7 @@ const page = () => {
             Upload a video (Optional)
           </p>
           <label htmlFor="recipe_video">
-            <p className="flex gap-1 sm:gap-2 w-fit text-sm sm:text-base cursor-pointer items-center text-white px-3 py-2 lg:py-[10px] lg:px-4 rounded sm:rounded-lg bg-primary">
+            <p className="flex gap-1 sm:gap-2 w-fit text-sm sm:text-base cursor-pointer items-center text-white px-3 py-2 lg:py-[10px] lg:px-4 rounded sm:rounded-lg bg-primary-orange">
               <CameraSvg />
               <span>Add Media</span>
             </p>
@@ -514,7 +514,7 @@ const page = () => {
               e.preventDefault();
               addIngredient();
             }}
-            className="flex mt-5 gap-1 text-sm sm:text-base sm:gap-2 w-fit cursor-pointer items-center text-white py-2 lg:py-[10px] px-[10px] lg:px-4 rounded sm:rounded-lg bg-primary"
+            className="flex mt-5 gap-1 text-sm sm:text-base sm:gap-2 w-fit cursor-pointer items-center text-white py-2 lg:py-[10px] px-[10px] lg:px-4 rounded sm:rounded-lg bg-primary-orange"
           >
             <AddMoreSvg />
             <p>Add more ingredient</p>
@@ -550,7 +550,7 @@ const page = () => {
               e.preventDefault();
               addInstruction();
             }}
-            className="flex mt-5 gap-1 text-sm sm:text-base sm:gap-2 w-fit cursor-pointer items-center text-white py-2 lg:py-[10px] px-[10px] lg:px-4 rounded sm:rounded-lg bg-primary"
+            className="flex mt-5 gap-1 text-sm sm:text-base sm:gap-2 w-fit cursor-pointer items-center text-white py-2 lg:py-[10px] px-[10px] lg:px-4 rounded sm:rounded-lg bg-primary-orange"
           >
             <AddMoreSvg />
             <p>Add more instruction</p>

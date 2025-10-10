@@ -38,12 +38,12 @@ const BlogCard = ({ item }: blogProps) => {
       <div className="mt-6">
         <div className="w-full flex items-center justify-between">
           {/* Blog Category */}
-          <h5 className="sm:leading-[20px] font-medium text-sm text-primary">
+          <h5 className="sm:leading-[20px] font-medium text-sm text-primary-orange">
             {item?.category?.category_name} | {item?.time_ago}.
           </h5>
 
           {/* Created Date */}
-          <p className="leading-[20px] font-medium text-sm text-primary">
+          <p className="leading-[20px] font-medium text-sm text-primary-orange">
             {item?.created_date}
           </p>
         </div>
