@@ -38,19 +38,19 @@ const BlogCard = ({ item }: blogProps) => {
       <div className="mt-6">
         <div className="w-full flex items-center justify-between">
           {/* Blog Category */}
-          <h5 className="sm:leading-[20px] font-medium text-sm text-primary">
+          <h5 className="sm:leading-[20px] font-medium text-sm text-primary-orange">
             {item?.category?.category_name} | {item?.time_ago}.
           </h5>
 
           {/* Created Date */}
-          <p className="leading-[20px] font-medium text-sm text-primary">
+          <p className="leading-[20px] font-medium text-sm text-primary-orange">
             {item?.created_date}
           </p>
         </div>
 
         <div className="space-y-2 mt-1">
           {/* Blog Title */}
-          <h4 className="text-lg 2xl:text-xl font-bold sm:leading-[160%] font-merriweather text-black sm:truncate">
+          <h4 className="text-lg 2xl:text-xl font-bold sm:leading-[160%] font-merriweather text-primary-black sm:truncate">
             {item?.title}
           </h4>
 
@@ -59,7 +59,7 @@ const BlogCard = ({ item }: blogProps) => {
             dangerouslySetInnerHTML={{
               __html: item?.description?.slice(0, 80),
             }}
-            className="text-textColor 2xl:leading-[150%] "
+            className="text-accent-gray 2xl:leading-[150%] "
           />
         </div>
 
@@ -77,12 +77,12 @@ const BlogCard = ({ item }: blogProps) => {
 
             <div>
               {/* Author Name */}
-              <h5 className="text-black font-medium leading-[140%] text-sm">
+              <h5 className="text-primary-black font-medium leading-[140%] text-sm">
                 {item?.author_name}
               </h5>
 
               {/* Created Date */}
-              <p className="text-textColor text-sm leading-[140%]">
+              <p className="text-accent-gray text-sm leading-[140%]">
                 {item?.created_date}
               </p>
             </div>

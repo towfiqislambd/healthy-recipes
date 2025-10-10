@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { CgSpinnerTwo } from "react-icons/cg";
+import { BiLoaderCircle } from "react-icons/bi";
 import { useResetPassword } from "@/Hooks/api/auth_api";
 import { HidePassSvg, ShowPassSvg } from "@/Components/Svg/SvgContainer";
 
@@ -12,11 +12,15 @@ type formData = {
 };
 
 const page = ({ params }: any) => {
+  // Hook
   const { email } = params;
+
+  // States
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [confirmPassword, setConfirmPassword] = useState<boolean>(false);
 
-  //mutation
+  // Mutation
   const { mutateAsync: resetPasswordMutation, isPending } = useResetPassword();
 
   // Hook Form
@@ -35,34 +39,42 @@ const page = ({ params }: any) => {
       password: data.password,
       password_confirmation: data.password_confirmation,
     };
-    await resetPasswordMutation(updatedData);
+    await resetPasswordMutation(updatedData, {
+      onError: (err: any) => {
+        setErrorMessage(err?.response?.data?.message);
+      },
+    });
   };
 
   return (
     <>
-      <div>
-        {/* Title */}
-        <h4 className="text-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
-          Create new password
-        </h4>
+      {/* Title */}
+      <h4 className="auth_heading">Create new password</h4>
 
-        {/* Description */}
-        <p className="text-center lg:mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto text-textColor">
-          Please enter and confirm your new password. You will need to login
-          after you reset.
-        </p>
-      </div>
+      {/* Description */}
+      <p className="text-center tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto text-accent-gray">
+        Please enter and confirm your new password. You will need to login after
+        you reset.
+      </p>
 
+      {/* Form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="lg:mt-8 mt-5 lg:space-y-6 space-y-3"
+        className="lg:mt-7 mt-5 lg:space-y-5.5 space-y-4"
       >
+        {/* Dynamic Error Message */}
+        {errorMessage && (
+          <div className="mb-4 p-3 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-sm">
+            {errorMessage}
+          </div>
+        )}
+
         {/* Password */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
             <label
               htmlFor="password"
-              className="text-black leading-[175%] tracking-[-0.064px]"
+              className="text-primary-black leading-[175%] tracking-[-0.064px]"
             >
               New Password
             </label>
@@ -98,7 +110,7 @@ const page = ({ params }: any) => {
           <div className="w-full flex justify-between">
             <label
               htmlFor="password_confirmation"
-              className="text-black leading-[175%] tracking-[-0.064px]"
+              className="text-primary-black leading-[175%] tracking-[-0.064px]"
             >
               Confirm New Password
             </label>
@@ -138,30 +150,35 @@ const page = ({ params }: any) => {
         {/* Submit button */}
         <div className="w-full pt-2">
           <button
-            disabled={isPending}
             type="submit"
-            className={`leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary w-full border bg-primary rounded-full text-center py-3 hover:bg-transparent hover:text-primary  transition-all duration-300 h-[50px] flex items-center justify-center
-                      ${isPending ? "cursor-not-allowed" : "cursor-pointer"}
-                      `}
+            disabled={isPending}
+            className={`auth_btn ${
+              isPending
+                ? "cursor-not-allowed hover:!bg-primary-orange hover:!text-white opacity-90"
+                : "cursor-pointer"
+            }`}
           >
             {isPending ? (
-              <CgSpinnerTwo className="animate-spin size-6" />
+              <span className="flex gap-2 items-center">
+                <BiLoaderCircle className="animate-spin text-xl" />
+                Please wait....
+              </span>
             ) : (
-              "Reset password"
+              "Reset Password"
             )}
           </button>
         </div>
-      </form>
 
-      {/* Back to login */}
-      <div className="sm:mt-12 mt-3 text-center">
-        <Link
-          href="/auth/login"
-          className="font-semibold leading-[38.375px] text-[#333] pl-1 underline hover:no-underline transition-all duration-300"
-        >
-          Back to login
-        </Link>
-      </div>
+        {/* Back to login */}
+        <div className="text-center">
+          <Link
+            href="/auth/login"
+            className="font-semibold leading-[38.375px] text-[#333] pl-1 underline hover:no-underline transition-all duration-300"
+          >
+            Back to login
+          </Link>
+        </div>
+      </form>
     </>
   );
 };

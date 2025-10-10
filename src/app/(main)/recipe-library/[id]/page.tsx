@@ -23,7 +23,7 @@ const page = async ({ params }: any) => {
         <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0 flex items-center space-x-1 md:space-x-2 text-sm md:text-base">
           <Link
             href="/"
-            className="text-[#8993A4] hover:text-primary leading-[130%] transition-all divide-blue-300"
+            className="text-[#8993A4] hover:text-primary-orange leading-[130%] transition-all divide-blue-300"
           >
             Home
           </Link>
@@ -32,7 +32,7 @@ const page = async ({ params }: any) => {
 
           <Link
             href="/recipe-library"
-            className="text-[#8993A4] hover:text-primary leading-[130%] transition-all divide-blue-300"
+            className="text-[#8993A4] hover:text-primary-orange leading-[130%] transition-all divide-blue-300"
           >
             All Recipe Library
           </Link>

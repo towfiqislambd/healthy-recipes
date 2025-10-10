@@ -35,10 +35,10 @@ const ReviewCard = ({ item }: ReviewItem) => {
 
           {/* User Info */}
           <div>
-            <h6 className="text-black font-medium text-sm md:text-base lg:text-lg 3xl:text-xl">
+            <h6 className="text-primary-black font-medium text-sm md:text-base lg:text-lg 3xl:text-xl">
               {item?.user?.name}
             </h6>
-            <p className="text-textColor text-sm">{item?.created_date}</p>
+            <p className="text-accent-gray text-sm">{item?.created_date}</p>
           </div>
         </div>
 
@@ -51,7 +51,7 @@ const ReviewCard = ({ item }: ReviewItem) => {
       </div>
 
       {/* Review Description */}
-      <p className="text-textColor text-sm 2xl:text-base leading-[150%] mt-3 3xl:mt-5">
+      <p className="text-accent-gray text-sm 2xl:text-base leading-[150%] mt-3 3xl:mt-5">
         {item?.comment}
       </p>
     </div>

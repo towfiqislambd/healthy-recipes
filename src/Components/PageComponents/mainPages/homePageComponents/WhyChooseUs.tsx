@@ -39,7 +39,7 @@ const WhyChooseUs = ({ data }: whyChooseProps) => {
                   </h5>
                 </div>
 
-                <p className="leading-[150%] text-textColor text-center">
+                <p className="leading-[150%] text-accent-gray text-center">
                   {description}
                 </p>
               </div>

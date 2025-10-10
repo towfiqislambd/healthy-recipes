@@ -106,7 +106,7 @@ const page = ({ params }: Props) => {
             <div className="w-full xl:w-[500px] 3xl:mt-5 bg-white rounded-lg h-full p-5">
               {/* Ingredients */}
               <div>
-                <h5 className="text-black text-lg sm:text-xl 2xl:text-2xl font-bold 2xl:leading-[130%] font-merriweather">
+                <h5 className="text-primary-black text-lg sm:text-xl 2xl:text-2xl font-bold 2xl:leading-[130%] font-merriweather">
                   Ingredients:
                 </h5>
 
@@ -114,7 +114,7 @@ const page = ({ params }: Props) => {
                   {recipeData?.data?.ingredients.map((item: any) => (
                     <li
                       key={item?.id}
-                      className="text-textColor leading-[130%]"
+                      className="text-accent-gray leading-[130%]"
                       dangerouslySetInnerHTML={{
                         __html: item?.ingredient_name,
                       }}
@@ -125,22 +125,22 @@ const page = ({ params }: Props) => {
 
               <div className="mt-5 sm:mt-8 2xl:mt-10 space-y-2 text-[15px] sm:text-base sm:space-y-3 2xl:space-y-4">
                 <div className="w-full flex items-center justify-between">
-                  <p className="text-textColor">Serving number</p>
-                  <p className="text-black font-medium">
+                  <p className="text-accent-gray">Serving number</p>
+                  <p className="text-primary-black font-medium">
                     {recipeData?.data?.serving_number}
                   </p>
                 </div>
 
                 <div className="w-full flex items-center justify-between">
-                  <p className="text-textColor">Preparation time</p>
-                  <p className="text-black font-medium">
+                  <p className="text-accent-gray">Preparation time</p>
+                  <p className="text-primary-black font-medium">
                     {recipeData?.data?.preparation_time}
                   </p>
                 </div>
 
                 <div className="w-full flex items-center justify-between">
-                  <p className="text-textColor">Cooking time</p>
-                  <p className="text-black font-medium">
+                  <p className="text-accent-gray">Cooking time</p>
+                  <p className="text-primary-black font-medium">
                     {recipeData?.data?.cooking_time}
                   </p>
                 </div>
@@ -148,12 +148,12 @@ const page = ({ params }: Props) => {
 
               {/* Nutrition */}
               <div className="pt-5 sm:pt-7 lg:pt-8">
-                <h5 className="text-black text-lg sm:text-xl 2xl:text-2xl font-bold 2xl:leading-[130%] font-merriweather">
+                <h5 className="text-primary-black text-lg sm:text-xl 2xl:text-2xl font-bold 2xl:leading-[130%] font-merriweather">
                   Nutrition:
                 </h5>
 
                 <div
-                  className="mt-3 2xl:mt-8 space-y-3 2xl:space-y-5 text-textColor leading-7 2xl:leading-10"
+                  className="mt-3 2xl:mt-8 space-y-3 2xl:space-y-5 text-accent-gray leading-7 2xl:leading-10"
                   dangerouslySetInnerHTML={{
                     __html:
                       recipeData?.data?.nutritions ||
@@ -164,7 +164,7 @@ const page = ({ params }: Props) => {
 
               {/* Tags */}
               <div className="pt-5 sm:pt-8">
-                <h5 className="text-black text-lg sm:text-xl 2xl:text-2xl font-bold leading-[130%] font-merriweather">
+                <h5 className="text-primary-black text-lg sm:text-xl 2xl:text-2xl font-bold leading-[130%] font-merriweather">
                   Tags:
                 </h5>
 
@@ -173,7 +173,7 @@ const page = ({ params }: Props) => {
                     ? recipeData?.data?.tag_names?.map((item: any) => (
                         <div
                           key={item?.id}
-                          className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor"
+                          className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-accent-gray"
                         >
                           {item?.tag_name}
                         </div>
@@ -181,7 +181,7 @@ const page = ({ params }: Props) => {
                     : recipeData?.data?.tags?.map((item: any) => (
                         <div
                           key={item.id}
-                          className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-textColor"
+                          className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-accent-gray"
                         >
                           {item?.tag_name}
                         </div>
@@ -204,7 +204,7 @@ const page = ({ params }: Props) => {
 
                     <div
                       onClick={handlePlay}
-                      className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700 items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer ${
+                      className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700 items-center justify-center bg-primary-orange rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer ${
                         !isPlaying ? "flex" : "hidden"
                       }`}
                     >
@@ -212,7 +212,7 @@ const page = ({ params }: Props) => {
                     </div>
                     <div
                       onClick={handlePause}
-                      className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700  items-center justify-center bg-primary rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer   ${
+                      className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700  items-center justify-center bg-primary-orange rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer   ${
                         isPlaying ? "flex" : "hidden"
                       } `}
                     >
@@ -223,7 +223,7 @@ const page = ({ params }: Props) => {
 
                 {/* Instructions */}
                 <div className="pt-5">
-                  <h5 className="text-black text-xl 2xl:text-2xl font-bold leading-[130%] font-merriweather">
+                  <h5 className="text-primary-black text-xl 2xl:text-2xl font-bold leading-[130%] font-merriweather">
                     Instructions:
                   </h5>
 
@@ -232,7 +232,7 @@ const page = ({ params }: Props) => {
                       (item: any, idx: number) => (
                         <p
                           key={item?.id}
-                          className="text-textColor 2xl:text-lg font-medium"
+                          className="text-accent-gray 2xl:text-lg font-medium"
                         >
                           <span>Step-{idx + 1}: </span> {item?.step}
                         </p>

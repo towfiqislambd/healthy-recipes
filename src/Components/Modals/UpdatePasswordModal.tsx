@@ -1,9 +1,9 @@
 "use client";
-import { useChangePassword } from "@/Hooks/api/auth_api";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { ImSpinner9 } from "react-icons/im";
+import { useChangePassword } from "@/Hooks/api/auth_api";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 const UpdatePasswordModal = ({ setOpen }: any) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -33,8 +33,8 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
   };
 
   return (
-    <div>
-      <h3 className="text-xl lg:text-2xl text-headingTextColor font-semibold">
+    <>
+      <h3 className="text-xl lg:text-2xl text-accent-gray font-semibold">
         Change Password
       </h3>
 
@@ -43,7 +43,7 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
         <div>
           <label
             htmlFor="current_password"
-            className="font-medium block w-full mb-[6px] text-black"
+            className="font-medium block w-full mb-[6px] text-primary-black"
           >
             Current Password
           </label>
@@ -55,7 +55,7 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
                 required: "Current Password is required",
               })}
               placeholder="Password"
-              className="bg-transparent outline-none text-black rounded-md pr-9 py-3 pl-4 block w-full"
+              className="bg-transparent outline-none text-primary-black rounded-md pr-9 py-3 pl-4 block w-full"
             />
             <span
               onClick={() => setShowPassword(!showPassword)}
@@ -79,7 +79,7 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
         <div>
           <label
             htmlFor="password"
-            className="font-medium block w-full mb-[6px] text-black"
+            className="font-medium block w-full mb-[6px] text-primary-black"
           >
             New Password
           </label>
@@ -91,7 +91,7 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
                 required: "New Password is required",
               })}
               placeholder="Password"
-              className="bg-transparent outline-none text-black rounded-md pr-9 py-3 pl-4 block w-full"
+              className="bg-transparent outline-none text-primary-black rounded-md pr-9 py-3 pl-4 block w-full"
             />
             <span
               onClick={() => setShowNewPassword(!showNewPassword)}
@@ -115,7 +115,7 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
         <div className="pb-2">
           <label
             htmlFor="password_confirmation"
-            className="font-medium block w-full mb-[6px] text-black"
+            className="font-medium block w-full mb-[6px] text-primary-black"
           >
             Confirm New Password
           </label>
@@ -129,7 +129,7 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
                   value === password || "Passwords do not match",
               })}
               placeholder="Password"
-              className="bg-transparent text-black outline-none rounded-md pr-9 py-3 pl-4 block w-full"
+              className="bg-transparent text-primary-black outline-none rounded-md pr-9 py-3 pl-4 block w-full"
             />
             <span
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -153,7 +153,7 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
         <button
           type="submit"
           disabled={isPending}
-          className={`flex justify-center w-full group duration-300 mx-auto transition-all hover:text-primary font-medium py-3 rounded-lg bg-primary border text-center border-primary text-white border-primaryBgColor ${
+          className={`flex justify-center w-full group duration-300 mx-auto transition-all hover:text-primary-orange font-medium py-3 rounded-lg bg-primary-orange border text-center border-primary-orange text-white ${
             isPending ? "cursor-not-allowed" : "hover:bg-transparent"
           }`}
         >
@@ -164,7 +164,7 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
           )}
         </button>
       </form>
-    </div>
+    </>
   );
 };
 

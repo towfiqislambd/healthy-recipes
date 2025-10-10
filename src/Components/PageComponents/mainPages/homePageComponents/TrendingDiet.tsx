@@ -42,14 +42,14 @@ const TrendingDiet = ({ data }: trendingProps) => {
           <div className="w-full flex items-center justify-center md:justify-end gap-3 mt-4">
             <button
               onClick={() => swiperRef?.slidePrev()}
-              className="size-10 lg:size-12 flex items-center justify-center border border-primary rounded-full hover:bg-primary transition-all duration-300 group"
+              className="size-10 lg:size-12 flex items-center justify-center border border-primary-orange rounded-full hover:bg-primary-orange transition-all duration-300 group"
             >
               <SliderPrevSvg />
             </button>
 
             <button
               onClick={() => swiperRef?.slideNext()}
-              className="size-10 lg:size-12 flex items-center justify-center border border-primary rounded-full hover:bg-primary transition-all duration-300 group"
+              className="size-10 lg:size-12 flex items-center justify-center border border-primary-orange rounded-full hover:bg-primary-orange transition-all duration-300 group"
             >
               <SliderNextSvg />
             </button>

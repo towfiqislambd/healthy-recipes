@@ -17,7 +17,9 @@ import { useLogout } from "@/Hooks/api/auth_api";
 import { usePathname } from "next/navigation";
 import Container from "@/Components/Common/Container";
 import { getAllRecipesPublic } from "@/Hooks/api/cms_api";
-import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
+import { MdLogout } from "react-icons/md";
+import { BiLoaderCircle } from "react-icons/bi";
+import { IoSettingsOutline } from "react-icons/io5";
 
 const navLinks = [
   { id: 1, path: "/", title: "Home" },
@@ -40,7 +42,7 @@ const Navbar = () => {
   const [searchModalOpen, setSearchModalOpen] = useState<boolean>(false);
 
   // Mutation & Query
-  const { mutate: logOutMutate, isPending } = useLogout();
+  const { mutate: logoutMutation, isPending } = useLogout();
   const { data: results, isLoading: resultLoading } = getAllRecipesPublic({
     search,
   });
@@ -56,13 +58,27 @@ const Navbar = () => {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    const handleWindowClick = () => {
+      setOpenPopup(false);
+      setSearch("");
+    };
+
+    window.addEventListener("click", handleWindowClick);
+
+    return () => {
+      window.removeEventListener("click", handleWindowClick);
+    };
+  }, []);
+
   return (
     <header className="py-1 lg:py-2 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] bg-[#F6F5F2] sticky w-full left-0 top-0 z-50">
       <Container>
         <nav className="w-full relative">
           <div className="flex justify-between items-center lg:px-3 xl:px-5 3xl:px-0">
-            {/* Left - Logo + Search Bar */}
+            {/* Left */}
             <div className="flex items-center gap-7">
+              {/* Logo */}
               <Link href="/">
                 <figure className="w-[80px] h-[70px] lg:w-[100px] lg:h-[87px] relative">
                   <Image
@@ -75,7 +91,10 @@ const Navbar = () => {
               </Link>
 
               {/* Search Bar */}
-              <div className="px-3 3xl:px-4 py-3 hidden 2xl:flex items-center gap-1 3xl:gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white w-[250px] 3xl:w-[380px]">
+              <div
+                onClick={e => e.stopPropagation()}
+                className="px-3 3xl:px-4 py-3 hidden 2xl:flex items-center gap-1 3xl:gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white w-[250px] 3xl:w-[380px]"
+              >
                 <SearchSvg />
                 <form className="w-full relative">
                   <input
@@ -108,7 +127,7 @@ const Navbar = () => {
                             key={idx}
                             href={`/recipe-details/${item?.id}`}
                             target="_blank"
-                            className="flex justify-between items-center border-b pb-3 cursor-pointer"
+                            className="flex justify-between items-center border-b border-gray-200 pb-3 cursor-pointer"
                           >
                             <div className="flex justify-center gap-2 items-center">
                               <figure className="w-16 rounded h-12 overflow-hidden relative">
@@ -120,7 +139,7 @@ const Navbar = () => {
                                 />
                               </figure>
                               <div>
-                                <p className="font-medium text-black">
+                                <p className="font-medium text-primary-black">
                                   {item?.recipe_name?.length > 40
                                     ? item.recipe_name.slice(0, 40) + "..."
                                     : item?.recipe_name}
@@ -157,8 +176,8 @@ const Navbar = () => {
                     <Link
                       key={link?.id}
                       href={link?.path}
-                      className={`hover:text-primary duration-300 transition-all text-[15px] 3xl:text-base ${
-                        isActive ? "text-primary-orange" : "text-textColor"
+                      className={`hover:text-primary-orange duration-300 transition-all text-[15px] 3xl:text-base ${
+                        isActive ? "text-primary-orange" : "text-accent-gray"
                       }`}
                     >
                       {link?.title}
@@ -184,18 +203,95 @@ const Navbar = () => {
                 </Link>
 
                 {user ? (
-                  <div className="flex gap-2 3xl:gap-3 items-center">
-                    {/* Avatar */}
-                    <button onClick={() => setOpenPopup(!openPopup)}>
-                      <Avatar className="size-10 lg:size-11 rounded-full cursor-pointer relative">
-                        <AvatarImage
+                  <div
+                    onClick={e => {
+                      e.stopPropagation();
+                      setOpenPopup(!openPopup);
+                    }}
+                    className="relative block"
+                  >
+                    <figure className="size-10 lg:size-12 bg-primary-orange rounded-full cursor-pointer relative grid place-items-center shrink-0">
+                      {user?.avatar ? (
+                        <Image
                           src={`${process.env.NEXT_PUBLIC_SITE_URL}/${user?.avatar}`}
+                          alt="user"
+                          fill
+                          className="size-full rounded-full object-cover"
                         />
-                        <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
+                      ) : (
+                        <p className="text-lg lg:text-[22px] font-medium text-white rounded-full">
                           {user?.name.slice(0, 1)}
-                        </AvatarFallback>
-                      </Avatar>
-                    </button>
+                        </p>
+                      )}
+                    </figure>
+
+                    {/* Account Modal */}
+                    <div
+                      onClick={e => e.stopPropagation()}
+                      className={`bg-gray-100 z-50 rounded-xl w-64 lg:w-[260px] 3xl:w-[270px] absolute right-2 2xl:right-0 top-[65px] mt-2 shadow-[0_8px_24px_rgba(0,0,0,0.1)] p-4 3xl:p-5 transition-all duration-300 ${
+                        openPopup
+                          ? "opacity-100 scale-100"
+                          : "opacity-0 scale-95 pointer-events-none"
+                      }`}
+                    >
+                      <div className="flex gap-3 md:gap-4 items-center mb-4 lg:mb-5">
+                        <figure className="size-10 lg:size-12 bg-primary-orange rounded-full cursor-pointer relative grid place-items-center shrink-0">
+                          {user?.avatar ? (
+                            <Image
+                              src={`${process.env.NEXT_PUBLIC_SITE_URL}/${user?.avatar}`}
+                              alt="user"
+                              fill
+                              className="size-full rounded-full object-cover"
+                            />
+                          ) : (
+                            <p className="text-lg lg:text-[22px] font-medium text-white rounded-full">
+                              {user?.name.at(0)}
+                            </p>
+                          )}
+                        </figure>
+
+                        <div>
+                          <h3 className="font-semibold truncate">
+                            {user?.name}
+                          </h3>
+                          <p className="text-gray-500 text-sm w-44 truncate">
+                            {user?.email}
+                          </p>
+                        </div>
+                      </div>
+
+                      <hr className="text-gray-300" />
+
+                      <div className="mt-4 font-medium flex gap-2.5 lg:gap-3.5 3xl:gap-4 flex-col text-gray-700 text-sm lg:text-[15px]">
+                        <Link
+                          href="/dashboard/settings"
+                          className="w-fit flex gap-2 items-center cursor-pointer hover:text-primary-blue duration-200"
+                        >
+                          <IoSettingsOutline />
+                          Settings
+                        </Link>
+
+                        <button
+                          disabled={isPending}
+                          onClick={() => logoutMutation()}
+                          className={`text-left text-red-500 w-fit flex gap-2 items-center ${
+                            isPending ? "!cursor-not-allowed" : "cursor-pointer"
+                          }`}
+                        >
+                          {isPending ? (
+                            <div className="flex gap-2 items-center">
+                              <BiLoaderCircle className="animate-spin text-red-500" />
+                              <span>Signing out...</span>
+                            </div>
+                          ) : (
+                            <p className="flex gap-1 items-center">
+                              <MdLogout />
+                              Sign Out
+                            </p>
+                          )}
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 ) : (
                   <Button
@@ -207,65 +303,20 @@ const Navbar = () => {
 
                 <button
                   onClick={() => setOpen(!isOpen)}
-                  className="bg-primary text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid 2xl:hidden place-items-center"
+                  className="bg-primary-orange text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid 2xl:hidden place-items-center"
                 >
                   <FaBars className="text-[22px] sm:text-2xl" />
                 </button>
               </div>
             </div>
           </div>
-
-          {openPopup && (
-            <div
-              onClick={e => {
-                e.preventDefault();
-                e.stopPropagation();
-              }}
-              className="bg-white z-50 rounded-xl w-64 lg:w-72 absolute right-3 lg:right-5 top-[88px] lg:top-28 shadow-[0_8px_24px_rgba(0,0,0,0.1)] p-4 md:p-5"
-            >
-              <div className="flex gap-3 md:gap-4 items-center mb-4 lg:mb-5">
-                <Avatar className="size-12 rounded-full relative">
-                  <AvatarImage
-                    src={`${process.env.NEXT_PUBLIC_SITE_URL}/${user?.avatar}`}
-                  />
-                  <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
-                    {user?.name.slice(0, 1)}
-                  </AvatarFallback>
-                </Avatar>
-
-                <div>
-                  <h3 className="font-semibold truncate">{user?.name}</h3>
-                  <p className="text-gray-500 text-sm truncate">
-                    {user?.email}
-                  </p>
-                </div>
-              </div>
-
-              <hr />
-
-              <div className="mt-4 lg:mt-5 font-medium flex gap-2.5 lg:gap-4 flex-col text-gray-700 text-sm lg:text-base">
-                <Link
-                  onClick={() => setOpenPopup(false)}
-                  href="/dashboard/settings"
-                >
-                  My Profile
-                </Link>
-                <button
-                  onClick={() => logOutMutate()}
-                  className="text-left text-red-500"
-                >
-                  Sign Out
-                </button>
-              </div>
-            </div>
-          )}
         </nav>
       </Container>
 
       {/* Blur Overlay */}
       <div
         onClick={() => setOpen(false)}
-        className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 2xl:hidden z-[999] ${
+        className={`fixed inset-0 bg-primary-black/30 backdrop-blur-sm transition-opacity duration-300 2xl:hidden z-[999] ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       />
@@ -298,8 +349,8 @@ const Navbar = () => {
                   key={link?.id}
                   onClick={() => setOpen(false)}
                   href={link?.path}
-                  className={`hover:text-primary duration-300 transition-all text-[15px] 3xl:text-base ${
-                    isActive ? "text-primary-orange" : "text-textColor"
+                  className={`hover:text-primary-orange duration-300 transition-all text-[15px] 3xl:text-base ${
+                    isActive ? "text-primary-orange" : "text-accent-gray"
                   }`}
                 >
                   {link?.title}
@@ -331,7 +382,7 @@ const Navbar = () => {
       {/* Mobile Search bar */}
       {searchModalOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-50 flex items-start justify-center pt-20"
+          className="fixed inset-0 bg-primary-black/50 z-50 flex items-start justify-center pt-10"
           onClick={() => {
             setSearch("");
             setSearchModalOpen(false);
@@ -344,7 +395,6 @@ const Navbar = () => {
             <button
               onClick={() => {
                 setSearchModalOpen(false);
-                // setSearchInput("");
               }}
               className="absolute top-1.5 md:top-2 right-1.5 md:right-2 text-gray-500 hover:text-gray-700 cursor-pointer"
             >
@@ -354,7 +404,7 @@ const Navbar = () => {
             <input
               type="text"
               placeholder="Search..."
-              className="w-full border border-gray-300 rounded px-3 md:px-4 py-1.5 md:py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full border border-gray-300 rounded px-3 md:px-4 py-1.5 md:py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-primary-orange"
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
@@ -374,7 +424,7 @@ const Navbar = () => {
                         key={idx}
                         href={`recipe-details/${item?.id}`}
                         target="_blank"
-                        className="flex justify-between items-center gap-3 border-b pb-3 cursor-pointer"
+                        className="flex justify-between items-center gap-3 border-b border-gray-200 pb-3 cursor-pointer"
                       >
                         {/* Left Side */}
                         <div className="flex justify-center gap-2 items-center">
@@ -387,7 +437,7 @@ const Navbar = () => {
                             />
                           </figure>
                           <div>
-                            <p className="font-medium text-black text-sm md:text-base">
+                            <p className="font-medium text-primary-black text-sm md:text-base">
                               {item?.recipe_name?.length > 40
                                 ? item.recipe_name.slice(0, 40) + "..."
                                 : item?.recipe_name}

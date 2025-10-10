@@ -74,7 +74,7 @@ const RecipeReview = ({ id }: Props) => {
           {/* Left - Form */}
           <div className="w-full xl:flex-1">
             {/* title */}
-            <h5 className="text-xl lg:text-2xl font-semibold text-black">
+            <h5 className="text-xl lg:text-2xl font-semibold text-primary-black">
               Submit your review
             </h5>
 
@@ -82,7 +82,7 @@ const RecipeReview = ({ id }: Props) => {
             <div className="py-2 lg:py-4 xl:py-8 w-full">
               {/* Ratings */}
               <div className="w-full">
-                <p className="text-textColor text-sm font-medium">
+                <p className="text-accent-gray text-sm font-medium">
                   Add your rating <span className="text-[#FF5630]">*</span>
                 </p>
 
@@ -108,7 +108,7 @@ const RecipeReview = ({ id }: Props) => {
                 >
                   {/* Email */}
                   <div className="flex flex-col gap-2 w-full">
-                    <label className="font-medium text-sm text-textColor">
+                    <label className="font-medium text-sm text-accent-gray">
                       Email <span className="text-[#FF5630]">*</span>
                     </label>
                     <input
@@ -123,7 +123,7 @@ const RecipeReview = ({ id }: Props) => {
 
                   {/* Name */}
                   <div className="flex flex-col gap-2 w-full">
-                    <label className="font-medium text-sm text-textColor">
+                    <label className="font-medium text-sm text-accent-gray">
                       Name <span className="text-[#FF5630]">*</span>
                     </label>
                     <input
@@ -140,7 +140,7 @@ const RecipeReview = ({ id }: Props) => {
                   <div className="flex flex-col gap-2 w-full">
                     <label
                       htmlFor="comment"
-                      className="font-medium text-sm text-textColor"
+                      className="font-medium text-sm text-accent-gray"
                     >
                       Write your review{" "}
                       <span className="text-[#FF5630]">*</span>
@@ -166,7 +166,7 @@ const RecipeReview = ({ id }: Props) => {
                   {/* Submit button */}
                   <div>
                     <button
-                      className="px-3 xl:px-8 py-2 xl:py-3 text-white font-medium bg-primary hover:bg-transparent transition-all duration-300 rounded-full hover:text-primary border border-primary"
+                      className="px-3 xl:px-8 py-2 xl:py-3 text-white font-medium bg-primary-orange hover:bg-transparent transition-all duration-300 rounded-full hover:text-primary-orange border border-primary-orange"
                       type="submit"
                     >
                       {isPending ? (
@@ -192,7 +192,7 @@ const RecipeReview = ({ id }: Props) => {
                 <ReviewCard key={idx} item={item} />
               ))
             ) : (
-              <p className="text-primary font-merriweather text-center text-lg lg:text-xl">
+              <p className="text-primary-orange font-merriweather text-center text-lg lg:text-xl">
                 No reviews found yet
               </p>
             )}
@@ -206,7 +206,11 @@ const RecipeReview = ({ id }: Props) => {
                     item.url && setActivePage(item.url.split("=")[1])
                   }
                   className={`px-3 py-1 rounded border transition-all duration-150 
-            ${item.active ? "bg-primary text-white" : "bg-white text-gray-700"} 
+            ${
+              item.active
+                ? "bg-primary-orange text-white"
+                : "bg-white text-gray-700"
+            } 
             ${
               !item.url ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"
             }`}

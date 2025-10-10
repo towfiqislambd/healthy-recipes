@@ -29,10 +29,10 @@ const page = () => {
       <div className="py-5 2xl:py-8 w-full flex flex-wrap items-center justify-center 2xl:justify-between gap-x-1 gap-y-2">
         <button
           onClick={() => setActiveTab({ id: 0, category_name: "All Recipes" })}
-          className={`px-3 sm:px-4 3xl:px-6 py-[5px] text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium ${
+          className={`px-3 sm:px-4 3xl:px-6 py-[5px] text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium cursor-pointer ${
             activeTab?.category_name === "All Recipes"
               ? "bg-[#3A3A3A] text-white"
-              : "bg-transparent text-textColor"
+              : "bg-transparent text-accent-gray"
           }`}
         >
           All Recipes
@@ -42,10 +42,10 @@ const page = () => {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab)}
-            className={`px-3 sm:px-4 3xl:px-6 py-[5px] text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium ${
+            className={`px-3 sm:px-4 3xl:px-6 py-[5px] cursor-pointer text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium ${
               tab?.category_name === activeTab?.category_name
                 ? "bg-[#3A3A3A] text-white"
-                : "bg-transparent text-textColor"
+                : "bg-transparent text-accent-gray"
             }`}
           >
             {tab?.category_name}
@@ -66,7 +66,7 @@ const page = () => {
         ) : (
           <div className="text-center col-span-4 py-6 space-y-3">
             <Image src={deleteImg} alt="logo" className="mx-auto size-16" />
-            <p className="text-primary font-merriweather md:text-lg">
+            <p className="text-primary-orange font-merriweather md:text-lg">
               No favorite recipes found
             </p>
           </div>
@@ -80,7 +80,11 @@ const page = () => {
             key={index}
             onClick={() => item.url && setActivePage(item.url.split("=")[1])}
             className={`px-3 py-1 rounded border transition-all duration-150 
-            ${item.active ? "bg-primary text-white" : "bg-white text-gray-700"} 
+            ${
+              item.active
+                ? "bg-primary-orange text-white"
+                : "bg-white text-gray-700"
+            } 
             ${
               !item.url ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"
             }`}

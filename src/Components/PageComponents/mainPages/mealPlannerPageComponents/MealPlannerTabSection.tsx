@@ -18,8 +18,9 @@ import Image from "next/image";
 import useAuth from "@/Hooks/useAuth";
 import deleteImg from "@/Assets/images/delete.png";
 import { RiResetLeftFill } from "react-icons/ri";
-import RecipeCard from "@/Components/Cards/RecipeCard";
+import RecipeCard, { recipeItem } from "@/Components/Cards/RecipeCard";
 import Container from "@/Components/Common/Container";
+import { RecipeCardSkeleton } from "@/Components/Loader/Loader";
 
 const MealPlannerTabSection = () => {
   const { user, search } = useAuth();
@@ -27,7 +28,7 @@ const MealPlannerTabSection = () => {
     id: 0,
     category_name: "All Recipes",
   });
-  
+
   const [ageGroup, setAgeGroup] = useState<any>(null);
   const [library, setLibrary] = useState<any>(null);
   const { data: allCategories, isLoading: isAllCategoryLoading } =
@@ -77,10 +78,10 @@ const MealPlannerTabSection = () => {
           <div className="py-8 w-full flex flex-wrap items-center justify-center 2xl:justify-between gap-x-1 gap-y-2">
             <button
               onClick={() => setActiveTab({ category_name: "All Recipes" })}
-              className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium ${
+              className={`px-4 2xl:px-6 2xl:py-3 py-2 cursor-pointer rounded-full font-medium ${
                 activeTab?.category_name === "All Recipes"
                   ? "bg-[#3A3A3A] text-white"
-                  : "bg-transparent text-textColor"
+                  : "bg-transparent text-accent-gray"
               }`}
             >
               All Recipes
@@ -90,10 +91,10 @@ const MealPlannerTabSection = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium ${
+                className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium cursor-pointer ${
                   tab?.category_name === activeTab?.category_name
                     ? "bg-[#3A3A3A] text-white"
-                    : "bg-transparent text-textColor"
+                    : "bg-transparent text-accent-gray"
                 }`}
               >
                 {tab?.category_name}
@@ -106,7 +107,7 @@ const MealPlannerTabSection = () => {
             <div className="flex flex-col lg:flex-row w-full lg:w-auto gap-3 lg:gap-0">
               {/* Age Filter */}
               <Select value={ageGroup || "all"} onValueChange={handleAgeChange}>
-                <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[460px] h-11 2xl:h-14 lg:rounded-l-full lg:px-6 px-3 text-base focus:ring-primary">
+                <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[460px] !h-11 2xl:!h-14 lg:rounded-l-full lg:px-6 px-3 text-base focus:ring-primary-orange">
                   <SelectValue placeholder="Filter by age group" />
                 </SelectTrigger>
                 <SelectContent className="px-0 py-0">
@@ -130,13 +131,14 @@ const MealPlannerTabSection = () => {
 
               {/* Diet Filter */}
               <Select value={library || "all"} onValueChange={handleDietChange}>
-                <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[450px] 2xl:h-14 h-11 lg:rounded-r-full lg:border-l-0 px-3 lg:px-6 text-base focus:ring-primary">
+                <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[450px] 2xl:!h-14 !h-11 lg:rounded-r-full lg:border-l-0 px-3 lg:px-6 text-base focus:ring-primary-orange">
                   <SelectValue placeholder="Filter by recipe library" />
                 </SelectTrigger>
                 <SelectContent className="px-0 py-0">
                   <SelectItem value="all" className="filterClass">
                     Filter by recipe library
                   </SelectItem>
+
                   {recipeLibrary?.data?.map((library: any) => (
                     <SelectItem
                       key={library.id}
@@ -153,7 +155,7 @@ const MealPlannerTabSection = () => {
             {/* Reset Button */}
             <button
               onClick={handleReset}
-              className="h-11 2xl:h-14 w-full lg:w-auto px-3 justify-center lg:px-6 border border-primary rounded-full flex items-center gap-2 bg-primary text-white transition-all duration-300 hover:bg-transparent hover:text-primary"
+              className="h-11 2xl:h-14 w-full lg:w-auto px-3 justify-center lg:px-6 border border-primary-orange rounded-full flex items-center gap-2 bg-primary-orange text-white transition-all duration-300 hover:bg-transparent hover:text-primary-orange"
             >
               <RiResetLeftFill />
               Reset
@@ -163,23 +165,18 @@ const MealPlannerTabSection = () => {
           {/* Recipe Cards */}
           <div className="mt-10 grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6">
             {privateRecipesLoading || isLoading ? (
-              "Loading"
+              Array.from({ length: 4 }).map((_, index) => (
+                <RecipeCardSkeleton key={index} />
+              ))
             ) : recipeData?.data?.length > 0 ? (
-              recipeData?.data?.map((item: any, idx: number) => (
-                <RecipeCard
-                  key={idx}
-                  // isMyRecipe={true}
-                  isPlanner={true}
-                  item={item}
-                />
+              recipeData?.data?.map((item: recipeItem, idx: number) => (
+                <RecipeCard key={idx} isPlanner={true} item={item} />
               ))
             ) : (
               <div className="text-center col-span-4 py-5 space-y-4">
                 <Image
                   src={deleteImg}
                   alt="logo"
-                  width={10}
-                  height={10}
                   className="mx-auto size-16 xl:size-auto"
                 />
                 <p className="text-primary font-merriweather text-lg lg:text-xl">
