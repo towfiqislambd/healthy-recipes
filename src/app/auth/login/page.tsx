@@ -14,6 +14,7 @@ type formData = {
 const page = () => {
   // State:
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   // Mutation:
   const { mutateAsync: loginMutation, isPending } = useLogin();
@@ -22,14 +23,16 @@ const page = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<formData>();
 
   // Form Data
   const onSubmit = async (data: formData) => {
-    await loginMutation(data);
-    reset();
+    await loginMutation(data, {
+      onError: (err: any) => {
+        setErrorMessage(err?.response?.data?.message);
+      },
+    });
   };
 
   return (
@@ -43,6 +46,13 @@ const page = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="lg:mt-8 space-y-4 lg:space-y-6"
       >
+        {/* Dynamic Error Message */}
+        {errorMessage && (
+          <div className="mb-4 p-3 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-sm">
+            {errorMessage}
+          </div>
+        )}
+
         {/* Email */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">

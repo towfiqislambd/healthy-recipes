@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
 import Link from "next/link";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { CgSpinnerTwo } from "react-icons/cg";
+import { BiLoaderCircle } from "react-icons/bi";
 import { useVerifyEmail } from "@/Hooks/api/auth_api";
 
 type formData = {
@@ -10,21 +10,26 @@ type formData = {
 };
 
 const page = () => {
-  //   mutation::
+  // State
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  //   Mutation:
   const { mutateAsync: verifyEmailMutation, isPending } = useVerifyEmail();
 
   // Hook Form
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<formData>();
 
   // Form Data
   const onSubmit = async (data: formData) => {
-    await verifyEmailMutation(data);
-    reset();
+    await verifyEmailMutation(data, {
+      onError: (err: any) => {
+        setErrorMessage(err?.response?.data?.message);
+      },
+    });
   };
 
   return (
@@ -46,6 +51,13 @@ const page = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="mt-5 lg:mt-8 space-y-3 lg:space-y-6"
       >
+        {/* Dynamic Error Message */}
+        {errorMessage && (
+          <div className="mb-4 p-3 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-sm">
+            {errorMessage}
+          </div>
+        )}
+
         {/* Email */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
@@ -75,16 +87,21 @@ const page = () => {
         {/* Submit button */}
         <div className="w-full pt-2">
           <button
-            disabled={isPending}
             type="submit"
-            className={`leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary-orange w-full border bg-primary-orange rounded-full text-center py-3 hover:bg-transparent hover:text-primary-orange  transition-all duration-300 h-[50px] flex items-center justify-center
-                  ${isPending ? "cursor-not-allowed" : "cursor-pointer"}
-                  `}
+            disabled={isPending}
+            className={`auth_btn ${
+              isPending
+                ? "cursor-not-allowed hover:!bg-primary-orange hover:!text-white opacity-90"
+                : "cursor-pointer"
+            }`}
           >
             {isPending ? (
-              <CgSpinnerTwo className="animate-spin size-6" />
+              <span className="flex gap-2 items-center">
+                <BiLoaderCircle className="animate-spin text-xl" />
+                Verifying....
+              </span>
             ) : (
-              "Verify"
+              "Verity"
             )}
           </button>
         </div>

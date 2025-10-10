@@ -29,15 +29,12 @@ body {
   @apply font-poppins bg-[#FCFCFC];
 }
 
-@media (max-width: 639px) {
+/* @media (max-width: 639px) {
   #otp_container div input {
     @apply !h-12 !w-16;
   }
-}
+} */
 
-#otp_container div {
-  @apply flex items-center justify-center sm:gap-5 gap-2;
-}
 
 #otp_container div input {
   @apply !h-16 !w-24 bg-[#ECF1EE] rounded-2xl;
@@ -48,7 +45,7 @@ body {
 }
 
 .auth_btn {
-  @apply leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary-orange w-full border bg-primary-orange rounded-full text-center py-3 hover:bg-transparent hover:text-primary-orange  transition-all duration-300 h-[50px] flex items-center justify-center;
+  @apply leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary-orange w-full border bg-primary-orange rounded-full text-center py-3 hover:bg-transparent hover:text-primary-orange transition-all duration-300 h-[50px] flex items-center justify-center;
 }
 
 .filterClass {
@@ -63,15 +60,6 @@ body {
   @apply text-primary-black leading-[175%] tracking-[-0.064px];
 }
 
-/* Custom CSS */
-
-.section_title {
-  @apply text-xl;
-}
-
-.section_description {
-  @apply text-base;
-}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -178,13 +166,4 @@ body {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
 }

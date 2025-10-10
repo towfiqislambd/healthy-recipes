@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { useResetPassword } from "@/Hooks/api/auth_api";
 import { HidePassSvg, ShowPassSvg } from "@/Components/Svg/SvgContainer";
+import { BiLoaderCircle } from "react-icons/bi";
 
 type formData = {
   password: string;
@@ -13,6 +14,7 @@ type formData = {
 
 const page = ({ params }: any) => {
   const { email } = params;
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [confirmPassword, setConfirmPassword] = useState<boolean>(false);
 
@@ -35,7 +37,11 @@ const page = ({ params }: any) => {
       password: data.password,
       password_confirmation: data.password_confirmation,
     };
-    await resetPasswordMutation(updatedData);
+    await resetPasswordMutation(updatedData, {
+      onError: (err: any) => {
+        setErrorMessage(err?.response?.data?.message);
+      },
+    });
   };
 
   return (
@@ -57,6 +63,13 @@ const page = ({ params }: any) => {
         onSubmit={handleSubmit(onSubmit)}
         className="lg:mt-8 mt-5 lg:space-y-6 space-y-3"
       >
+        {/* Dynamic Error Message */}
+        {errorMessage && (
+          <div className="mb-4 p-3 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-sm">
+            {errorMessage}
+          </div>
+        )}
+
         {/* Password */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
@@ -138,16 +151,21 @@ const page = ({ params }: any) => {
         {/* Submit button */}
         <div className="w-full pt-2">
           <button
-            disabled={isPending}
             type="submit"
-            className={`leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary-orange w-full border bg-primary-orange rounded-full text-center py-3 hover:bg-transparent hover:text-primary-orange  transition-all duration-300 h-[50px] flex items-center justify-center
-                      ${isPending ? "cursor-not-allowed" : "cursor-pointer"}
-                      `}
+            disabled={isPending}
+            className={`auth_btn ${
+              isPending
+                ? "cursor-not-allowed hover:!bg-primary-orange hover:!text-white opacity-90"
+                : "cursor-pointer"
+            }`}
           >
             {isPending ? (
-              <CgSpinnerTwo className="animate-spin size-6" />
+              <span className="flex gap-2 items-center">
+                <BiLoaderCircle className="animate-spin text-xl" />
+                Please wait....
+              </span>
             ) : (
-              "Reset password"
+              "Reset Password"
             )}
           </button>
         </div>

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import OTPInput from "react-otp-input";
-import { CgSpinnerTwo } from "react-icons/cg";
+import { BiLoaderCircle } from "react-icons/bi";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useResendOTP, useVerifyOTP } from "@/Hooks/api/auth_api";
@@ -18,6 +18,7 @@ const page = ({ params }: any) => {
   const [timer, setTimer] = useState<number>(60);
   const [isReset, setIsReset] = useState<boolean>(false);
   const [activeResendButton, setActiveResendButton] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   // Mutations
   const { mutateAsync: verifyOtpMutation, isPending } = useVerifyOTP();
@@ -34,7 +35,11 @@ const page = ({ params }: any) => {
   // Form Data
   const onSubmit = async (data: formData) => {
     const payload = { email: decodeURIComponent(email), ...data };
-    await verifyOtpMutation(payload);
+    await verifyOtpMutation(payload, {
+      onError: (err: any) => {
+        setErrorMessage(err?.response?.data?.message);
+      },
+    });
   };
 
   // Func for resend otp
@@ -61,19 +66,24 @@ const page = ({ params }: any) => {
 
   return (
     <>
-      <div>
-        {/* Title */}
-        <h4 className="text-primary-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
-          Verify account
-        </h4>
+      {/* Title */}
+      <h4 className="text-primary-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
+        Verify account
+      </h4>
 
-        {/* Description */}
-        <p className="text-center lg:mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto">
-          Enter 4 digit code
-        </p>
-      </div>
+      {/* Description */}
+      <p className="text-center lg:mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto">
+        Enter 4 digit code
+      </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="lg:mt-8 space-y-6">
+        {/* Dynamic Error Message */}
+        {errorMessage && (
+          <div className="mb-4 p-3 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-sm">
+            {errorMessage}
+          </div>
+        )}
+
         {/* OTP */}
         <div id="otp_container" className="sm:mt-10 mt-6 mb-7">
           <Controller
@@ -89,8 +99,12 @@ const page = ({ params }: any) => {
                 value={field.value || ""}
                 onChange={field.onChange}
                 numInputs={4}
-                renderSeparator={false}
                 renderInput={props => <input {...props} />}
+                renderSeparator={false}
+                containerStyle={
+                  "flex items-center justify-center sm:gap-5 gap-2"
+                }
+                inputStyle={`!w-[50px] md:!w-[90px] mx-auto xl:!w-[110px] !h-[50px] md:!h-[70px] xl:!h-[90px] border border-[#0184FF] md:rounded-[12px] !bg-plan-card rounded-[8px] text-lg md:text-xl lg:text-3xl font-medium text-[#071431] bg-[linear-gradient(90deg,_rgba(33,72,159,0.15)_0%,_rgba(1,132,255,0.15)_100%)]`}
               />
             )}
           />
@@ -106,8 +120,8 @@ const page = ({ params }: any) => {
 
           <p>
             <button
-              onClick={handleResendCode}
               type="button"
+              onClick={handleResendCode}
               className={`font-semibold ${
                 activeResendButton
                   ? "text-secondary-blue cursor-pointer"
@@ -116,6 +130,7 @@ const page = ({ params }: any) => {
             >
               Resend
             </button>
+
             <span className="pl-2">
               code in <span>00:{timer < 10 ? `0${timer}` : timer}</span>
             </span>
@@ -125,14 +140,19 @@ const page = ({ params }: any) => {
         {/* Submit button */}
         <div className="w-full pt-2">
           <button
-            disabled={isPending}
             type="submit"
-            className={`leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary-orange w-full border bg-primary-orange rounded-full text-center py-3 hover:bg-transparent hover:text-primary-orange  transition-all duration-300 h-[50px] flex items-center justify-center
-                    ${isPending ? "cursor-not-allowed" : "cursor-pointer"}
-                    `}
+            disabled={isPending}
+            className={`auth_btn ${
+              isPending
+                ? "cursor-not-allowed hover:!bg-primary-orange hover:!text-white opacity-90"
+                : "cursor-pointer"
+            }`}
           >
             {isPending ? (
-              <CgSpinnerTwo className="animate-spin size-6" />
+              <span className="flex gap-2 items-center">
+                <BiLoaderCircle className="animate-spin text-xl" />
+                Verifying....
+              </span>
             ) : (
               "Verify"
             )}

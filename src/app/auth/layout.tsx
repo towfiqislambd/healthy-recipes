@@ -1,12 +1,12 @@
-import Container from "@/Components/Common/Container";
 import React from "react";
+import Container from "@/Components/Common/Container";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="min-h-screen max-h-screen flex items-center justify-center">
+    <main className="min-h-screen flex items-center justify-center">
       <Container>
-        <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
-          <div className="bg-[#FCFCFC] w-[600px] mx-auto">{children}</div>
+        <div className="my-10 w-full md:w-[500px] lg:w-[600px] mx-auto bg-[#F6F5F2] rounded-lg shadow p-4 md:p-5 lg:p-8">
+          {children}
         </div>
       </Container>
     </main>
