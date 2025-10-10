@@ -27,7 +27,7 @@ const MealPlannerTabSection = () => {
     id: 0,
     category_name: "All Recipes",
   });
-  
+
   const [ageGroup, setAgeGroup] = useState<any>(null);
   const [library, setLibrary] = useState<any>(null);
   const { data: allCategories, isLoading: isAllCategoryLoading } =
@@ -80,7 +80,7 @@ const MealPlannerTabSection = () => {
               className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium ${
                 activeTab?.category_name === "All Recipes"
                   ? "bg-[#3A3A3A] text-white"
-                  : "bg-transparent text-textColor"
+                  : "bg-transparent text-accent-gray"
               }`}
             >
               All Recipes
@@ -93,7 +93,7 @@ const MealPlannerTabSection = () => {
                 className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium ${
                   tab?.category_name === activeTab?.category_name
                     ? "bg-[#3A3A3A] text-white"
-                    : "bg-transparent text-textColor"
+                    : "bg-transparent text-accent-gray"
                 }`}
               >
                 {tab?.category_name}

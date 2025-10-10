@@ -140,7 +140,7 @@ export default function DashboardLayout({
         {/* Blur Overlay */}
         <div
           onClick={() => setOpen(false)}
-          className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 2xl:hidden z-[999] ${
+          className={`fixed inset-0 bg-primary-black/30 backdrop-blur-sm transition-opacity duration-300 2xl:hidden z-[999] ${
             isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
         ></div>

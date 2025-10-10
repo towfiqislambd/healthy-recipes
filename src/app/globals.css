@@ -5,9 +5,9 @@
 @theme {
   /* Colors */
   --color-primary-orange: #ff9f1c;
-  --color-secondary: #055ad9;
-  --color-black: #141414;
-  --color-textColor: #5a5c5f;
+  --color-secondary-blue: #055ad9;
+  --color-primary-black: #141414;
+  --color-accent-gray: #5a5c5f;
 
   /* Font Family */
   --font-poppins: var(--font-poppins);
@@ -44,11 +44,11 @@ body {
 }
 
 #otp_container div input:focus {
-  @apply outline-2 outline-secondary;
+  @apply outline-2 outline-secondary-blue;
 }
 
 .filterClass {
-  @apply text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 lg:px-4 focus:bg-primary font-poppins text-textColor focus:text-white cursor-pointer;
+  @apply text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 lg:px-4 focus:bg-primary-orange font-poppins text-accent-gray focus:text-white cursor-pointer;
 }
 
 .auth_input {
@@ -56,7 +56,7 @@ body {
 }
 
 .auth_label {
-  @apply text-black leading-[175%] tracking-[-0.064px];
+  @apply text-primary-black leading-[175%] tracking-[-0.064px];
 }
 
 /* Custom CSS */

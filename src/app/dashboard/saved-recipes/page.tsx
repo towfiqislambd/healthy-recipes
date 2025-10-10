@@ -32,7 +32,7 @@ const page = () => {
           className={`px-3 sm:px-4 3xl:px-6 py-[5px] text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium ${
             activeTab?.category_name === "All Recipes"
               ? "bg-[#3A3A3A] text-white"
-              : "bg-transparent text-textColor"
+              : "bg-transparent text-accent-gray"
           }`}
         >
           All Recipes
@@ -45,7 +45,7 @@ const page = () => {
             className={`px-3 sm:px-4 3xl:px-6 py-[5px] text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium ${
               tab?.category_name === activeTab?.category_name
                 ? "bg-[#3A3A3A] text-white"
-                : "bg-transparent text-textColor"
+                : "bg-transparent text-accent-gray"
             }`}
           >
             {tab?.category_name}

@@ -77,7 +77,7 @@ const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
           className={`px-3 sm:px-4 2xl:px-6 2xl:py-3 py-2 text-sm sm:text-base rounded-full font-medium ${
             activeTab?.category_name === "All Recipes"
               ? "bg-[#3A3A3A] text-white"
-              : "bg-transparent text-textColor"
+              : "bg-transparent text-accent-gray"
           }`}
         >
           All Recipes <span>({getCountByType("All Recipes")})</span>
@@ -90,7 +90,7 @@ const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
             className={`px-3 sm:px-4 3xl:px-5 2xl:py-3 py-2 text-sm sm:text-base rounded-full font-medium ${
               tab?.category_name === activeTab?.category_name
                 ? "bg-[#3A3A3A] text-white"
-                : "bg-transparent text-textColor"
+                : "bg-transparent text-accent-gray"
             }`}
           >
             {tab?.category_name}
@@ -108,7 +108,7 @@ const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
           <SelectContent className="px-0 py-0">
             <SelectItem
               value="all"
-              className="text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 xl:px-4 focus:bg-primary-orange font-poppins text-textColor focus:text-white cursor-pointer"
+              className="text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 xl:px-4 focus:bg-primary-orange font-poppins text-accent-gray focus:text-white cursor-pointer"
             >
               Select recipes by tags
             </SelectItem>
@@ -117,7 +117,7 @@ const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
               <SelectItem
                 key={tag.id}
                 value={tag.id}
-                className="text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 xl:px-4 focus:bg-primary-orange font-poppins text-textColor focus:text-white cursor-pointer"
+                className="text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 xl:px-4 focus:bg-primary-orange font-poppins text-accent-gray focus:text-white cursor-pointer"
               >
                 {tag.tag_name}
               </SelectItem>

@@ -39,7 +39,7 @@ const Register = () => {
   return (
     <>
       {/* Title */}
-      <h4 className="text-black text-center font-merriweather text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
+      <h4 className="text-primary-black text-center font-merriweather text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
         New account
       </h4>
 

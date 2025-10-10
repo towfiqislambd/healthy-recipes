@@ -35,7 +35,7 @@ const Button = ({
         variant === "primary_btn" &&
           "bg-primary-orange font-medium text-white rounded-full inline-flex items-center justify-center px-3 xl:px-5 3xl:px-8 py-1 xl:py-2 3xl:py-3 border border-primary-orange hover:bg-transparent duration-300 transition-all group hover:text-primary-orange text-[15px] lg:text-base",
         variant === "secondary_btn" &&
-          "text-textColor font-merriweather md:px-6 px-3 md:py-3 py-1 border rounded-full border-primary-orange hover:bg-primary-orange transition-all duration-300 hover:text-white",
+          "text-accent-gray font-merriweather md:px-6 px-3 md:py-3 py-1 border rounded-full border-primary-orange hover:bg-primary-orange transition-all duration-300 hover:text-white",
         className
       )}
       {...props}

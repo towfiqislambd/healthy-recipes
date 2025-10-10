@@ -31,7 +31,7 @@ const page = () => {
     <>
       <div>
         {/* Title */}
-        <h4 className="text-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
+        <h4 className="text-primary-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
           Verify account
         </h4>
 
@@ -51,7 +51,7 @@ const page = () => {
           <div className="w-full flex justify-between">
             <label
               htmlFor="email"
-              className="text-black leading-[175%] tracking-[-0.064px]"
+              className="text-primary-black leading-[175%] tracking-[-0.064px]"
             >
               Email
             </label>

@@ -33,10 +33,10 @@ const page = async () => {
         <Container>
           {mealPlannerTitleAndDesc?.data?.map((item: mealItem, idx: number) => (
             <div key={idx} className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
-              <h1 className="text-xl md:text-2xl xl:text-3xl 3xl:text-5xl font-merriweather font-bold text-black">
+              <h1 className="text-xl md:text-2xl xl:text-3xl 3xl:text-5xl font-merriweather font-bold text-primary-primary-black">
                 {item?.title}
               </h1>
-              <p className="pt-5 xl:pt-7 max-w-[912px] mx-auto sm:leading-[150%] text-[15px] sm:text-base text-textColor">
+              <p className="pt-5 xl:pt-7 max-w-[912px] mx-auto sm:leading-[150%] text-[15px] sm:text-base text-accent-gray">
                 {item?.description}
               </p>
             </div>

@@ -28,19 +28,19 @@ const RecipeLibraryCard = ({ item }: RecipeLibraryCardProps) => {
           fill
           alt="recipe library"
         />
-        {/* Black Overlay */}
-        <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30" />
+        {/* primary-black Overlay */}
+        <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-primary-black/30 to-primary-black/30" />
       </div>
 
       <div className="py-4 px-4 ">
-        <h5 className="text-lg 3xl:text-xl font-bold font-merriweather text-black truncate">
+        <h5 className="text-lg 3xl:text-xl font-bold font-merriweather text-primary-black truncate">
           {item?.diet_name}
         </h5>
 
         <div className="mt-2 3xl:mt-4 space-y-2">
           <div className="flex gap-3">
             <RecipeBookSvg />
-            <p className="text-textColor font-medium">
+            <p className="text-accent-gray font-medium">
               {item?.recipes_count} | Multiple authors
             </p>
           </div>

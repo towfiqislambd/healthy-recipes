@@ -36,7 +36,7 @@ const page = () => {
   return (
     <>
       {/* Title */}
-      <h4 className="text-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
+      <h4 className="text-primary-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
         Login
       </h4>
 
@@ -104,7 +104,7 @@ const page = () => {
         <div className="w-full flex items-center justify-end">
           <Link
             href="/auth/verify-email"
-            className="text-textColor underline font-semibold text-sm lg:text-base hover:no-underline transition-all duration-300"
+            className="text-accent-gray underline font-semibold text-sm lg:text-base hover:no-underline transition-all duration-300"
           >
             Forgot password?
           </Link>

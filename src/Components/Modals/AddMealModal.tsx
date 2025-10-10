@@ -31,7 +31,7 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
   const { mutateAsync: addMealPlanner, isPending } =
     useAddMealPlanner(recipeId);
 
-  const filterClass = `text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 focus:bg-primary-orange font-poppins text-textColor focus:text-white cursor-pointer`;
+  const filterClass = `text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 focus:bg-primary-orange font-poppins text-accent-gray focus:text-white cursor-pointer`;
 
   const handleDayChange = (value: string) => {
     setDay(value);

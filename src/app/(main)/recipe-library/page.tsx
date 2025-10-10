@@ -39,7 +39,7 @@ const page = async () => {
             <span className="text-gray-500"> {">"} </span>
             <Link
               href="/recipe-library"
-              className="text-textColor hover:text-primary-orange leading-[130%] transition-all divide-blue-300"
+              className="text-accent-gray hover:text-primary-orange leading-[130%] transition-all divide-blue-300"
             >
               Recipe Library
             </Link>
@@ -50,7 +50,7 @@ const page = async () => {
         <div className="mt-3 lg:mt-5 3xl:mt-10 lg:pb-10">
           <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
             {/* Title */}
-            <h2 className="text-black text-xl lg:text-2xl xl:text-3xl 3xl:text-5xl font-bold leading-[130%]">
+            <h2 className="text-primary-black text-xl lg:text-2xl xl:text-3xl 3xl:text-5xl font-bold leading-[130%]">
               All Recipe Library
             </h2>
 

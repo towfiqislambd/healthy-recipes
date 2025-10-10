@@ -120,7 +120,7 @@ const Navbar = () => {
                                 />
                               </figure>
                               <div>
-                                <p className="font-medium text-black">
+                                <p className="font-medium text-primary-black">
                                   {item?.recipe_name?.length > 40
                                     ? item.recipe_name.slice(0, 40) + "..."
                                     : item?.recipe_name}
@@ -158,7 +158,7 @@ const Navbar = () => {
                       key={link?.id}
                       href={link?.path}
                       className={`hover:text-primary-orange duration-300 transition-all text-[15px] 3xl:text-base ${
-                        isActive ? "text-primary-orange" : "text-textColor"
+                        isActive ? "text-primary-orange" : "text-accent-gray"
                       }`}
                     >
                       {link?.title}
@@ -265,7 +265,7 @@ const Navbar = () => {
       {/* Blur Overlay */}
       <div
         onClick={() => setOpen(false)}
-        className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 2xl:hidden z-[999] ${
+        className={`fixed inset-0 bg-primary-black/30 backdrop-blur-sm transition-opacity duration-300 2xl:hidden z-[999] ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       />
@@ -299,7 +299,7 @@ const Navbar = () => {
                   onClick={() => setOpen(false)}
                   href={link?.path}
                   className={`hover:text-primary-orange duration-300 transition-all text-[15px] 3xl:text-base ${
-                    isActive ? "text-primary-orange" : "text-textColor"
+                    isActive ? "text-primary-orange" : "text-accent-gray"
                   }`}
                 >
                   {link?.title}
@@ -331,7 +331,7 @@ const Navbar = () => {
       {/* Mobile Search bar */}
       {searchModalOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-50 flex items-start justify-center pt-20"
+          className="fixed inset-0 bg-primary-black/50 z-50 flex items-start justify-center pt-20"
           onClick={() => {
             setSearch("");
             setSearchModalOpen(false);
@@ -387,7 +387,7 @@ const Navbar = () => {
                             />
                           </figure>
                           <div>
-                            <p className="font-medium text-black text-sm md:text-base">
+                            <p className="font-medium text-primary-black text-sm md:text-base">
                               {item?.recipe_name?.length > 40
                                 ? item.recipe_name.slice(0, 40) + "..."
                                 : item?.recipe_name}

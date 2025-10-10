@@ -56,7 +56,7 @@ const page = () => {
 
   return (
     <section className="max-w-[717px] bg-white shadow mx-auto p-5 rounded-lg mt-5 sm:mt-8 2xl:mt-12">
-      <h3 className="text-headingTextColor font-semibold text-xl lg:text-2xl mb-3">
+      <h3 className="text-headingaccent-gray font-semibold text-xl lg:text-2xl mb-3">
         User Profile
       </h3>
 
@@ -64,7 +64,7 @@ const page = () => {
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-5">
         <div className="mb-5">
-          <p className="text-headingTextColor font-medium mb-2">
+          <p className="text-headingaccent-gray font-medium mb-2">
             Profile picture
           </p>
 
@@ -108,7 +108,7 @@ const page = () => {
               {...register("name", { required: true })}
               id="name"
               type="text"
-              className="border border-[#D0D5DD] bg-[#F9FAFB] outline-none text-textColor rounded px-3 py-2 block w-full"
+              className="border border-[#D0D5DD] bg-[#F9FAFB] outline-none text-accent-gray rounded px-3 py-2 block w-full"
             />
           </div>
         </div>
@@ -123,7 +123,7 @@ const page = () => {
             id="email"
             {...register("email", { required: true })}
             type="email"
-            className="border border-[#D0D5DD] bg-[#F9FAFB] outline-none text-textColor rounded px-3 py-2 block w-full opacity-70"
+            className="border border-[#D0D5DD] bg-[#F9FAFB] outline-none text-accent-gray rounded px-3 py-2 block w-full opacity-70"
           />
         </div>
 
@@ -131,7 +131,7 @@ const page = () => {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="rounded-[7px] font-medium px-3 py-2 inline-flex items-center gap-2 border border-[#D0D5DD] text-[15px] lg:text-base text-textColor"
+          className="rounded-[7px] font-medium px-3 py-2 inline-flex items-center gap-2 border border-[#D0D5DD] text-[15px] lg:text-base text-accent-gray"
         >
           <Image src={editPassword} alt="edit" className="" />
           <span>Change Password</span>

@@ -44,7 +44,7 @@ const DashboardHeader = ({ setOpen, setOpenPopup, openPopup, isOpen }: any) => {
               <Link
                 href={link?.path}
                 key={link?.title}
-                className="hover:text-primary-orange duration-300 transition-all text-textColor"
+                className="hover:text-primary-orange duration-300 transition-all text-accent-gray"
               >
                 {link?.title}
               </Link>

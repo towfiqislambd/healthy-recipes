@@ -39,13 +39,13 @@ const Hero = ({ data }: heroBannerProps) => {
                 {/* Left side - Contents */}
                 <div className="space-y-5 lg:space-y-7 3xl:space-y-10  w-full flex-1">
                   <div className="space-y-3 md:space-y-5">
-                    <h1 className="md:max-w-[740px] w-full font-merriweather text-[20px] md:text-[24px] lg:text-[32px] 2xl:text-[40px] 3xl:text-[50px] font-bold leading-[135%] text-black">
+                    <h1 className="md:max-w-[740px] w-full font-merriweather text-[20px] md:text-[24px] lg:text-[32px] 2xl:text-[40px] 3xl:text-[50px] font-bold leading-[135%] text-primary-black">
                       <p dangerouslySetInnerHTML={{ __html: title }}></p>
                     </h1>
 
                     <div
                       dangerouslySetInnerHTML={{ __html: description }}
-                      className="text-textColor leading-[150%] max-w-[740px] "
+                      className="text-accent-gray leading-[150%] max-w-[740px] "
                     />
                   </div>
 
@@ -63,7 +63,7 @@ const Hero = ({ data }: heroBannerProps) => {
                         src={`${process.env.NEXT_PUBLIC_SITE_URL}/${image}`}
                         alt="banner"
                       />
-                      <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30" />
+                      <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-primary-black/30 to-primary-black/30" />
                     </div>
 
                     <div className="3xl:h-[340px] h-[230px] 3xl:w-[320px] w-full overflow-hidden rounded-lg relative">
@@ -73,7 +73,7 @@ const Hero = ({ data }: heroBannerProps) => {
                         src={`${process.env.NEXT_PUBLIC_SITE_URL}/${image_one}`}
                         alt="banner"
                       />
-                      <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30" />
+                      <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-primary-black/30 to-primary-black/30" />
                     </div>
                   </div>
 
@@ -85,7 +85,7 @@ const Hero = ({ data }: heroBannerProps) => {
                         src={`${process.env.NEXT_PUBLIC_SITE_URL}/${image_two}`}
                         alt="banner"
                       />
-                      <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30" />
+                      <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-primary-black/30 to-primary-black/30" />
                     </div>
 
                     <div className="3xl:h-[360px] h-[230px] 3xl:w-[340px] w-full relative rounded-lg overflow-hidden">
@@ -95,7 +95,7 @@ const Hero = ({ data }: heroBannerProps) => {
                         src={`${process.env.NEXT_PUBLIC_SITE_URL}/${image_three}`}
                         alt="banner"
                       />
-                      <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30" />
+                      <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-primary-black/30 to-primary-black/30" />
                     </div>
                   </div>
                 </div>

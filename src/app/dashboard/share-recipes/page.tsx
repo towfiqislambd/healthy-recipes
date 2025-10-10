@@ -191,7 +191,7 @@ const page = () => {
             placeholder="Write recipe name"
             className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
           />
-          <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">
+          <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-primary-black mt-2">
             Maximum 20 words
           </p>
           {errors.recipe_name && (
@@ -352,7 +352,7 @@ const page = () => {
             placeholder="4"
             className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
           />
-          <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">
+          <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-primary-black mt-2">
             Numeric values e.g. 2, 3, 4, 5
           </p>
           {errors.serving_number && (
@@ -382,7 +382,7 @@ const page = () => {
             placeholder="30 min"
             className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
           />
-          <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">
+          <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-primary-black mt-2">
             Numeric values for time e.g. 20min, 30min, 40min
           </p>
           {errors.cooking_time && (
@@ -412,7 +412,7 @@ const page = () => {
             placeholder="40 min"
             className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
           />
-          <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">
+          <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-primary-black mt-2">
             Numeric values for time e.g. 20min, 30min, 40min
           </p>
           {errors.preparation_time && (
@@ -437,7 +437,7 @@ const page = () => {
             placeholder="Write here...."
             {...register("nutrition_info", { required: true })}
           ></textarea>
-          <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">
+          <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-primary-black mt-2">
             Maximum 1000 words
           </p>
           {errors.nutrition_info && (
@@ -459,7 +459,7 @@ const page = () => {
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
           />
-          <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">
+          <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-primary-black mt-2">
             Maximum 10 keywords, should all be in lowercase and separated by
             commas. e.g. pizza, bacon etc.
           </p>
@@ -500,7 +500,7 @@ const page = () => {
                 onChange={e => handleIngredientChange(e, ingredient.id)}
               />
               {index === 0 && (
-                <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">
+                <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-primary-black mt-2">
                   e.g. "¼ teaspoon salt"
                 </p>
               )}
@@ -535,7 +535,7 @@ const page = () => {
                 onChange={e => handleInstructionChange(e, instruction.id)}
               />
               {index === 0 && (
-                <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">
+                <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-primary-black mt-2">
                   e.g. "Grease a 6-quart slow cooker with cooking spray. Add in
                   chicken bouillon cubes."
                 </p>
@@ -570,7 +570,7 @@ const page = () => {
             {...register("resource_link")}
             className="border rounded-[5px] px-3 lg:px-4 py-2 lg:py-3 outline-none block w-full"
           />
-          <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-black mt-2">
+          <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-primary-black mt-2">
             e.g. https://example.com/easy-chicken-dinner-recipe
           </p>
         </div>

@@ -63,7 +63,7 @@ const page = ({ params }: any) => {
     <>
       <div>
         {/* Title */}
-        <h4 className="text-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
+        <h4 className="text-primary-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
           Verify account
         </h4>
 
@@ -101,7 +101,7 @@ const page = ({ params }: any) => {
           )}
         </div>
 
-        <div className="flex flex-col items-center text-textColor gap-3">
+        <div className="flex flex-col items-center text-accent-gray gap-3">
           <p>Didn’t Receive Code?</p>
 
           <p>
@@ -110,8 +110,8 @@ const page = ({ params }: any) => {
               type="button"
               className={`font-semibold ${
                 activeResendButton
-                  ? "text-secondary cursor-pointer"
-                  : "text-textColor"
+                  ? "text-secondary-blue cursor-pointer"
+                  : "text-accent-gray"
               }`}
             >
               Resend

@@ -42,12 +42,12 @@ const page = ({ params }: any) => {
     <>
       <div>
         {/* Title */}
-        <h4 className="text-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
+        <h4 className="text-primary-black font-merriweather text-center text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
           Create new password
         </h4>
 
         {/* Description */}
-        <p className="text-center lg:mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto text-textColor">
+        <p className="text-center lg:mt-6 tracking-[-0.36px] leading-[28px] max-w-[466px] mx-auto text-accent-gray">
           Please enter and confirm your new password. You will need to login
           after you reset.
         </p>
@@ -62,7 +62,7 @@ const page = ({ params }: any) => {
           <div className="w-full flex justify-between">
             <label
               htmlFor="password"
-              className="text-black leading-[175%] tracking-[-0.064px]"
+              className="text-primary-black leading-[175%] tracking-[-0.064px]"
             >
               New Password
             </label>
@@ -98,7 +98,7 @@ const page = ({ params }: any) => {
           <div className="w-full flex justify-between">
             <label
               htmlFor="password_confirmation"
-              className="text-black leading-[175%] tracking-[-0.064px]"
+              className="text-primary-black leading-[175%] tracking-[-0.064px]"
             >
               Confirm New Password
             </label>

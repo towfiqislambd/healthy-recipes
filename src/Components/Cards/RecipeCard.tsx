@@ -100,8 +100,8 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
                 alt=""
               />
 
-              {/* Black Overlay  */}
-              <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-black/30 to-black/30" />
+              {/* primary-black Overlay  */}
+              <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-primary-black/30 to-primary-black/30" />
             </div>
           </div>
 
@@ -121,7 +121,7 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
 
           {/* Type */}
           <div className="absolute top-3 left-3">
-            <p className="px-2 4xl:px-3 py-1 4xl:py-1.5 rounded-sm bg-white/50 text-black text-sm truncate">
+            <p className="px-2 4xl:px-3 py-1 4xl:py-1.5 rounded-sm bg-white/50 text-primary-black text-sm truncate">
               <span>
                 {`${item?.library_name || item?.recipe_library?.diet_name}
                    | 
@@ -131,8 +131,8 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
           </div>
         </div>
 
-        <div className="py-4 px-3 text-wrap border-b border-dashed border-black">
-          <h5 className="text-lg 4xl:text-xl font-bold font-merriweather text-black truncate">
+        <div className="py-4 px-3 text-wrap border-b border-dashed border-primary-black">
+          <h5 className="text-lg 4xl:text-xl font-bold font-merriweather text-primary-black truncate">
             {item?.recipe_name}
           </h5>
 
@@ -142,17 +142,17 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
                 <RecipeBookSvg />
               </div>
 
-              <p className="text-textColor text-[15px] xl:text-base font-medium">
+              <p className="text-accent-gray text-[15px] xl:text-base font-medium">
                 {item?.serving_number} servings | {item?.preparation_time} min
                 needed
               </p>
             </div>
 
-            <p className="text-textColor font-medium text-[15px] xl:text-base">
+            <p className="text-accent-gray font-medium text-[15px] xl:text-base">
               For: <span className="capitalize"> {item?.age_group}</span>
             </p>
 
-            <p className="text-textColor font-medium text-[15px] xl:text-base truncate">
+            <p className="text-accent-gray font-medium text-[15px] xl:text-base truncate">
               {`${item?.total_ingredients} ingredients | ${item?.recipe_creator}`}
             </p>
           </div>
@@ -162,7 +162,7 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
           {/* Views */}
           <div className="flex items-center gap-1">
             <FireSvg />
-            <span className="text-textColor text-sm font-medium">
+            <span className="text-accent-gray text-sm font-medium">
               {item?.views}
             </span>
           </div>
@@ -170,7 +170,7 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
           {/* Reviews */}
           <div className="flex items-center gap-1">
             <StarSvg />
-            <span className="text-textColor text-sm font-medium">
+            <span className="text-accent-gray text-sm font-medium">
               {item?.average_rating || item?.reviews_avg}
             </span>
           </div>

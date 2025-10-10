@@ -24,12 +24,12 @@ const page = async () => {
         <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
           <div className="text-center">
             {/* Title */}
-            <h2 className="text-2xl xl:text-3xl 3xl:text-5xl font-bold font-merriweather text-black">
+            <h2 className="text-2xl xl:text-3xl 3xl:text-5xl font-bold font-merriweather text-primary-primary-black">
               Recipe Blogs & Tips
             </h2>
 
             {/* Short Description */}
-            <p className="xl:mt-8 mt-4 text-textColor leading-[150%] lg:max-w-[912px] mx-auto text-sm lg:text-base">
+            <p className="xl:mt-8 mt-4 text-accent-gray leading-[150%] lg:max-w-[912px] mx-auto text-sm lg:text-base">
               A revolutionary approach to meal planning. Cutting-edge
               organization tools crafted to save time and tailor your weekly
               menu to your dietary preferences and habits.
