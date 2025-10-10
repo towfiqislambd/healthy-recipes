@@ -38,21 +38,24 @@ const categoryColors = [
 ];
 
 const page = () => {
+  // States
+  const popoverTriggerRef = useRef<any>(null);
   const [itemId, setItemId] = useState<number | null>(null);
   const [recipe, setRecipe] = useState(null);
   const [open, setOpen] = useState(false);
-  const [mealPlannerId, setMealPlannerId] = useState<number | null>(null);
-  const { data: mealPlannerTableData, isLoading: tableDataLoading } =
-    getMealPlannerTableData();
-  const { data: allCategory, isLoading: categoryLoading } = getAllCategories();
-  const { mutateAsync: deleteMealPlan } = useDeleteMealPlanner(mealPlannerId);
   const [activeAction, setActiveAction] = useState<any>({
     day: null,
     category: null,
     action: null,
   });
 
-  const popoverTriggerRef = useRef<any>(null);
+  // Queries
+  const { data: mealPlannerTableData, isLoading: tableDataLoading } =
+    getMealPlannerTableData();
+  const { data: allCategory, isLoading: categoryLoading } = getAllCategories();
+
+  // Mutation
+  const { mutateAsync: deletePlanMutation } = useDeleteMealPlanner();
 
   if (tableDataLoading || categoryLoading) {
     return (
@@ -64,8 +67,9 @@ const page = () => {
 
   const handleDeletePlans = async (meal_plan_id: number) => {
     if (meal_plan_id) {
-      setMealPlannerId(meal_plan_id);
-      await deleteMealPlan();
+      await deletePlanMutation({
+        endpoint: `/api/meal/${meal_plan_id}`,
+      });
     }
   };
 
@@ -75,11 +79,12 @@ const page = () => {
   };
 
   const renderDayCell = (day: any, category: any) => {
-    const meals = mealPlannerTableData?.[day.toLowerCase()]
+    const meals = mealPlannerTableData?.data?.[day.toLowerCase()]
       ?.filter(
         (item: any) => item?.category?.category_name === category?.category_name
       )
       ?.flatMap((item: any) => item?.meals || []);
+    console.log(meals);
 
     const handleEditPlan = () => {
       setActiveAction((prev: any) => ({
@@ -121,19 +126,21 @@ const page = () => {
             <div className="absolute right-1 top-1 sm:right-2 sm:top-2 md:right-3 md:top-3">
               <Popover>
                 <PopoverTrigger ref={popoverTriggerRef}>
-                  <p className="p-1">
+                  <button className="p-1 cursor-pointer">
                     <ThreeDotSvg />
-                  </p>
+                  </button>
                 </PopoverTrigger>
-                <PopoverContent className="w-[105px] md:w-28 text-sm md:text-base border space-y-1 sm:space-y-2">
+
+                <PopoverContent className="w-[105px] md:w-28 text-sm md:text-base border border-gray-200 shadow space-y-1 sm:space-y-2">
                   <button
-                    className="block w-full text-left"
+                    className="block w-full text-left cursor-pointer"
                     onClick={handleEditPlan}
                   >
                     {isActive("edit") ? "Cancel" : "Edit Meal"}
                   </button>
+
                   <button
-                    className="text-red-500 block w-full text-left"
+                    className="text-red-500 block w-full text-left cursor-pointer"
                     onClick={handleDeletePlan}
                   >
                     {isActive("delete") ? "Cancel" : "Delete"}
@@ -150,7 +157,7 @@ const page = () => {
                     style={{
                       color:
                         categoryColors[
-                          allCategory.findIndex(
+                          allCategory?.data?.findIndex(
                             (cat: any) =>
                               cat.category_name === category.category_name
                           ) % categoryColors.length
@@ -169,16 +176,16 @@ const page = () => {
                         handleEditPlans(data?.id);
                         setRecipe(data);
                       }}
-                      className="ml-1 flex-shrink-0"
+                      className="ml-1 flex-shrink-0 cursor-pointer"
                     >
-                      <MdOutlineModeEditOutline className="text-lg sm:text-xl text-primary" />
+                      <MdOutlineModeEditOutline className="text-lg sm:text-xl text-primary-orange" />
                     </button>
                   )}
 
                   {isActive("delete") && (
                     <button
                       onClick={() => handleDeletePlans(data?.meal_plan_id)}
-                      className="ml-1 flex-shrink-0"
+                      className="ml-1 flex-shrink-0 cursor-pointer"
                     >
                       <RxCross2 className="text-lg sm:text-xl text-red-500" />
                     </button>
@@ -204,7 +211,7 @@ const page = () => {
 
         <Link
           href="/meal-planner"
-          className="px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base text-[#5A5C5F] border border-primary rounded-lg"
+          className="px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base text-[#5A5C5F] border border-primary-orange rounded-lg"
         >
           Add meal
         </Link>

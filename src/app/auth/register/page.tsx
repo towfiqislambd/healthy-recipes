@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { CgSpinnerTwo } from "react-icons/cg";
+import { BiLoaderCircle } from "react-icons/bi";
 import { useRegister } from "@/Hooks/api/auth_api";
 import { HidePassSvg, ShowPassSvg } from "@/Components/Svg/SvgContainer";
 
@@ -20,33 +20,42 @@ const Register = () => {
   // States
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [confirmPassword, setConfirmPassword] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   // Hook Form
   const {
     register,
     handleSubmit,
-    reset,
     getValues,
     formState: { errors },
   } = useForm<formData>();
 
   // Form Data
   const onSubmit = async (data: formData) => {
-    await registerMutation(data);
-    reset();
+    await registerMutation(data, {
+      onError: (err: any) => {
+        setErrorMessage(err?.response?.data?.message);
+      },
+    });
   };
 
   return (
     <>
       {/* Title */}
-      <h4 className="text-black text-center font-merriweather text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px]">
-        New account
-      </h4>
+      <h4 className="auth_heading">New Account</h4>
 
+      {/* Form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="lg:mt-8 space-y-4 lg:space-y-6"
+        className="space-y-4 lg:space-y-5.5"
       >
+        {/* Dynamic Error Message */}
+        {errorMessage && (
+          <div className="mb-4 p-3 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-sm">
+            {errorMessage}
+          </div>
+        )}
+
         {/* Full Name */}
         <div className="flex flex-col gap-1">
           <div className="w-full flex justify-between">
@@ -172,38 +181,41 @@ const Register = () => {
           <button
             type="submit"
             disabled={isPending}
-            className={`leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary w-full border bg-primary rounded-full text-center py-3 hover:bg-transparent hover:text-primary transition-all duration-300 h-[50px] flex items-center justify-center
-                 ${isPending ? "cursor-not-allowed" : "cursor-pointer"}
-               `}
+            className={`auth_btn ${
+              isPending
+                ? "cursor-not-allowed hover:!bg-primary-orange hover:!text-white opacity-90"
+                : "cursor-pointer"
+            }`}
           >
             {isPending ? (
-              <CgSpinnerTwo className="animate-spin size-6" />
+              <span className="flex gap-2 items-center">
+                <BiLoaderCircle className="animate-spin text-xl" />
+                Please wait....
+              </span>
             ) : (
-              "Create account"
+              "Create Account"
             )}
           </button>
         </div>
-      </form>
 
-      {/* Already have account */}
-      <div className="lg:mt-10 mt-5 text-center">
-        <h6 className="leading-[38.375px] text-[#333]">
+        {/* Already have account */}
+        <div className="text-center leading-[38.375px] text-[#333]">
           Already have an account?
           <Link
-            href={"/auth/login"}
-            className="font-semibold pl-1 underline hover:no-underline transition-all duration-300"
+            href="/auth/login"
+            className="font-medium pl-1 underline hover:no-underline transition-all duration-300"
           >
             Log in
           </Link>
-        </h6>
-      </div>
+        </div>
 
-      {/* Back to home */}
-      <div className="lg:pt-10 pt-3 text-center">
-        <Link href="/" className="text-primary underline">
-          Go to home
-        </Link>
-      </div>
+        {/* Back to home */}
+        <div className="text-center">
+          <Link href="/" className="text-primary-orange underline">
+            Go to home
+          </Link>
+        </div>
+      </form>
     </>
   );
 };

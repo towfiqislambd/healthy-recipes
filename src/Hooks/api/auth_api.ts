@@ -32,9 +32,6 @@ export const useRegister = () => {
         router.push("/auth/login");
       }
     },
-    onError: (err: any) => {
-      toast.error(err?.response?.data?.message);
-    },
   });
 };
 
@@ -42,7 +39,6 @@ export const useRegister = () => {
 export const useLogin = () => {
   const router = useRouter();
   const { setToken } = useAuth();
-
   return useClientApi({
     method: "post",
     key: ["login"],
@@ -53,9 +49,6 @@ export const useLogin = () => {
         toast.success(data?.message);
         router.push("/dashboard/overview");
       }
-    },
-    onError: (err: any) => {
-      toast.error(err?.response?.data?.message);
     },
   });
 };
@@ -96,9 +89,6 @@ export const useVerifyEmail = () => {
         router.push(`/auth/verify-otp/${data?.data?.email}`);
       }
     },
-    onError: (err: any) => {
-      toast.error(err?.response?.data?.message);
-    },
   });
 };
 
@@ -115,9 +105,6 @@ export const useVerifyOTP = () => {
         router.push(`/auth/reset-password/${data?.data?.email}`);
       }
     },
-    onError: (err: any) => {
-      toast.error(err?.response?.data?.message);
-    },
   });
 };
 
@@ -131,9 +118,6 @@ export const useResendOTP = () => {
       if (data?.success) {
         toast.success(data?.message);
       }
-    },
-    onError: (err: any) => {
-      toast.error(err?.response?.data?.message);
     },
   });
 };
@@ -150,9 +134,6 @@ export const useResetPassword = () => {
         toast.success(data?.message);
         router.push("/auth/login");
       }
-    },
-    onError: (err: any) => {
-      toast.error(err?.response?.data?.message);
     },
   });
 };

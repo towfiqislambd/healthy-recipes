@@ -30,7 +30,7 @@ const OurMealPlanner = ({ data }: mealPlannerProps) => {
 
                 <div
                   dangerouslySetInnerHTML={{ __html: description }}
-                  className="space-y-3 2xl:space-y-6 mt-3 2xl:mt-5 3xl:mt-8 text-textColor leading-[150%]"
+                  className="space-y-3 2xl:space-y-6 mt-3 2xl:mt-5 3xl:mt-8 text-accent-gray leading-[150%]"
                 />
 
                 <div className="2xl:mt-10 mt-5">

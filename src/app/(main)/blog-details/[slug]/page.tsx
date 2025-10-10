@@ -72,7 +72,7 @@ const page = ({ params }: Props) => {
                 dangerouslySetInnerHTML={{
                   __html: blogDetails?.data?.description,
                 }}
-                className="text-textColor leading-[160%]"
+                className="text-accent-gray leading-[160%]"
               />
             </section>
           </div>

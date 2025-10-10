@@ -1,24 +1,35 @@
 "use client";
-import { getRecipeDetails, useEditMealPlanner } from "@/Hooks/api/cms_api";
-import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { CgSpinnerTwo } from "react-icons/cg";
+import React, { useState } from "react";
+import { BiLoaderCircle } from "react-icons/bi";
+import { getRecipeDetails, useEditMealPlanner } from "@/Hooks/api/cms_api";
 
 const EditMealModal = ({ recipe, itemId, setOpen }: any) => {
-  const [recipeRename, setRecipeRename] = useState("");
+  // States
+  const [recipeRename, setRecipeRename] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  // Query & Mutation
+  const { mutateAsync: editMealPlan, isPending } = useEditMealPlanner(itemId);
   const { data: recipeDetailsData, isLoading } = getRecipeDetails(
     recipe?.recipe_id
   );
-  const { mutateAsync: editMealPlan, isPending } = useEditMealPlanner(itemId);
 
+  // Func for edit recipe
   const handleEditRecipe = () => {
+    setErrorMessage("");
     if (!recipeRename) {
-      toast.error("Please write something before updating.");
-      return;
+      return setErrorMessage("Please write something before updating.");
     }
-    const data = { name: recipeRename };
-    editMealPlan(data);
-    setOpen(false);
+    const payload = { name: recipeRename };
+    editMealPlan(payload, {
+      onSuccess: (data: any) => {
+        if (data?.success) {
+          toast.success(data?.message);
+          setOpen(false);
+        }
+      },
+    });
   };
 
   return (
@@ -27,15 +38,22 @@ const EditMealModal = ({ recipe, itemId, setOpen }: any) => {
         Edit Recipe
       </label>
 
+      {/* Dynamic Error Message */}
+      {errorMessage && (
+        <div className="my-4 p-3 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-sm">
+          {errorMessage}
+        </div>
+      )}
+
       {isLoading ? (
-        <div className="py-3 w-fit mx-auto">Loading...</div>
+        <div className="h-[42px] sm:h-[50px] w-full rounded-[5px] bg-gray-200 animate-pulse" />
       ) : (
         <input
           type="text"
           defaultValue={
             recipe?.name ? recipe?.name : recipeDetailsData?.recipe_name
           }
-          className="border rounded-[5px] px-3 py-2 sm:py-3 outline-none block w-full"
+          className="border border-gray-300 rounded-[6px] px-3 py-2 sm:py-3 outline-none block w-full"
           placeholder="Write Something...."
           onChange={e => setRecipeRename(e.target.value)}
         />
@@ -44,11 +62,17 @@ const EditMealModal = ({ recipe, itemId, setOpen }: any) => {
       {/* buttons */}
       <div className="pt-3 sm:pt-6 pb-3 flex items-center justify-center gap-3">
         <button
+          disabled={isPending}
           onClick={handleEditRecipe}
-          className="px-3 sm:px-5 py-2 sm:py-2.5 border border-primary bg-primary text-white rounded-md"
+          className={`px-3 sm:px-5 py-2 sm:py-2.5 border border-primary-orange bg-primary-orange text-white rounded-md ${
+            isPending ? "cursor-not-allowed opacity-90" : "cursor-pointer"
+          }`}
         >
           {isPending ? (
-            <CgSpinnerTwo className="animate-spin size-6" />
+            <span className="flex gap-2 items-center">
+              <BiLoaderCircle className="animate-spin text-xl" />
+              Please wait....
+            </span>
           ) : (
             "Update recipe"
           )}
@@ -56,7 +80,7 @@ const EditMealModal = ({ recipe, itemId, setOpen }: any) => {
 
         <button
           onClick={() => setOpen(false)}
-          className="px-4 sm:px-8 py-2 sm:py-2.5 border border-primary text-primary rounded-md"
+          className="px-4 sm:px-8 py-2 sm:py-2.5 border border-primary-orange text-primary-orange rounded-md cursor-pointer"
         >
           Cancel
         </button>

@@ -119,7 +119,7 @@ const Footer = async () => {
       </Container>
 
       {/* Copyright Section */}
-      <p className="text-[#D0D0D0] text-center py-5 border-t border-primary">
+      <p className="text-[#D0D0D0] text-center py-5 border-t border-primary-orange">
         {footerInfo?.copyright_text}
       </p>
     </footer>

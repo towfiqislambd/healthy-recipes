@@ -47,7 +47,7 @@ const ShareRecipeSocialMedia = ({ fullLocation }: Props) => {
     <Container>
       <section className="w-full flex items-center lg:justify-center mt-5 sm:mt-8">
         <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
-          <h5 className="font-merriweather text-xl lg:text-2xl text-black font-bold">
+          <h5 className="font-merriweather text-xl lg:text-2xl text-primary-black font-bold">
             Share
           </h5>
 
@@ -66,7 +66,7 @@ const ShareRecipeSocialMedia = ({ fullLocation }: Props) => {
 
           {/* Share input */}
           <div className="mt-5 xl:mt-8 rounded-sm bg-white shadow-[0px_0px_4px_0px_rgba(2,0,57,0.08)] py-3 xl:py-4 px-3 w-full flex items-center md:min-w-[440px] md:gap-9 gap-2">
-            <p className="text-textColor text-sm md:text-base">
+            <p className="text-accent-gray text-sm md:text-base">
               Want to share a link instead?
             </p>
             <p

@@ -19,7 +19,7 @@ const TestimonialCard = ({ item }: testimonialProps) => {
       <div className="px-6 sm:px-10 py-10 md:py-12 bg-[#FF9F1C1F] rounded-[28px] relative group-hover:bg-[#FF9F1C7A] transition-all duration-300 min-h-[230px]">
         <div
           dangerouslySetInnerHTML={{ __html: item?.description }}
-          className="text-black text-center"
+          className="text-primary-black text-center"
         />
 
         <div className="absolute top-4 right-12 opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -47,8 +47,8 @@ const TestimonialCard = ({ item }: testimonialProps) => {
 
         {/* Info */}
         <div>
-          <h5 className="text-black leading-[150%]">{item?.title}</h5>
-          <p className="text-sm text-textColor">{item?.sub_title}</p>
+          <h5 className="text-primary-black leading-[150%]">{item?.title}</h5>
+          <p className="text-sm text-accent-gray">{item?.sub_title}</p>
         </div>
       </div>
     </div>
