@@ -100,11 +100,10 @@ const page = ({ params }: any) => {
                 onChange={field.onChange}
                 numInputs={4}
                 renderInput={props => <input {...props} />}
-                renderSeparator={false}
                 containerStyle={
                   "flex items-center justify-center sm:gap-5 gap-2"
                 }
-                inputStyle={`!w-[50px] md:!w-[90px] mx-auto xl:!w-[110px] !h-[50px] md:!h-[70px] xl:!h-[90px] border border-[#0184FF] md:rounded-[12px] !bg-plan-card rounded-[8px] text-lg md:text-xl lg:text-3xl font-medium text-[#071431] bg-[linear-gradient(90deg,_rgba(33,72,159,0.15)_0%,_rgba(1,132,255,0.15)_100%)]`}
+                inputStyle={`!h-12 !w-14 md:!h-20 md:!w-22 bg-gray-200 border border-gray-200 rounded-lg md:rounded-2xl focus:outline-2 outline-primary-orange`}
               />
             )}
           />
