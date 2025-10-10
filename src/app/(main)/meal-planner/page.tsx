@@ -26,7 +26,7 @@ const page = async () => {
   const mealPlannerCard = await getMealPlannerCard();
   const shareRecipes = await getShareRecipesData();
   const recentBlogs = await getRecentBLogs();
-  console.log(mealPlannerCard);
+
   return (
     <section className="mt-12">
       <div className="pt-20 pb-6 text-center">

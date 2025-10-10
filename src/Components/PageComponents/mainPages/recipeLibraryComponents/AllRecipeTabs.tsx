@@ -74,7 +74,7 @@ const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
       <div className="py-5 sm:py-8 w-full flex flex-wrap items-center justify-center 3xl:justify-between gap-x-1 gap-y-2">
         <button
           onClick={() => setActiveTab({ id: 0, category_name: "All Recipes" })}
-          className={`px-3 sm:px-4 2xl:px-6 2xl:py-3 py-2 text-sm sm:text-base rounded-full font-medium ${
+          className={`px-3 sm:px-4 2xl:px-6 2xl:py-3 py-2 cursor-pointer text-sm sm:text-base rounded-full font-medium ${
             activeTab?.category_name === "All Recipes"
               ? "bg-[#3A3A3A] text-white"
               : "bg-transparent text-accent-gray"
@@ -87,7 +87,7 @@ const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab)}
-            className={`px-3 sm:px-4 3xl:px-5 2xl:py-3 py-2 text-sm sm:text-base rounded-full font-medium ${
+            className={`px-3 sm:px-4 3xl:px-5 2xl:py-3 py-2 cursor-pointer text-sm sm:text-base rounded-full font-medium ${
               tab?.category_name === activeTab?.category_name
                 ? "bg-[#3A3A3A] text-white"
                 : "bg-transparent text-accent-gray"
@@ -102,7 +102,7 @@ const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
       {/* Filter by tag names */}
       <div className="w-full flex flex-wrap items-center justify-center 2xl:justify-end gap-3 xl:gap-3 2xl:gap-5">
         <Select value={tag || "all"} onValueChange={handleTagChange}>
-          <SelectTrigger className="w-[300px] md:w-[380px] 2xl:w-[450px] h-9 sm:h-11 2xl:h-14 rounded-full px-4 2xl:px-6 text-base focus:ring-primary-orange">
+          <SelectTrigger className="w-[300px] md:w-[380px] 2xl:w-[450px] !h-9 sm:!h-11 2xl:!h-14 rounded-full px-4 2xl:px-6 text-base focus:ring-primary-orange">
             <SelectValue placeholder="Select recipes by tags..." />
           </SelectTrigger>
           <SelectContent className="px-0 py-0">

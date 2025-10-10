@@ -2,10 +2,9 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { CgSpinnerTwo } from "react-icons/cg";
 import { useLogin } from "@/Hooks/api/auth_api";
-import { HidePassSvg, ShowPassSvg } from "@/Components/Svg/SvgContainer";
 import { BiLoaderCircle } from "react-icons/bi";
+import { HidePassSvg, ShowPassSvg } from "@/Components/Svg/SvgContainer";
 
 type formData = {
   email: string;
@@ -113,16 +112,21 @@ const page = () => {
         {/* Submit button */}
         <div className="w-full pt-2">
           <button
-            disabled={isPending}
             type="submit"
-            className={`leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary-orange w-full border bg-primary-orange rounded-full text-center py-3 hover:bg-transparent hover:text-primary-orange  transition-all duration-300 h-[50px] flex items-center justify-center
-                    ${isPending ? "cursor-not-allowed" : "cursor-pointer"}
-                    `}
+            disabled={isPending}
+            className={`auth_btn ${
+              isPending
+                ? "cursor-not-allowed hover:!bg-primary-orange hover:!text-white opacity-90"
+                : "cursor-pointer"
+            }`}
           >
             {isPending ? (
-              <BiLoaderCircle className="animate-spin size-6" />
+              <span className="flex gap-2 items-center">
+                <BiLoaderCircle className="animate-spin text-xl" />
+                Logging In....
+              </span>
             ) : (
-              "Login"
+              "Log In"
             )}
           </button>
         </div>

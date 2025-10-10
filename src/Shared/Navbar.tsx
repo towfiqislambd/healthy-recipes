@@ -187,11 +187,11 @@ const Navbar = () => {
                   <div className="flex gap-2 3xl:gap-3 items-center">
                     {/* Avatar */}
                     <button onClick={() => setOpenPopup(!openPopup)}>
-                      <Avatar className="size-10 lg:size-11 rounded-full cursor-pointer relative">
+                      <Avatar className="size-10 lg:size-11 rounded-full cursor-pointer relative border border-gray-200">
                         <AvatarImage
                           src={`${process.env.NEXT_PUBLIC_SITE_URL}/${user?.avatar}`}
                         />
-                        <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full">
+                        <AvatarFallback className="text-lg lg:text-[22px] font-medium w-full h-full rounded-full bg-gray-200">
                           {user?.name.slice(0, 1)}
                         </AvatarFallback>
                       </Avatar>
