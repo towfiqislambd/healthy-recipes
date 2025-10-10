@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/Components/ui/select";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 import { BiLoaderCircle } from "react-icons/bi";
 import { getAllCategories, useAddMealPlanner } from "@/Hooks/api/cms_api";
 
@@ -22,9 +22,13 @@ interface addMealProps {
 }
 
 const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
+  // Hook
+  const router = useRouter();
+
   // States
-  const [category_id, setCategoryId] = useState<number | null>(null);
   const [day, setDay] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [category_id, setCategoryId] = useState<number | null>(null);
 
   // Static day options
   const days = [
@@ -42,16 +46,28 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
   const { mutateAsync: addMealPlanner, isPending } =
     useAddMealPlanner(recipeId);
 
-  // Handlers
+  // Func for all to plan
   const handleAddPlan = async () => {
+    setErrorMessage("");
     if (!category_id || !day) {
-      return toast.error("Please select at least a day and a category");
+      return setErrorMessage("Please select at least a day and a category");
     }
-    const data = { day, category_id };
-    await addMealPlanner(data);
-    setCategoryId(null);
-    setDay("");
-    setOpen(false);
+    const payload = { day, category_id };
+
+    await addMealPlanner(payload, {
+      onSuccess: (data: any) => {
+        if (data?.success) {
+          router.push("/dashboard/meal-planner");
+          setCategoryId(null);
+          setDay("");
+          setOpen(false);
+        }
+        setErrorMessage(data?.message);
+      },
+      onError: (err: any) => {
+        setErrorMessage(err?.response?.data?.message);
+      },
+    });
   };
 
   return (
@@ -60,6 +76,13 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
       <h5 className="font-newBaskerville font-semibold text-center text-[#5A5C5F] leading-[132%] text-lg mt-5 md:text-xl">
         Plan for a meal
       </h5>
+
+      {/* Dynamic Error Message */}
+      {errorMessage && (
+        <div className="mt-4 mb-2 p-3 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-sm">
+          {errorMessage}
+        </div>
+      )}
 
       {/* Day Select */}
       <div className="mt-5 md:mt-7 mb-5 z-[99999]">

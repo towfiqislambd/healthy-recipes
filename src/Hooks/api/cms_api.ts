@@ -224,6 +224,16 @@ export const useAddReview = (id: number) => {
   });
 };
 
+// Meal Planner Table
+export const getMealPlannerTableData = () => {
+  return useClientApi({
+    method: "get",
+    isPrivate: true,
+    key: ["meal-planner-data"],
+    endpoint: `/api/get-meal-plans`,
+  });
+};
+
 // Add Meal Planner
 export const useAddMealPlanner = (recipe_id: number | null) => {
   const queryClient = useQueryClient();
@@ -235,28 +245,24 @@ export const useAddMealPlanner = (recipe_id: number | null) => {
     onSuccess: (data: any) => {
       if (data?.success) {
         toast.success(data?.message);
+        queryClient.invalidateQueries("meal-planner-data" as any);
       }
-      // queryClient.invalidateQueries(["meal-planner-table"]);
-      // navigate("/dashboard/meal-planner");
-    },
-    onError: (err: any) => {
-      toast.error(err?.response?.data?.message);
     },
   });
 };
 
 // Delete Meal Planner
-export const useDeleteMealPlanner = (meal_plan_id: number | null) => {
+export const useDeleteMealPlanner = () => {
   const queryClient = useQueryClient();
   return useClientApi({
-    method: "post",
-    enabled: !!meal_plan_id,
-    key: ["delete-meal-planner", meal_plan_id],
+    method: "delete",
+    key: ["delete-meal-planner"],
     isPrivate: true,
-    endpoint: `/api/meal/${meal_plan_id}`,
     onSuccess: (data: any) => {
-      // queryClient.invalidateQueries(["get-wishlists"]);
-      toast.success(data?.message);
+      if (data?.success) {
+        toast.success(data?.message);
+        queryClient.invalidateQueries("meal-planner-data" as any);
+      }
     },
     onError: (err: any) => {
       toast.error(err?.response?.data?.message);
@@ -274,8 +280,10 @@ export const useEditMealPlanner = (meal_plan_id: number | null) => {
     isPrivate: true,
     endpoint: `/api/meal-update/${meal_plan_id}`,
     onSuccess: (data: any) => {
-      // queryClient.invalidateQueries(["get-wishlists"]);
-      toast.success(data?.message);
+      if (data?.success) {
+        toast.success(data?.message);
+        queryClient.invalidateQueries("meal-planner-data" as any);
+      }
     },
     onError: (err: any) => {
       toast.error(err?.response?.data?.message);
@@ -402,15 +410,5 @@ export const getMyRecipes = (page_id?: number, category_id?: number) => {
     queryOptions: {
       retry: false,
     },
-  });
-};
-
-// Meal Planner Table
-export const getMealPlannerTableData = () => {
-  return useClientApi({
-    method: "get",
-    isPrivate: true,
-    key: ["meal-planner-data"],
-    endpoint: `/api/get-meal-plans`,
   });
 };
