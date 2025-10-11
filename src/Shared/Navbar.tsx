@@ -12,14 +12,15 @@ import { FaBars } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import logo from "@/Assets/images/logo.png";
+import { recipeItem } from "@/Types/type";
 import Button from "@/Components/Common/Button";
 import { useLogout } from "@/Hooks/api/auth_api";
 import { usePathname } from "next/navigation";
-import Container from "@/Components/Common/Container";
-import { getAllRecipesPublic } from "@/Hooks/api/cms_api";
 import { MdLogout } from "react-icons/md";
 import { BiLoaderCircle } from "react-icons/bi";
 import { IoSettingsOutline } from "react-icons/io5";
+import Container from "@/Components/Common/Container";
+import { getAllRecipesPublic } from "@/Hooks/api/cms_api";
 
 const navLinks = [
   { id: 1, path: "/", title: "Home" },
@@ -46,6 +47,7 @@ const Navbar = () => {
   const { data: results, isLoading: resultLoading } = getAllRecipesPublic({
     search,
   });
+  console.log(results);
 
   useEffect(() => {
     if (isOpen) {
@@ -74,240 +76,236 @@ const Navbar = () => {
   return (
     <header className="py-1 lg:py-2 shadow-[0px_2px_8px_0px_rgba(0,0,0,0.05)] bg-[#F6F5F2] sticky w-full left-0 top-0 z-50">
       <Container>
-        <nav className="w-full relative">
-          <div className="flex justify-between items-center lg:px-3 xl:px-5 3xl:px-0">
-            {/* Left */}
-            <div className="flex items-center gap-7">
-              {/* Logo */}
-              <Link href="/">
-                <figure className="w-[80px] h-[70px] lg:w-[100px] lg:h-[87px] relative">
-                  <Image
-                    fill
-                    className="w-full h-full object-cover"
-                    src={logo}
-                    alt="logo"
-                  />
-                </figure>
-              </Link>
+        <nav className="flex justify-between items-center lg:px-3 xl:px-5 3xl:px-0 w-full relative">
+          {/* Left */}
+          <div className="flex items-center gap-7">
+            {/* Logo */}
+            <Link href="/">
+              <figure className="w-[80px] h-[70px] lg:w-[100px] lg:h-[87px] relative">
+                <Image
+                  fill
+                  className="w-full h-full object-cover"
+                  src={logo}
+                  alt="logo"
+                />
+              </figure>
+            </Link>
 
-              {/* Search Bar */}
-              <div
-                onClick={e => e.stopPropagation()}
-                className="px-3 3xl:px-4 py-3 hidden 2xl:flex items-center gap-1 3xl:gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white w-[250px] 3xl:w-[380px]"
-              >
-                <SearchSvg />
-                <form className="w-full relative">
-                  <input
-                    type="search"
-                    placeholder="Search for recipes name ..."
-                    className="focus:outline-none w-full placeholder:text-sm 3xl:placeholder:text-base"
-                    value={search}
-                    onChange={e => setSearch(e.target.value)}
-                  />
-                </form>
+            {/* Search Bar */}
+            <div
+              onClick={e => e.stopPropagation()}
+              className="px-3 3xl:px-4 py-3 hidden 2xl:flex items-center gap-1 3xl:gap-2 rounded-full shadow-[0px_0px_6px_0px_rgba(0,0,0,0.04)] bg-white w-[250px] 3xl:w-[380px]"
+            >
+              <SearchSvg />
+              <form className="w-full relative">
+                <input
+                  type="search"
+                  placeholder="Search by recipes name ..."
+                  className="focus:outline-none w-full placeholder:text-sm 3xl:placeholder:text-base"
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                />
+              </form>
 
-                {search.trim() && (
-                  <div className="bg-white w-[450px] border border-gray-200 shadow-sm rounded-[16px] pb-4 px-4 max-h-[400px] overflow-y-auto absolute top-[80px] z-50">
-                    <h3 className="text-lg font-semibold pt-3 pb-2 sticky top-0 bg-white">
-                      Search Results
-                    </h3>
+              {search.trim() && (
+                <div className="bg-white w-[450px] border border-gray-200 shadow-sm rounded-[16px] pb-4 px-4 max-h-[400px] overflow-y-auto absolute top-[80px] z-50">
+                  <h3 className="text-lg font-semibold pt-3 pb-2 sticky top-0 bg-white">
+                    Search Results
+                  </h3>
 
-                    {resultLoading ? (
-                      <div className="flex justify-center py-6 ">
-                        <LoadingSvg />
-                      </div>
-                    ) : results === undefined ? (
-                      <p className="text-center text-gray-500">
-                        No results found.
-                      </p>
-                    ) : (
-                      <ul className="space-y-4">
-                        {results?.data?.map((item: any, idx: number) => (
-                          <Link
-                            key={idx}
-                            href={`/recipe-details/${item?.id}`}
-                            target="_blank"
-                            className="flex justify-between items-center border-b border-gray-200 pb-3 cursor-pointer"
-                          >
-                            <div className="flex justify-center gap-2 items-center">
-                              <figure className="w-16 rounded h-12 overflow-hidden relative">
-                                <Image
-                                  className="w-full h-full object-cover rounded"
-                                  fill
-                                  alt="image"
-                                  src={`${process.env.NEXT_PUBLIC_SITE_URL}/${item?.recipe_image}`}
-                                />
-                              </figure>
-                              <div>
-                                <p className="font-medium text-primary-black">
-                                  {item?.recipe_name?.length > 40
-                                    ? item.recipe_name.slice(0, 40) + "..."
-                                    : item?.recipe_name}
-                                </p>
+                  {resultLoading ? (
+                    <div className="flex justify-center py-6 ">
+                      <LoadingSvg />
+                    </div>
+                  ) : results === undefined ? (
+                    <p className="text-center text-gray-500">
+                      No results found.
+                    </p>
+                  ) : (
+                    <ul className="space-y-4">
+                      {results?.data?.map((item: recipeItem, idx: number) => (
+                        <Link
+                          key={idx}
+                          href={`/recipe-details/${item?.id}`}
+                          target="_blank"
+                          className="flex justify-between items-center border-b border-gray-200 pb-3 cursor-pointer"
+                        >
+                          <div className="flex justify-center gap-2 items-center">
+                            <figure className="w-16 rounded h-12 overflow-hidden relative">
+                              <Image
+                                className="w-full h-full object-cover rounded"
+                                fill
+                                alt="image"
+                                src={`${process.env.NEXT_PUBLIC_SITE_URL}/${item?.recipe_image}`}
+                              />
+                            </figure>
+                            <div>
+                              <p className="font-medium text-primary-black">
+                                {item?.recipe_name?.length > 40
+                                  ? item.recipe_name.slice(0, 40) + "..."
+                                  : item?.recipe_name}
+                              </p>
 
-                                <p className="text-sm text-gray-500">
-                                  Category: {item?.category_name || "N/A"}
-                                </p>
-                              </div>
+                              <p className="text-sm text-gray-500">
+                                Category: {item?.category_name || "N/A"}
+                              </p>
                             </div>
+                          </div>
 
-                            <p className="text-sm flex gap-1 items-center font-semibold text-[#000]">
-                              <span className="w-4 h-4">
-                                <StarSvg2 />
-                              </span>
-                              {item?.average_rating}
-                            </p>
-                          </Link>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                )}
-              </div>
+                          <p className="text-sm flex gap-1 items-center font-semibold text-[#000]">
+                            <span className="size-4">
+                              <StarSvg2 />
+                            </span>
+                            {item?.average_rating}
+                          </p>
+                        </Link>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right - Nav Links */}
+          <div className="flex items-center gap-10">
+            <div className="hidden 2xl:flex gap-4 3xl:gap-5">
+              {navLinks?.map(link => {
+                const isActive = pathname === link.path;
+
+                return (
+                  <Link
+                    key={link?.id}
+                    href={link?.path}
+                    className={`hover:text-primary-orange duration-300 transition-all text-[15px] 3xl:text-base ${
+                      isActive ? "text-primary-orange" : "text-accent-gray"
+                    }`}
+                  >
+                    {link?.title}
+                  </Link>
+                );
+              })}
             </div>
 
-            {/* Right - Nav Links */}
-            <div className="flex items-center gap-10">
-              <div className="hidden 2xl:flex gap-4 3xl:gap-5">
-                {navLinks?.map(link => {
-                  const isActive = pathname === link.path;
+            {/* Cta section */}
+            <div className="flex gap-3 3xl:gap-5 items-center">
+              <button
+                className="2xl:hidden"
+                onClick={() => setSearchModalOpen(true)}
+              >
+                <SearchSvg />
+              </button>
 
-                  return (
-                    <Link
-                      key={link?.id}
-                      href={link?.path}
-                      className={`hover:text-primary-orange duration-300 transition-all text-[15px] 3xl:text-base ${
-                        isActive ? "text-primary-orange" : "text-accent-gray"
-                      }`}
-                    >
-                      {link?.title}
-                    </Link>
-                  );
-                })}
-              </div>
+              <Link
+                href="/dashboard/saved-recipes"
+                className="size-10 rounded-full bg-[#FDE0B8] hidden 2xl:inline-flex items-center justify-center"
+              >
+                <LoveSvg />
+              </Link>
 
-              {/* Cta section */}
-              <div className="flex gap-3 3xl:gap-5 items-center">
-                <button
-                  className="2xl:hidden"
-                  onClick={() => setSearchModalOpen(true)}
+              {user ? (
+                <div
+                  onClick={e => {
+                    e.stopPropagation();
+                    setOpenPopup(!openPopup);
+                  }}
+                  className="relative block"
                 >
-                  <SearchSvg />
-                </button>
+                  <figure className="size-10 lg:size-12 bg-primary-orange rounded-full cursor-pointer relative grid place-items-center shrink-0">
+                    {user?.avatar ? (
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_SITE_URL}/${user?.avatar}`}
+                        alt="user"
+                        fill
+                        className="size-full rounded-full object-cover"
+                      />
+                    ) : (
+                      <p className="text-lg lg:text-[22px] font-medium text-white rounded-full">
+                        {user?.name.slice(0, 1)}
+                      </p>
+                    )}
+                  </figure>
 
-                <Link
-                  href="/dashboard/saved-recipes"
-                  className="size-10 rounded-full bg-[#FDE0B8] hidden 2xl:inline-flex items-center justify-center"
-                >
-                  <LoveSvg />
-                </Link>
-
-                {user ? (
+                  {/* Account Modal */}
                   <div
-                    onClick={e => {
-                      e.stopPropagation();
-                      setOpenPopup(!openPopup);
-                    }}
-                    className="relative block"
+                    onClick={e => e.stopPropagation()}
+                    className={`bg-gray-100 z-50 rounded-xl w-64 lg:w-[260px] 3xl:w-[270px] absolute right-2 2xl:right-0 top-[65px] mt-2 shadow-[0_8px_24px_rgba(0,0,0,0.1)] p-4 3xl:p-5 transition-all duration-300 ${
+                      openPopup
+                        ? "opacity-100 scale-100"
+                        : "opacity-0 scale-95 pointer-events-none"
+                    }`}
                   >
-                    <figure className="size-10 lg:size-12 bg-primary-orange rounded-full cursor-pointer relative grid place-items-center shrink-0">
-                      {user?.avatar ? (
-                        <Image
-                          src={`${process.env.NEXT_PUBLIC_SITE_URL}/${user?.avatar}`}
-                          alt="user"
-                          fill
-                          className="size-full rounded-full object-cover"
-                        />
-                      ) : (
-                        <p className="text-lg lg:text-[22px] font-medium text-white rounded-full">
-                          {user?.name.slice(0, 1)}
-                        </p>
-                      )}
-                    </figure>
-
-                    {/* Account Modal */}
-                    <div
-                      onClick={e => e.stopPropagation()}
-                      className={`bg-gray-100 z-50 rounded-xl w-64 lg:w-[260px] 3xl:w-[270px] absolute right-2 2xl:right-0 top-[65px] mt-2 shadow-[0_8px_24px_rgba(0,0,0,0.1)] p-4 3xl:p-5 transition-all duration-300 ${
-                        openPopup
-                          ? "opacity-100 scale-100"
-                          : "opacity-0 scale-95 pointer-events-none"
-                      }`}
-                    >
-                      <div className="flex gap-3 md:gap-4 items-center mb-4 lg:mb-5">
-                        <figure className="size-10 lg:size-12 bg-primary-orange rounded-full cursor-pointer relative grid place-items-center shrink-0">
-                          {user?.avatar ? (
-                            <Image
-                              src={`${process.env.NEXT_PUBLIC_SITE_URL}/${user?.avatar}`}
-                              alt="user"
-                              fill
-                              className="size-full rounded-full object-cover"
-                            />
-                          ) : (
-                            <p className="text-lg lg:text-[22px] font-medium text-white rounded-full">
-                              {user?.name.at(0)}
-                            </p>
-                          )}
-                        </figure>
-
-                        <div>
-                          <h3 className="font-semibold truncate">
-                            {user?.name}
-                          </h3>
-                          <p className="text-gray-500 text-sm w-44 truncate">
-                            {user?.email}
+                    <div className="flex gap-3 md:gap-4 items-center mb-4 lg:mb-5">
+                      <figure className="size-10 lg:size-12 bg-primary-orange rounded-full cursor-pointer relative grid place-items-center shrink-0">
+                        {user?.avatar ? (
+                          <Image
+                            src={`${process.env.NEXT_PUBLIC_SITE_URL}/${user?.avatar}`}
+                            alt="user"
+                            fill
+                            className="size-full rounded-full object-cover"
+                          />
+                        ) : (
+                          <p className="text-lg lg:text-[22px] font-medium text-white rounded-full">
+                            {user?.name.at(0)}
                           </p>
-                        </div>
-                      </div>
+                        )}
+                      </figure>
 
-                      <hr className="text-gray-300" />
-
-                      <div className="mt-4 font-medium flex gap-2.5 lg:gap-3.5 3xl:gap-4 flex-col text-gray-700 text-sm lg:text-[15px]">
-                        <Link
-                          href="/dashboard/settings"
-                          className="w-fit flex gap-2 items-center cursor-pointer hover:text-primary-blue duration-200"
-                        >
-                          <IoSettingsOutline />
-                          Settings
-                        </Link>
-
-                        <button
-                          disabled={isPending}
-                          onClick={() => logoutMutation()}
-                          className={`text-left text-red-500 w-fit flex gap-2 items-center ${
-                            isPending ? "!cursor-not-allowed" : "cursor-pointer"
-                          }`}
-                        >
-                          {isPending ? (
-                            <div className="flex gap-2 items-center">
-                              <BiLoaderCircle className="animate-spin text-red-500" />
-                              <span>Signing out...</span>
-                            </div>
-                          ) : (
-                            <p className="flex gap-1 items-center">
-                              <MdLogout />
-                              Sign Out
-                            </p>
-                          )}
-                        </button>
+                      <div>
+                        <h3 className="font-semibold truncate">{user?.name}</h3>
+                        <p className="text-gray-500 text-sm w-44 truncate">
+                          {user?.email}
+                        </p>
                       </div>
                     </div>
-                  </div>
-                ) : (
-                  <Button
-                    path="/auth/register"
-                    text="Sign Up"
-                    className="!py-1.5 lg:!py-2 2xl:!py-2.5 3xl:!py-3 !px-4 lg:!px-5 3xl:!px-8"
-                  />
-                )}
 
-                <button
-                  onClick={() => setOpen(!isOpen)}
-                  className="bg-primary-orange text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid 2xl:hidden place-items-center"
-                >
-                  <FaBars className="text-[22px] sm:text-2xl" />
-                </button>
-              </div>
+                    <hr className="text-gray-300" />
+
+                    <div className="mt-4 font-medium flex gap-2.5 lg:gap-3.5 3xl:gap-4 flex-col text-gray-700 text-sm lg:text-[15px]">
+                      <Link
+                        href="/dashboard/settings"
+                        className="w-fit flex gap-2 items-center cursor-pointer hover:text-primary-blue duration-200"
+                      >
+                        <IoSettingsOutline />
+                        Settings
+                      </Link>
+
+                      <button
+                        disabled={isPending}
+                        onClick={() => logoutMutation()}
+                        className={`text-left text-red-500 w-fit flex gap-2 items-center ${
+                          isPending ? "!cursor-not-allowed" : "cursor-pointer"
+                        }`}
+                      >
+                        {isPending ? (
+                          <div className="flex gap-2 items-center">
+                            <BiLoaderCircle className="animate-spin text-red-500" />
+                            <span>Signing out...</span>
+                          </div>
+                        ) : (
+                          <p className="flex gap-1 items-center">
+                            <MdLogout />
+                            Sign Out
+                          </p>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Button
+                  path="/auth/register"
+                  text="Sign Up"
+                  className="!py-1.5 lg:!py-2 2xl:!py-2.5 3xl:!py-3 !px-4 lg:!px-5 3xl:!px-8"
+                />
+              )}
+
+              <button
+                onClick={() => setOpen(!isOpen)}
+                className="bg-primary-orange text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid 2xl:hidden place-items-center"
+              >
+                <FaBars className="text-[22px] sm:text-2xl" />
+              </button>
             </div>
           </div>
         </nav>
@@ -419,7 +417,7 @@ const Navbar = () => {
                   <p className="text-center text-gray-500">No results found.</p>
                 ) : (
                   <ul className="space-y-4">
-                    {results?.data?.map((item: any, idx: any) => (
+                    {results?.data?.map((item: recipeItem, idx: number) => (
                       <Link
                         key={idx}
                         href={`recipe-details/${item?.id}`}

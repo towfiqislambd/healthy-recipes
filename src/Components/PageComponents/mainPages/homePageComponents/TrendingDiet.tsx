@@ -10,6 +10,7 @@ import type { Swiper as SwiperClass } from "swiper";
 import Container from "@/Components/Common/Container";
 import RecipeCard from "@/Components/Cards/RecipeCard";
 import { SliderNextSvg, SliderPrevSvg } from "@/Components/Svg/SvgContainer";
+import Heading from "@/Components/Common/Heading";
 
 type trendingItem = {
   id: 1;
@@ -32,24 +33,20 @@ const TrendingDiet = ({ data }: trendingProps) => {
       <Container>
         <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
           {/* Title */}
-          <div className="text-center">
-            <h2 className="font-merriweather text-[22px] md:text-[24px] lg:text-[28px] 2xl:text-[32px] leading-[140%] font-bold">
-              Trending Diet Food Recipes
-            </h2>
-          </div>
+          <Heading text="Trending Diet Food Recipes" />
 
           {/* Navigation Buttons */}
           <div className="w-full flex items-center justify-center md:justify-end gap-3 mt-4">
             <button
+              className="swiper_btn"
               onClick={() => swiperRef?.slidePrev()}
-              className="size-10 lg:size-12 flex items-center justify-center border border-primary-orange rounded-full hover:bg-primary-orange transition-all duration-300 group"
             >
               <SliderPrevSvg />
             </button>
 
             <button
+              className="swiper_btn"
               onClick={() => swiperRef?.slideNext()}
-              className="size-10 lg:size-12 flex items-center justify-center border border-primary-orange rounded-full hover:bg-primary-orange transition-all duration-300 group"
             >
               <SliderNextSvg />
             </button>

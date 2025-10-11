@@ -1,11 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { ImSpinner9 } from "react-icons/im";
+import { BiLoaderCircle } from "react-icons/bi";
 import { useChangePassword } from "@/Hooks/api/auth_api";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 const UpdatePasswordModal = ({ setOpen }: any) => {
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
@@ -27,18 +28,34 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
 
   // Handlers:
   const onSubmit = async (data: any) => {
-    await userPasswordUpdateMutation(data);
-    setOpen(false);
-    reset();
+    setErrorMessage("");
+    await userPasswordUpdateMutation(data, {
+      onSuccess: (data: any) => {
+        if (data?.success) {
+          setOpen(false);
+          reset();
+        }
+      },
+      onError: (err: any) => {
+        setErrorMessage(err?.response?.data?.message);
+      },
+    });
   };
 
   return (
     <>
-      <h3 className="text-xl lg:text-2xl text-accent-gray font-semibold">
+      <h3 className="text-xl lg:text-2xl text-accent-gray font-semibold mb-3">
         Change Password
       </h3>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* Dynamic Error Message */}
+        {errorMessage && (
+          <div className="mb-4 p-3 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-sm">
+            {errorMessage}
+          </div>
+        )}
+
         {/* Current Password */}
         <div>
           <label
@@ -47,7 +64,7 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
           >
             Current Password
           </label>
-          <div className="relative border border-gray-800 rounded-md">
+          <div className="relative border border-gray-300 rounded-md">
             <input
               id="current_password"
               type={showPassword ? "text" : "password"}
@@ -83,7 +100,7 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
           >
             New Password
           </label>
-          <div className="relative border border-gray-800 rounded-md">
+          <div className="relative border border-gray-300 rounded-md">
             <input
               id="password"
               type={showNewPassword ? "text" : "password"}
@@ -119,7 +136,7 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
           >
             Confirm New Password
           </label>
-          <div className="relative border border-gray-800 rounded-md">
+          <div className="relative border border-gray-300 rounded-md">
             <input
               id="password_confirmation"
               type={showConfirmPassword ? "text" : "password"}
@@ -154,11 +171,16 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
           type="submit"
           disabled={isPending}
           className={`flex justify-center w-full group duration-300 mx-auto transition-all hover:text-primary-orange font-medium py-3 rounded-lg bg-primary-orange border text-center border-primary-orange text-white ${
-            isPending ? "cursor-not-allowed" : "hover:bg-transparent"
+            isPending
+              ? "cursor-not-allowed hover:!bg-primary-orange hover:!text-white opacity-90"
+              : "hover:bg-transparent cursor-pointer"
           }`}
         >
           {isPending ? (
-            <ImSpinner9 className="animate-spin text-white text-xl text-center" />
+            <span className="flex gap-2 items-center">
+              <BiLoaderCircle className="animate-spin text-xl" />
+              Changing....
+            </span>
           ) : (
             "Change Password"
           )}

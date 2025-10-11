@@ -16,9 +16,10 @@ import React from "react";
 import { useState } from "react";
 import Image from "next/image";
 import useAuth from "@/Hooks/useAuth";
+import { recipeItem } from "@/Types/type";
 import deleteImg from "@/Assets/images/delete.png";
 import { RiResetLeftFill } from "react-icons/ri";
-import RecipeCard, { recipeItem } from "@/Components/Cards/RecipeCard";
+import RecipeCard from "@/Components/Cards/RecipeCard";
 import Container from "@/Components/Common/Container";
 import { RecipeCardSkeleton } from "@/Components/Loader/Loader";
 
@@ -44,12 +45,13 @@ const MealPlannerTabSection = () => {
     }
   );
   const { data: recipesPrivate, isLoading: privateRecipesLoading } =
-    getAllRecipesPrivate(activeTab?.id, library as any, ageGroup, null, search);
+    getAllRecipesPrivate(activeTab?.id, library, ageGroup, null, search);
 
   const isLoading =
     isAllCategoryLoading || isRecipeLibraryLoading || loadingAllRecipe;
 
   let recipeData = null;
+
   if (user) {
     recipeData = recipesPrivate;
   } else {
@@ -71,8 +73,8 @@ const MealPlannerTabSection = () => {
   };
 
   return (
-    <Container>
-      <section className="py-5 3xl:py-12">
+    <section className="py-5 3xl:py-12">
+      <Container>
         <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
           {/* Tabs */}
           <div className="py-8 w-full flex flex-wrap items-center justify-center 2xl:justify-between gap-x-1 gap-y-2">
@@ -110,7 +112,7 @@ const MealPlannerTabSection = () => {
                 <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[460px] !h-11 2xl:!h-14 lg:rounded-l-full lg:px-6 px-3 text-base focus:ring-primary-orange">
                   <SelectValue placeholder="Filter by age group" />
                 </SelectTrigger>
-                <SelectContent className="px-0 py-0">
+                <SelectContent className="px-0 py-0 border-transparent">
                   <SelectItem value="all" className="filterClass">
                     Filter by age group
                   </SelectItem>
@@ -134,7 +136,7 @@ const MealPlannerTabSection = () => {
                 <SelectTrigger className="w-full lg:w-[280px] xl:w-[300px] 2xl:w-[450px] 2xl:!h-14 !h-11 lg:rounded-r-full lg:border-l-0 px-3 lg:px-6 text-base focus:ring-primary-orange">
                   <SelectValue placeholder="Filter by recipe library" />
                 </SelectTrigger>
-                <SelectContent className="px-0 py-0">
+                <SelectContent className="px-0 py-0 border-transparent">
                   <SelectItem value="all" className="filterClass">
                     Filter by recipe library
                   </SelectItem>
@@ -155,7 +157,7 @@ const MealPlannerTabSection = () => {
             {/* Reset Button */}
             <button
               onClick={handleReset}
-              className="h-11 2xl:h-14 w-full lg:w-auto px-3 justify-center lg:px-6 border border-primary-orange rounded-full flex items-center gap-2 bg-primary-orange text-white transition-all duration-300 hover:bg-transparent hover:text-primary-orange"
+              className="h-11 2xl:h-14 w-full lg:w-auto px-3 justify-center lg:px-6 border border-primary-orange rounded-full flex items-center gap-2 bg-primary-orange text-white transition-all duration-300 hover:bg-transparent hover:text-primary-orange cursor-pointer"
             >
               <RiResetLeftFill />
               Reset
@@ -186,8 +188,8 @@ const MealPlannerTabSection = () => {
             )}
           </div>
         </div>
-      </section>
-    </Container>
+      </Container>
+    </section>
   );
 };
 

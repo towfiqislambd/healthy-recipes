@@ -41,11 +41,12 @@ const Hero = ({ data }: heroBannerProps) => {
               {/* Left side - Contents */}
               <div className="space-y-5 lg:space-y-7 3xl:space-y-10  w-full flex-1">
                 <div className="space-y-3 md:space-y-5">
-                  <h1 className="md:max-w-[740px] w-full font-merriweather text-[20px] md:text-[24px] lg:text-[32px] 2xl:text-[40px] 3xl:text-[50px] font-bold leading-[135%] text-primary-black">
-                    <p dangerouslySetInnerHTML={{ __html: title }}></p>
-                  </h1>
+                  <h1
+                    dangerouslySetInnerHTML={{ __html: title }}
+                    className="md:max-w-[740px] w-full font-merriweather text-[20px] md:text-[24px] lg:text-[32px] 2xl:text-[40px] 3xl:text-[50px] font-bold leading-[135%] text-primary-black"
+                  />
 
-                  <div
+                  <p
                     dangerouslySetInnerHTML={{ __html: description }}
                     className="text-accent-gray leading-[150%] max-w-[740px] "
                   />

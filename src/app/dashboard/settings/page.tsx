@@ -3,9 +3,8 @@ import React from "react";
 import Image from "next/image";
 import { useState } from "react";
 import useAuth from "@/Hooks/useAuth";
-import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import { ImSpinner9 } from "react-icons/im";
+import { BiLoaderCircle } from "react-icons/bi";
 import Modal from "@/Components/Common/Modal";
 import editPassword from "@/Assets/images/edit.png";
 import { MdOutlineCameraAlt } from "react-icons/md";
@@ -14,11 +13,13 @@ import UpdatePasswordModal from "@/Components/Modals/UpdatePasswordModal";
 
 const page = () => {
   const { user } = useAuth();
-  const [open, setOpen] = useState(false);
-  const [profilePic, setProfilePic] = useState(
+  const [open, setOpen] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [uploadedFile, setUploadedFile] = useState<null | File>(null);
+  const [profilePic, setProfilePic] = useState<string>(
     user?.avatar ? `${process.env.NEXT_PUBLIC_SITE_URL}/${user?.avatar}` : ""
   );
-  const [uploadedFile, setUploadedFile] = useState(null);
+
   const { mutateAsync: updateUserMutation, isPending } = useUpdateUser();
 
   const { register, handleSubmit } = useForm({
@@ -29,6 +30,7 @@ const page = () => {
   });
 
   const onSubmit = async (data: any) => {
+    setErrorMessage("");
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("email", data.email);
@@ -36,7 +38,7 @@ const page = () => {
     const isNameChanged = user?.name !== data.name;
     const isFileUploaded = uploadedFile !== null;
     if (!isNameChanged && !isFileUploaded) {
-      return toast.error("No changes detected");
+      return setErrorMessage("No changes detected");
     }
     if (isFileUploaded) {
       formData.append("avatar", uploadedFile);
@@ -56,25 +58,31 @@ const page = () => {
 
   return (
     <section className="max-w-[717px] bg-white shadow mx-auto p-5 rounded-lg mt-5 sm:mt-8 2xl:mt-12">
-      <h3 className="text-headingaccent-gray font-semibold text-xl lg:text-2xl mb-3">
+      {/* Dynamic Error Message */}
+      {errorMessage && (
+        <div className="mb-4 p-3 bg-red-500/10 border border-red-500 rounded text-red-500 text-sm">
+          {errorMessage}
+        </div>
+      )}
+
+      <h3 className="text-gray-800 font-semibold text-xl lg:text-2xl mb-3">
         User Profile
       </h3>
 
-      <hr />
+      <hr className="text-gray-300" />
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-5">
         <div className="mb-5">
-          <p className="text-headingaccent-gray font-medium mb-2">
-            Profile picture
-          </p>
+          <p className="text-gray-700 font-medium mb-2">Profile picture</p>
 
           {/* User profile picture */}
-          <figure className="size-28 border rounded-full relative">
+          <figure className="size-28 border border-gray-300 rounded-full relative">
             {profilePic ? (
-              <img
+              <Image
                 src={profilePic}
                 alt="profile"
-                className="w-full h-full rounded-full object-cover"
+                fill
+                className="size-full rounded-full object-cover"
               />
             ) : (
               <p className="w-full h-full grid place-items-center font-semibold text-4xl rounded-full bg-gray-200">
@@ -123,7 +131,7 @@ const page = () => {
             id="email"
             {...register("email", { required: true })}
             type="email"
-            className="border border-[#D0D5DD] bg-[#F9FAFB] outline-none text-accent-gray rounded px-3 py-2 block w-full opacity-70"
+            className="border border-[#D0D5DD] bg-[#F9FAFB] outline-none text-accent-gray rounded px-3 py-2 block w-full opacity-70 cursor-not-allowed"
           />
         </div>
 
@@ -131,9 +139,9 @@ const page = () => {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="rounded-[7px] font-medium px-3 py-2 inline-flex items-center gap-2 border border-[#D0D5DD] text-[15px] lg:text-base text-accent-gray"
+          className="rounded-[7px] font-medium px-3 py-2 inline-flex items-center gap-2 border border-[#D0D5DD] text-[15px] lg:text-base text-accent-gray cursor-pointer"
         >
-          <Image src={editPassword} alt="edit" className="" />
+          <Image src={editPassword} alt="edit" />
           <span>Change Password</span>
         </button>
 
@@ -141,13 +149,18 @@ const page = () => {
         <div className="mt-6">
           <button
             type="submit"
-            className={`px-9 group duration-300 transition-all hover:text-primary-orange sm:px-10 font-medium py-2 sm:py-3 rounded-lg bg-primary-orange border border-primary-orange text-white h-12 ${
-              isPending ? "cursor-not-allowed" : "hover:bg-transparent"
-            }`}
             disabled={isPending}
+            className={`px-9 group duration-300 transition-all hover:text-primary-orange sm:px-10 font-medium py-2 sm:py-3 rounded-lg bg-primary-orange border border-primary-orange text-white h-12 ${
+              isPending
+                ? "cursor-not-allowed"
+                : "hover:bg-transparent cursor-pointer"
+            }`}
           >
             {isPending ? (
-              <ImSpinner9 className="animate-spin text-white text-xl" />
+              <span className="flex gap-2 items-center">
+                <BiLoaderCircle className="animate-spin text-xl" />
+                Saving....
+              </span>
             ) : (
               "Save"
             )}
@@ -155,7 +168,7 @@ const page = () => {
         </div>
       </form>
 
-      {/* modal */}
+      {/* Modal */}
       <Modal open={open} onClose={() => setOpen(false)}>
         <UpdatePasswordModal setOpen={setOpen} />
       </Modal>

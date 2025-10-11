@@ -2,8 +2,9 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { recipeItem } from "@/Types/type";
 import deleteImg from "@/Assets/images/delete.png";
-import RecipeCard, { recipeItem } from "@/Components/Cards/RecipeCard";
+import RecipeCard from "@/Components/Cards/RecipeCard";
 import { getMyRecipes, getWishlist } from "@/Hooks/api/cms_api";
 import { RecipeCardSkeleton } from "@/Components/Loader/Loader";
 

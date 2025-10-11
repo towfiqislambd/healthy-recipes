@@ -21,8 +21,8 @@ const navLinks = [
 
 const DashboardHeader = ({ setOpen, isOpen }: any) => {
   const { user } = useAuth();
-  const { mutate: logoutMutation, isPending } = useLogout();
   const [openPopup, setOpenPopup] = useState(false);
+  const { mutate: logoutMutation, isPending } = useLogout();
 
   useEffect(() => {
     const handleWindowClick = () => {
@@ -135,6 +135,7 @@ const DashboardHeader = ({ setOpen, isOpen }: any) => {
               <div className="mt-4 font-medium flex gap-2.5 lg:gap-3.5 3xl:gap-4 flex-col text-gray-700 text-sm lg:text-[15px]">
                 <Link
                   href="/dashboard/settings"
+                  onClick={() => setOpenPopup(false)}
                   className="w-fit flex gap-2 items-center cursor-pointer hover:text-primary-blue duration-200"
                 >
                   <IoSettingsOutline />
