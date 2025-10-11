@@ -28,7 +28,8 @@ const RecipeLibraryCard = ({ item }: RecipeLibraryCardProps) => {
           fill
           alt="recipe library"
         />
-        {/* primary-black Overlay */}
+
+        {/* Primary-black Overlay */}
         <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-primary-black/30 to-primary-black/30" />
       </div>
 
@@ -37,13 +38,11 @@ const RecipeLibraryCard = ({ item }: RecipeLibraryCardProps) => {
           {item?.diet_name}
         </h5>
 
-        <div className="mt-2 3xl:mt-4 space-y-2">
-          <div className="flex gap-3">
-            <RecipeBookSvg />
-            <p className="text-accent-gray font-medium">
-              {item?.recipes_count} | Multiple authors
-            </p>
-          </div>
+        <div className="flex gap-3 mt-2 3xl:mt-4">
+          <RecipeBookSvg />
+          <p className="text-accent-gray font-medium">
+            {item?.recipes_count} | Multiple authors
+          </p>
         </div>
       </div>
     </Link>

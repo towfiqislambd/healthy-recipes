@@ -105,6 +105,14 @@ export async function getRecentBLogs() {
   });
 }
 
+// Recent Details
+export async function getBlogDetails(slug: string) {
+  return useServerApi({
+    mode: "SSG",
+    endpoint: `/api/blog/${slug}`,
+  });
+}
+
 // Meal Planner Info
 export async function getMealPlannerInfo() {
   return useServerApi({
@@ -215,8 +223,10 @@ export const useAddReview = (id: number) => {
     isPrivate: true,
     endpoint: `/api/review/${id}`,
     onSuccess: (data: any) => {
-      // queryClient.invalidateQueries(["get-wishlists"]);
-      toast.success(data?.message);
+      if (data?.success) {
+        queryClient.invalidateQueries("all-recipe-reviews" as any);
+        toast.success(data?.message);
+      }
     },
     onError: (err: any) => {
       toast.error(err?.response?.data?.message);
@@ -358,21 +368,11 @@ export const getRecipeDetails = (id: any) => {
 export const getRecipeReview = (recipe_id: number, page_id: number) => {
   return useClientApi({
     method: "get",
-    key: ["recipe-reviews", recipe_id, page_id],
+    key: ["all-recipe-reviews", recipe_id, page_id],
     endpoint: `/api/reviews-by-pagination/${recipe_id}?page=${page_id}`,
     queryOptions: {
       retry: false,
     },
-  });
-};
-
-// Recent Blogs
-export const getBlogDetails = (slug: string) => {
-  return useClientApi({
-    method: "get",
-    enabled: !!slug,
-    key: ["blog-details", slug],
-    endpoint: `/api/blog/${slug}`,
   });
 };
 

@@ -53,13 +53,16 @@ const ShareRecipeSocialMedia = ({ fullLocation }: Props) => {
 
           {/* Social Links */}
           <div className="flex items-center gap-4 mt-3 xl:mt-4">
-            <button onClick={handleFacebookRedirect}>
+            <button onClick={handleFacebookRedirect} className="cursor-pointer">
               <FacebookShareSvg />
             </button>
-            <button onClick={handleInstagramRedirect}>
+            <button
+              onClick={handleInstagramRedirect}
+              className="cursor-pointer"
+            >
               <InstagramShareSvg />
             </button>
-            <button onClick={handleTwitterRedirect}>
+            <button onClick={handleTwitterRedirect} className="cursor-pointer">
               <TwitterShareSvg />
             </button>
           </div>

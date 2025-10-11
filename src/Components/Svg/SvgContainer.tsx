@@ -90,9 +90,8 @@ export function SliderPrevSvg() {
       fill="none"
     >
       <path
-        className="group-hover:stroke-white transition-all duration-300"
         d="M9.57 5.93018L3.5 12.0002L9.57 18.0702"
-        stroke="#292D32"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
@@ -101,7 +100,7 @@ export function SliderPrevSvg() {
       <path
         className="group-hover:stroke-white transition-all duration-300"
         d="M20.5019 12H3.67188"
-        stroke="#292D32"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
@@ -121,18 +120,16 @@ export function SliderNextSvg() {
       fill="none"
     >
       <path
-        className="group-hover:stroke-white transition-all duration-300"
         d="M14.4297 5.93018L20.4997 12.0002L14.4297 18.0702"
-        stroke="#292D32"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        className="group-hover:stroke-white transition-all duration-300"
         d="M3.5 12H20.33"
-        stroke="#292D32"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"

@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { CgSpinnerTwo } from "react-icons/cg";
 import { AddMoreSvg, CameraSvg } from "@/Components/Svg/SvgContainer";
+import { BiLoaderCircle } from "react-icons/bi";
 const ageData = [
   {
     id: 1,
@@ -189,7 +190,7 @@ const page = () => {
           <input
             {...register("recipe_name", { required: true })}
             placeholder="Write recipe name"
-            className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
+            className="auth_input"
           />
           <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-primary-black mt-2">
             Maximum 20 words
@@ -273,7 +274,7 @@ const page = () => {
           </label>
           <select
             {...register("category_id", { required: true })}
-            className="border rounded-[5px] px-2 lg:px-3 py-2 lg:py-3 outline-none block w-full"
+            className="auth_input"
           >
             {recipeCategory?.data?.map((item: any, idx: number) => (
               <option key={idx} value={item?.id}>
@@ -295,7 +296,7 @@ const page = () => {
           </label>
           <select
             {...register("recipe_library_id", { required: true })}
-            className="border rounded-[5px] px-2 lg:px-3 py-2 lg:py-3 outline-none block w-full"
+            className="auth_input"
           >
             {allLibrary?.data?.map((item: any, idx: number) => (
               <option key={idx} value={item?.id}>
@@ -317,7 +318,7 @@ const page = () => {
           </label>
           <select
             {...register("age_group", { required: true })}
-            className="border rounded-[5px] px-2 lg:px-3 py-2 lg:py-3 outline-none block w-full"
+            className="auth_input"
           >
             {ageData?.map((item: any, idx: any) => (
               <option key={idx} value={item?.value}>
@@ -350,7 +351,7 @@ const page = () => {
               },
             })}
             placeholder="4"
-            className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
+            className="auth_input"
           />
           <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-primary-black mt-2">
             Numeric values e.g. 2, 3, 4, 5
@@ -380,7 +381,7 @@ const page = () => {
               },
             })}
             placeholder="30 min"
-            className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
+            className="auth_input"
           />
           <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-primary-black mt-2">
             Numeric values for time e.g. 20min, 30min, 40min
@@ -410,7 +411,7 @@ const page = () => {
               },
             })}
             placeholder="40 min"
-            className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
+            className="auth_input"
           />
           <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-primary-black mt-2">
             Numeric values for time e.g. 20min, 30min, 40min
@@ -433,7 +434,7 @@ const page = () => {
           <textarea
             id="nutrition_info"
             rows={5}
-            className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
+            className="auth_input"
             placeholder="Write here...."
             {...register("nutrition_info", { required: true })}
           ></textarea>
@@ -453,7 +454,7 @@ const page = () => {
             Tags
           </label>
           <input
-            className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
+            className="auth_input"
             placeholder="Add tags (separate by commas or spaces)"
             value={inputValue}
             onChange={handleInputChange}
@@ -495,7 +496,7 @@ const page = () => {
                 Ingredients ({index + 1})
               </label>
               <input
-                className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
+                className="auth_input"
                 value={ingredient.value}
                 onChange={e => handleIngredientChange(e, ingredient.id)}
               />
@@ -530,7 +531,7 @@ const page = () => {
               </label>
               <textarea
                 rows={3}
-                className="border rounded-[5px] px-2 lg:px-4 py-2 lg:py-3 outline-none block w-full"
+                className="auth_input"
                 value={instruction.value}
                 onChange={e => handleInstructionChange(e, instruction.id)}
               />
@@ -568,7 +569,7 @@ const page = () => {
           <input
             type="url"
             {...register("resource_link")}
-            className="border rounded-[5px] px-3 lg:px-4 py-2 lg:py-3 outline-none block w-full"
+            className="auth_input"
           />
           <p className="text-sm px-2 py-1 bg-[#F4F5F7] w-fit rounded text-primary-black mt-2">
             e.g. https://example.com/easy-chicken-dinner-recipe
@@ -579,10 +580,18 @@ const page = () => {
           {/* Submit btn */}
           <button
             type="submit"
-            className="px-3 text-center sm:px-5 py-[6px] sm:py-2 bg-[#3F3F3F] rounded-[6px] text-white border"
+            disabled={isPending}
+            className={`px-5 text-center sm:px-5 py-[6px] sm:py-2.5 bg-primary-orange rounded-[6px] text-white border  ${
+              isPending
+                ? "cursor-not-allowed hover:!bg-primary-orange hover:!text-white opacity-90"
+                : "cursor-pointer"
+            }`}
           >
             {isPending ? (
-              <CgSpinnerTwo className="animate-spin size-6" />
+              <span className="flex gap-2 items-center">
+                <BiLoaderCircle className="animate-spin text-xl" />
+                Submitting....
+              </span>
             ) : (
               "Submit here"
             )}
@@ -600,7 +609,7 @@ const page = () => {
               setInstructions([{ id: Date.now(), value: "" }]);
               setIngredients([{ id: Date.now(), value: "" }]);
             }}
-            className="px-3 sm:px-5 py-[6px] sm:py-2 border-[#3F3F3F] hover:bg-gray-100 duration-300 transition-all rounded-[6px] border"
+            className="px-3 sm:px-5 py-[6px] sm:py-2 border-[#3F3F3F] hover:bg-gray-100 duration-300 transition-all rounded-[6px] border cursor-pointer"
           >
             Cancel
           </button>

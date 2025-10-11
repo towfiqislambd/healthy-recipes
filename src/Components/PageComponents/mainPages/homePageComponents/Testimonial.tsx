@@ -34,15 +34,15 @@ const Testimonial = ({ data }: testimonialProps) => {
             {/* Navigation buttons */}
             <div className="w-full flex items-center justify-end gap-3 mt-10 sm:mt-0">
               <button
+                className="swiper_btn"
                 onClick={() => swiperRef?.slidePrev()}
-                className="sm:size-12 size-8 flex items-center justify-center border border-primary-orange rounded-full hover:bg-primary-orange transition-all duration-300 group"
               >
                 <SliderPrevSvg />
               </button>
 
               <button
+                className="swiper_btn"
                 onClick={() => swiperRef?.slideNext()}
-                className="sm:size-12 size-8 flex items-center justify-center border border-primary-orange rounded-full hover:bg-primary-orange transition-all duration-300 group"
               >
                 <SliderNextSvg />
               </button>

@@ -105,7 +105,7 @@ const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
           <SelectTrigger className="w-[300px] md:w-[380px] 2xl:w-[450px] !h-9 sm:!h-11 2xl:!h-14 rounded-full px-4 2xl:px-6 text-base focus:ring-primary-orange">
             <SelectValue placeholder="Select recipes by tags..." />
           </SelectTrigger>
-          <SelectContent className="px-0 py-0">
+          <SelectContent className="px-0 py-0 border-transparent">
             <SelectItem
               value="all"
               className="text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 xl:px-4 focus:bg-primary-orange font-poppins text-accent-gray focus:text-white cursor-pointer"
@@ -127,7 +127,7 @@ const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
 
         <button
           onClick={handleReset}
-          className="h-9 sm:h-11 2xl:h-14 px-3 2xl:px-6 border border-primary-orange rounded-full flex items-center gap-2 bg-primary-orange text-white transition-all duration-300 hover:bg-transparent hover:text-primary-orange"
+          className="h-9 sm:h-11 2xl:h-14 px-3 2xl:px-6 border border-primary-orange rounded-full flex items-center gap-2 bg-primary-orange text-white transition-all duration-300 hover:bg-transparent hover:text-primary-orange cursor-pointer"
         >
           <RiResetLeftFill />
           Reset

@@ -25,8 +25,8 @@ const WhyChooseUs = ({ data }: whyChooseProps) => {
           <div className="mt-5 lg:mt-7 3xl:mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-12 px-5 sm:px-0">
             {data?.map(({ title, description, image }, index) => (
               <div key={index} className="w-full sm:space-y-4 space-y-2">
-                <div className="flex items-center gap-2 justify-center w-full">
-                  <figure className="relative size-10">
+                <div className="flex items-center gap-3 justify-center w-full">
+                  <figure className="relative size-8">
                     <Image
                       src={`${process.env.NEXT_PUBLIC_SITE_URL}/${image}`}
                       alt="image"
@@ -34,7 +34,7 @@ const WhyChooseUs = ({ data }: whyChooseProps) => {
                     />
                   </figure>
 
-                  <h5 className="text-xl 3xl:text-3xl leading-[140%] text-primary-orange font-merriweather">
+                  <h5 className="text-xl 3xl:text-2xl leading-[140%] text-primary-orange font-merriweather">
                     {title}
                   </h5>
                 </div>
