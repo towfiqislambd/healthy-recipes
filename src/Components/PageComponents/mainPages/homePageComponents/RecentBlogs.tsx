@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperClass } from "swiper";
 import BlogCard from "@/Components/Cards/BlogCard";
 import Container from "@/Components/Common/Container";
+import Heading from "@/Components/Common/Heading";
 import { SliderNextSvg, SliderPrevSvg } from "@/Components/Svg/SvgContainer";
 
 type blogItem = {
@@ -33,24 +34,22 @@ const RecentBlogs = ({ data }: blogProps) => {
       <Container>
         <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
           {/* Title */}
-          <h2 className="font-merriweather text-[22px] md:text-[24px] lg:text-[28px] 2xl:text-[32px] leading-[140%] font-bold">
-            Recipe Blogs & Tips
-          </h2>
+          <Heading text="Recipe Blogs & Tips" />
 
           {/* Slider */}
           <div className="w-full">
             {/* Nav buttons */}
             <div className="w-full flex items-center justify-end gap-3">
               <button
+                className="swiper_btn"
                 onClick={() => swiperRef?.slidePrev()}
-                className="size-10 lg:size-12 flex items-center justify-center border border-primary-orange rounded-full hover:bg-primary-orange transition-all duration-300 group"
               >
                 <SliderPrevSvg />
               </button>
 
               <button
+                className="swiper_btn"
                 onClick={() => swiperRef?.slideNext()}
-                className="size-10 lg:size-12 flex items-center justify-center border border-primary-orange rounded-full hover:bg-primary-orange transition-all duration-300 group"
               >
                 <SliderNextSvg />
               </button>

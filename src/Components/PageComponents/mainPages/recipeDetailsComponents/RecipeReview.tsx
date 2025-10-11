@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import Rating from "react-rating";
 import useAuth from "@/Hooks/useAuth";
 import toast from "react-hot-toast";
-import { CgSpinnerTwo } from "react-icons/cg";
+import { BiLoaderCircle } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 import Container from "@/Components/Common/Container";
 import ReviewCard from "@/Components/Cards/ReviewCard";
@@ -41,7 +41,6 @@ const RecipeReview = ({ id }: Props) => {
   // Query & Mutation
   const { data: allReviews, isLoading } = getRecipeReview(id, activePage);
   const { mutateAsync: reviewMutation, isPending } = useAddReview(id);
-  console.log(allReviews);
 
   const {
     register,
@@ -73,12 +72,12 @@ const RecipeReview = ({ id }: Props) => {
         <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0 flex flex-col xl:flex-row items-center gap-5 xl:gap-10 3xl:gap-12">
           {/* Left - Form */}
           <div className="w-full xl:flex-1">
-            {/* title */}
+            {/* Title */}
             <h5 className="text-xl lg:text-2xl font-semibold text-primary-black">
               Submit your review
             </h5>
 
-            {/* form */}
+            {/* Form */}
             <div className="py-2 lg:py-4 xl:py-8 w-full">
               {/* Ratings */}
               <div className="w-full">
@@ -112,12 +111,14 @@ const RecipeReview = ({ id }: Props) => {
                       Email <span className="text-[#FF5630]">*</span>
                     </label>
                     <input
-                      className={`px-3 xl:px-4 py-2 xl:py-4 border rounded-lg w-full focus:outline-none`}
+                      className={`px-3 xl:px-4 py-2 xl:py-4 border rounded-lg w-full focus:outline-none ${
+                        user && "cursor-not-allowed"
+                      }`}
                       type="email"
                       placeholder={user ? "" : "Join@gmail.com"}
                       defaultValue={user?.email}
-                      readOnly={user && true}
-                      disabled={user && true}
+                      readOnly={user}
+                      disabled={user}
                     />
                   </div>
 
@@ -127,7 +128,9 @@ const RecipeReview = ({ id }: Props) => {
                       Name <span className="text-[#FF5630]">*</span>
                     </label>
                     <input
-                      className="px-3 xl:px-4 py-2 xl:py-4 border rounded-lg w-full focus:outline-none"
+                      className={`px-3 xl:px-4 py-2 xl:py-4 border rounded-lg w-full focus:outline-none ${
+                        user && "cursor-not-allowed"
+                      }`}
                       type="text"
                       placeholder="Jon Doe"
                       defaultValue={user?.name}
@@ -142,7 +145,7 @@ const RecipeReview = ({ id }: Props) => {
                       htmlFor="comment"
                       className="font-medium text-sm text-accent-gray"
                     >
-                      Write your review{" "}
+                      Write your review
                       <span className="text-[#FF5630]">*</span>
                     </label>
                     <textarea
@@ -164,18 +167,24 @@ const RecipeReview = ({ id }: Props) => {
                   </div>
 
                   {/* Submit button */}
-                  <div>
-                    <button
-                      className="px-3 xl:px-8 py-2 xl:py-3 text-white font-medium bg-primary-orange hover:bg-transparent transition-all duration-300 rounded-full hover:text-primary-orange border border-primary-orange"
-                      type="submit"
-                    >
-                      {isPending ? (
-                        <CgSpinnerTwo className="animate-spin size-6" />
-                      ) : (
-                        "Submit Review"
-                      )}
-                    </button>
-                  </div>
+                  <button
+                    type="submit"
+                    disabled={isPending}
+                    className={`px-3 xl:px-8 py-2 xl:py-3 text-white font-medium bg-primary-orange hover:bg-transparent transition-all duration-300 rounded-full hover:text-primary-orange border border-primary-orange ${
+                      isPending
+                        ? "cursor-not-allowed hover:!bg-primary-orange hover:!text-white opacity-90"
+                        : "cursor-pointer"
+                    }`}
+                  >
+                    {isPending ? (
+                      <span className="flex gap-2 items-center">
+                        <BiLoaderCircle className="animate-spin text-xl" />
+                        Please wait....
+                      </span>
+                    ) : (
+                      "Submit Review"
+                    )}
+                  </button>
                 </form>
               </div>
             </div>
@@ -211,9 +220,7 @@ const RecipeReview = ({ id }: Props) => {
                 ? "bg-primary-orange text-white"
                 : "bg-white text-gray-700"
             } 
-            ${
-              !item.url ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"
-            }`}
+            ${!item.url ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
                   disabled={!item.url}
                   dangerouslySetInnerHTML={{ __html: item.label }}
                 />

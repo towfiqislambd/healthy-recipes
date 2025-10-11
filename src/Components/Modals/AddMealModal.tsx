@@ -85,12 +85,12 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
       )}
 
       {/* Day Select */}
-      <div className="mt-5 md:mt-7 mb-5 z-[99999]">
+      <div className="mt-5 md:mt-7 mb-5">
         <Select onValueChange={setDay}>
           <SelectTrigger className="w-full py-5 rounded-[6px] px-4 text-base focus:ring-primary-orange">
             <SelectValue placeholder="Select a day..." />
           </SelectTrigger>
-          <SelectContent className="px-0 py-0 border-transparent">
+          <SelectContent className="px-0 py-0 border-transparent z-[999]">
             {days?.map(dayItem => (
               <SelectItem
                 key={dayItem}
@@ -109,7 +109,7 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
         <SelectTrigger className="w-full py-5 rounded-[6px] px-4 text-base focus:ring-primary-orange">
           <SelectValue placeholder="Select a category..." />
         </SelectTrigger>
-        <SelectContent className="px-0 py-0 border-transparent">
+        <SelectContent className="px-0 py-0 border-transparent z-[999]">
           {recipeCategory?.data?.map((item: categoryItem) => (
             <SelectItem key={item.id} value={item.id} className="filterClass">
               {item.category_name}

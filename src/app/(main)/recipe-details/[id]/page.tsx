@@ -12,6 +12,7 @@ import Container from "@/Components/Common/Container";
 import RecipeReview from "@/Components/PageComponents/mainPages/recipeDetailsComponents/RecipeReview";
 import ShareYourMeal from "@/Components/PageComponents/mainPages/homePageComponents/ShareYourMeal";
 import ShareRecipeSocialMedia from "@/Components/PageComponents/mainPages/recipeDetailsComponents/ShareRecipeSocialMedia";
+import { Spinner } from "@/Components/Loader/Loader";
 
 interface Props {
   params: Promise<{ id: number }>;
@@ -60,6 +61,14 @@ const page = ({ params }: Props) => {
       setFullLocation(`${window.location.origin}/recipe-details/${id}`);
     }
   }, [id]);
+
+  if (recipeDataLoading || shareRecipeLoading) {
+    return (
+      <div className="h-[80vh] flex justify-center items-center">
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -204,12 +213,13 @@ const page = ({ params }: Props) => {
 
                     <div
                       onClick={handlePlay}
-                      className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700 items-center justify-center bg-primary-orange rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer ${
+                      className={`size-16 transition-all duration-700 items-center justify-center bg-primary-orange rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer ${
                         !isPlaying ? "flex" : "hidden"
                       }`}
                     >
                       <PlayButtonSvg />
                     </div>
+
                     <div
                       onClick={handlePause}
                       className={`size-16 opacity-0 group-hover:opacity-100 transition-all duration-700  items-center justify-center bg-primary-orange rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer   ${

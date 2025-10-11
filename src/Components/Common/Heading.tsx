@@ -20,7 +20,7 @@ const Heading: React.FC<HeadingProps> = ({
     <Tag
       data-aos={animation ? "fade-up" : undefined}
       className={cn(
-        "font-merriweather text-[24px] lg:text-[28px] 2xl:text-[32px] 3xl:text-[40px] leading-[140%] font-bold text-center",
+        "font-merriweather text-2xl 2xl:text-3xl 3xl:text-4xl leading-[140%] font-semibold text-center",
         className
       )}
       {...props}

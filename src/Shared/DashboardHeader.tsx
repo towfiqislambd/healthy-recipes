@@ -21,8 +21,8 @@ const navLinks = [
 
 const DashboardHeader = ({ setOpen, isOpen }: any) => {
   const { user } = useAuth();
-  const { mutate: logoutMutation, isPending } = useLogout();
   const [openPopup, setOpenPopup] = useState(false);
+  const { mutate: logoutMutation, isPending } = useLogout();
 
   useEffect(() => {
     const handleWindowClick = () => {
