@@ -172,9 +172,6 @@ export const useChangePassword = () => {
         toast.success(data?.message);
       }
     },
-    onError: (err: any) => {
-      toast.error(err?.response?.data?.message);
-    },
   });
 };
 

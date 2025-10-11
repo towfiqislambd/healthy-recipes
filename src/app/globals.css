@@ -202,7 +202,7 @@ body {
 }
 
 .auth_input {
-  @apply rounded-lg border-[0.5px] bg-none shadow-[0px_0px_4px_0px_rgba(0,9,54,0.06)] focus:outline-none px-3 lg:px-5 py-2 lg:py-3;
+  @apply rounded-[6px] border-gray-300 bg-none px-3 lg:px-5 py-2 lg:py-3 block w-full;
 }
 
 .auth_label {

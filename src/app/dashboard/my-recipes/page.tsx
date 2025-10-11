@@ -1,10 +1,16 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
+import { recipeItem } from "@/Types/type";
 import deleteImg from "@/Assets/images/delete.png";
 import RecipeCard from "@/Components/Cards/RecipeCard";
 import { getAllCategories, getMyRecipes } from "@/Hooks/api/cms_api";
 import { RecipeCardSkeleton } from "@/Components/Loader/Loader";
+
+type categoryItem = {
+  id: number;
+  category_name: string;
+};
 
 const page = () => {
   const [activeTab, setActiveTab] = useState({
@@ -21,7 +27,7 @@ const page = () => {
 
   return (
     <section className="3xl:p-5">
-      <h3 className="3xl:mb-7 text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">
+      <h3 className="text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">
         Your shared recipes
       </h3>
 
@@ -38,9 +44,9 @@ const page = () => {
           All Recipes
         </button>
 
-        {allCategories?.data?.map((tab: any) => (
+        {allCategories?.data?.map((tab: categoryItem) => (
           <button
-            key={tab.id}
+            key={tab?.id}
             onClick={() => setActiveTab(tab)}
             className={`cursor-pointer px-3 sm:px-4 3xl:px-6 py-[5px] text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium ${
               tab?.category_name === activeTab?.category_name
@@ -60,9 +66,11 @@ const page = () => {
             <RecipeCardSkeleton key={index} />
           ))
         ) : myRecipes?.data?.recipes?.data?.length > 0 ? (
-          myRecipes?.data?.recipes?.data?.map((item: any, idx: number) => (
-            <RecipeCard key={idx} item={item} />
-          ))
+          myRecipes?.data?.recipes?.data?.map(
+            (item: recipeItem, idx: number) => (
+              <RecipeCard key={idx} item={item} />
+            )
+          )
         ) : (
           <div className="text-center col-span-4 py-6 space-y-3">
             <Image src={deleteImg} alt="logo" className="mx-auto size-16" />
