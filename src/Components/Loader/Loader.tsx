@@ -20,29 +20,20 @@ export function Spinner() {
 
 export const RecipeCardSkeleton = () => {
   return (
-    <div className="bg-gray-200 shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] pb-1 4xl:pb-5 flex flex-col justify-between group rounded-2xl animate-pulse">
+    <div className="bg-white rounded-lg shadow-md p-3 space-y-4 animate-pulse">
       <div className="relative">
-        <div className="h-[300px] lg:h-[320px] 3xl:h-[350px] w-full bg-gray-200 rounded-sm overflow-hidden" />
-        <div className="absolute size-9 4xl:size-10 top-3 right-3 bg-gray-300 rounded-full" />
-        <div className="absolute top-3 left-3 bg-gray-300 h-5 w-40 rounded-sm" />
+        <div className="h-[200px] bg-gray-200 rounded-lg" />
+      </div>
+      <div className="h-6 w-4/5 bg-gray-200 rounded" />
+      <div className="space-y-2">
+        <div className="h-4 w-full bg-gray-200 rounded" />
+        <div className="h-4 w-full bg-gray-200 rounded" />
+        <div className="h-4 w-3/5 bg-gray-200 rounded" />
       </div>
 
-      <div className="py-4 px-3 border-b border-dashed border-gray-300">
-        <div className="h-5 bg-gray-300 rounded w-3/4 mb-3" />
-        <div className="space-y-3">
-          <div className="h-4 bg-gray-200 rounded w-full" />
-          <div className="h-4 bg-gray-200 rounded w-2/3" />
-          <div className="h-4 bg-gray-200 rounded w-3/4" />
-        </div>
-      </div>
-
-      <div className="px-5 py-3 4xl:py-5 w-full flex items-center justify-between">
-        <div className="h-4 bg-gray-200 rounded w-10" />
-        <div className="h-4 bg-gray-200 rounded w-10" />
-      </div>
-
-      <div className="px-5 mb-3">
-        <div className="h-10 bg-gray-200 rounded-lg w-full" />
+      <div className="flex justify-between items-center">
+        <div className="w-10 h-5 rounded bg-gray-200"></div>
+        <div className="w-8 h-4 rounded bg-gray-200"></div>
       </div>
     </div>
   );

@@ -24,6 +24,7 @@ const page = () => {
     activePage,
     activeTab?.id
   );
+  console.log(savedRecipes);
 
   return (
     <section className="3xl:p-5">
@@ -44,19 +45,26 @@ const page = () => {
           All Recipes
         </button>
 
-        {allCategories?.data?.map((tab: categoryItem) => (
-          <button
-            key={tab?.id}
-            onClick={() => setActiveTab(tab)}
-            className={`px-3 sm:px-4 3xl:px-6 py-[5px] cursor-pointer text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium ${
-              tab?.category_name === activeTab?.category_name
-                ? "bg-[#3A3A3A] text-white"
-                : "bg-transparent text-accent-gray"
-            }`}
-          >
-            {tab?.category_name}
-          </button>
-        ))}
+        {categoryLoading
+          ? Array.from({ length: 7 }).map((_, index) => (
+              <button
+                className="px-4 sm:px-8 3xl:px-16 py-5 rounded-full font-medium bg-gray-200 animate-pulse"
+                key={index}
+              />
+            ))
+          : allCategories?.data?.map((tab: categoryItem) => (
+              <button
+                key={tab?.id}
+                onClick={() => setActiveTab(tab)}
+                className={`px-3 sm:px-4 3xl:px-6 py-[5px] cursor-pointer text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium ${
+                  tab?.category_name === activeTab?.category_name
+                    ? "bg-[#3A3A3A] text-white"
+                    : "bg-transparent text-accent-gray"
+                }`}
+              >
+                {tab?.category_name}
+              </button>
+            ))}
       </div>
 
       {/* Recipe Cards */}
@@ -93,9 +101,7 @@ const page = () => {
                 ? "bg-primary-orange text-white"
                 : "bg-white text-gray-700"
             } 
-            ${
-              !item.url ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"
-            }`}
+            ${!item.url ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
             disabled={!item.url}
             dangerouslySetInnerHTML={{ __html: item.label }}
           />

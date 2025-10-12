@@ -177,7 +177,7 @@ export const getAllRecipesPrivate = (
     method: "get",
     isPrivate: true,
     key: [
-      "all-recipes-public",
+      "all-recipes-private",
       category_id,
       recipe_library_id,
       age_group,
@@ -201,11 +201,13 @@ export const useWishlist = (id: number) => {
     isPrivate: true,
     endpoint: `/api/wishlist/${id}`,
     onSuccess: (data: any) => {
-      // queryClient.invalidateQueries(["get-wishlists"]);
-      if (data.length === 0) {
-        toast.success("Removed from favorites");
-      } else {
-        toast.success("Added to favorites");
+      if (data?.success) {
+        if (data?.data?.length === 0) {
+          toast.success("Removed from favorites");
+        } else {
+          toast.success("Added to favorites");
+        }
+        queryClient.invalidateQueries("get-wishlists" as any);
       }
     },
     onError: (err: any) => {
@@ -291,7 +293,6 @@ export const useEditMealPlanner = (meal_plan_id: number | null) => {
     endpoint: `/api/meal-update/${meal_plan_id}`,
     onSuccess: (data: any) => {
       if (data?.success) {
-        toast.success(data?.message);
         queryClient.invalidateQueries("meal-planner-data" as any);
       }
     },
@@ -309,8 +310,9 @@ export const useAddNewRecipe = () => {
     isPrivate: true,
     endpoint: "/api/recipe/store",
     onSuccess: (data: any) => {
-      // queryClient.invalidateQueries(["get-wishlists"]);
-      toast.success(data?.message);
+      if (data?.success) {
+        toast.success(data?.message);
+      }
     },
     onError: (err: any) => {
       toast.error(err?.response?.data?.message);
@@ -333,15 +335,6 @@ export const getAllCategories = () => {
     method: "get",
     key: ["categories"],
     endpoint: "/api/categories",
-  });
-};
-
-// All Library
-export const getAllLibrary = () => {
-  return useClientApi({
-    method: "get",
-    key: ["library"],
-    endpoint: "/api/recipe-libraries",
   });
 };
 
@@ -376,20 +369,11 @@ export const getRecipeReview = (recipe_id: number, page_id: number) => {
   });
 };
 
-// Site Settings (Client)
-export const getSiteSettingsClient = () => {
-  return useClientApi({
-    method: "get",
-    key: ["get-site-settings"],
-    endpoint: `/api/site-settings`,
-  });
-};
-
 // Get Wishlist
 export const getWishlist = (page_id?: number, category_id?: number) => {
   return useClientApi({
     method: "get",
-    key: ["get-wishlist", page_id, category_id],
+    key: ["get-wishlists", page_id, category_id],
     endpoint: "/api/wishlists",
     isPrivate: true,
     params: { page_id, category_id },
@@ -403,7 +387,7 @@ export const getWishlist = (page_id?: number, category_id?: number) => {
 export const getMyRecipes = (page_id?: number, category_id?: number) => {
   return useClientApi({
     method: "get",
-    key: ["get-wishlist", page_id, category_id],
+    key: ["get-my-recipe", page_id, category_id],
     endpoint: "/api/my-recipes",
     isPrivate: true,
     params: { page_id, category_id },
