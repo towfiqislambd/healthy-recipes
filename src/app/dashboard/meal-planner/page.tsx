@@ -1,22 +1,23 @@
 "use client";
-import Modal from "@/Components/Common/Modal";
-import EditMealModal from "@/Components/Modals/EditMealModal";
-import { ThreeDotSvg } from "@/Components/Svg/SvgContainer";
 import {
   getAllCategories,
   getMealPlannerTableData,
   useDeleteMealPlanner,
 } from "@/Hooks/api/cms_api";
-import Link from "next/link";
-import React, { useRef, useState } from "react";
-import { MdOutlineModeEditOutline } from "react-icons/md";
-import { RxCross2 } from "react-icons/rx";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/Components/ui/popover";
+import Link from "next/link";
+import { RxCross2 } from "react-icons/rx";
+import React, { useRef, useState } from "react";
+import Modal from "@/Components/Common/Modal";
+import EditMealModal from "@/Components/Modals/EditMealModal";
+import { ThreeDotSvg } from "@/Components/Svg/SvgContainer";
+import { MdOutlineModeEditOutline } from "react-icons/md";
 import { Spinner } from "@/Components/Loader/Loader";
+
 const days = [
   "Saturday",
   "Sunday",
@@ -26,6 +27,7 @@ const days = [
   "Thursday",
   "Friday",
 ];
+
 const categoryColors = [
   "#049361",
   "#3D76CC",
@@ -37,12 +39,22 @@ const categoryColors = [
   "#C0684D",
 ];
 
+type Recipe = {
+  id: number;
+  recipe_id: number;
+  name: string;
+  recipe_name: string;
+  recipe: {
+    recipe_name: string;
+  };
+};
+
 const page = () => {
   // States
   const popoverTriggerRef = useRef<any>(null);
   const [itemId, setItemId] = useState<number | null>(null);
-  const [recipe, setRecipe] = useState(null);
-  const [open, setOpen] = useState(false);
+  const [recipe, setRecipe] = useState<null | Recipe>(null);
+  const [open, setOpen] = useState<boolean>(false);
   const [activeAction, setActiveAction] = useState<any>({
     day: null,
     category: null,
@@ -50,21 +62,23 @@ const page = () => {
   });
 
   // Queries
+  const { data: allCategory, isLoading: categoryLoading } = getAllCategories();
   const { data: mealPlannerTableData, isLoading: tableDataLoading } =
     getMealPlannerTableData();
-  const { data: allCategory, isLoading: categoryLoading } = getAllCategories();
 
   // Mutation
   const { mutateAsync: deletePlanMutation } = useDeleteMealPlanner();
 
+  // Spinner
   if (tableDataLoading || categoryLoading) {
     return (
-      <div className="flex justify-center items-center h-[85vh]">
+      <div className="flex justify-center items-center h-[80vh]">
         <Spinner />
       </div>
     );
   }
 
+  // Func for delete plan
   const handleDeletePlans = async (meal_plan_id: number) => {
     if (meal_plan_id) {
       await deletePlanMutation({
@@ -73,6 +87,7 @@ const page = () => {
     }
   };
 
+  // Func for edit plan
   const handleEditPlans = (item_id: number) => {
     setOpen(true);
     setItemId(item_id);
@@ -84,7 +99,6 @@ const page = () => {
         (item: any) => item?.category?.category_name === category?.category_name
       )
       ?.flatMap((item: any) => item?.meals || []);
-    console.log(meals);
 
     const handleEditPlan = () => {
       setActiveAction((prev: any) => ({
@@ -149,7 +163,7 @@ const page = () => {
               </Popover>
             </div>
 
-            <ul className="space-y-1 sm:space-y-2 pt-5">
+            <ul className="space-y-1 sm:space-y-2 pt-10">
               {meals?.map((data: any, idx: number) => (
                 <li key={idx} className="flex items-center gap-1 group">
                   <span
@@ -166,7 +180,7 @@ const page = () => {
                   >
                     •
                   </span>
-                  <span className="flex-1 text-xs sm:text-sm md:text-[15px]">
+                  <span className="flex-1 text-xs sm:text-sm">
                     {data?.name ? data?.name : data?.recipe?.recipe_name}
                   </span>
 
@@ -211,7 +225,7 @@ const page = () => {
 
         <Link
           href="/meal-planner"
-          className="px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base text-[#5A5C5F] border border-primary-orange rounded-lg"
+          className="px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base text-[#5A5C5F] border border-primary-orange rounded-lg hover:bg-primary-orange hover:text-white duration-300 transition-all"
         >
           Add meal
         </Link>
@@ -238,6 +252,7 @@ const page = () => {
               ))}
             </tr>
           </thead>
+
           <tbody>
             {allCategory?.data.map((category: any, idx: number) => (
               <tr key={category?.id} className="text-nowrap">
@@ -267,12 +282,7 @@ const page = () => {
 
       {/* Modal */}
       <Modal open={open} onClose={() => setOpen(false)}>
-        <EditMealModal
-          open={open}
-          setOpen={setOpen}
-          itemId={itemId}
-          recipe={recipe}
-        />
+        <EditMealModal setOpen={setOpen} itemId={itemId} recipe={recipe} />
       </Modal>
     </section>
   );

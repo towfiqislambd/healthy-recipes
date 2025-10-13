@@ -152,7 +152,7 @@ const page = () => {
             disabled={isPending}
             className={`px-9 group duration-300 transition-all hover:text-primary-orange sm:px-10 font-medium py-2 sm:py-3 rounded-lg bg-primary-orange border border-primary-orange text-white h-12 ${
               isPending
-                ? "cursor-not-allowed"
+                ? "cursor-not-allowed hover:bg-primary-orange hover:text-white opacity-90"
                 : "hover:bg-transparent cursor-pointer"
             }`}
           >

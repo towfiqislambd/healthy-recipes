@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { recipeItem } from "@/Types/type";
 import deleteImg from "@/Assets/images/delete.png";
 import RecipeCard from "@/Components/Cards/RecipeCard";
-import { getAllCategories, getMyRecipes } from "@/Hooks/api/cms_api";
 import { RecipeCardSkeleton } from "@/Components/Loader/Loader";
+import { getAllCategories, getMyRecipes } from "@/Hooks/api/cms_api";
 
 type categoryItem = {
   id: number;
@@ -17,7 +17,7 @@ const page = () => {
     id: 0,
     category_name: "All Recipes",
   });
-  const [activePage, setActivePage] = useState(1);
+  const [activePage, setActivePage] = useState<number>(1);
   const { data: allCategories, isLoading: categoryLoading } =
     getAllCategories();
   const { data: myRecipes, isLoading: myRecipeLoading } = getMyRecipes(
@@ -44,19 +44,27 @@ const page = () => {
           All Recipes
         </button>
 
-        {allCategories?.data?.map((tab: categoryItem) => (
-          <button
-            key={tab?.id}
-            onClick={() => setActiveTab(tab)}
-            className={`cursor-pointer px-3 sm:px-4 3xl:px-6 py-[5px] text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium ${
-              tab?.category_name === activeTab?.category_name
-                ? "bg-[#3A3A3A] text-white"
-                : "bg-transparent text-accent-gray"
-            }`}
-          >
-            {tab?.category_name}
-          </button>
-        ))}
+        {categoryLoading
+          ? Array.from({ length: 7 }).map((_, index) => (
+              <button
+                className="px-4 sm:px-8 3xl:px-16 py-5 rounded-full font-medium bg-gray-200 animate-pulse"
+                key={index}
+              />
+            ))
+          : allCategories?.data?.map((tab: categoryItem) => (
+              <button
+                key={tab?.id}
+                onClick={() => setActiveTab(tab)}
+                className={`cursor-pointer px-3 sm:px-4 3xl:px-6 py-[5px] text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium ${
+                  tab?.category_name === activeTab?.category_name
+                    ? "bg-[#3A3A3A] text-white"
+                    : "bg-transparent text-accent-gray"
+                }`}
+              >
+                {tab?.category_name}
+              </button>
+            ))}
+        {}
       </div>
 
       {/* Recipe Cards */}
@@ -93,9 +101,7 @@ const page = () => {
                 ? "bg-primary-orange text-white"
                 : "bg-white text-gray-700"
             } 
-            ${
-              !item.url ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-200"
-            }`}
+            ${!item.url ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
             disabled={!item.url}
             dangerouslySetInnerHTML={{ __html: item.label }}
           />

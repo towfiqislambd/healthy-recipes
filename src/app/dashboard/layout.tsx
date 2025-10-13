@@ -36,7 +36,7 @@ export default function DashboardLayout({
           <aside
             className={`${
               isOpen ? "translate-x-0" : "-translate-x-full xl:translate-x-0"
-            } xl:static w-60 2xl:w-64 bg-accent-white overflow-y-auto pt-7 h-full shrink-0 fixed top-0 left-0 duration-500 transition-transform z-[999]`}
+            } xl:static w-60 2xl:w-64 bg-gray-50 border-r border-gray-200 overflow-y-auto pt-7 h-full shrink-0 fixed top-0 left-0 duration-500 transition-transform z-[999]`}
           >
             <Link href="/" className="block xl:hidden">
               <figure className="w-[80px] h-[70px] lg:w-[100px] mx-auto lg:h-[87px] relative">
