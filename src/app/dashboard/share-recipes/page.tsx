@@ -1,14 +1,15 @@
 "use client";
 import {
   getAllCategories,
-  getAllLibrary,
+  getRecipeLibraryClient,
   useAddNewRecipe,
 } from "@/Hooks/api/cms_api";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { CgSpinnerTwo } from "react-icons/cg";
-import { AddMoreSvg, CameraSvg } from "@/Components/Svg/SvgContainer";
 import { BiLoaderCircle } from "react-icons/bi";
+import { Spinner } from "@/Components/Loader/Loader";
+import { AddMoreSvg, CameraSvg } from "@/Components/Svg/SvgContainer";
+
 const ageData = [
   {
     id: 1,
@@ -34,22 +35,24 @@ const ageData = [
 
 const page = () => {
   // Mutation & Queries
+  const { data: allLibrary, isLoading: libraryLoading } =
+    getRecipeLibraryClient();
+  const { data: recipeCategory, isLoading: categoryLoading } =
+    getAllCategories();
   const { mutateAsync: recipeMutation, isPending } = useAddNewRecipe();
-  const { data: recipeCategory } = getAllCategories();
-  const { data: allLibrary } = getAllLibrary();
 
   // States
+  const [tags, setTags] = useState<any>([]);
   const [recipe_video, setRecipeVideo] = useState<any>(null);
   const [recipe_image, setRecipeImage] = useState<any>(null);
-  const [tags, setTags] = useState<any>([]);
   const [inputValue, setInputValue] = useState<string>("");
+  const [customErrors, setCustomErrors] = useState<any>({});
   const [instructions, setInstructions] = useState<any>([
     { id: Date.now(), value: "" },
   ]);
   const [ingredients, setIngredients] = useState<any>([
     { id: Date.now(), value: "" },
   ]);
-  const [customErrors, setCustomErrors] = useState<any>({});
 
   const {
     register,
@@ -170,11 +173,21 @@ const page = () => {
     setInstructions([...instructions, { id: Date.now(), value: "" }]);
   };
 
+  // Spinner
+  if (libraryLoading || categoryLoading) {
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <Spinner />
+      </div>
+    );
+  }
+
   return (
-    <div className="max-w-[752px] mx-auto sm:py-3 2xl:py-10">
+    <section className="max-w-[752px] mx-auto sm:py-3 2xl:py-10">
       <h3 className="mb-3 sm:mb-5 3xl:mb-7 text-xl 2xl:text-2xl text-[#E48E19] font-semibold font-merriweather">
         Share your recipe
       </h3>
+
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-6 lg:space-y-8"
@@ -615,7 +628,7 @@ const page = () => {
           </button>
         </div>
       </form>
-    </div>
+    </section>
   );
 };
 

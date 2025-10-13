@@ -70,7 +70,7 @@ const page = () => {
         </div>
 
         <div className="grid md:grid-cols-2 2xl:grid-cols-3 4xl:grid-cols-4 gap-5">
-          {loadingMyRecipes ? (
+          {LoadingSavedRecipes ? (
             Array.from({ length: 4 }).map((_, index) => (
               <RecipeCardSkeleton key={index} />
             ))
