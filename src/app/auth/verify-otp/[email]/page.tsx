@@ -46,7 +46,7 @@ const page = ({ params }: any) => {
   const handleResendCode = (e: any) => {
     e.preventDefault();
     if (email) {
-      resendOtpMutation({ email: email });
+      resendOtpMutation({ email: decodeURIComponent(email) });
     }
     setActiveResendButton(false);
     setTimer(60);
@@ -128,7 +128,14 @@ const page = ({ params }: any) => {
                   : "text-accent-gray"
               }`}
             >
-              {isReSending ? "Resending" : "Resend"}
+              {isReSending ? (
+                <span className="flex gap-1.5 items-center">
+                  <BiLoaderCircle className="animate-spin text-lg" />
+                  Resending
+                </span>
+              ) : (
+                "Resend"
+              )}
             </button>
 
             <span className="pl-2">
