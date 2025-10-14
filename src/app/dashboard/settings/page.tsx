@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { useState } from "react";
 import useAuth from "@/Hooks/useAuth";
@@ -11,8 +11,16 @@ import { MdOutlineCameraAlt } from "react-icons/md";
 import { useUpdateUser } from "@/Hooks/api/auth_api";
 import UpdatePasswordModal from "@/Components/Modals/UpdatePasswordModal";
 
+type formData = {
+  name: string;
+  email: string;
+};
+
 const page = () => {
+  // Hook
   const { user } = useAuth();
+
+  // States
   const [open, setOpen] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [uploadedFile, setUploadedFile] = useState<null | File>(null);
@@ -20,8 +28,10 @@ const page = () => {
     user?.avatar ? `${process.env.NEXT_PUBLIC_SITE_URL}/${user?.avatar}` : ""
   );
 
+  // Mutation
   const { mutateAsync: updateUserMutation, isPending } = useUpdateUser();
 
+  // Hook Form
   const { register, handleSubmit } = useForm({
     defaultValues: {
       name: user?.name,
@@ -29,7 +39,8 @@ const page = () => {
     },
   });
 
-  const onSubmit = async (data: any) => {
+  // Form Data
+  const onSubmit = async (data: formData) => {
     setErrorMessage("");
     const formData = new FormData();
     formData.append("name", data.name);

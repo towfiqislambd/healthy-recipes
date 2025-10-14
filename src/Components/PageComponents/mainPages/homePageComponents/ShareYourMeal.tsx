@@ -45,7 +45,7 @@ const ShareYourMeal = ({ data }: shareMealProps) => {
 
               {/* Share Recipe button */}
               <Link
-                href="/dashboard/dashboard-share-recipes"
+                href="/dashboard/share-recipes"
                 className="px-6 py-3 rounded-full text-white border border-white relative mt-5 flex-shrink-0"
               >
                 {btn_text}

@@ -24,8 +24,8 @@ type Props = {
 const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
   // States
   const [tag, setTag] = useState<any>(null);
-  const [activeTab, setActiveTab] = useState({
-    id: 0,
+  const [activeTab, setActiveTab] = useState<any>({
+    id: "",
     category_name: "All Recipes",
   });
 
