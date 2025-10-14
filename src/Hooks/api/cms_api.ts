@@ -370,7 +370,10 @@ export const getRecipeReview = (recipe_id: number, page_id: number) => {
 };
 
 // Get Wishlist
-export const getWishlist = (page_id?: number, category_id?: number) => {
+export const getWishlist = (
+  page_id?: number,
+  category_id?: number | string
+) => {
   return useClientApi({
     method: "get",
     key: ["get-wishlists", page_id, category_id],
@@ -384,7 +387,10 @@ export const getWishlist = (page_id?: number, category_id?: number) => {
 };
 
 // Get My Recipes
-export const getMyRecipes = (page_id?: number, category_id?: number) => {
+export const getMyRecipes = (
+  page_id?: number,
+  category_id?: number | string
+) => {
   return useClientApi({
     method: "get",
     key: ["get-my-recipe", page_id, category_id],

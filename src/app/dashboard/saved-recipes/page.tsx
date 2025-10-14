@@ -8,13 +8,13 @@ import { getAllCategories, getWishlist } from "@/Hooks/api/cms_api";
 import { RecipeCardSkeleton } from "@/Components/Loader/Loader";
 
 type categoryItem = {
-  id: number;
+  id: any;
   category_name: string;
 };
 
 const page = () => {
   const [activeTab, setActiveTab] = useState({
-    id: 0,
+    id: "",
     category_name: "All Recipes",
   });
   const [activePage, setActivePage] = useState(1);
@@ -35,7 +35,7 @@ const page = () => {
       {/* Tabs */}
       <div className="py-5 2xl:py-8 w-full flex flex-wrap items-center justify-center 2xl:justify-between gap-x-1 gap-y-2">
         <button
-          onClick={() => setActiveTab({ id: 0, category_name: "All Recipes" })}
+          onClick={() => setActiveTab({ id: "", category_name: "All Recipes" })}
           className={`px-3 sm:px-4 3xl:px-6 py-[5px] text-[15px] sm:text-base sm:py-2 3xl:py-3 rounded-full font-medium cursor-pointer ${
             activeTab?.category_name === "All Recipes"
               ? "bg-[#3A3A3A] text-white"

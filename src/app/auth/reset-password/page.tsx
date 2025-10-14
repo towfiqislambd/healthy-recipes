@@ -5,15 +5,18 @@ import { useForm } from "react-hook-form";
 import { BiLoaderCircle } from "react-icons/bi";
 import { useResetPassword } from "@/Hooks/api/auth_api";
 import { HidePassSvg, ShowPassSvg } from "@/Components/Svg/SvgContainer";
+import { useSearchParams } from "next/navigation";
 
 type formData = {
   password: string;
   password_confirmation: string;
 };
 
-const page = ({ params }: any) => {
+const page = () => {
   // Hook
-  const { email } = params;
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
+  const key = searchParams.get("key");
 
   // States
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -34,8 +37,8 @@ const page = ({ params }: any) => {
   // Form Data
   const onSubmit = async (data: formData) => {
     const updatedData = {
-      email: decodeURIComponent(email),
-      key: null,
+      email: decodeURIComponent(email as string),
+      key: key,
       password: data.password,
       password_confirmation: data.password_confirmation,
     };

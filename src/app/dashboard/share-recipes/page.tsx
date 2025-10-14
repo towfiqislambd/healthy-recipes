@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { BiLoaderCircle } from "react-icons/bi";
 import { Spinner } from "@/Components/Loader/Loader";
 import { AddMoreSvg, CameraSvg } from "@/Components/Svg/SvgContainer";
+import { useRouter } from "next/navigation";
 
 const ageData = [
   {
@@ -34,6 +35,9 @@ const ageData = [
 ];
 
 const page = () => {
+  // Hook
+  const router = useRouter();
+
   // Mutation & Queries
   const { data: allLibrary, isLoading: libraryLoading } =
     getRecipeLibraryClient();
@@ -114,7 +118,13 @@ const page = () => {
         formData.append(`instructions[${i}]`, inst.value)
       );
 
-    await recipeMutation(formData);
+    await recipeMutation(formData, {
+      onSuccess: (data: any) => {
+        if (data?.success) {
+          router.push("/dashboard/my-recipes");
+        }
+      },
+    });
     reset();
   };
 
