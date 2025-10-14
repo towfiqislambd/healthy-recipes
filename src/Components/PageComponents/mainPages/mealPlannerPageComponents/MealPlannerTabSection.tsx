@@ -26,7 +26,7 @@ import { RecipeCardSkeleton } from "@/Components/Loader/Loader";
 const MealPlannerTabSection = () => {
   const { user, search } = useAuth();
   const [activeTab, setActiveTab] = useState<any>({
-    id: 0,
+    id: "",
     category_name: "All Recipes",
   });
 

@@ -47,7 +47,6 @@ const Navbar = () => {
   const { data: results, isLoading: resultLoading } = getAllRecipesPublic({
     search,
   });
-  console.log(results);
 
   useEffect(() => {
     if (isOpen) {
@@ -236,7 +235,7 @@ const Navbar = () => {
                     }`}
                   >
                     <div className="flex gap-3 md:gap-4 items-center mb-4 lg:mb-5">
-                      <figure className="size-10 lg:size-12 bg-primary-orange rounded-full cursor-pointer relative grid place-items-center shrink-0">
+                      <figure className="size-10 lg:size-12 bg-primary-orange rounded-full relative grid place-items-center shrink-0">
                         {user?.avatar ? (
                           <Image
                             src={`${process.env.NEXT_PUBLIC_SITE_URL}/${user?.avatar}`}
