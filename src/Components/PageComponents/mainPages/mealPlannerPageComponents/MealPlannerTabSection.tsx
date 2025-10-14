@@ -44,24 +44,24 @@ const MealPlannerTabSection = () => {
       search,
     }
   );
-  const { data: recipesPrivate, isLoading: privateRecipesLoading } =
-    getAllRecipesPrivate(activeTab?.id, library, ageGroup, null, search);
+  // const { data: recipesPrivate } =
+  //   getAllRecipesPrivate(activeTab?.id, library, ageGroup, null, search);
 
   const isLoading =
     isAllCategoryLoading || isRecipeLibraryLoading || loadingAllRecipe;
 
-  let recipeData = null;
+  let recipeData = allRecipes;
 
-  if (user) {
-    recipeData = recipesPrivate;
-  } else {
-    recipeData = allRecipes;
-  }
+  // if (user) {
+  //   recipeData = recipesPrivate;
+  // } else {
+  //   recipeData = allRecipes;
+  // }
 
   const handleReset = () => {
     setAgeGroup(null);
     setLibrary(null);
-    setActiveTab({ id: 0, category_name: "All Recipes" });
+    setActiveTab({ id: "", category_name: "All Recipes" });
   };
 
   const handleAgeChange = (value: any) => {
@@ -166,7 +166,7 @@ const MealPlannerTabSection = () => {
 
           {/* Recipe Cards */}
           <div className="mt-10 grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6">
-            {privateRecipesLoading || isLoading ? (
+            {isLoading ? (
               Array.from({ length: 4 }).map((_, index) => (
                 <RecipeCardSkeleton key={index} />
               ))
