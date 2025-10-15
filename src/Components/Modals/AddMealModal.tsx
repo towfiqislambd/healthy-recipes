@@ -95,7 +95,7 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
               <SelectItem
                 key={dayItem}
                 value={dayItem}
-                className="filterClass capitalize"
+                className="filter_btn capitalize"
               >
                 {dayItem}
               </SelectItem>
@@ -111,7 +111,7 @@ const AddMealModal = ({ recipeId, setOpen }: addMealProps) => {
         </SelectTrigger>
         <SelectContent className="px-0 py-0 border-transparent z-[999]">
           {recipeCategory?.data?.map((item: categoryItem) => (
-            <SelectItem key={item.id} value={item.id} className="filterClass">
+            <SelectItem key={item.id} value={item.id} className="filter_btn">
               {item.category_name}
             </SelectItem>
           ))}

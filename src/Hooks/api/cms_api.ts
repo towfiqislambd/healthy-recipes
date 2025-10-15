@@ -141,10 +141,10 @@ export const getAllRecipesPublic = ({
   tag_id,
   search,
 }: {
-  category_id?: number;
-  recipe_library_id?: number;
+  category_id?: string;
+  recipe_library_id?: string;
   age_group?: string;
-  tag_id?: number;
+  tag_id?: string;
   search?: string;
 }) => {
   return useClientApi({

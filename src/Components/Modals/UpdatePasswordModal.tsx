@@ -5,7 +5,19 @@ import { BiLoaderCircle } from "react-icons/bi";
 import { useChangePassword } from "@/Hooks/api/auth_api";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
-const UpdatePasswordModal = ({ setOpen }: any) => {
+type formData = {
+  password: string;
+  current_password: string;
+  password_confirmation: string;
+};
+
+type UpdatePasswordModalProps = {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const UpdatePasswordModal: React.FC<UpdatePasswordModalProps> = ({
+  setOpen,
+}) => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
@@ -22,12 +34,12 @@ const UpdatePasswordModal = ({ setOpen }: any) => {
     reset,
     formState: { errors },
     watch,
-  } = useForm();
+  } = useForm<formData>();
 
   const password = watch("password");
 
   // Handlers:
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: formData) => {
     setErrorMessage("");
     await userPasswordUpdateMutation(data, {
       onSuccess: (data: any) => {

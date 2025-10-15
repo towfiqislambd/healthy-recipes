@@ -34,6 +34,15 @@ const ageData = [
   },
 ];
 
+type ListItem = { id: number; value: string };
+
+type CustomErrors = Partial<{
+  recipe_image: string;
+  tags: string;
+  ingredients: string;
+  instructions: string;
+}>;
+
 const page = () => {
   // Hook
   const router = useRouter();
@@ -46,15 +55,15 @@ const page = () => {
   const { mutateAsync: recipeMutation, isPending } = useAddNewRecipe();
 
   // States
-  const [tags, setTags] = useState<any>([]);
+  const [tags, setTags] = useState<string[]>([]);
   const [recipe_video, setRecipeVideo] = useState<any>(null);
   const [recipe_image, setRecipeImage] = useState<any>(null);
   const [inputValue, setInputValue] = useState<string>("");
-  const [customErrors, setCustomErrors] = useState<any>({});
-  const [instructions, setInstructions] = useState<any>([
+  const [customErrors, setCustomErrors] = useState<CustomErrors>({});
+  const [instructions, setInstructions] = useState<ListItem[]>([
     { id: Date.now(), value: "" },
   ]);
-  const [ingredients, setIngredients] = useState<any>([
+  const [ingredients, setIngredients] = useState<ListItem[]>([
     { id: Date.now(), value: "" },
   ]);
 
