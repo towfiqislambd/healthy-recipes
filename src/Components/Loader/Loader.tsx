@@ -1,21 +1,8 @@
 "use client";
-import { RotatingLines } from "react-loader-spinner";
+import { PuffLoader } from "react-spinners";
 
 export function Spinner() {
-  return (
-    <RotatingLines
-      visible={true}
-      height={60}
-      width={60}
-      color="grey"
-      strokeWidth="5"
-      strokeColor="orange"
-      animationDuration="0.75"
-      ariaLabel="rotating-lines-loading"
-      wrapperStyle={{}}
-      wrapperClass=""
-    />
-  );
+  return <PuffLoader size={50} color="#ff9f1c" />;
 }
 
 export const RecipeCardSkeleton = () => {

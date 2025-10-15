@@ -4,7 +4,7 @@ import AllRecipeTabs from "./AllRecipeTabs";
 import { getAllRecipesPublic } from "@/Hooks/api/cms_api";
 
 type Props = {
-  library_id: number;
+  library_id: string;
   allCategories: any;
 };
 

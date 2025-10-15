@@ -70,7 +70,7 @@ body {
   @apply leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary-orange w-full border bg-primary-orange rounded-full text-center py-3 hover:bg-transparent hover:text-primary-orange transition-all duration-300 h-[50px] flex items-center justify-center;
 }
 
-.filterClass {
+.filter_btn {
   @apply text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 lg:px-4 focus:bg-primary-orange font-poppins text-accent-gray focus:text-white cursor-pointer;
 }
 
@@ -197,7 +197,7 @@ body {
   @apply size-10 lg:size-12 flex items-center justify-center border border-primary-orange rounded-full hover:bg-primary-orange transition-all duration-300 cursor-pointer text-accent-gray hover:text-white;
 }
 
-.filterClass {
+.filter_btn {
   @apply text-sm lg:text-base !py-1.5 lg:!py-2 2xl:!py-3 px-3 lg:px-4 focus:bg-primary-orange font-poppins text-accent-gray focus:text-white cursor-pointer;
 }
 

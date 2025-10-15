@@ -6,28 +6,42 @@ import {
 } from "@/Components/Svg/SvgContainer";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Spinner } from "@/Components/Loader/Loader";
 import React, { use, useEffect, useRef, useState } from "react";
 import { getRecipeDetails, getShareRecipe } from "@/Hooks/api/cms_api";
 import Container from "@/Components/Common/Container";
 import RecipeReview from "@/Components/PageComponents/mainPages/recipeDetailsComponents/RecipeReview";
 import ShareYourMeal from "@/Components/PageComponents/mainPages/homePageComponents/ShareYourMeal";
 import ShareRecipeSocialMedia from "@/Components/PageComponents/mainPages/recipeDetailsComponents/ShareRecipeSocialMedia";
-import { Spinner } from "@/Components/Loader/Loader";
+
+type ingredientItem = {
+  id: number;
+  ingredient_name: string;
+};
+
+type instructionItem = {
+  id: number;
+  step: string;
+};
+
+type tagItem = {
+  id: number;
+  tag_name: string;
+};
 
 interface Props {
   params: Promise<{ id: number }>;
 }
 
 const page = ({ params }: Props) => {
-  const [fullLocation, setFullLocation] = useState<string>("");
-
   // Hooks
-  const router = useRouter();
   const { id } = use(params);
+  const router = useRouter();
 
   // States
   const videoRef = useRef<any>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [fullLocation, setFullLocation] = useState<string>("");
 
   // Query
   const { data: shareRecipe, isLoading: shareRecipeLoading } = getShareRecipe();
@@ -120,7 +134,7 @@ const page = ({ params }: Props) => {
                 </h5>
 
                 <div className="mt-4 lg:mt-5 2xl:mt-8 space-y-3 2xl:space-y-5">
-                  {recipeData?.data?.ingredients.map((item: any) => (
+                  {recipeData?.data?.ingredients.map((item: ingredientItem) => (
                     <li
                       key={item?.id}
                       className="text-accent-gray leading-[130%]"
@@ -179,7 +193,7 @@ const page = ({ params }: Props) => {
 
                 <div className="mt-5 2xl:mt-8 flex items-center flex-wrap gap-3">
                   {recipeData?.data?.tag_names
-                    ? recipeData?.data?.tag_names?.map((item: any) => (
+                    ? recipeData?.data?.tag_names?.map((item: tagItem) => (
                         <div
                           key={item?.id}
                           className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-accent-gray"
@@ -187,7 +201,7 @@ const page = ({ params }: Props) => {
                           {item?.tag_name}
                         </div>
                       ))
-                    : recipeData?.data?.tags?.map((item: any) => (
+                    : recipeData?.data?.tags?.map((item: tagItem) => (
                         <div
                           key={item.id}
                           className="bg-[#EFEFEF] px-2 py-1 rounded-sm w-fit text-accent-gray"
@@ -239,7 +253,7 @@ const page = ({ params }: Props) => {
 
                   <div className="mt-4 2xl:mt-6 space-y-3 2xl:space-y-5">
                     {recipeData?.data?.instructions?.map(
-                      (item: any, idx: number) => (
+                      (item: instructionItem, idx: number) => (
                         <p
                           key={item?.id}
                           className="text-accent-gray 2xl:text-lg font-medium"

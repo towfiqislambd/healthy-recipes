@@ -8,7 +8,6 @@ import {
 } from "@/Components/ui/select";
 import {
   getAllCategories,
-  getAllRecipesPrivate,
   getAllRecipesPublic,
   getRecipeLibraryClient,
 } from "@/Hooks/api/cms_api";
@@ -23,15 +22,29 @@ import RecipeCard from "@/Components/Cards/RecipeCard";
 import Container from "@/Components/Common/Container";
 import { RecipeCardSkeleton } from "@/Components/Loader/Loader";
 
+interface Category {
+  id: string;
+  category_name: string;
+}
+
+interface RecipeLibrary {
+  id: string;
+  diet_name: string;
+}
+
 const MealPlannerTabSection = () => {
-  const { user, search } = useAuth();
-  const [activeTab, setActiveTab] = useState<any>({
+  // Hook
+  const { search } = useAuth();
+
+  // States
+  const [ageGroup, setAgeGroup] = useState<string>("");
+  const [library, setLibrary] = useState<string>("");
+  const [activeTab, setActiveTab] = useState<Category>({
     id: "",
     category_name: "All Recipes",
   });
 
-  const [ageGroup, setAgeGroup] = useState<any>(null);
-  const [library, setLibrary] = useState<any>(null);
+  // Queries
   const { data: allCategories, isLoading: isAllCategoryLoading } =
     getAllCategories();
   const { data: recipeLibrary, isLoading: isRecipeLibraryLoading } =
@@ -44,32 +57,19 @@ const MealPlannerTabSection = () => {
       search,
     }
   );
-  // const { data: recipesPrivate } =
-  //   getAllRecipesPrivate(activeTab?.id, library, ageGroup, null, search);
-
-  const isLoading =
-    isAllCategoryLoading || isRecipeLibraryLoading || loadingAllRecipe;
-
-  let recipeData = allRecipes;
-
-  // if (user) {
-  //   recipeData = recipesPrivate;
-  // } else {
-  //   recipeData = allRecipes;
-  // }
 
   const handleReset = () => {
-    setAgeGroup(null);
-    setLibrary(null);
+    setAgeGroup("");
+    setLibrary("");
     setActiveTab({ id: "", category_name: "All Recipes" });
   };
 
-  const handleAgeChange = (value: any) => {
-    setAgeGroup(value === "all" ? null : value);
+  const handleAgeChange = (value: string) => {
+    setAgeGroup(value === "all" ? "" : value);
   };
 
-  const handleDietChange = (value: any) => {
-    setLibrary(value === "all" ? null : value);
+  const handleDietChange = (value: string) => {
+    setLibrary(value === "all" ? "" : value);
   };
 
   return (
@@ -79,7 +79,9 @@ const MealPlannerTabSection = () => {
           {/* Tabs */}
           <div className="py-8 w-full flex flex-wrap items-center justify-center 2xl:justify-between gap-x-1 gap-y-2">
             <button
-              onClick={() => setActiveTab({ category_name: "All Recipes" })}
+              onClick={() =>
+                setActiveTab({ id: "", category_name: "All Recipes" })
+              }
               className={`px-4 2xl:px-6 2xl:py-3 py-2 cursor-pointer rounded-full font-medium ${
                 activeTab?.category_name === "All Recipes"
                   ? "bg-[#3A3A3A] text-white"
@@ -89,19 +91,26 @@ const MealPlannerTabSection = () => {
               All Recipes
             </button>
 
-            {allCategories?.data?.map((tab: any) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab)}
-                className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium cursor-pointer ${
-                  tab?.category_name === activeTab?.category_name
-                    ? "bg-[#3A3A3A] text-white"
-                    : "bg-transparent text-accent-gray"
-                }`}
-              >
-                {tab?.category_name}
-              </button>
-            ))}
+            {isAllCategoryLoading
+              ? Array.from({ length: 7 }).map((_, index) => (
+                  <button
+                    className="px-4 sm:px-8 3xl:px-16 py-5 rounded-full font-medium bg-gray-200 animate-pulse"
+                    key={index}
+                  />
+                ))
+              : allCategories?.data?.map((tab: Category) => (
+                  <button
+                    key={tab?.id}
+                    onClick={() => setActiveTab(tab)}
+                    className={`px-4 2xl:px-6 2xl:py-3 py-2 rounded-full font-medium cursor-pointer ${
+                      tab?.category_name === activeTab?.category_name
+                        ? "bg-[#3A3A3A] text-white"
+                        : "bg-transparent text-accent-gray"
+                    }`}
+                  >
+                    {tab?.category_name}
+                  </button>
+                ))}
           </div>
 
           {/* Filters */}
@@ -113,19 +122,19 @@ const MealPlannerTabSection = () => {
                   <SelectValue placeholder="Filter by age group" />
                 </SelectTrigger>
                 <SelectContent className="px-0 py-0 border-transparent">
-                  <SelectItem value="all" className="filterClass">
+                  <SelectItem value="all" className="filter_btn">
                     Filter by age group
                   </SelectItem>
-                  <SelectItem value="teen" className="filterClass">
+                  <SelectItem value="teen" className="filter_btn">
                     Teen (13–19 years)
                   </SelectItem>
-                  <SelectItem value="adult" className="filterClass">
+                  <SelectItem value="adult" className="filter_btn">
                     Adult (20–39 years)
                   </SelectItem>
-                  <SelectItem value="middle-adulthood" className="filterClass">
+                  <SelectItem value="middle-adulthood" className="filter_btn">
                     Middle adulthood (40–59 years)
                   </SelectItem>
-                  <SelectItem value="senior-adult" className="filterClass">
+                  <SelectItem value="senior-adult" className="filter_btn">
                     Senior Adult (60+)
                   </SelectItem>
                 </SelectContent>
@@ -137,15 +146,15 @@ const MealPlannerTabSection = () => {
                   <SelectValue placeholder="Filter by recipe library" />
                 </SelectTrigger>
                 <SelectContent className="px-0 py-0 border-transparent">
-                  <SelectItem value="all" className="filterClass">
+                  <SelectItem value="all" className="filter_btn">
                     Filter by recipe library
                   </SelectItem>
 
-                  {recipeLibrary?.data?.map((library: any) => (
+                  {recipeLibrary?.data?.map((library: RecipeLibrary) => (
                     <SelectItem
                       key={library.id}
                       value={library.id}
-                      className="filterClass"
+                      className="filter_btn"
                     >
                       {library?.diet_name}
                     </SelectItem>
@@ -166,12 +175,12 @@ const MealPlannerTabSection = () => {
 
           {/* Recipe Cards */}
           <div className="mt-10 grid lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 gap-6">
-            {isLoading ? (
+            {loadingAllRecipe ? (
               Array.from({ length: 4 }).map((_, index) => (
                 <RecipeCardSkeleton key={index} />
               ))
-            ) : recipeData?.data?.length > 0 ? (
-              recipeData?.data?.map((item: recipeItem, idx: number) => (
+            ) : allRecipes?.data?.length > 0 ? (
+              allRecipes?.data?.map((item: recipeItem, idx: number) => (
                 <RecipeCard key={idx} isPlanner={true} item={item} />
               ))
             ) : (
