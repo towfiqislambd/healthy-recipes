@@ -10,13 +10,7 @@ type formData = {
   otp: string;
 };
 
-type PageProps = {
-  params: {
-    email: string;
-  };
-};
-
-const page = ({ params }: PageProps) => {
+const page = ({ params }: any) => {
   // Hook
   const { email } = params;
 

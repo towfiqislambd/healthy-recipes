@@ -10,7 +10,7 @@ import RecentBlogs from "@/Components/PageComponents/mainPages/homePageComponent
 import ShareYourMeal from "@/Components/PageComponents/mainPages/homePageComponents/ShareYourMeal";
 import AllRecipes from "@/Components/PageComponents/mainPages/recipeLibraryComponents/AllRecipes";
 
-const page = async ({ params }: { params: { id: string } }) => {
+const page = async ({ params }: any) => {
   const { id } = params;
   const shareRecipeData = await getShareRecipesData();
   const blogData = await getRecentBLogs();
