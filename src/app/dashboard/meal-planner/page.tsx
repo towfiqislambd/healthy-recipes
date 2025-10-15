@@ -39,6 +39,13 @@ const categoryColors = [
   "#C0684D",
 ];
 
+type Day = (typeof days)[number];
+
+type Category = {
+  id: number;
+  category_name: string;
+};
+
 type Recipe = {
   id: number;
   recipe_id: number;
@@ -49,13 +56,25 @@ type Recipe = {
   };
 };
 
+interface ActiveAction {
+  day: Day | null;
+  category: string | null;
+  action: "edit" | "delete" | null;
+}
+
+export interface MealItem {
+  id: number;
+  category: Category;
+  meals: Recipe[];
+}
+
 const page = () => {
   // States
   const popoverTriggerRef = useRef<any>(null);
   const [itemId, setItemId] = useState<number | null>(null);
   const [recipe, setRecipe] = useState<null | Recipe>(null);
   const [open, setOpen] = useState<boolean>(false);
-  const [activeAction, setActiveAction] = useState<any>({
+  const [activeAction, setActiveAction] = useState<ActiveAction>({
     day: null,
     category: null,
     action: null,
@@ -93,15 +112,16 @@ const page = () => {
     setItemId(item_id);
   };
 
-  const renderDayCell = (day: any, category: any) => {
+  const renderDayCell = (day: Day, category: Category) => {
     const meals = mealPlannerTableData?.data?.[day.toLowerCase()]
       ?.filter(
-        (item: any) => item?.category?.category_name === category?.category_name
+        (item: MealItem) =>
+          item?.category?.category_name === category?.category_name
       )
-      ?.flatMap((item: any) => item?.meals || []);
+      ?.flatMap((item: MealItem) => item?.meals || []);
 
     const handleEditPlan = () => {
-      setActiveAction((prev: any) => ({
+      setActiveAction(prev => ({
         day,
         category: category?.category_name,
         action:
@@ -128,7 +148,7 @@ const page = () => {
       if (popoverTriggerRef.current) popoverTriggerRef.current.click();
     };
 
-    const isActive = (action: any) =>
+    const isActive = (action: "edit" | "delete") =>
       activeAction.action === action &&
       activeAction.day === day &&
       activeAction.category === category?.category_name;
@@ -254,7 +274,7 @@ const page = () => {
           </thead>
 
           <tbody>
-            {allCategory?.data.map((category: any, idx: number) => (
+            {allCategory?.data.map((category: Category, idx: number) => (
               <tr key={category?.id} className="text-nowrap">
                 <td
                   className="border-t border-r w-0 px-0 py-8 md:py-10 border-[#B3BAC5] bg-[#FAEEDD] font-medium text-center"

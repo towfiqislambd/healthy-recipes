@@ -9,22 +9,33 @@ import {
 import React from "react";
 import Image from "next/image";
 import { useState } from "react";
+import { recipeItem } from "@/Types/type";
 import deleteImg from "@/Assets/images/delete.png";
 import { RiResetLeftFill } from "react-icons/ri";
 import RecipeCard from "@/Components/Cards/RecipeCard";
 import { getAllRecipesPublic } from "@/Hooks/api/cms_api";
 import { RecipeCardSkeleton } from "@/Components/Loader/Loader";
 
+interface Category {
+  id: string;
+  category_name: string;
+}
+
+interface tagItem {
+  id: string;
+  tag_name: string;
+}
+
 type Props = {
-  library_id: number;
+  library_id: string;
   recipes: any;
   allCategories: any;
 };
 
 const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
   // States
-  const [tag, setTag] = useState<any>(null);
-  const [activeTab, setActiveTab] = useState<any>({
+  const [tag, setTag] = useState<string>("");
+  const [activeTab, setActiveTab] = useState<Category>({
     id: "",
     category_name: "All Recipes",
   });
@@ -47,13 +58,13 @@ const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
 
   // Func for reset
   const handleReset = () => {
-    setTag(null);
-    setActiveTab({ id: 0, category_name: "All Recipes" });
+    setTag("");
+    setActiveTab({ id: "", category_name: "All Recipes" });
   };
 
   // Func for tag change
-  const handleTagChange = (value: any) => {
-    setTag(value === "all" ? null : value);
+  const handleTagChange = (value: string) => {
+    setTag(value === "all" ? "" : value);
   };
 
   // Get unique tags from all recipes
@@ -73,7 +84,7 @@ const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
       {/* Tabs */}
       <div className="py-5 sm:py-8 w-full flex flex-wrap items-center justify-center 3xl:justify-between gap-x-1 gap-y-2">
         <button
-          onClick={() => setActiveTab({ id: 0, category_name: "All Recipes" })}
+          onClick={() => setActiveTab({ id: "", category_name: "All Recipes" })}
           className={`px-3 sm:px-4 2xl:px-6 2xl:py-3 py-2 cursor-pointer text-sm sm:text-base rounded-full font-medium ${
             activeTab?.category_name === "All Recipes"
               ? "bg-[#3A3A3A] text-white"
@@ -83,7 +94,7 @@ const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
           All Recipes <span>({getCountByType("All Recipes")})</span>
         </button>
 
-        {allCategories?.data?.map((tab: any) => (
+        {allCategories?.data?.map((tab: Category) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab)}
@@ -113,7 +124,7 @@ const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
               Select recipes by tags
             </SelectItem>
 
-            {uniqueTags.map((tag: any) => (
+            {uniqueTags?.map((tag: any) => (
               <SelectItem
                 key={tag.id}
                 value={tag.id}
@@ -141,7 +152,7 @@ const AllRecipeTabs = ({ recipes, allCategories, library_id }: Props) => {
             <RecipeCardSkeleton key={index} />
           ))
         ) : allRecipes?.data?.length > 0 ? (
-          allRecipes?.data?.map((item: any, idx: number) => (
+          allRecipes?.data?.map((item: recipeItem, idx: number) => (
             <RecipeCard key={idx} item={item} />
           ))
         ) : (
