@@ -32,52 +32,51 @@ const RecentBlogs = ({ data }: blogProps) => {
   return (
     <section className="py-10 2xl:py-16 3xl:py-20 bg-[#F8FCF9]">
       <Container>
-        <div className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
-          {/* Title */}
-          <Heading text="Recipe Blogs & Tips" />
+        {/* Title */}
+        <Heading text="Recipe Blogs & Tips" />
 
-          {/* Slider */}
-          <div className="w-full">
-            {/* Nav buttons */}
-            <div className="w-full flex items-center justify-end gap-3">
-              <button
-                className="swiper_btn"
-                onClick={() => swiperRef?.slidePrev()}
-              >
-                <SliderPrevSvg />
-              </button>
+        {/* Slider */}
+        <div className="w-full">
+          {/* Nav buttons */}
+          <div className="w-full mt-3 flex items-center justify-center lg:justify-end gap-3">
+            <button
+              className="swiper_btn"
+              onClick={() => swiperRef?.slidePrev()}
+            >
+              <SliderPrevSvg />
+            </button>
 
-              <button
-                className="swiper_btn"
-                onClick={() => swiperRef?.slideNext()}
-              >
-                <SliderNextSvg />
-              </button>
-            </div>
+            <button
+              className="swiper_btn"
+              onClick={() => swiperRef?.slideNext()}
+            >
+              <SliderNextSvg />
+            </button>
+          </div>
 
-            {/* Swiper */}
-            <div className="mt-5">
-              <Swiper
-                onSwiper={setSwiperRef}
-                spaceBetween={20}
-                slidesPerView={1}
-                loop={true}
-                modules={[Navigation]}
-                className="mySwiper"
-                breakpoints={{
-                  640: { slidesPerView: 2, spaceBetween: 25 },
-                  768: { slidesPerView: 2, spaceBetween: 25 },
-                  1024: { slidesPerView: 3, spaceBetween: 25 },
-                  1460: { slidesPerView: 4, spaceBetween: 25 },
-                }}
-              >
-                {data?.map((item, idx) => (
-                  <SwiperSlide key={idx}>
-                    <BlogCard item={item} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
+          {/* Swiper */}
+          <div className="mt-5">
+            <Swiper
+              onSwiper={setSwiperRef}
+              spaceBetween={20}
+              slidesPerView={1}
+              loop={true}
+              speed={800}
+              modules={[Navigation]}
+              className="mySwiper"
+              breakpoints={{
+                640: { slidesPerView: 2, spaceBetween: 25 },
+                768: { slidesPerView: 2, spaceBetween: 25 },
+                1024: { slidesPerView: 3, spaceBetween: 25 },
+                1460: { slidesPerView: 4, spaceBetween: 25 },
+              }}
+            >
+              {data?.map((item, idx) => (
+                <SwiperSlide key={idx}>
+                  <BlogCard item={item} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
       </Container>

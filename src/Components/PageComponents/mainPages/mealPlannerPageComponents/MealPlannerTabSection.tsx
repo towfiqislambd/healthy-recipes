@@ -114,7 +114,7 @@ const MealPlannerTabSection = () => {
           </div>
 
           {/* Filters */}
-          <div className="my-2 w-full md:w-[400px] lg:w-auto mx-auto border lg:border-none p-5 rounded-lg lg:p-0 3xl:py-12 flex flex-col lg:flex-row items-center justify-center gap-3 2xl:gap-5">
+          <div className="my-2 w-full md:w-[400px] lg:w-auto mx-auto border border-gray-200 lg:border-none p-5 rounded-lg lg:p-0 3xl:py-12 flex flex-col lg:flex-row items-center justify-center gap-3 2xl:gap-5">
             <div className="flex flex-col lg:flex-row w-full lg:w-auto gap-3 lg:gap-0">
               {/* Age Filter */}
               <Select value={ageGroup || "all"} onValueChange={handleAgeChange}>

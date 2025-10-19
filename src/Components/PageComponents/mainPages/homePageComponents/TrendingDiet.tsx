@@ -57,6 +57,7 @@ const TrendingDiet = ({ data }: trendingProps) => {
             <Swiper
               onSwiper={setSwiperRef}
               spaceBetween={20}
+              speed={800}
               slidesPerView={1}
               loop={true}
               modules={[Navigation]}
