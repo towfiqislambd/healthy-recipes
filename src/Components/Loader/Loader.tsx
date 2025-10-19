@@ -9,7 +9,7 @@ export const RecipeCardSkeleton = () => {
   return (
     <div className="bg-white rounded-lg shadow-md p-3 space-y-4 animate-pulse">
       <div className="relative">
-        <div className="h-[200px] bg-gray-200 rounded-lg" />
+        <div className="h-[230px] bg-gray-200 rounded-lg" />
       </div>
       <div className="h-6 w-4/5 bg-gray-200 rounded" />
       <div className="space-y-2">

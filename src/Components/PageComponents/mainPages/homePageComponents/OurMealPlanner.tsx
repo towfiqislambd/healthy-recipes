@@ -43,8 +43,8 @@ const OurMealPlanner = ({ data }: mealPlannerProps) => {
               </div>
 
               {/* Right - Image */}
-              <div className="bg-[#FDE0B8] px-6 sm:px-12 sm:py-14 py-7 rounded-lg flex-1 group overflow-hidden w-full">
-                <figure className="relative w-full h-[500px]">
+              <div className="bg-[#FDE0B8] lg:px-12 lg:py-14 rounded-lg flex-1 group overflow-hidden w-full">
+                <figure className="relative w-full h-[350px] md:h-[450px] lg:h-[500px]">
                   <Image
                     className="group-hover:scale-105 transition-all duration-500 rounded-md w-full"
                     fill

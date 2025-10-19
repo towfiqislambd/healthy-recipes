@@ -18,7 +18,7 @@ const RecipeLibraryCard = ({ item }: RecipeLibraryCardProps) => {
   return (
     <Link
       href={`/recipes/recipe_library/${item?.id}`}
-      className={`w-full bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-2xl `}
+      className={`w-full bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] block group rounded-lg `}
     >
       {/* Recipe Library Image */}
       <div className="h-[250px] lg:h-[300px] w-full rounded-sm overflow-hidden relative">

@@ -24,7 +24,7 @@ const page = async () => {
   const blogData = await getRecentBLogs();
 
   return (
-    <section className="mt-[100px] lg:mt-[134px]">
+    <section className="mt-14">
       <Container>
         {/* Breadcrumbs */}
         <div className="flex items-center space-x-2 lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
@@ -45,14 +45,14 @@ const page = async () => {
         </div>
 
         {/* All Libraries */}
-        <div className="mt-3 lg:mt-5 3xl:mt-10 lg:pb-10 g:px-3 xl:px-5 2xl:px-10 3xl:px-0">
+        <div className="mt-3 lg:mt-5 3xl:mt-7 lg:pb-10 g:px-3 xl:px-5 2xl:px-10 3xl:px-0">
           {/* Title */}
           <h2 className="text-primary-black text-xl lg:text-2xl xl:text-3xl 3xl:text-5xl font-bold leading-[130%]">
             All Recipe Library
           </h2>
 
           {/* Library */}
-          <div className="grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5 pt-7 lg:pb-10 space-y-5">
+          <div className="grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5 pt-8 lg:pb-10 space-y-5">
             {recipeLibrary?.data?.map((item: libraryItem, idx: number) => (
               <RecipeCategoryCard key={idx} item={item} />
             ))}

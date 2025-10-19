@@ -301,7 +301,7 @@ const Navbar = () => {
 
               <button
                 onClick={() => setOpen(!isOpen)}
-                className="bg-primary-orange text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid 2xl:hidden place-items-center"
+                className="bg-primary-orange text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid 2xl:hidden place-items-center cursor-pointer"
               >
                 <FaBars className="text-[22px] sm:text-2xl" />
               </button>
@@ -322,14 +322,14 @@ const Navbar = () => {
       <div
         className={`${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } duration-500 transition-transform fixed top-0 z-[999] left-0 bg-white p-5 lg:p-7 shadow-lg overflow-y-auto  border-r max-h-screen min-h-screen w-[250px] lg:w-[270px] 2xl:hidden`}
+        } duration-500 transition-transform fixed top-0 z-[999] left-0 bg-white p-5 lg:p-7 shadow-lg overflow-y-auto border-r border-gray-200 max-h-screen min-h-screen w-[250px] lg:w-[270px] 2xl:hidden`}
       >
         {/* Logo */}
         <Link href="/" onClick={() => setOpen(false)}>
           <figure className="w-[100px] h-[90px] relative">
             <Image
               className="object-cover w-full h-full mx-auto"
-              src={`${process.env.NEXT_PUBLIC_SITE_URL}/${logo}`}
+              src={logo}
               alt="logo"
               fill
             />
@@ -370,7 +370,7 @@ const Navbar = () => {
         {/* Cancel btn */}
         <button
           onClick={() => setOpen(false)}
-          className="absolute top-3 right-3"
+          className="absolute top-3 right-3 cursor-pointer"
         >
           <RxCross2 className="text-xl" />
         </button>

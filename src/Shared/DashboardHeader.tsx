@@ -168,7 +168,7 @@ const DashboardHeader = ({ setOpen, isOpen }: any) => {
           {/* Mobile Bar */}
           <button
             onClick={() => setOpen(!isOpen)}
-            className="bg-primary-orange text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid 2xl:hidden place-items-center"
+            className="bg-primary-orange text-white w-9 h-9 sm:w-10 sm:h-10 rounded grid 2xl:hidden place-items-center cursor-pointer"
           >
             <FaBars className="text-[22px] sm:text-2xl" />
           </button>

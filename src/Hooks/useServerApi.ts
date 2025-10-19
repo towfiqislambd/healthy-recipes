@@ -4,11 +4,11 @@ interface FetchOptions {
   revalidate?: number;
 }
 
-export async function useServerApi<T = any>({
+export async function useServerApi({
   endpoint,
   mode = "SSG",
   revalidate = 3600,
-}: FetchOptions): Promise<T> {
+}: FetchOptions) {
   const url = `${process.env.NEXT_PUBLIC_SITE_URL}${endpoint}`;
 
   const fetchOptions: RequestInit & { next?: { revalidate?: number } } =

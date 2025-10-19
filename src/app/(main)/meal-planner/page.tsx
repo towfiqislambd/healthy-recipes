@@ -28,8 +28,8 @@ const page = async () => {
   const recentBlogs = await getRecentBLogs();
 
   return (
-    <section className="mt-12">
-      <div className="pt-20 pb-16 text-center">
+    <section className="lg:mt-12">
+      <div className="pt-10 lg:pt-20 pb-16 text-center">
         <Container>
           {mealPlannerTitleAndDesc?.data?.map((item: mealItem, idx: number) => (
             <div key={idx} className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">
@@ -45,7 +45,7 @@ const page = async () => {
         </Container>
       </div>
 
-      <div className="py-10 bg-white">
+      <div className="py-10">
         <Container>
           <div className="lg:px-3 grid xl:grid-cols-3 gap-7 xl:gap-10 2xl:gap-20">
             {mealPlannerCard?.data?.map((item: cardItem, idx: number) => (
