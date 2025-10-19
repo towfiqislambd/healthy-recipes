@@ -11,8 +11,10 @@ import Container from "@/Components/Common/Container";
 import RecipeCard from "@/Components/Cards/RecipeCard";
 import { SliderNextSvg, SliderPrevSvg } from "@/Components/Svg/SvgContainer";
 import Heading from "@/Components/Common/Heading";
+import { getTrendingRecipes } from "@/Hooks/api/cms_api";
+import { RecipeCardSkeleton } from "@/Components/Loader/Loader";
 
-type trendingItem = {
+type TrendingRecipes = {
   id: 1;
   recipe_name: string;
   recipe_image: string;
@@ -21,11 +23,8 @@ type trendingItem = {
   preparation_time: number;
 };
 
-interface trendingProps {
-  data: trendingItem[];
-}
-
-const TrendingDiet = ({ data }: trendingProps) => {
+const TrendingDiet = () => {
+  const { data: trendingRecipes, isLoading } = getTrendingRecipes();
   const [swiperRef, setSwiperRef] = useState<SwiperClass | null>(null);
 
   return (
@@ -71,11 +70,19 @@ const TrendingDiet = ({ data }: trendingProps) => {
                 1460: { slidesPerView: 4, spaceBetween: 20 },
               }}
             >
-              {data?.map((item, idx) => (
-                <SwiperSlide key={idx}>
-                  <RecipeCard item={item} />
-                </SwiperSlide>
-              ))}
+              {isLoading
+                ? Array.from({ length: 4 }).map((_, index) => (
+                    <SwiperSlide key={index}>
+                      <RecipeCardSkeleton />
+                    </SwiperSlide>
+                  ))
+                : trendingRecipes?.data?.map(
+                    (item: TrendingRecipes, idx: number) => (
+                      <SwiperSlide key={idx}>
+                        <RecipeCard item={item} />
+                      </SwiperSlide>
+                    )
+                  )}
             </Swiper>
           </div>
         </div>
