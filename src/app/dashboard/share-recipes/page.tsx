@@ -209,7 +209,7 @@ const page = () => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="space-y-6 lg:space-y-8"
+        className="space-y-6 lg:space-y-7"
       >
         {/* Recipe Name */}
         <div>
@@ -641,9 +641,9 @@ const page = () => {
               setInstructions([{ id: Date.now(), value: "" }]);
               setIngredients([{ id: Date.now(), value: "" }]);
             }}
-            className="px-3 sm:px-5 py-[6px] sm:py-2 border-[#3F3F3F] hover:bg-gray-100 duration-300 transition-all rounded-[6px] border cursor-pointer"
+            className="px-3 sm:px-5 py-[6px] sm:py-2 border-gray-200 bg-gray-100 hover:bg-gray-100 duration-300 transition-all rounded-[6px] border cursor-pointer font-medium"
           >
-            Cancel
+            Reset
           </button>
         </div>
       </form>

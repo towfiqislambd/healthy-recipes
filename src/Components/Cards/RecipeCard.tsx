@@ -15,6 +15,7 @@ import Modal from "@/Components/Common/Modal";
 import { LuLoaderPinwheel } from "react-icons/lu";
 import { useWishlist } from "@/Hooks/api/cms_api";
 import AddMealModal from "@/Components/Modals/AddMealModal";
+import Image from "next/image";
 
 interface recipeProps {
   item: recipeItem;
@@ -64,16 +65,17 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
     <>
       <Link
         href={`/recipe-details/${item.id}`}
-        className={`bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] pb-1 4xl:pb-5 flex flex-col justify-between group rounded-2xl`}
+        className="bg-white shadow-[0px_0px_8px_0px_rgba(0,0,0,0.04)] flex flex-col justify-between group rounded-lg"
       >
         <div className="relative">
           {/* Recipe Image */}
           <div className="block">
-            <div className="h-[300px] lg:h-[320px] 3xl:h-[350px] w-full relative rounded-sm overflow-hidden">
-              <img
+            <div className="h-[300px] lg:h-[320px] w-full relative rounded-sm overflow-hidden">
+              <Image
                 className="w-full h-full object-cover group-hover:scale-105 duration-300 transition-all"
                 src={`${process.env.NEXT_PUBLIC_SITE_URL}/${item?.recipe_image}`}
-                alt=""
+                alt="recipe_img"
+                fill
               />
 
               {/* primary-black Overlay  */}
@@ -98,11 +100,9 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
           {/* Type */}
           <div className="absolute top-3 left-3">
             <p className="px-2 4xl:px-3 py-1 4xl:py-1.5 rounded-sm bg-white/50 text-primary-black text-sm truncate">
-              <span>
-                {`${item?.library_name || item?.recipe_library?.diet_name}
+              {`${item?.library_name || item?.recipe_library?.diet_name}
                    | 
                    ${item?.category_name || item?.category?.category_name}`}
-              </span>
             </p>
           </div>
         </div>
@@ -112,11 +112,11 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
             {item?.recipe_name}
           </h5>
 
-          <div className="mt-2 4xl:mt-4 space-y-1 4xl:space-y-2">
+          <div className="mt-2 4xl:mt-3 space-y-1 4xl:space-y-2">
             <div className="flex flex-wrap gap-2 truncate">
-              <div className="flex-shrink-0">
+              <p className="flex-shrink-0">
                 <RecipeBookSvg />
-              </div>
+              </p>
 
               <p className="text-accent-gray text-[15px] xl:text-base font-medium">
                 {item?.serving_number} servings | {item?.preparation_time} min
@@ -157,7 +157,7 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
           <div className="px-5 mb-3">
             <button
               onClick={e => handleAddToPlanner(e, item)}
-              className="hover:bg-primary-orange border border-primary-orange px-3 2xl:px-5 py-2 2xl:py-3 rounded-lg hover:text-white text-[#5A5C5F] duration-300 transition-all cursor-pointer w-fit"
+              className="hover:bg-primary-orange border border-primary-orange px-4 py-2.5 rounded-[6px] hover:text-white text-[#5A5C5F] duration-300 transition-all cursor-pointer w-fit text-sm"
             >
               + Add to planner
             </button>

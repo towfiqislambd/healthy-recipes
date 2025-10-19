@@ -55,6 +55,7 @@ const Testimonial = ({ data }: testimonialProps) => {
                 spaceBetween={20}
                 slidesPerView={1}
                 loop={true}
+                speed={800}
                 modules={[Navigation]}
                 className="mySwiper"
                 breakpoints={{

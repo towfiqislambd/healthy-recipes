@@ -76,7 +76,7 @@ const Register = () => {
             })}
             placeholder="Enter your Full Name"
             className={`auth_input ${
-              errors.name ? "border-red-500" : "border-[#9D9D9D]"
+              errors.name ? "!border-red-500" : "border-[#9D9D9D]"
             }`}
           />
         </div>
@@ -99,7 +99,7 @@ const Register = () => {
             {...register("email", { required: "Email is required" })}
             placeholder="Enter your email"
             className={`auth_input ${
-              errors.email ? "border-red-500" : "border-[#9D9D9D]"
+              errors.email ? "!border-red-500" : "border-[#9D9D9D]"
             }`}
           />
         </div>
@@ -118,7 +118,7 @@ const Register = () => {
           </div>
           <div
             className={`w-full auth_input relative ${
-              errors.password ? "border-red-500" : "border-[#9D9D9D]"
+              errors.password ? "!border-red-500" : "!border-[#9D9D9D]"
             }`}
           >
             <input
@@ -152,7 +152,7 @@ const Register = () => {
           <div
             className={`w-full auth_input relative ${
               errors.password_confirmation
-                ? "border-red-500"
+                ? "!border-red-500"
                 : "border-[#9D9D9D]"
             }`}
           >

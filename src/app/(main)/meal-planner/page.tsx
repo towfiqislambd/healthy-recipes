@@ -45,7 +45,7 @@ const page = async () => {
         </Container>
       </div>
 
-      <div className="py-10 bg-white">
+      <div className="py-10">
         <Container>
           <div className="lg:px-3 grid xl:grid-cols-3 gap-7 xl:gap-10 2xl:gap-20">
             {mealPlannerCard?.data?.map((item: cardItem, idx: number) => (

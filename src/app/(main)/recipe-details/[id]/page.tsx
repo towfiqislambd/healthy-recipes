@@ -92,7 +92,7 @@ const page = ({ params }: Props) => {
             {/* Back button */}
             <button
               onClick={() => router.back()}
-              className="flex items-center gap-2 text-[#373E85] group cursor-pointer"
+              className="flex items-center gap-2 text-[#373E85] group cursor-pointer font-medium"
             >
               <span className="group-hover:-translate-x-1 duration-300 transition-all">
                 <BackArrowSvg />

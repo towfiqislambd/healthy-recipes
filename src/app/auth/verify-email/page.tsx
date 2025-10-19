@@ -76,7 +76,7 @@ const page = () => {
             {...register("email", { required: "Email is required" })}
             placeholder="Enter your email"
             className={`auth_input ${
-              errors.email ? "border-red-500" : "border-[#9D9D9D]"
+              errors.email ? "!border-red-500" : "border-[#9D9D9D]"
             }`}
           />
         </div>

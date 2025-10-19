@@ -89,7 +89,7 @@ const page = () => {
           </div>
           <div
             className={`w-full auth_input relative ${
-              errors.password ? "border-red-500" : "border-[#9D9D9D]"
+              errors.password ? "!border-red-500" : "border-[#9D9D9D]"
             }`}
           >
             <input
@@ -126,7 +126,7 @@ const page = () => {
           <div
             className={`w-full auth_input relative ${
               errors.password_confirmation
-                ? "border-red-500"
+                ? "!border-red-500"
                 : "border-[#9D9D9D]"
             }`}
           >
