@@ -26,18 +26,6 @@ export async function getSocialLinks() {
 }
 
 // ================================================
-//  SSR (Server Side Rendering)
-// ================================================
-
-// Trending Recipes (Public)
-export async function getTrendingRecipesPublic() {
-  return useServerApi({
-    mode: "SSR",
-    endpoint: "/api/guest/trending-recipes",
-  });
-}
-
-// ================================================
 //  SSG (Static Site Generation)
 // ================================================
 
@@ -157,33 +145,7 @@ export const getAllRecipesPublic = ({
       tag_id,
       search,
     ],
-    endpoint: "/api/guest/recipes",
-    params: { category_id, recipe_library_id, age_group, tag_id, search },
-    queryOptions: {
-      retry: false,
-    },
-  });
-};
-
-// Get All Recipes Private
-export const getAllRecipesPrivate = (
-  category_id?: number,
-  recipe_library_id?: number,
-  age_group?: number | any,
-  tag_id?: number | any,
-  search?: string
-) => {
-  return useClientApi({
-    method: "get",
     isPrivate: true,
-    key: [
-      "all-recipes-private",
-      category_id,
-      recipe_library_id,
-      age_group,
-      tag_id,
-      search,
-    ],
     endpoint: "/api/auth/recipes",
     params: { category_id, recipe_library_id, age_group, tag_id, search },
     queryOptions: {
@@ -397,6 +359,19 @@ export const getMyRecipes = (
     endpoint: "/api/my-recipes",
     isPrivate: true,
     params: { page_id, category_id },
+    queryOptions: {
+      retry: false,
+    },
+  });
+};
+
+// Trending Recipes
+export const getTrendingRecipes = () => {
+  return useClientApi({
+    method: "get",
+    key: ["trending-recipes"],
+    endpoint: "/api/auth/trending-recipes",
+    isPrivate: true,
     queryOptions: {
       retry: false,
     },

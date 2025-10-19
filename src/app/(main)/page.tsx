@@ -5,7 +5,6 @@ import {
   getRecipeLibraryData,
   getShareRecipesData,
   getTestimonialData,
-  getTrendingRecipesPublic,
   getWhyChooseData,
 } from "@/Hooks/api/cms_api";
 import Hero from "@/Components/PageComponents/mainPages/homePageComponents/Hero";
@@ -20,7 +19,6 @@ import WhyChooseUs from "@/Components/PageComponents/mainPages/homePageComponent
 const Page = async () => {
   const heroData = await getHeroData();
   const whyChooseData = await getWhyChooseData();
-  const trendingRecipes = await getTrendingRecipesPublic();
   const recipeLibraryData = await getRecipeLibraryData();
   const mealPlannerData = await getMealPlannerData();
   const shareRecipesData = await getShareRecipesData();
@@ -31,7 +29,7 @@ const Page = async () => {
     <>
       <Hero data={heroData?.data} />
       <WhyChooseUs data={whyChooseData?.data} />
-      <TrendingDiet data={trendingRecipes?.data} />
+      <TrendingDiet />
       <RecipeLibrary data={recipeLibraryData?.data} />
       <OurMealPlanner data={mealPlannerData?.data} />
       <ShareYourMeal data={shareRecipesData?.data} />
