@@ -28,8 +28,8 @@ const page = async () => {
   const recentBlogs = await getRecentBLogs();
 
   return (
-    <section className="mt-12">
-      <div className="pt-20 pb-16 text-center">
+    <section className="lg:mt-12">
+      <div className="pt-10 lg:pt-20 pb-16 text-center">
         <Container>
           {mealPlannerTitleAndDesc?.data?.map((item: mealItem, idx: number) => (
             <div key={idx} className="lg:px-3 xl:px-5 2xl:px-10 3xl:px-0">

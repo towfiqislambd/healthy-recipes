@@ -31,7 +31,7 @@ body {
 }
 
 .auth_btn {
-  @apply leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary-orange w-full border bg-primary-orange rounded-full text-center py-3 hover:bg-transparent hover:text-primary-orange transition-all duration-300 h-[50px] flex items-center justify-center;
+  @apply leading-[160%] font-semibold text-white tracking-[-0.096px] border-primary-orange w-full border bg-primary-orange rounded-full text-center py-3 hover:bg-transparent hover:text-primary-orange transition-all duration-300 h-[43px] md:h-[50px] flex items-center justify-center;
 }
 
 .filter_btn {
@@ -47,7 +47,7 @@ body {
 }
 
 .auth_heading {
-  @apply text-primary-black text-center font-merriweather text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px] mb-3;
+  @apply text-primary-black text-center font-merriweather text-2xl md:text-3xl lg:text-4xl tracking-[-0.36px] leading-[83.146px] md:mb-3;
 }
 
 .swiper_btn {
