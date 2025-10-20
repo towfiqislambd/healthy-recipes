@@ -12,10 +12,10 @@ import useAuth from "@/Hooks/useAuth";
 import { recipeItem } from "@/Types/type";
 import { useRouter } from "next/navigation";
 import Modal from "@/Components/Common/Modal";
-import { LuLoaderPinwheel } from "react-icons/lu";
 import { useWishlist } from "@/Hooks/api/cms_api";
 import AddMealModal from "@/Components/Modals/AddMealModal";
 import Image from "next/image";
+import { RiLoader4Line } from "react-icons/ri";
 
 interface recipeProps {
   item: recipeItem;
@@ -78,7 +78,7 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
                 fill
               />
 
-              {/* primary-black Overlay  */}
+              {/* Primary-black Overlay  */}
               <div className="absolute top-0 left-0 h-full w-full bg-gradient-to-t from-primary-black/30 to-primary-black/30" />
             </div>
           </div>
@@ -91,7 +91,7 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
             }`}
           >
             {isPending ? (
-              <LuLoaderPinwheel className="animate-spin text-red-400 size-6" />
+              <RiLoader4Line className="animate-spin text-red-400 size-6" />
             ) : (
               <LoveSvg isFavorite={item?.is_wishlisted} />
             )}
@@ -99,7 +99,7 @@ const RecipeCard = ({ item, isPlanner }: recipeProps) => {
 
           {/* Type */}
           <div className="absolute top-3 left-3">
-            <p className="px-2 4xl:px-3 py-1 4xl:py-1.5 rounded-sm bg-white/50 text-primary-black text-sm truncate">
+            <p className="px-2 4xl:px-2.5 py-1 rounded-sm bg-white/50 text-primary-black text-sm truncate">
               {`${item?.library_name || item?.recipe_library?.diet_name}
                    | 
                    ${item?.category_name || item?.category?.category_name}`}
