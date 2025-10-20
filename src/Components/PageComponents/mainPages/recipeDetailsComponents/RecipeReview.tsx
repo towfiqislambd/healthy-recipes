@@ -111,7 +111,7 @@ const RecipeReview = ({ id }: Props) => {
                       Email <span className="text-[#FF5630]">*</span>
                     </label>
                     <input
-                      className={`px-3 xl:px-4 py-2 xl:py-4 border rounded-lg w-full focus:outline-none ${
+                      className={`px-3 xl:px-4 py-2 xl:py-4 border border-gray-300 rounded-lg w-full focus:outline-none ${
                         user && "cursor-not-allowed"
                       }`}
                       type="email"
@@ -128,7 +128,7 @@ const RecipeReview = ({ id }: Props) => {
                       Name <span className="text-[#FF5630]">*</span>
                     </label>
                     <input
-                      className={`px-3 xl:px-4 py-2 xl:py-4 border rounded-lg w-full focus:outline-none ${
+                      className={`px-3 xl:px-4 py-2 xl:py-4 border border-gray-300 rounded-lg w-full focus:outline-none ${
                         user && "cursor-not-allowed"
                       }`}
                       type="text"
@@ -193,7 +193,7 @@ const RecipeReview = ({ id }: Props) => {
           {/* Right - Contents */}
           <div className="space-y-5 xl:flex-1 w-full">
             {isLoading ? (
-              Array.from({ length: 4 }).map((_, index) => (
+              Array.from({ length: 3 }).map((_, index) => (
                 <ReviewCardSkeleton key={index} />
               ))
             ) : allReviews?.data?.data?.length > 0 ? (
@@ -214,7 +214,7 @@ const RecipeReview = ({ id }: Props) => {
                   onClick={() =>
                     item.url && setActivePage(item.url.split("=")[1])
                   }
-                  className={`px-3 py-1 rounded border transition-all duration-150 
+                  className={`px-3 py-1 rounded border border-gray-300 transition-all duration-150 
             ${
               item.active
                 ? "bg-primary-orange text-white"
