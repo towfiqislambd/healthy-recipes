@@ -108,7 +108,7 @@ const Navbar = () => {
 
               {search.trim() && (
                 <div className="bg-white w-[450px] border border-gray-200 shadow-sm rounded-[16px] pb-4 px-4 max-h-[400px] overflow-y-auto absolute top-[80px] z-50">
-                  <h3 className="text-lg font-semibold pt-3 pb-2 sticky top-0 bg-white">
+                  <h3 className="text-lg font-semibold pt-3 pb-2 sticky top-0 z-50 bg-white">
                     Search Results
                   </h3>
 
@@ -129,8 +129,8 @@ const Navbar = () => {
                           target="_blank"
                           className="flex justify-between items-center border-b border-gray-200 pb-3 cursor-pointer"
                         >
-                          <div className="flex justify-center gap-2 items-center">
-                            <figure className="w-16 rounded h-12 overflow-hidden relative">
+                          <div className="flex justify-center gap-2.5 items-center">
+                            <figure className="w-14 rounded h-12 overflow-hidden relative">
                               <Image
                                 className="w-full h-full object-cover rounded"
                                 fill
@@ -138,7 +138,8 @@ const Navbar = () => {
                                 src={`${process.env.NEXT_PUBLIC_SITE_URL}/${item?.recipe_image}`}
                               />
                             </figure>
-                            <div>
+
+                            <div className="space-y-0.5">
                               <p className="font-medium text-primary-black">
                                 {item?.recipe_name?.length > 40
                                   ? item.recipe_name.slice(0, 40) + "..."

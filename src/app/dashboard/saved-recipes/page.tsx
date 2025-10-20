@@ -95,7 +95,7 @@ const page = () => {
           <button
             key={index}
             onClick={() => item.url && setActivePage(item.url.split("=")[1])}
-            className={`px-3 py-1 rounded border transition-all duration-150 
+            className={`px-3 py-1 rounded border border-gray-300 transition-all duration-150 
             ${
               item.active
                 ? "bg-primary-orange text-white"
