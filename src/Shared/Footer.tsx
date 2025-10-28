@@ -33,7 +33,7 @@ const Footer = async () => {
     },
     {
       title: "Share recipe",
-      path: "/dashboard/dashboard-share-recipes",
+      path: "/dashboard/share-recipes",
     },
     {
       title: "Meal planner",
@@ -89,7 +89,7 @@ const Footer = async () => {
             <ul className="md:space-y-3 space-y-2 md:mt-4 mt-2">
               {recipeLibrary?.data?.map((item: libraryItem) => (
                 <li key={item?.id}>
-                  <Link href={`/recipes/recipe_library/${item?.id}`}>
+                  <Link href={`/recipe_library/${item?.id}`}>
                     {item?.diet_name}
                   </Link>
                 </li>
